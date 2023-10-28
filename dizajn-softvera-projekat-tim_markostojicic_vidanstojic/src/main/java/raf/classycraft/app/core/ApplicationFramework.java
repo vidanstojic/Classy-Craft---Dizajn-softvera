@@ -1,4 +1,25 @@
 package raf.classycraft.app.core;
 
+import com.sun.tools.javac.Main;
+import raf.classycraft.app.view.MainFrame;
+
 public class ApplicationFramework {
+
+    private static ApplicationFramework instance;
+
+    private ApplicationFramework(){
+
+    }
+
+    public void initialize(){
+        MainFrame.getInstance().setVisible(true);
+    }
+
+    public static ApplicationFramework getInstance(){
+        if(instance == null){
+            instance = new ApplicationFramework();
+        }
+        return instance;
+    }
+
 }

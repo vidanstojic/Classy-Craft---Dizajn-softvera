@@ -1,7 +1,11 @@
 package raf.classycraft;
 
+import raf.classycraft.app.core.ApplicationFramework;
+
 public class AppCore {
     public static void main(String[] args) {
-        System.out.println("Test");
+        ApplicationFramework appCore = ApplicationFramework.getInstance();
+        appCore.initialize();
+
     }
 }
