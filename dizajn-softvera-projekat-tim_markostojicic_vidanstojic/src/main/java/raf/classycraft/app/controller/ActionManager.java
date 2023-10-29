@@ -1,4 +1,4 @@
-package raf.classycraft.app.core;
+package raf.classycraft.app.controller;
 
 import raf.classycraft.app.controller.ExitAction;
 
@@ -6,18 +6,14 @@ public class ActionManager {
     private ExitAction ea;
 
     public ActionManager(){
-        initialize();
+        initialiseActions();
     }
 
-    public void initialize(){
+    private void initialiseActions(){
         ea = new ExitAction();
     }
 
     public ExitAction getEa() {
         return ea;
-    }
-
-    public void setEa(ExitAction ea) {
-        this.ea = ea;
     }
 }
