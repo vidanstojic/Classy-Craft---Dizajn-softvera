@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.URL;
 
-public class ExitAction extends AbstractAction {
+public class ExitAction extends AbstractClassyAction {
     public ExitAction(){
         Icon icon = null;
         URL ImageUrl = getClass().getResource("/images/exit.png");

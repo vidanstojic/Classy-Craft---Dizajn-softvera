@@ -1,10 +1,13 @@
 package raf.classycraft.app.view;
 
+import raf.classycraft.app.core.ActionManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
     private static MainFrame instance;
+    private ActionManager manager;
 
     // buduca polja za glavni view
 
@@ -28,6 +31,7 @@ public class MainFrame extends JFrame {
         MyToolBar toolBar = new MyToolBar();
         add(toolBar,BorderLayout.NORTH);
 
+        manager = new ActionManager();
     }
 
     public static MainFrame getInstance(){
@@ -36,5 +40,13 @@ public class MainFrame extends JFrame {
             instance.initialize();
         }
         return instance;
+    }
+
+    public ActionManager getManager() {
+        return manager;
+    }
+
+    public void setManager(ActionManager manager) {
+        this.manager = manager;
     }
 }
