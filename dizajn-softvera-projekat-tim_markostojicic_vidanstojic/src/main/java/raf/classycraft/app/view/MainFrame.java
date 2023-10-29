@@ -44,6 +44,7 @@ public class MainFrame extends JFrame {
 
     public ActionManager getManager() {
         return manager;
+
     }
 
     public void setManager(ActionManager manager) {
