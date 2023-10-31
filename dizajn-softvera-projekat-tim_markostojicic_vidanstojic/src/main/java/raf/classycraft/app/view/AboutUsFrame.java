@@ -2,6 +2,7 @@ package raf.classycraft.app.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class AboutUsFrame extends JFrame {
     public AboutUsFrame(){
@@ -26,6 +27,33 @@ public class AboutUsFrame extends JFrame {
         panel.add(titlePanel, BorderLayout.NORTH);
         panel.add(textPanel, BorderLayout.CENTER);
 
+        URL vidanURL = getClass().getResource("/images/Vidan Stojic.jpg");
+        URL markoURL = getClass().getResource("/images/Marko Stojicic.jpeg");
+        ImageIcon icon1 = null;
+
+        if(vidanURL != null){
+            icon1 = new ImageIcon(vidanURL);
+        }
+        else {
+            System.err.println("Resource not found: " + vidanURL);
+        }
+
+        ImageIcon icon2 = null;
+
+        if(markoURL != null){
+            icon2 = new ImageIcon(markoURL);
+        }
+        else {
+            System.err.println("Resource not found: " + markoURL);
+        }
+
+        JPanel imagesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel imagesLabel1 = new JLabel();
+        imagesLabel1.setIcon(icon1);
+        JLabel imagesLabel2 = new JLabel();
+        imagesLabel2.setIcon(icon2);
+        imagesPanel.add(imagesLabel1,imagesLabel2);
+        panel.add(imagesPanel);
 
         this.add(panel);
     }
