@@ -1,6 +1,7 @@
 package raf.classycraft.app.view;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.net.URL;
 
@@ -22,7 +23,7 @@ public class AboutUsFrame extends JFrame {
         titlePanel.add(title);
 
         JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel text = new JLabel("Na ovom projektu rade Vidan Stojic i Marko Stojicic.");
+        JLabel text = new JLabel("Na ovom projektu rade Vidan Stojić i Marko Stojičić.");
         textPanel.add(text);
 
         panel.add(titlePanel);
@@ -52,15 +53,28 @@ public class AboutUsFrame extends JFrame {
 
         JLabel imageLabel1 = new JLabel(icon1);
         JLabel imageLabel2 = new JLabel(icon2);
-
         imagePanel.add(imageLabel1);
         imagePanel.add(imageLabel2);
+
+
 
         panel.add(titlePanel);
         panel.add(textPanel);
         panel.add(imagePanel);
 
+        JLabel textMarko = new JLabel("Marko(kontakt: mstojicic12923rn@raf.rs)");
+        JLabel textVidan = new JLabel("Vidan(kontakt: vstojic8223rn@raf.rs)");
+
+        JPanel namesPanel = new JPanel(new FlowLayout());
+        namesPanel.add(textVidan);
+        namesPanel.add(textMarko);
+        textMarko.setBorder(new EmptyBorder(10, 30, 15, 50));
+        textVidan.setBorder(new EmptyBorder(10,70,15,50));
+
         panel.add(imagePanel);
+        panel.add(namesPanel);
+
+
 
 
         this.add(panel);
