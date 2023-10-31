@@ -14,7 +14,8 @@ public class AboutUsFrame extends JFrame {
         int screenWidth = screenSize.width;
         setSize(screenWidth / 2, screenHeight / 2);
 
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel title = new JLabel("AboutUs");
@@ -24,8 +25,8 @@ public class AboutUsFrame extends JFrame {
         JLabel text = new JLabel("Na ovom projektu rade Vidan Stojic i Marko Stojicic.");
         textPanel.add(text);
 
-        panel.add(titlePanel, BorderLayout.NORTH);
-        panel.add(textPanel, BorderLayout.CENTER);
+        panel.add(titlePanel);
+        panel.add(textPanel);
 
         URL vidanURL = getClass().getResource("/images/Vidan Stojic.jpg");
         URL markoURL = getClass().getResource("/images/Marko Stojicic.jpeg");
@@ -47,13 +48,20 @@ public class AboutUsFrame extends JFrame {
             System.err.println("Resource not found: " + markoURL);
         }
 
-        JPanel imagesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel imagesLabel1 = new JLabel();
-        imagesLabel1.setIcon(icon1);
-        JLabel imagesLabel2 = new JLabel();
-        imagesLabel2.setIcon(icon2);
-        imagesPanel.add(imagesLabel1,imagesLabel2);
-        panel.add(imagesPanel);
+        JPanel imagePanel = new JPanel(new FlowLayout());
+
+        JLabel imageLabel1 = new JLabel(icon1);
+        JLabel imageLabel2 = new JLabel(icon2);
+
+        imagePanel.add(imageLabel1);
+        imagePanel.add(imageLabel2);
+
+        panel.add(titlePanel);
+        panel.add(textPanel);
+        panel.add(imagePanel);
+
+        panel.add(imagePanel);
+
 
         this.add(panel);
     }
