@@ -1,4 +1,4 @@
-package raf.classycraft.app.model.CompositeAbstract;
+package raf.classycraft.app.model.compositeAbstract;
 
 import java.util.ArrayList;
 import java.util.List;

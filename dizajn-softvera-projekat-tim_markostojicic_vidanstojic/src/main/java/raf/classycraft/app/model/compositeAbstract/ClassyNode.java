@@ -1,4 +1,4 @@
-package raf.classycraft.app.model.CompositeAbstract;
+package raf.classycraft.app.model.compositeAbstract;
 
 public abstract class ClassyNode {
 

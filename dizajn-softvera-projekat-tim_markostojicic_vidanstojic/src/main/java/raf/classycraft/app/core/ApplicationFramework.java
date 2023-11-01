@@ -1,7 +1,5 @@
 package raf.classycraft.app.core;
 
-import com.sun.tools.javac.Main;
-import raf.classycraft.app.model.CompositeImplement.ProjectExplorer;
 import raf.classycraft.app.view.MainFrame;
 
 public class ApplicationFramework {

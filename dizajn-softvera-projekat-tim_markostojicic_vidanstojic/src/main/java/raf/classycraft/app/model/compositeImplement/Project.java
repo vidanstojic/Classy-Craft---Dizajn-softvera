@@ -1,9 +1,7 @@
-package raf.classycraft.app.model.CompositeImplement;
+package raf.classycraft.app.model.compositeImplement;
 
-import raf.classycraft.app.model.CompositeAbstract.ClassyNode;
-import raf.classycraft.app.model.CompositeAbstract.ClassyNodeComposite;
-
-import java.util.List;
+import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 
 public class Project extends ClassyNodeComposite {
 
