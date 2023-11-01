@@ -15,13 +15,14 @@ public class MessageGenerator implements IPublisher {
 
     private List<ISubscriber> subscribers;
 
-    public MessageGenerator(Tip tip, LocalDateTime timestamp){
+    public MessageGenerator(Tip tip, LocalDateTime timestamp, String text){
         this.tip = tip;
         this.timestamp = timestamp;
-        generateMessage(tip, timestamp);
+        this.tekst = tekst;
     }
-    public void generateMessage(Tip tip, LocalDateTime timestamp){
-    /// na osnovu cega generisati poruku, gde pisem akciju
+    public void generateMessage(Tip tip, LocalDateTime timestamp, String tekst){
+        String message = "["+tip +"]" + "["+timestamp +"]" + tekst;
+        notifySub(new Notification(message));
     }
 
     @Override
