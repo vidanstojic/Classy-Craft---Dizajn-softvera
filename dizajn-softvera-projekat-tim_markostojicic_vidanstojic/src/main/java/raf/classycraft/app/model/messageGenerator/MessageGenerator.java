@@ -2,6 +2,7 @@ package raf.classycraft.app.model.messageGenerator;
 
 import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
+import raf.classycraft.app.observer.Notification;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +32,9 @@ public class MessageGenerator implements IPublisher {
     }
 
     @Override
-    public void notifySub() {
+    public void notifySub(Notification notification) {
 
     }
+
+ 
 }
