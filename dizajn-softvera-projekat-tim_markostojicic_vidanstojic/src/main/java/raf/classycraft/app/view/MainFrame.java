@@ -1,13 +1,17 @@
 package raf.classycraft.app.view;
 
 import raf.classycraft.app.controller.ActionManager;
+import raf.classycraft.app.model.messageGenerator.MessageGenerator;
+import raf.classycraft.app.observer.ISubscriber;
+import raf.classycraft.app.observer.Notification;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
     private ActionManager actionManager;
+
 
     // buduca polja za glavni view
 
@@ -37,6 +41,7 @@ public class MainFrame extends JFrame {
         MyToolBar toolBar = new MyToolBar();
         add(toolBar,BorderLayout.NORTH);
 
+
     }
 
     public static MainFrame getInstance(){
@@ -53,4 +58,8 @@ public class MainFrame extends JFrame {
     }
 
 
+    @Override
+    public void update(Notification notification) {
+
+    }
 }
