@@ -1,13 +1,14 @@
 package raf.classycraft.app.model.CompositeAbstract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ClassyNodeComposite extends ClassyNode{
 
-    private List<ClassyNode> children;
+    protected List<ClassyNode> children = new ArrayList<>();
 
-    public ClassyNodeComposite(List<ClassyNode> children) {
-        this.children = children;
+    public ClassyNodeComposite() {
+
     }
 
     ///Metode

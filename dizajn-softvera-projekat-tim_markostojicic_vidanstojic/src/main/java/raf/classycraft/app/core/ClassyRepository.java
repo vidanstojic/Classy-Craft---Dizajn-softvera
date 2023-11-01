@@ -1,2 +1,8 @@
-package raf.classycraft.app.core;public interface ClassyRepository {
+package raf.classycraft.app.core;
+
+import raf.classycraft.app.model.CompositeImplement.ProjectExplorer;
+
+public interface ClassyRepository {
+
+    public ProjectExplorer getRoot();
 }

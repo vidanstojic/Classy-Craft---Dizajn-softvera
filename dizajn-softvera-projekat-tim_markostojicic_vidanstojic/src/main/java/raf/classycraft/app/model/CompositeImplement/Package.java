@@ -7,17 +7,17 @@ import java.util.List;
 
 public class Package extends ClassyNodeComposite {
 
-    public Package(List<ClassyNode> children) {
-        super(children);
+    public Package() {
+
     }
 
     @Override
     public void addChild(ClassyNode child) {
-
+        children.add(child);
     }
 
     @Override
     public void removeChild(ClassyNode child) {
-
+        children.remove(child);
     }
 }

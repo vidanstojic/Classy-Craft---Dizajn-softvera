@@ -7,17 +7,26 @@ import java.util.List;
 
 public class ProjectExplorer extends ClassyNodeComposite {
 
-    public ProjectExplorer(List<ClassyNode> children) {
-        super(children);
+    private static ProjectExplorer insance;
+
+    private ProjectExplorer() {
+
+    }
+
+    public static ProjectExplorer getInstance(){
+        if(insance == null){
+            insance = new ProjectExplorer();
+        }
+        return insance;
     }
 
     @Override
     public void addChild(ClassyNode child) {
-
+        children.add(child);
     }
 
     @Override
     public void removeChild(ClassyNode child) {
-
+        children.remove(child);
     }
 }
