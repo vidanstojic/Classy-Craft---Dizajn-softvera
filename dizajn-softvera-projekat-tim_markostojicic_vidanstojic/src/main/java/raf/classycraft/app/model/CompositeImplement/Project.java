@@ -7,8 +7,11 @@ import java.util.List;
 
 public class Project extends ClassyNodeComposite {
 
-    public Project() {
-
+    private String autor;
+    // pogledati/pitati kako se dodaju resursi
+    
+    public Project(String autor) {
+        this.autor = autor;
     }
 
     @Override

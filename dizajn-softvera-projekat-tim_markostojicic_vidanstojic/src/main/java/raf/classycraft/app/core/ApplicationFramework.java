@@ -16,7 +16,7 @@ public class ApplicationFramework {
     public void initialize(){
 
         MainFrame.getInstance().setVisible(true);
-        classyRepository = new ClassyRepositoryImplemention(ProjectExplorer.getInstance());
+        classyRepository = new ClassyRepositoryImplemention();
     }
 
     public static ApplicationFramework getInstance(){

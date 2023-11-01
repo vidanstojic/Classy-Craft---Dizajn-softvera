@@ -6,8 +6,8 @@ public class ClassyRepositoryImplemention implements ClassyRepository {
 
     private ProjectExplorer root;
 
-    public ClassyRepositoryImplemention(ProjectExplorer root) {
-        this.root = root;
+    public ClassyRepositoryImplemention() {
+        this.root = new ProjectExplorer();
     }
 
     @Override
