@@ -13,6 +13,9 @@ public class ApplicationFramework {
     private FileLogger fileLogger;
     private MessageGenerator messageGenerator;
 
+    private MainFrame mainFrame;
+
+
     private ApplicationFramework(){
 
     }
