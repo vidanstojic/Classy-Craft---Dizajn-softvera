@@ -15,6 +15,10 @@ public class MessageGenerator implements IPublisher {
 
     private List<ISubscriber> subscribers;
 
+    public MessageGenerator(){
+
+    }
+
     public MessageGenerator(Tip tip, LocalDateTime timestamp, String text){
         this.tip = tip;
         this.timestamp = timestamp;

@@ -1,6 +1,7 @@
 package raf.classycraft.app.view;
 
 import raf.classycraft.app.controller.ActionManager;
+import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.model.messageGenerator.MessageGenerator;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
@@ -13,6 +14,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ActionManager actionManager;
 
 
+
     // buduca polja za glavni view
 
     private MainFrame(){
@@ -22,6 +24,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     private void initialize(){
         actionManager = new ActionManager();
 
+
+        ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
 
 
 
@@ -60,6 +64,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     @Override
     public void update(Notification notification) {
-
+        // ovde treba JOptionPane
+        JOptionPane optionPane = new JOptionPane();
     }
 }

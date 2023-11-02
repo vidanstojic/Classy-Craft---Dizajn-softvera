@@ -1,5 +1,6 @@
 package raf.classycraft.app.model.simpleFactory;
 
+import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.model.simpleFactory.Logger;
 import raf.classycraft.app.observer.Notification;
 
@@ -10,6 +11,11 @@ import java.io.IOException;
 
 public class FileLogger implements Logger {
 
+
+    public  FileLogger(){
+        ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
+
+    }
 
     @Override
     public void update(Notification notification) {
