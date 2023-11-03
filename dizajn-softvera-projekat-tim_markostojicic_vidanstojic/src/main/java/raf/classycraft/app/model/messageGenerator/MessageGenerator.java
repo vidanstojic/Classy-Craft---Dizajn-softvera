@@ -5,6 +5,7 @@ import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageGenerator implements IPublisher {
@@ -13,7 +14,7 @@ public class MessageGenerator implements IPublisher {
     private Tip tip;
     private LocalDateTime timestamp;
 
-    private List<ISubscriber> subscribers;
+    private List<ISubscriber> subscribers = new ArrayList<>();
 
     public MessageGenerator(){
 

@@ -13,17 +13,20 @@ public class ApplicationFramework {
 
     private MessageGenerator messageGenerator;
 
-    private LoggerFactory loggerFactory;
+    private FileLogger fileLogger;
+    private ConsoleLogger consoleLogger;
 
     private ApplicationFramework(){
 
     }
 
     public void initialize(){
-
+        messageGenerator = new MessageGenerator();
         MainFrame.getInstance().setVisible(true);
+
         classyRepository = new ClassyRepositoryImplemention();
-        loggerFactory = new LoggerFactory();
+        LoggerFactory loggerFactory = new LoggerFactory();
+
 
     }
 

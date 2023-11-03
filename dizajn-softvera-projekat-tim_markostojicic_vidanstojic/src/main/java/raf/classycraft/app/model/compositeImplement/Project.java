@@ -3,13 +3,20 @@ package raf.classycraft.app.model.compositeImplement;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 
+import java.net.URL;
+
 public class Project extends ClassyNodeComposite {
 
     private String autor;
-    // pogledati/pitati kako se dodaju resursi
-    
-    public Project(String autor) {
+    private URL filepath;
+
+    public Project(){
+
+    }
+
+    public Project(String autor, URL filepath) {
         this.autor = autor;
+        this.filepath = filepath;
     }
 
     @Override

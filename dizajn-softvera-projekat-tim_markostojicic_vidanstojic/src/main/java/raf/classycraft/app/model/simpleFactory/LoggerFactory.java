@@ -6,6 +6,8 @@ import java.io.File;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 public class LoggerFactory {
+
+    /// PROMENITI CEO LOGGER FACTORY
     private ConsoleLogger consoleLogger;
     private FileLogger fileLogger;
 
