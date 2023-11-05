@@ -2,6 +2,7 @@ package raf.classycraft.app.view;
 
 import raf.classycraft.app.controller.ActionManager;
 import raf.classycraft.app.core.ApplicationFramework;
+import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.MessageGenerator;
 import raf.classycraft.app.model.messageGenerator.Type;
 import raf.classycraft.app.observer.ISubscriber;
@@ -68,7 +69,13 @@ public class MainFrame extends JFrame implements ISubscriber {
         //  JOptionPane.showMessageDialog(null, "Uh-oh!", "Error", JOptionPane.ERROR_MESSAGE);
         // uh oh je tekst, a error je naslov
         if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.ERROR){
-            
+            JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.ERROR_MESSAGE);
+        }
+        else if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.WARNING){
+            JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.WARNING_MESSAGE);
+        }
+        else if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.INFORMATION){
+            JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

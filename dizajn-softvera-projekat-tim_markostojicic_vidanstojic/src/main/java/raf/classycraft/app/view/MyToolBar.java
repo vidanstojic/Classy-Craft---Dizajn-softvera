@@ -1,6 +1,5 @@
 package raf.classycraft.app.view;
 
-import raf.classycraft.app.controller.ExitAction;
 
 import javax.swing.*;
 

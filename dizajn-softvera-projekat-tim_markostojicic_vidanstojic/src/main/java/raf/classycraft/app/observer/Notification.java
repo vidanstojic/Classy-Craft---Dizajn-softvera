@@ -12,11 +12,13 @@ public class Notification{
 
     private Type type;
     private EventTypes eventTypes;
+    private String messageText;
 
-    public Notification(String message, EventTypes eventTypes, Type type) {
+    public Notification(String message, EventTypes eventTypes, Type type,String messageText) {
         this.message = message;
         this.eventTypes = eventTypes;
         this.type = type;
+        this.messageText = messageText;
     }
 
     public String getMessage() {
@@ -41,5 +43,9 @@ public class Notification{
 
     public void setEventTypes(EventTypes eventTypes) {
         this.eventTypes = eventTypes;
+    }
+
+    public String getMessageText() {
+        return messageText;
     }
 }
