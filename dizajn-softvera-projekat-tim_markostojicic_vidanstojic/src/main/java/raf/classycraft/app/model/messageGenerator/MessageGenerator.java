@@ -1,8 +1,6 @@
 package raf.classycraft.app.model.messageGenerator;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
+
 public class MessageGenerator implements IPublisher {
 
 
@@ -81,5 +79,11 @@ public class MessageGenerator implements IPublisher {
         }
     }
 
+    public List<ISubscriber> getSubscribers() {
+        return subscribers;
+    }
 
+    public void setSubscribers(List<ISubscriber> subscribers) {
+        this.subscribers = subscribers;
+    }
 }

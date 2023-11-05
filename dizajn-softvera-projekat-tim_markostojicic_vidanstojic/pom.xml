@@ -8,14 +8,6 @@
     <artifactId>dizajn-softvera-projekat-tim_markostojicic_vidanstojic</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <properties>
         <maven.compiler.source>10</maven.compiler.source>
