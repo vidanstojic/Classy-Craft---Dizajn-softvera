@@ -1,9 +1,17 @@
 package raf.classycraft.app.model.messageGenerator;
 
-public enum Mistakes {
+public enum EventTypes {
     NODE_CANNOT_BE_DELETED,
     NAME_CANNOT_BE_EMPTY,
     PROJECTEXPLORER_CANNOT_BE_DELETED,
+    NODE_MUST_BE_SELECTED,
+
+    NODE_WILL_BE_DELETED,
+
+    NODE_SUCCESSFULLY_RENAMED,
+
+    NODE_SUCCESSFULLY_DELETED
+
 
 
 

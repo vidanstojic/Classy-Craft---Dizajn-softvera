@@ -3,6 +3,7 @@ package raf.classycraft.app.view;
 import raf.classycraft.app.controller.ActionManager;
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.model.messageGenerator.MessageGenerator;
+import raf.classycraft.app.model.messageGenerator.Type;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 
@@ -64,7 +65,10 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     @Override
     public void update(Notification notification) {
-        // ovde treba JOptionPane
-        JOptionPane optionPane = new JOptionPane();
+        //  JOptionPane.showMessageDialog(null, "Uh-oh!", "Error", JOptionPane.ERROR_MESSAGE);
+        // uh oh je tekst, a error je naslov
+        if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.ERROR){
+            
+        }
     }
 }
