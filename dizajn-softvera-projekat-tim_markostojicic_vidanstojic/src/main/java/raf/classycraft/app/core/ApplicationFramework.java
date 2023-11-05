@@ -26,8 +26,9 @@ public class ApplicationFramework {
 
         classyRepository = new ClassyRepositoryImplemention();
         LoggerFactory loggerFactory = new LoggerFactory();
-        loggerFactory.createLogger("consoleLogger");
-        loggerFactory.createLogger("fileLogger");
+        // proveriti
+        consoleLogger = (ConsoleLogger) loggerFactory.createLogger("consoleLogger");
+        fileLogger = (FileLogger) loggerFactory.createLogger("fileLogger");
 
 
     }
