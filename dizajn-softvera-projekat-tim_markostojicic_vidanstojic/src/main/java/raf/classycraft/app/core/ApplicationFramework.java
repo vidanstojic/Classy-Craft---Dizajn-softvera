@@ -26,8 +26,8 @@ public class ApplicationFramework {
 
         classyRepository = new ClassyRepositoryImplemention();
         LoggerFactory loggerFactory = new LoggerFactory();
-        loggerFactory.loggerType("consoleLogger");
-        loggerFactory.loggerType("fileLogger");
+        loggerFactory.createLogger("consoleLogger");
+        loggerFactory.createLogger("fileLogger");
 
 
     }

@@ -7,19 +7,15 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 public class LoggerFactory {
 
-    /// PROMENITI CEO LOGGER FACTORY
-    private ConsoleLogger consoleLogger = new ConsoleLogger();
-    private FileLogger fileLogger = new FileLogger();
-
     public LoggerFactory(){
 
     }
 
-    public Logger loggerType(String loggerType){
+    public Logger createLogger(String loggerType){
         if(loggerType.toLowerCase().equals("consolelogger")) {
-            return consoleLogger;
+            return new ConsoleLogger();
         } else if (loggerType.toLowerCase().equals("filelogger")) {
-            return fileLogger;
+            return new FileLogger();
         }
         return null;
     }
