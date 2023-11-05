@@ -4,15 +4,14 @@ import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageGenerator implements IPublisher {
 
-    private String tekst;
-    private Tip tip;
-    private LocalDateTime timestamp;
+    private String text;
+    private Type tip;
+
 
     private List<ISubscriber> subscribers = new ArrayList<>();
 
@@ -20,14 +19,12 @@ public class MessageGenerator implements IPublisher {
 
     }
 
-    public MessageGenerator(Tip tip, LocalDateTime timestamp, String text){
+    public MessageGenerator(Type tip, String text){
         this.tip = tip;
-        this.timestamp = timestamp;
-        this.tekst = tekst;
+        this.text = text;
     }
-    public void generateMessage(Tip tip, LocalDateTime timestamp, String tekst){
-        String message = "["+tip +"]" + "["+timestamp +"]" + tekst;
-        notifySub(new Notification(message));
+    public void generateMessage(Type tip, String tekst){
+      //  notifySub(new Notification(message));
     }
 
     @Override
@@ -47,29 +44,22 @@ public class MessageGenerator implements IPublisher {
         }
     }
 
-    public String getTekst() {
-        return tekst;
+    public String getText() {
+        return text;
     }
 
-    public void setTekst(String tekst) {
-        this.tekst = tekst;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Tip getTip() {
+    public Type getTip() {
         return tip;
     }
 
-    public void setTip(Tip tip) {
+    public void setTip(Type tip) {
         this.tip = tip;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public List<ISubscriber> getSubscribers() {
         return subscribers;
@@ -78,4 +68,5 @@ public class MessageGenerator implements IPublisher {
     public void setSubscribers(List<ISubscriber> subscribers) {
         this.subscribers = subscribers;
     }
+
 }

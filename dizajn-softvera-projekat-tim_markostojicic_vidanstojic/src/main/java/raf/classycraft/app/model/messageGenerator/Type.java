@@ -1,5 +1,5 @@
 package raf.classycraft.app.model.messageGenerator;
 
-public enum Tip {
+public enum Type {
     ERROR, WARNING, INFORMATION;
 }

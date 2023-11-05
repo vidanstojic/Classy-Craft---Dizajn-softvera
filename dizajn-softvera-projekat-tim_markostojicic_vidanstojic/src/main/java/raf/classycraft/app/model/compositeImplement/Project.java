@@ -7,7 +7,7 @@ import java.net.URL;
 
 public class Project extends ClassyNodeComposite {
 
-    private String autor;
+    private String author;
     private URL filepath;
 
     public Project(){
@@ -15,7 +15,7 @@ public class Project extends ClassyNodeComposite {
     }
 
     public Project(String autor, URL filepath) {
-        this.autor = autor;
+        this.author = autor;
         this.filepath = filepath;
     }
 
