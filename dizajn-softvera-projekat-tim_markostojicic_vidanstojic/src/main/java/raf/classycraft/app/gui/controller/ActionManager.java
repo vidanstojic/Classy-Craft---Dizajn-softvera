@@ -1,6 +1,4 @@
-package raf.classycraft.app.controller;
-
-import raf.classycraft.app.controller.ExitAction;
+package raf.classycraft.app.gui.controller;
 
 public class ActionManager {
     private ExitAction ea;

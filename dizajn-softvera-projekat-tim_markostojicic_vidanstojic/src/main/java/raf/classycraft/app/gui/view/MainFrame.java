@@ -1,8 +1,7 @@
-package raf.classycraft.app.view;
+package raf.classycraft.app.gui.view;
 
-import raf.classycraft.app.controller.ActionManager;
+import raf.classycraft.app.gui.controller.ActionManager;
 import raf.classycraft.app.core.ApplicationFramework;
-import raf.classycraft.app.model.messageGenerator.Type;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 

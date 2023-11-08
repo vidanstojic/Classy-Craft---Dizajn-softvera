@@ -1,4 +1,4 @@
-package raf.classycraft.app.view;
+package raf.classycraft.app.gui.view;
 
 
 import javax.swing.*;

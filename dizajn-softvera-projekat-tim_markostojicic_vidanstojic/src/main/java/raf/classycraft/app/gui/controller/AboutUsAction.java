@@ -1,6 +1,6 @@
-package raf.classycraft.app.controller;
+package raf.classycraft.app.gui.controller;
 
-import raf.classycraft.app.view.AboutUsFrame;
+import raf.classycraft.app.gui.view.AboutUsFrame;
 
 import java.awt.event.ActionEvent;
 

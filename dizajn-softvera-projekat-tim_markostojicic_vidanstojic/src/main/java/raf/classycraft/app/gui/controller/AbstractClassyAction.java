@@ -1,7 +1,6 @@
-package raf.classycraft.app.controller;
+package raf.classycraft.app.gui.controller;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.net.URL;
 
 public abstract class AbstractClassyAction extends AbstractAction {

@@ -4,7 +4,7 @@ import raf.classycraft.app.model.simpleFactory.ConsoleLogger;
 import raf.classycraft.app.model.simpleFactory.FileLogger;
 import raf.classycraft.app.model.messageGenerator.MessageGeneratorImplementation;
 import raf.classycraft.app.model.simpleFactory.LoggerFactory;
-import raf.classycraft.app.view.MainFrame;
+import raf.classycraft.app.gui.view.MainFrame;
 
 public class ApplicationFramework {
 

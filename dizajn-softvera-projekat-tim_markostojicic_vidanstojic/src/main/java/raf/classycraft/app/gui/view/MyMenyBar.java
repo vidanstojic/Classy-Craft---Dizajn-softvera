@@ -1,6 +1,4 @@
-package raf.classycraft.app.view;
-
-import raf.classycraft.app.controller.ExitAction;
+package raf.classycraft.app.gui.view;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
