@@ -1,5 +1,8 @@
 package raf.classycraft.app.gui.controller;
 
+import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
+import raf.classycraft.app.gui.view.MainFrame;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -16,6 +19,7 @@ public class RemoveItemAction extends AbstractClassyAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
+        MainFrame.getInstance().getClassyTree().removeChild(selected, selected);/// videti sta je parent i promeniti argumente
     }
 }

@@ -38,6 +38,11 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
 
     @Override
+    public void removeChild(ClassyTreeItem selected, ClassyTreeItem parent) {
+
+    }
+
+    @Override
     public ClassyTreeItem getSelectedNode() {
         return (ClassyTreeItem) treeView.getLastSelectedPathComponent();
     }
