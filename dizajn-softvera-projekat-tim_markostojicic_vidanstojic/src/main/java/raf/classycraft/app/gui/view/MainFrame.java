@@ -2,6 +2,8 @@ package raf.classycraft.app.gui.view;
 
 import raf.classycraft.app.gui.controller.ActionManager;
 import raf.classycraft.app.core.ApplicationFramework;
+import raf.classycraft.app.gui.tree.ClassyTree;
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 
@@ -11,6 +13,8 @@ import java.awt.*;
 public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
     private ActionManager actionManager;
+
+    private ClassyTree classyTree;
 
 
 
@@ -22,7 +26,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private void initialize(){
         actionManager = new ActionManager();
-
+        classyTree = new ClassyTreeImplementation();
 
         ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
 
