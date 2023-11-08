@@ -6,6 +6,8 @@ public class ActionManager {
 
     private NewProjectAction newProjectAction;
 
+    private RemoveItemAction removeItemAction;
+
     public ActionManager(){
         initialiseActions();
     }
@@ -14,6 +16,7 @@ public class ActionManager {
         ea = new ExitAction();
         aboutUs = new AboutUsAction();
         newProjectAction = new NewProjectAction();
+        removeItemAction = new RemoveItemAction();
     }
 
     public ExitAction getEa() {
@@ -26,5 +29,9 @@ public class ActionManager {
 
     public NewProjectAction getNewProjectAction() {
         return newProjectAction;
+    }
+
+    public RemoveItemAction getRemoveItemAction() {
+        return removeItemAction;
     }
 }
