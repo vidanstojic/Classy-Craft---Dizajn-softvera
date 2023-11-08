@@ -49,6 +49,17 @@ public class MainFrame extends JFrame implements ISubscriber {
         add(toolBar,BorderLayout.NORTH);
 
 
+        JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
+        JPanel desktop = new JPanel();
+
+        JScrollPane scroll=new JScrollPane(projectExplorer);
+        scroll.setMinimumSize(new Dimension(200,150));
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        getContentPane().add(split,BorderLayout.CENTER);
+        split.setDividerLocation(250);
+        split.setOneTouchExpandable(true);
+
+
     }
 
     public static MainFrame getInstance(){

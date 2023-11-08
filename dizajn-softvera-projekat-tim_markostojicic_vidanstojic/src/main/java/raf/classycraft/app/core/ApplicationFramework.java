@@ -21,10 +21,10 @@ public class ApplicationFramework {
     }
 
     public void initialize(){
+        classyRepository = new ClassyRepositoryImplemention();
         messageGenerator = new MessageGeneratorImplementation();
         MainFrame.getInstance().setVisible(true);
 
-        classyRepository = new ClassyRepositoryImplemention();
         LoggerFactory loggerFactory = new LoggerFactory();
         // proveriti
         consoleLogger = (ConsoleLogger) loggerFactory.createLogger("consoleLogger");
@@ -42,5 +42,9 @@ public class ApplicationFramework {
 
     public MessageGeneratorImplementation getMessageGenerator() {
         return messageGenerator;
+    }
+
+    public ClassyRepository getClassyRepository() {
+        return classyRepository;
     }
 }
