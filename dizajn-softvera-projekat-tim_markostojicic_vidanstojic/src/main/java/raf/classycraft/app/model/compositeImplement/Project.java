@@ -10,12 +10,13 @@ public class Project extends ClassyNodeComposite {
     private String author;
     private URL filepath;
 
-    public Project(){
-
+    public Project(String name, ClassyNode parent){
+        super.setName(name);
+        super.setParent(parent);
     }
 
-    public Project(String autor, URL filepath) {
-        this.author = autor;
+    public Project(String author, URL filepath) {
+        this.author = author;
         this.filepath = filepath;
     }
 
