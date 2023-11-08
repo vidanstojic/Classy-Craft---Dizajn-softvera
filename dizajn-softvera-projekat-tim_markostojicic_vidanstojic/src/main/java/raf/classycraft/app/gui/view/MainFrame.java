@@ -79,4 +79,8 @@ public class MainFrame extends JFrame implements ISubscriber {
             JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
+    public ClassyTree getClassyTree() {
+        return classyTree;
+    }
 }
