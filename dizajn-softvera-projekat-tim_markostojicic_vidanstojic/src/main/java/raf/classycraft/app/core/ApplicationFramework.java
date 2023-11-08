@@ -2,7 +2,7 @@ package raf.classycraft.app.core;
 
 import raf.classycraft.app.model.simpleFactory.ConsoleLogger;
 import raf.classycraft.app.model.simpleFactory.FileLogger;
-import raf.classycraft.app.model.messageGenerator.MessageGenerator;
+import raf.classycraft.app.model.messageGenerator.MessageGeneratorImplementation;
 import raf.classycraft.app.model.simpleFactory.LoggerFactory;
 import raf.classycraft.app.view.MainFrame;
 
@@ -11,7 +11,7 @@ public class ApplicationFramework {
     private static ApplicationFramework instance;
     private ClassyRepository classyRepository;
 
-    private MessageGenerator messageGenerator;
+    private MessageGeneratorImplementation messageGenerator;
 
     private FileLogger fileLogger;
     private ConsoleLogger consoleLogger;
@@ -21,7 +21,7 @@ public class ApplicationFramework {
     }
 
     public void initialize(){
-        messageGenerator = new MessageGenerator();
+        messageGenerator = new MessageGeneratorImplementation();
         MainFrame.getInstance().setVisible(true);
 
         classyRepository = new ClassyRepositoryImplemention();
@@ -40,7 +40,7 @@ public class ApplicationFramework {
         return instance;
     }
 
-    public MessageGenerator getMessageGenerator() {
+    public MessageGeneratorImplementation getMessageGenerator() {
         return messageGenerator;
     }
 }
