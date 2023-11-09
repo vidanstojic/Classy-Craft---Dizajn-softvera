@@ -13,21 +13,16 @@ import java.security.interfaces.RSAPrivateCrtKey;
 public class PackageMouseListener extends MouseAdapter {
 
     ClassyTreeItem classyTreeItem;
-    public PackageMouseListener(Object lastComponentObject){
-        if(lastComponentObject instanceof DefaultMutableTreeNode){
-            DefaultMutableTreeNode lastCompNode = (DefaultMutableTreeNode)lastComponentObject;
-            this.classyTreeItem = (ClassyTreeItem) lastComponentObject;
-        }
+    public PackageMouseListener(){
+
 
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if(e.getClickCount() == 2 && classyTreeItem != null) {
-            if(classyTreeItem.getClassyNode() instanceof Package){
-                System.out.println("Marko");
-            }
+        if(e.getClickCount() == 2) {
+            System.out.println("Marko");
         }
     }
 }
