@@ -32,6 +32,9 @@ public class ClassyTreeImplementation implements ClassyTree{
             return;
 
         ClassyNode child = createChild(parent.getClassyNode());
+        if(child == null){
+            return;
+        }
         parent.add(new ClassyTreeItem(child));
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
         treeView.expandPath(treeView.getSelectionPath());
@@ -68,15 +71,17 @@ public class ClassyTreeImplementation implements ClassyTree{
             Object selection = JOptionPane.showInputDialog(null, "Do you want a new subpackage, or would you like a new diagram?",
                     "Add new item", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
             // proveriti da li ovaj JOptionPane sme da stoji ovde
-            if(selection.equals("Diagram")){
+            if(selection == null){
+                return null;
+            }
+
+            else if(selection.equals("Diagram")){
                 return new Diagrams("Diagram"+new Random().nextInt(100), parent);
             }
             else if(selection.equals("Package")){
                 return new Package("Package"+new Random().nextInt(100), parent);
             }
-            else{
-                return null;
-            }
+
 
 
         }
