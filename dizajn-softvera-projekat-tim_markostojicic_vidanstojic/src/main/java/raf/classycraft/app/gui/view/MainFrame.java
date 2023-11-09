@@ -56,10 +56,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         JPanel desktop = new JPanel();
 
         JMenuBar proba = new JMenuBar();
-        //proba.setMaximumSize(new Dimension(200,200));
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-        JPanel tabbed = new JPanel();
-        tabbedPane.addTab("Proba",tabbed);
+        JPanel tabbed1 = new JPanel();
+        tabbedPane.addTab("Tab1",tabbed1);
+        JPanel tabbe2 = new JPanel();
+        tabbedPane.addTab("Tab2", tabbe2);
         proba.add(tabbedPane);
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
