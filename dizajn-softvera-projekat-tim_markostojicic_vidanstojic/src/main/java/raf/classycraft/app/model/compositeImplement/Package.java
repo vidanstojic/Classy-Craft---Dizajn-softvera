@@ -12,11 +12,24 @@ public class Package extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-        children.add(child);
+        if (child != null &&  child instanceof Diagrams){
+            Diagrams diagrams = (Diagrams) child;
+            if (!this.getChildren().contains(diagrams)){
+                this.getChildren().add(diagrams);
+            }
+        }
+        else if (child != null &&  child instanceof Package){
+            Package packageChild = (Package) child;
+            if (!this.getChildren().contains(packageChild)){
+                this.getChildren().add(packageChild);
+            }
+        }
     }
 
     @Override
     public void removeChild(ClassyNode child) {
-        children.remove(child);
+        if(this.getChildren().contains(child)){
+            this.getChildren().remove(child);
+        }
     }
 }

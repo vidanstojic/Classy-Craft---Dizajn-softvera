@@ -32,6 +32,8 @@ public class Project extends ClassyNodeComposite {
 
     @Override
     public void removeChild(ClassyNode child) {
-        children.remove(child);
+        if(this.getChildren().contains(child)){
+            this.getChildren().remove(child);
+        }
     }
 }
