@@ -9,6 +9,8 @@ import raf.classycraft.app.observer.Notification;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
@@ -53,22 +55,19 @@ public class MainFrame extends JFrame implements ISubscriber {
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
         JPanel desktop = new JPanel();
 
-        JScrollPane scroll=new JScrollPane(projectExplorer);
-        scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
-        getContentPane().add(split,BorderLayout.WEST);
-        split.setDividerLocation(250);
-        split.setOneTouchExpandable(true);
-
-
         JMenuBar proba = new JMenuBar();
-        proba.setMaximumSize(new Dimension(200,200));
+        //proba.setMaximumSize(new Dimension(200,200));
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
         JPanel tabbed = new JPanel();
         tabbedPane.addTab("Proba",tabbed);
         proba.add(tabbedPane);
 
-        getContentPane().add(proba,BorderLayout.CENTER);
+        JScrollPane scroll=new JScrollPane(projectExplorer);
+        scroll.setMinimumSize(new Dimension(200,150));
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,proba);
+        getContentPane().add(split,BorderLayout.CENTER);
+        split.setDividerLocation(250);
+        split.setOneTouchExpandable(true);
 
     }
 
