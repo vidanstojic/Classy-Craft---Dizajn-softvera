@@ -38,7 +38,15 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
 
     @Override
-    public void removeChild(ClassyTreeItem selected, ClassyTreeItem parent) {
+    public void removeChild(ClassyTreeItem selected) {
+
+        if(selected != null){
+            ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
+            parent.remove(selected);
+            ((ClassyNodeComposite) parent.getClassyNode()).removeChild(selected.getClassyNode());
+            SwingUtilities.updateComponentTreeUI(treeView);
+        }
+
 
     }
 

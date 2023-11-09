@@ -20,6 +20,6 @@ public class RemoveItemAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-        MainFrame.getInstance().getClassyTree().removeChild(selected, selected);/// videti sta je parent i promeniti argumente
+        MainFrame.getInstance().getClassyTree().removeChild(selected);/// videti sta je parent i promeniti argumente
     }
 }
