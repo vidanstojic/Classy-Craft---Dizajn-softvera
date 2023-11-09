@@ -22,7 +22,8 @@ public class ProjectAuthorAction extends AbstractClassyAction{
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected.getClassyNode() instanceof Project){
-            
+            Project project = (Project) selected.getClassyNode();
+            project.setAuthor("Marko");
         }
     }
 }

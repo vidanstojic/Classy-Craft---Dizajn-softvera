@@ -14,8 +14,8 @@ public class NewProjectAction extends AbstractClassyAction{
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                 KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/plus.png"));
-        putValue(NAME, "Add");
-        putValue(SHORT_DESCRIPTION, "Add");
+        putValue(NAME, "Add Item");
+        putValue(SHORT_DESCRIPTION, "Add Item");
     }
     @Override
     public void actionPerformed(ActionEvent e) {

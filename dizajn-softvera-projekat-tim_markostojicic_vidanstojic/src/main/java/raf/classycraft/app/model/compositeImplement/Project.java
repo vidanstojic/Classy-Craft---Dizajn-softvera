@@ -35,4 +35,20 @@ public class Project extends ClassyNodeComposite {
             this.getChildren().remove(child);
         }
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public URL getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(URL filepath) {
+        this.filepath = filepath;
+    }
 }

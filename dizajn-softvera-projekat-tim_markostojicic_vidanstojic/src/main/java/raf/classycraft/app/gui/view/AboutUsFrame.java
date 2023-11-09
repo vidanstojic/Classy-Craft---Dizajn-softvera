@@ -23,7 +23,7 @@ public class AboutUsFrame extends JFrame {
         titlePanel.add(title);
 
         JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel text = new JLabel("Na ovom projektu rade Vidan Stojić i Marko Stojičić.");
+        JLabel text = new JLabel("Marko Stojičić and Vidan Stojić are working on this project.");
         textPanel.add(text);
 
         panel.add(titlePanel);
@@ -62,8 +62,8 @@ public class AboutUsFrame extends JFrame {
         panel.add(textPanel);
         panel.add(imagePanel);
 
-        JLabel textMarko = new JLabel("Marko(kontakt: mstojicic12923rn@raf.rs)");
-        JLabel textVidan = new JLabel("Vidan(kontakt: vstojic8223rn@raf.rs)");
+        JLabel textMarko = new JLabel("Marko(contact: mstojicic12923rn@raf.rs)");
+        JLabel textVidan = new JLabel("Vidan(contact: vstojic8223rn@raf.rs)");
 
         JPanel namesPanel = new JPanel(new FlowLayout());
         namesPanel.add(textVidan);
