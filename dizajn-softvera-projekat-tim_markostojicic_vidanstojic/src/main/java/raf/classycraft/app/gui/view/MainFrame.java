@@ -104,4 +104,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     public ClassyTree getClassyTree() {
         return classyTree;
     }
+
+
 }

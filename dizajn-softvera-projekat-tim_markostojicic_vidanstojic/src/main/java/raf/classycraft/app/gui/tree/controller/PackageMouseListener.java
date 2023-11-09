@@ -1,5 +1,6 @@
 package raf.classycraft.app.gui.tree.controller;
 
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeImplement.Package;
 
@@ -12,9 +13,9 @@ import java.security.interfaces.RSAPrivateCrtKey;
 
 public class PackageMouseListener extends MouseAdapter {
 
-    ClassyTreeItem classyTreeItem;
-    public PackageMouseListener(){
-
+    ClassyTreeImplementation classyTreeImplementation;
+    public PackageMouseListener(ClassyTreeImplementation classyTreeImplementation){
+        this.classyTreeImplementation = classyTreeImplementation;
 
     }
 
@@ -22,7 +23,10 @@ public class PackageMouseListener extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
 
         if(e.getClickCount() == 2) {
-            System.out.println("Marko");
+            if(classyTreeImplementation.getSelectedNode().getClassyNode() instanceof Package){
+                System.out.println("Marko");
+            }
+
         }
     }
 }
