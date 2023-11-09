@@ -9,9 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class ProjectAuthorAction extends AbstractClassyAction{
+public class ProjectAuthorAction extends AbstractClassyAction {
 
-    public ProjectAuthorAction(){
+    public ProjectAuthorAction() {
         putValue(SMALL_ICON, loadIcon("/images/author.png"));
         putValue(NAME, "Project Author");
         putValue(SHORT_DESCRIPTION, "Set the project author");
@@ -21,9 +21,18 @@ public class ProjectAuthorAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-        if(selected.getClassyNode() instanceof Project){
+        if (selected.getClassyNode() instanceof Project) {
             Project project = (Project) selected.getClassyNode();
-            project.setAuthor("Marko");
+            String userInput = JOptionPane.showInputDialog("Input name of the author:");
+            if (!(project.getAuthor() != null)) {
+                if (userInput == null) {
+                    project.setAuthor(null);
+                } else {
+                    project.setAuthor(userInput);
+                    project.getAuthor();
+                }
+            }else
+                project.getAuthor();
         }
     }
 }
