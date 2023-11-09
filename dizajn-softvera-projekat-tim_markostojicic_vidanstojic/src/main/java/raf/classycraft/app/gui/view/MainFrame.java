@@ -4,6 +4,7 @@ import raf.classycraft.app.gui.controller.ActionManager;
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.ClassyTree;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
+import raf.classycraft.app.gui.tree.controller.PackageMouseListener;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 
@@ -18,7 +19,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private ClassyTree classyTree;
 
-
+    private PackageView packageView;
 
     // buduca polja za glavni view
 
@@ -55,21 +56,16 @@ public class MainFrame extends JFrame implements ISubscriber {
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
         JPanel desktop = new JPanel();
 
-        JMenuBar proba = new JMenuBar();
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-        JPanel tabbed1 = new JPanel();
-        tabbedPane.addTab("Tab1",tabbed1);
-        JPanel tabbe2 = new JPanel();
-        tabbedPane.addTab("Tab2", tabbe2);
-        proba.add(tabbedPane);
-
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,proba);
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll, desktop);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
+
+        this.packageView = new PackageView();
+        split.setRightComponent(new JScrollPane(packageView));
     }
 
     public static MainFrame getInstance(){
@@ -105,5 +101,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         return classyTree;
     }
 
-
+    public PackageView getPackageView() {
+        return packageView;
+    }
 }

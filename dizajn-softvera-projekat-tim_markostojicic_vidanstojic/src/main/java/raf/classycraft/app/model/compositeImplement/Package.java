@@ -32,4 +32,5 @@ public class Package extends ClassyNodeComposite {
             this.getChildren().remove(child);
         }
     }
+
 }
