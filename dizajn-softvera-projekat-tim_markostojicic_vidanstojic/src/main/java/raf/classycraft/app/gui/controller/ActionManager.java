@@ -8,6 +8,8 @@ public class ActionManager {
 
     private RemoveItemAction removeItemAction;
 
+    private ProjectAuthorAction projectAuthorAction;
+
     public ActionManager(){
         initialiseActions();
     }
@@ -17,6 +19,7 @@ public class ActionManager {
         aboutUs = new AboutUsAction();
         newProjectAction = new NewProjectAction();
         removeItemAction = new RemoveItemAction();
+        projectAuthorAction = new ProjectAuthorAction();
     }
 
     public ExitAction getEa() {
@@ -33,5 +36,9 @@ public class ActionManager {
 
     public RemoveItemAction getRemoveItemAction() {
         return removeItemAction;
+    }
+
+    public ProjectAuthorAction getProjectAuthorAction() {
+        return projectAuthorAction;
     }
 }

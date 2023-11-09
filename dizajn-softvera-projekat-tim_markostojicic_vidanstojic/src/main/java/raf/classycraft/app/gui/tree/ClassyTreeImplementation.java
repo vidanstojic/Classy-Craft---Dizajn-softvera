@@ -67,7 +67,7 @@ public class ClassyTreeImplementation implements ClassyTree{
             String initialSelection = "Diagram";
             Object selection = JOptionPane.showInputDialog(null, "Do you want a new subpackage, or would you like a new diagram?",
                     "Add new item", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-
+            // proveriti da li ovaj JOptionPane sme da stoji ovde
             if(selection.equals("Diagram")){
                 return new Diagrams("Diagram"+new Random().nextInt(100), parent);
             }

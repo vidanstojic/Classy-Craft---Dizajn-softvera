@@ -15,9 +15,8 @@ public class Project extends ClassyNodeComposite {
         super.setParent(parent);
     }
 
-    public Project(String author, URL filepath) {
+    public Project(String author) {
         this.author = author;
-        this.filepath = filepath;
     }
 
     @Override
