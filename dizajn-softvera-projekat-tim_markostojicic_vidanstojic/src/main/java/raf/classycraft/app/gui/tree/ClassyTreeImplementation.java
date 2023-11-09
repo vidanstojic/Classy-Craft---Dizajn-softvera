@@ -65,14 +65,19 @@ public class ClassyTreeImplementation implements ClassyTree{
         else if(parent instanceof Package){
             Object[] selectionValues = {"Package","Diagram"};
             String initialSelection = "Diagram";
-            Object selection = JOptionPane.showInputDialog(null, "Do you want a new subpackage, or would you like a diagram??",
+            Object selection = JOptionPane.showInputDialog(null, "Do you want a new subpackage, or would you like a new diagram?",
                     "Add new item", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
             if(selection.equals("Diagram")){
                 return new Diagrams("Diagram"+new Random().nextInt(100), parent);
             }
             else if(selection.equals("Package")){
                 return new Package("Package"+new Random().nextInt(100), parent);
             }
+            else{
+                return null;
+            }
+
 
         }
 
