@@ -4,6 +4,7 @@ import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 
@@ -58,7 +59,8 @@ public class ClassyTreeImplementation implements ClassyTree{
     private ClassyNode createChild(ClassyNode parent) {
         if (parent instanceof ProjectExplorer)
             return  new Project("Project" +new Random().nextInt(100),parent);
-
+        else if(parent instanceof Project)
+            return new Package("Package"+new Random().nextInt(100), parent);
 
         return null;
     }

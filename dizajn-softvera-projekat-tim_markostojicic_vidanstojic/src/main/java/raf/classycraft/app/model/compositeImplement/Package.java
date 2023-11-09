@@ -5,8 +5,9 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 
 public class Package extends ClassyNodeComposite {
 
-    public Package() {
-
+    public Package(String name, ClassyNode parent){
+        super.setName(name);
+        super.setParent(parent);
     }
 
     @Override
