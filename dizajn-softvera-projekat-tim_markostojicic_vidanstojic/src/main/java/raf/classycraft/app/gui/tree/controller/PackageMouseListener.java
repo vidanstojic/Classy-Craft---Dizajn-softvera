@@ -8,6 +8,7 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.Project;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -31,7 +32,8 @@ public class PackageMouseListener extends MouseAdapter {
                 PackageView packageView = MainFrame.getInstance().getPackageView();
                 for(ClassyNode child : parentPackage.getChildren()){
                     if(child instanceof Diagrams){
-                        packageView.addTab(child.getName(), new DiagramView());
+                        Project project = (Project) child.getParent().getParent();
+                        packageView.addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
                     }
                 }
             }

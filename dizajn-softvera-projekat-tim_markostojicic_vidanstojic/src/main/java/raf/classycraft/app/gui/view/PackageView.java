@@ -2,6 +2,7 @@ package raf.classycraft.app.gui.view;
 
 import com.sun.tools.javac.Main;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.ISubscriberView;
 import raf.classycraft.app.observer.TreeNotification;
@@ -52,7 +53,11 @@ public class PackageView extends JPanel implements ISubscriberView {
     public void update(ClassyNode child, TreeNotification typeNotify) {
      //   System.out.println("Update called with typeNotify: " + typeNotify);
         if(typeNotify == TreeNotification.ADDED_CHILD){
-            addTab(child.getName(), new DiagramView());
+            if(child.getParent().getParent() instanceof Project){
+                Project project = (Project) child.getParent().getParent();
+                addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+            }
+
         }
         else if(typeNotify == TreeNotification.DELETED_CHILD){
             removeTab(child);
