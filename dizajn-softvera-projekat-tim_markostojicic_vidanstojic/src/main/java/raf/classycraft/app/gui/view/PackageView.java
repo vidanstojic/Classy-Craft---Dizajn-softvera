@@ -16,6 +16,8 @@ public class PackageView extends JPanel implements ISubscriberView {
     private Label author;
     private Label nameOfProject;
 
+    public static boolean flag = false;
+
     public PackageView(){
 
         tabbedPaneInit();
@@ -51,6 +53,9 @@ public class PackageView extends JPanel implements ISubscriberView {
 
     @Override
     public void update(Object notify, TreeNotification typeNotify) {
+        if(flag == false){
+            return;
+        }
         ClassyNode child = (ClassyNode) notify;
         //   System.out.println("Update called with typeNotify: " + typeNotify);
         if(typeNotify == TreeNotification.ADDED_CHILD){
@@ -63,5 +68,13 @@ public class PackageView extends JPanel implements ISubscriberView {
         else if(typeNotify == TreeNotification.DELETED_CHILD){
             removeTab(child);
         }
+    }
+
+    public static boolean isFlag() {
+        return flag;
+    }
+
+    public static void setFlag(boolean flag) {
+        PackageView.flag = flag;
     }
 }

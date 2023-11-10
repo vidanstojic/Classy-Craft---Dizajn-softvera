@@ -35,6 +35,7 @@ public class PackageMouseListener extends MouseAdapter {
                         if(parentPackage.findProject() != null && parentPackage.findProject() instanceof  Project) {
                             Project project = parentPackage.findProject();
                             packageView.addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+                            packageView.setFlag(true);
                         }
                     }
                 }
