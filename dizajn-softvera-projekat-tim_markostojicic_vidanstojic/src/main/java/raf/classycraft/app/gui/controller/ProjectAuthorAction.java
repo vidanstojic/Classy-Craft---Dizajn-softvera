@@ -29,10 +29,8 @@ public class ProjectAuthorAction extends AbstractClassyAction {
                     project.setAuthor(null);
                 } else {
                     project.setAuthor(userInput);
-                    project.getAuthor();
                 }
-            }else
-                project.getAuthor();
+            }
         }
     }
 }

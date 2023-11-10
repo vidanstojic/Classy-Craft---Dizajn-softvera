@@ -5,6 +5,7 @@ import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.ClassyTree;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.controller.PackageMouseListener;
+import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 
@@ -21,6 +22,8 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private PackageView packageView;
 
+
+
     // buduca polja za glavni view
 
     private MainFrame(){
@@ -30,7 +33,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     private void initialize(){
         actionManager = new ActionManager();
         classyTree = new ClassyTreeImplementation();
-
         ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
 
 

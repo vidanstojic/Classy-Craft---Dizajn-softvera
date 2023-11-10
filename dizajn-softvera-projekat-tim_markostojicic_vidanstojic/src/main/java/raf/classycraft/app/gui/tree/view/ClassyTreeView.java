@@ -20,5 +20,6 @@ public class ClassyTreeView extends JTree {
         setCellEditor(new ClassyTreeCellEditor(this, treeCellRenderer));
         setCellRenderer(treeCellRenderer);
         setEditable(true);
+        this.setLargeModel(true);
     }
 }
