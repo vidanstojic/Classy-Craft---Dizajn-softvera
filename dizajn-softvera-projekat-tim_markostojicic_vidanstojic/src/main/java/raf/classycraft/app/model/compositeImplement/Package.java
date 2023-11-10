@@ -57,9 +57,24 @@ public class Package extends ClassyNodeComposite implements IPublisherTree {
     }
 
     @Override
-    public void notifySub(ClassyNode child, TreeNotification typeNotify) {
+    public void notifySub(Object notify, TreeNotification typeNotify) {
+        ClassyNode child = (ClassyNode) notify;
         for(ISubscriberView iSubscriberView : this.subscribers){
             iSubscriberView.update(child, typeNotify);
         }
+    }
+
+    public Project findProject() {
+        ClassyNode currentNode = this;
+
+        while (!(currentNode instanceof Project)) {
+            ClassyNode parent = currentNode.getParent();
+            if (parent == null) {
+                return null;
+            }
+            currentNode = parent;
+        }
+        Project project = (Project) currentNode;
+        return project;
     }
 }

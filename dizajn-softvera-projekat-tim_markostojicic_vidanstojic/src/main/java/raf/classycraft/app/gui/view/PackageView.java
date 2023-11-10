@@ -50,10 +50,11 @@ public class PackageView extends JPanel implements ISubscriberView {
     }
 
     @Override
-    public void update(ClassyNode child, TreeNotification typeNotify) {
-     //   System.out.println("Update called with typeNotify: " + typeNotify);
+    public void update(Object notify, TreeNotification typeNotify) {
+        ClassyNode child = (ClassyNode) notify;
+        //   System.out.println("Update called with typeNotify: " + typeNotify);
         if(typeNotify == TreeNotification.ADDED_CHILD){
-            if(child.getParent().getParent() instanceof Project){
+            if( child.getParent().getParent() != null && child.getParent().getParent() instanceof Project){
                 Project project = (Project) child.getParent().getParent();
                 addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
             }

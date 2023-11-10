@@ -23,4 +23,6 @@ public abstract class ClassyNode {
     public void setParent(ClassyNode parent) {
         this.parent = parent;
     }
+
+
 }

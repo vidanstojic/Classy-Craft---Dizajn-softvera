@@ -28,12 +28,14 @@ public class PackageMouseListener extends MouseAdapter {
 
         if(e.getClickCount() == 2) {
             if(classyTreeImplementation.getSelectedNode().getClassyNode() instanceof Package){
-                ClassyNodeComposite parentPackage = (ClassyNodeComposite) classyTreeImplementation.getSelectedNode().getClassyNode();
+                Package parentPackage = (Package) classyTreeImplementation.getSelectedNode().getClassyNode();
                 PackageView packageView = MainFrame.getInstance().getPackageView();
                 for(ClassyNode child : parentPackage.getChildren()){
                     if(child instanceof Diagrams){
-                        Project project = (Project) child.getParent().getParent();
-                        packageView.addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+                        if(parentPackage.findProject() != null && parentPackage.findProject() instanceof  Project) {
+                            Project project = parentPackage.findProject();
+                            packageView.addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+                        }
                     }
                 }
             }

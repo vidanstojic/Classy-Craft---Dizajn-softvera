@@ -1,8 +1,16 @@
 package raf.classycraft.app.model.compositeImplement;
 
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.observer.IPublisherTree;
+import raf.classycraft.app.observer.ISubscriberView;
+import raf.classycraft.app.observer.TreeNotification;
 
-public class Diagrams extends ClassyNode {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Diagrams extends ClassyNode implements IPublisherTree {
+
+    List<ISubscriberView> subscriberViews = new ArrayList<>();
     public Diagrams(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
@@ -27,6 +35,7 @@ public class Diagrams extends ClassyNode {
     @Override
     public void setName(String name) {
         super.setName(name);
+        notifySub(name, TreeNotification.RENAMED_CHILD);
     }
 
     @Override
@@ -38,4 +47,24 @@ public class Diagrams extends ClassyNode {
     public void setParent(ClassyNode parent) {
         super.setParent(parent);
     }
+
+    @Override
+    public void addSubscriber(ISubscriberView iSubscriber) {
+        this.subscriberViews.add(iSubscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriberView iSubscriber) {
+        this.subscriberViews.remove(iSubscriber);
+    }
+
+    @Override
+    public void notifySub(Object notify, TreeNotification typeNotify) {
+
+        for(ISubscriberView subscriberView : this.subscriberViews){
+            subscriberView.update(notify, typeNotify);
+        }
+    }
+
+
 }
