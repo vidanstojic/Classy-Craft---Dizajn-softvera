@@ -1,13 +1,23 @@
 package raf.classycraft.app.model.compositeImplement;
 
+import com.sun.tools.javac.Main;
+import raf.classycraft.app.gui.view.MainFrame;
+import raf.classycraft.app.gui.view.PackageView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.observer.*;
 
-public class Package extends ClassyNodeComposite {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Package extends ClassyNodeComposite implements IPublisherTree {
+
+
+    List<ISubscriberView> subscribers = new ArrayList<>();
     public Package(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
+        this.addSubscriber(MainFrame.getInstance().getPackageView());
     }
 
     @Override
@@ -16,6 +26,7 @@ public class Package extends ClassyNodeComposite {
             Diagrams diagrams = (Diagrams) child;
             if (!this.getChildren().contains(diagrams)){
                 this.getChildren().add(diagrams);
+                notifySub(diagrams, TreeNotification.ADDED_CHILD);
             }
         }
         else if (child != null &&  child instanceof Package){
@@ -31,6 +42,24 @@ public class Package extends ClassyNodeComposite {
         if(this.getChildren().contains(child)){
             this.getChildren().remove(child);
         }
+        notifySub(child, TreeNotification.DELETED_CHILD);
     }
 
+
+    @Override
+    public void addSubscriber(ISubscriberView iSubscriber) {
+        this.subscribers.add(iSubscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriberView iSubscriber) {
+        this.subscribers.remove(iSubscriber);
+    }
+
+    @Override
+    public void notifySub(ClassyNode child, TreeNotification typeNotify) {
+        for(ISubscriberView iSubscriberView : this.subscribers){
+            iSubscriberView.update(child, typeNotify);
+        }
+    }
 }

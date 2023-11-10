@@ -4,15 +4,12 @@ import raf.classycraft.app.gui.controller.ActionManager;
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.ClassyTree;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
-import raf.classycraft.app.gui.tree.controller.PackageMouseListener;
-import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.Notification;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+
 
 public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
@@ -67,6 +64,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
         this.packageView = new PackageView();
+
         split.setRightComponent(new JScrollPane(packageView));
     }
 
@@ -85,9 +83,10 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
     @Override
-    public void update(Notification notification) {
+    public void update(Object notify) {
         //  JOptionPane.showMessageDialog(null, "Uh-oh!", "Error", JOptionPane.ERROR_MESSAGE);
         // uh oh je tekst, a error je naslov
+        Notification notification = (Notification) notify;
         if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.ERROR){
             JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.ERROR_MESSAGE);
         }
@@ -97,6 +96,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         else if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.INFORMATION){
             JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.INFORMATION_MESSAGE);
         }
+
     }
 
     public ClassyTree getClassyTree() {

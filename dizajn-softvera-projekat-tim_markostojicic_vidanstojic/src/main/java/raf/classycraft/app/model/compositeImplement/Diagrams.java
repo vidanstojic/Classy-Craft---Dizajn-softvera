@@ -7,4 +7,35 @@ public class Diagrams extends ClassyNode {
         super.setName(name);
         super.setParent(parent);
     }
+
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public ClassyNode getParent() {
+        return super.getParent();
+    }
+
+    @Override
+    public void setParent(ClassyNode parent) {
+        super.setParent(parent);
+    }
 }

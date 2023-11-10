@@ -1,5 +1,5 @@
 package raf.classycraft.app.observer;
 
 public interface ISubscriber {
-    void update(Notification notification);
+    void update(Object notify);
 }

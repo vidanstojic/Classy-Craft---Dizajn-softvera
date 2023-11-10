@@ -14,7 +14,8 @@ public class ConsoleLogger implements Logger {
 
 
     @Override
-    public void update(Notification notification) {
+    public void update(Object notify) {
+        Notification notification = (Notification) notify;
         this.log(notification.getMessage());
     }
 

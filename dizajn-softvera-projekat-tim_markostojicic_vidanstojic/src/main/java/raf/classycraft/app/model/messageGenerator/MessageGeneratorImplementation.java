@@ -74,7 +74,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
     }
 
     @Override
-    public void notifySub(Notification notification) {
+    public void notifySub(Object notify) {
+        Notification notification = (Notification) notify;
         for(ISubscriber listener : subscribers){
             listener.update(notification);
         }
