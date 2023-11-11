@@ -4,14 +4,13 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
-import raf.classycraft.app.observer.TreeNotificationType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Diagrams extends ClassyNode implements IPublisher {
 
-    List<ISubscriber> subscriberViews = new ArrayList<>();
+    List<ISubscriber> subscribers = new ArrayList<>(); // nije jos dodan DijagramView u listu
     public Diagrams(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
@@ -50,21 +49,35 @@ public class Diagrams extends ClassyNode implements IPublisher {
 
     @Override
     public void addSubscriber(ISubscriber iSubscriber) {
-        this.subscriberViews.add(iSubscriber);
+        this.subscribers.add(iSubscriber);
     }
 
     @Override
     public void removeSubscriber(ISubscriber iSubscriber) {
-        this.subscriberViews.remove(iSubscriber);
+        this.subscribers.remove(iSubscriber);
     }
 
     @Override
     public void notifySub(Object notify) {
         NotificationTree notificationTree = new NotificationTree();// ovde ce tek biti potrebno da se promeni nesto kasnije u toku projekta
         // kada bude bilo bitno da DijagramView slusa Dijagram
-        for(ISubscriber subscriberView : this.subscriberViews){
+        for(ISubscriber subscriberView : this.subscribers){
             subscriberView.update(notificationTree);
         }
+    }
+
+    public Project findProject() {
+        ClassyNode currentNode = this;
+
+        while (!(currentNode instanceof Project)) {
+            ClassyNode parent = currentNode.getParent();
+            if (parent == null) {
+                return null;
+            }
+            currentNode = parent;
+        }
+        Project project = (Project) currentNode;
+        return project;
     }
 
 

@@ -1,6 +1,7 @@
 package raf.classycraft.app.gui.view;
 
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
@@ -56,13 +57,19 @@ public class PackageView extends JPanel implements ISubscriber {
             return;
         }
         NotificationTree notificationTree = (NotificationTree) notify;
-        ClassyNode child = notificationTree.getClassyNode();
+        Diagrams child = null;
+        if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Diagrams){
+            child = (Diagrams) notificationTree.getClassyNode();
+        }
+        else{
+            return;
+        }
         TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
 
 
         if(typeNotify == TreeNotificationType.ADDED_CHILD){
-            if( child.getParent().getParent() != null && child.getParent().getParent() instanceof Project){
-                Project project = (Project) child.getParent().getParent();
+            if( child.findProject() != null && child.findProject() instanceof Project){
+                Project project = child.findProject();
                 addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
             }
 
