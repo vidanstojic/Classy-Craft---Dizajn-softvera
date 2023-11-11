@@ -1,5 +1,6 @@
 package raf.classycraft.app.gui.tree;
 
+import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
@@ -8,6 +9,8 @@ import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
+import raf.classycraft.app.model.messageGenerator.EventTypes;
+import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
@@ -45,11 +48,16 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void removeChild(ClassyTreeItem selected) {
 
+        if(selected ==null){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+            return;
+        }//Puca izuzetak ako se klikne na brisanje elementa a element nije selektovan
         if(selected != null){
             ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
             parent.remove(selected);
             ((ClassyNodeComposite) parent.getClassyNode()).removeChild(selected.getClassyNode());
             SwingUtilities.updateComponentTreeUI(treeView);
+            return;
         }
 
 

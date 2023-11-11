@@ -36,7 +36,6 @@ public class FileLogger implements Logger {
 
             bufferedWriter.close();
             fileWriter.close();
-            System.out.println("Mare doktor");
 
         } catch (IOException e) {
             System.out.println("Podaci se nisu pravilno upisali u fajl");

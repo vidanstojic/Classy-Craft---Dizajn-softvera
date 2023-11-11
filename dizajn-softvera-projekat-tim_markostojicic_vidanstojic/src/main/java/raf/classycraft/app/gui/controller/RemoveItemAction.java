@@ -26,7 +26,11 @@ public class RemoveItemAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-        if(selected.getClassyNode() instanceof ProjectExplorer){
+        if(selected == null){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+            return;
+        }
+        else if(selected.getClassyNode() instanceof ProjectExplorer){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_CANNOT_BE_DELETED, Type.ERROR);
             return;
         }

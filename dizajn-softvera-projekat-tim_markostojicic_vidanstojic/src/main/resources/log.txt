@@ -1,1 +1,1 @@
-[ERROR][2023-11-11T22:39:10.503377200]Node can not be deleted.
+[WARNING][2023-11-11T23:44:30.997248400]Only project has author.

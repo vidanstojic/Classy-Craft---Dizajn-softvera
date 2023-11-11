@@ -57,6 +57,9 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         } else if (type == Type.WARNING && eventType == EventTypes.PROJECTEXPLORER_CANNOT_BE_RENAMED) {
             messageText = "Project Explorer can not be renamed";
             message = "["+Type.WARNING+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
+        } else if (type == Type.WARNING && eventType == EventTypes.ONLY_PROJECT_HAS_AUTHOR) {
+            messageText = "Only project has author.";
+            message = "["+Type.WARNING+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
 
 

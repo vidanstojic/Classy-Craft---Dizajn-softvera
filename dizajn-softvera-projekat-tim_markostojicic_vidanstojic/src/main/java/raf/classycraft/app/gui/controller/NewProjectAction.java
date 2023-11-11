@@ -1,7 +1,10 @@
 package raf.classycraft.app.gui.controller;
 
+import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.MainFrame;
+import raf.classycraft.app.model.messageGenerator.EventTypes;
+import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +23,10 @@ public class NewProjectAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
+        if(selected == null) {
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+            return;
+        }
         MainFrame.getInstance().getClassyTree().addChild(selected);
     }
 }
