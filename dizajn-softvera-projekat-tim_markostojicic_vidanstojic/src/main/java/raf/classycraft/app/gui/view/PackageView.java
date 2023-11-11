@@ -21,22 +21,17 @@ public class PackageView extends JPanel implements ISubscriber {
     public static boolean flag = false;
 
     public PackageView(){
+        tabbedPaneInit();
+    }
 
-        tabbedPaneInit();
-    }
-    public PackageView(String nameP, String nameA){
-        this.nameA = nameA;
-        this.nameP = nameP;
-        tabbedPaneInit();
-    }
 
     public void tabbedPaneInit(){
         this.tabbedPane = new JTabbedPane();
         this.setLayout(new BorderLayout());
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        nameOfProject = new Label(nameP);
-        author = new Label(nameA);
+        nameOfProject = new Label("");
+        author = new Label("");
         nameOfProject.setAlignment(Label.CENTER);
         author.setAlignment(Label.CENTER);
 
@@ -124,6 +119,13 @@ public class PackageView extends JPanel implements ISubscriber {
 
         else if(typeNotify == TreeNotificationType.RENAMED_CHILD){
             changeTabTitle(child, notificationTree.getOldNameNode());
+        }
+
+        else if(typeNotify == TreeNotificationType.PROJECT_AUTHOR_NAME){
+            this.nameP = notificationTree.getProjectName();
+            this.nameA = notificationTree.getAuthorName();
+            nameOfProject.setText("Project name: "+nameP);
+            author.setText("Author: "+nameA);
         }
     }
 

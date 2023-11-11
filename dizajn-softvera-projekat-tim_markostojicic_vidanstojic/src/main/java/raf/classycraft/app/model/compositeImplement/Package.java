@@ -17,6 +17,7 @@ public class Package extends ClassyNodeComposite implements IPublisher {
         super.setName(name);
         super.setParent(parent);
         this.addSubscriber(MainFrame.getInstance().getPackageView());
+        this.projectName();
     }
 
     @Override
@@ -82,5 +83,12 @@ public class Package extends ClassyNodeComposite implements IPublisher {
     public void nameChangedDiagram(ClassyNode child, String oldName){
             NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.RENAMED_CHILD, oldName);
             notifySub(notificationTree);
+    }
+    public void projectName(){
+        Project project = findProject();
+        String projectName = project.getName();
+        String authorName = project.getAuthor();
+        NotificationTree notificationTree = new NotificationTree(projectName, authorName, TreeNotificationType.PROJECT_AUTHOR_NAME);
+        notifySub(notificationTree);
     }
 }

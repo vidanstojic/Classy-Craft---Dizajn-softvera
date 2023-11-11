@@ -9,6 +9,9 @@ public class NotificationTree {
 
     private String oldNameNode;
 
+    private String projectName;
+    private String authorName;
+
     public NotificationTree(ClassyNode classyNode,TreeNotificationType treeNotificationType) {
         this.classyNode = classyNode;
         this.treeNotificationType = treeNotificationType;
@@ -21,6 +24,12 @@ public class NotificationTree {
         this.classyNode = classyNode;
         this.treeNotificationType = treeNotificationType;
         this.oldNameNode = oldNameNode;
+    }
+
+    public NotificationTree(String projectName, String authorName, TreeNotificationType treeNotificationType){
+        this.projectName = projectName;
+        this.authorName = authorName;
+        this.treeNotificationType = treeNotificationType;
     }
 
     public TreeNotificationType getTreeNotificationType() {
@@ -45,5 +54,21 @@ public class NotificationTree {
 
     public void setOldNameNode(String oldNameNode) {
         this.oldNameNode = oldNameNode;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }

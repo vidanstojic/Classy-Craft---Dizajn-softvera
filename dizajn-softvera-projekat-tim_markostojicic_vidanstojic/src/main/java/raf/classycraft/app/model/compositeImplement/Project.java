@@ -42,6 +42,7 @@ public class Project extends ClassyNodeComposite {
 
     public void setAuthor(String author) {
         this.author = author;
+
     }
 
     public URL getFilepath() {
