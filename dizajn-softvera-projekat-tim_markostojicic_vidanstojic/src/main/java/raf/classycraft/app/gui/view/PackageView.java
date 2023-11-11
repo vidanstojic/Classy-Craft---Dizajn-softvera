@@ -15,11 +15,18 @@ public class PackageView extends JPanel implements ISubscriber {
     private JTabbedPane tabbedPane;
     private Label author;
     private Label nameOfProject;
+    private String nameP;
+    private String nameA;
 
     public static boolean flag = false;
 
     public PackageView(){
 
+        tabbedPaneInit();
+    }
+    public PackageView(String nameP, String nameA){
+        this.nameA = nameA;
+        this.nameP = nameP;
         tabbedPaneInit();
     }
 
@@ -28,24 +35,24 @@ public class PackageView extends JPanel implements ISubscriber {
         this.setLayout(new BorderLayout());
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        Label imeProjekta = new Label("Projekat");
-        Label imeAutora = new Label("Mare autor");
-        imeProjekta.setAlignment(Label.CENTER);
-        imeAutora.setAlignment(Label.CENTER);
+        nameOfProject = new Label(nameP);
+        author = new Label(nameA);
+        nameOfProject.setAlignment(Label.CENTER);
+        author.setAlignment(Label.CENTER);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0; // x osa kolona
         gbc.gridy = 0;// y osa red
         gbc.gridwidth = 1;// broj kolona koje zauzima
         gbc.weightx = 1.0;
-        add(imeProjekta, gbc);
+        add(nameOfProject, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.weightx = 1.0;
-        add(imeAutora, gbc);
+        add(author, gbc);
 
         tabbedPane = new JTabbedPane();
         gbc.fill = GridBagConstraints.BOTH;
@@ -126,5 +133,21 @@ public class PackageView extends JPanel implements ISubscriber {
 
     public static void setFlag(boolean flag) {
         PackageView.flag = flag;
+    }
+
+    public String getNameP() {
+        return nameP;
+    }
+
+    public void setNameP(String nameP) {
+        this.nameP = nameP;
+    }
+
+    public String getNameA() {
+        return nameA;
+    }
+
+    public void setNameA(String nameA) {
+        this.nameA = nameA;
     }
 }

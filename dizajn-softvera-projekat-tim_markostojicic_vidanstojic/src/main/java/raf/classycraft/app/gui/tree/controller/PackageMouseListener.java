@@ -29,11 +29,15 @@ public class PackageMouseListener extends MouseAdapter {
         if(e.getClickCount() == 2) {
             if(classyTreeImplementation.getSelectedNode().getClassyNode() instanceof Package){
                 Package parentPackage = (Package) classyTreeImplementation.getSelectedNode().getClassyNode();
-                PackageView packageView = MainFrame.getInstance().getPackageView();
+                PackageView packageView = MainFrame.getInstance().getPackageView();//Mislim da moramo da imamo vise PackageView, ovim imamo samo jedan
                 for(ClassyNode child : parentPackage.getChildren()){
                     if(child instanceof Diagrams){
                         if(parentPackage.findProject() != null && parentPackage.findProject() instanceof  Project) {
                             Project project = parentPackage.findProject();
+                            //packageView.setNameA(project.getAuthor());
+                            //packageView.setNameP(project.getName());
+                            //PackageView packageView = new PackageView(project.getName(),project.getAuthor());
+                            //MainFrame.getInstance().setPackageView(packageView);
                             packageView.addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
                             packageView.setFlag(true);
                         }

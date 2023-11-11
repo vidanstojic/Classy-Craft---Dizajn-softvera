@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 
 public class FileLogger implements Logger {
 
@@ -24,9 +25,9 @@ public class FileLogger implements Logger {
 
     @Override
     public void log(String message) {
-        String filePath = "resources/txtFiles/log.txt";
+        URL filePath = getClass().getResource("resources/log.txt");
 
-        File file = new File(filePath);
+        File file = new File(String.valueOf(filePath));
 
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -37,7 +38,7 @@ public class FileLogger implements Logger {
 
             bufferedWriter.close();
             fileWriter.close();
-
+            System.out.println("Mare doktro");
 
         } catch (IOException e) {
             System.out.println("Podaci se nisu pravilno upisali u fajl");

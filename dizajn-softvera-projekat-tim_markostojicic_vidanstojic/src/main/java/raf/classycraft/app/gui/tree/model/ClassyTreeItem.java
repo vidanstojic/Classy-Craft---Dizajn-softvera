@@ -14,14 +14,6 @@ public class ClassyTreeItem extends DefaultMutableTreeNode {
 
     @Override
     public String toString() {
-        if(this.classyNode instanceof Project){
-            Project project = (Project) this.classyNode;
-            if(project.getAuthor() != null){
-                String ispis = project.getName()+" author: "+project.getAuthor();
-                return ispis;
-            }
-
-        }
         return classyNode.getName();
     }
 

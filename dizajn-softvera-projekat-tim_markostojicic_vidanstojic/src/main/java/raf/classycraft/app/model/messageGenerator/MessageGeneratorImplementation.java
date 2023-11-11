@@ -15,6 +15,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
 
     private List<ISubscriber> subscribers = new ArrayList<>();
+    private NotificationMessageGenerator notification;
 
     public MessageGeneratorImplementation(){
 
@@ -57,7 +58,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
         
 
-        NotificationMessageGenerator notification = new NotificationMessageGenerator(message, eventType, type, messageText);
+        notification = new NotificationMessageGenerator(message, eventType, type, messageText);
         notifySub(notification);
 
     }
@@ -86,5 +87,9 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
     public void setSubscribers(List<ISubscriber> subscribers) {
         this.subscribers = subscribers;
+    }
+
+    public NotificationMessageGenerator getNotification() {
+        return notification;
     }
 }

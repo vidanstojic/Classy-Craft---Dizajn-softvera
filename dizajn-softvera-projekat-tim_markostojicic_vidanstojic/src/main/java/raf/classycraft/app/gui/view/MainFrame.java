@@ -97,6 +97,7 @@ public class MainFrame extends JFrame implements ISubscriber {
             JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.INFORMATION_MESSAGE);
         }
 
+
     }
 
     public ClassyTree getClassyTree() {
@@ -105,5 +106,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public PackageView getPackageView() {
         return packageView;
+    }
+
+    public void setPackageView(PackageView packageView) {
+        this.packageView = packageView;
     }
 }
