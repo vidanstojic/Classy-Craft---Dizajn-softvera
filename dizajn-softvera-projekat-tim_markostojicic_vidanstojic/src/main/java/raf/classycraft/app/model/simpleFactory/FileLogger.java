@@ -25,9 +25,7 @@ public class FileLogger implements Logger {
 
     @Override
     public void log(String message) {
-        URL filePath = getClass().getResource("resources/log.txt");
-
-        File file = new File(String.valueOf(filePath));
+        File file = new File("dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/log.txt");
 
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -38,7 +36,7 @@ public class FileLogger implements Logger {
 
             bufferedWriter.close();
             fileWriter.close();
-            System.out.println("Mare doktro");
+            System.out.println("Mare doktor");
 
         } catch (IOException e) {
             System.out.println("Podaci se nisu pravilno upisali u fajl");
