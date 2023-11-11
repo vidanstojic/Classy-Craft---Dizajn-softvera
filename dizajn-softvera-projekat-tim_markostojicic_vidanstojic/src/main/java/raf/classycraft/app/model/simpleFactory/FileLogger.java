@@ -7,14 +7,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 
 public class FileLogger implements Logger {
 
-
+    private File file = new File("dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/log.txt");
+    private FileWriter fileWriter;
+    private BufferedWriter bufferedWriter;
     public  FileLogger(){
         ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
-
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     @Override
@@ -25,11 +28,10 @@ public class FileLogger implements Logger {
 
     @Override
     public void log(String message) {
-        File file = new File("dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/log.txt");
 
         try {
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            fileWriter = new FileWriter(this.file, true);
+            bufferedWriter = new BufferedWriter(fileWriter);
 
             bufferedWriter.write(message);
             bufferedWriter.newLine();

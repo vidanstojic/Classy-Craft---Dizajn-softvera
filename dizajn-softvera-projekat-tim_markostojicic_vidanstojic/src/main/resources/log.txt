@@ -1,1 +1,6 @@
-[WARNING][2023-11-11T23:44:30.997248400]Only project has author.
+[WARNING][2023-11-12T00:38:48.811687100]Node must be selected.
+[WARNING][2023-11-12T00:38:51.623990800]Node must be selected.
+[WARNING][2023-11-12T00:38:53.774738800]Node must be selected.
+[ERROR][2023-11-12T00:38:57.372776700]Node can not be deleted.
+[WARNING][2023-11-12T00:38:59.378932500]Only project has author.
+[WARNING][2023-11-12T00:39:03.981411500]Project Explorer can not be renamed
