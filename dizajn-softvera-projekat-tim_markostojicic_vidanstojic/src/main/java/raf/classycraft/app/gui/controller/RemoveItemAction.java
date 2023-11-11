@@ -28,8 +28,6 @@ public class RemoveItemAction extends AbstractClassyAction{
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected.getClassyNode() instanceof ProjectExplorer){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_CANNOT_BE_DELETED, Type.ERROR);
-            //messageGeneratorImplementation.notifySub(messageGeneratorImplementation.getNotification());
-            //MainFrame.getInstance().update(messageGeneratorImplementation.getNotification());
             return;
         }
         MainFrame.getInstance().getClassyTree().removeChild(selected);/// videti sta je parent i promeniti argumente

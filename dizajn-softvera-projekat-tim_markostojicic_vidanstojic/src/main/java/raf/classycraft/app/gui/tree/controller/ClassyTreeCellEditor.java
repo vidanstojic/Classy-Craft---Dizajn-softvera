@@ -1,10 +1,13 @@
 package raf.classycraft.app.gui.tree.controller;
 
+import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
+import raf.classycraft.app.model.messageGenerator.EventTypes;
+import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -50,6 +53,7 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
         }
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
         if(clicked.getClassyNode() instanceof ProjectExplorer){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.PROJECTEXPLORER_CANNOT_BE_RENAMED, Type.WARNING);
             return;
         }
         String odlName = clicked.getClassyNode().getName();

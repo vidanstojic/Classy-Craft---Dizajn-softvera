@@ -54,9 +54,11 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         else if(type == Type.INFORMATION && eventType == EventTypes.NODE_SUCCESSFULLY_DELETED){
             messageText = "Node is successfully deleted.";
             message = "["+Type.INFORMATION+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
+        } else if (type == Type.WARNING && eventType == EventTypes.PROJECTEXPLORER_CANNOT_BE_RENAMED) {
+            messageText = "Project Explorer can not be renamed";
+            message = "["+Type.WARNING+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
 
-        
 
         notification = new NotificationMessageGenerator(message, eventType, type, messageText);
         notifySub(notification);
