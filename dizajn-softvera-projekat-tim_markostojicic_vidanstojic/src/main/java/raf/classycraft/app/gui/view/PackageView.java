@@ -31,6 +31,7 @@ public class PackageView extends JPanel implements ISubscriber {
         Label imeProjekta = new Label("Projekat");
         Label imeAutora = new Label("Mare autor");
         imeProjekta.setAlignment(Label.CENTER);
+        imeAutora.setAlignment(Label.CENTER);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0; // x osa kolona
@@ -41,7 +42,7 @@ public class PackageView extends JPanel implements ISubscriber {
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.weightx = 1.0;
         add(imeAutora, gbc);
@@ -49,7 +50,7 @@ public class PackageView extends JPanel implements ISubscriber {
         tabbedPane = new JTabbedPane();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 1;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
