@@ -1,8 +1,10 @@
 package raf.classycraft.app.gui.tree.controller;
 
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
+import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -33,6 +35,7 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
 
     public boolean isCellEditable(EventObject obj){
         if(obj instanceof MouseEvent){
+            ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
             if(((MouseEvent)obj).getClickCount() == 3){
                 return true;
             }
@@ -46,6 +49,9 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
             return;
         }
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
+        if(clicked.getClassyNode() instanceof ProjectExplorer){
+            return;
+        }
         String odlName = clicked.getClassyNode().getName();
         clicked.setName(e.getActionCommand());
         if(clicked.getClassyNode() instanceof Diagrams){
