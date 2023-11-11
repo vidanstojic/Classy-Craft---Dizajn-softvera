@@ -5,6 +5,7 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.observer.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,5 +77,10 @@ public class Package extends ClassyNodeComposite implements IPublisher {
         }
         Project project = (Project) currentNode;
         return project;
+    }
+
+    public void nameChangedDiagram(ClassyNode child, String oldName){
+            NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.RENAMED_CHILD, oldName);
+            notifySub(notificationTree);
     }
 }

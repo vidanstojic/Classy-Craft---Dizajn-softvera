@@ -36,7 +36,16 @@ public class PackageView extends JPanel implements ISubscriber {
 
     public void removeTab(ClassyNode child){
         int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
-        tabbedPane.removeTabAt(indexOfTabRemove);
+        if (indexOfTabRemove != -1) {
+            tabbedPane.removeTabAt(indexOfTabRemove);
+        }
+    }
+
+    public void changeTabTitle(ClassyNode child, String oldName){
+        int indexOfTab = tabbedPane.indexOfTab(oldName);
+        if (indexOfTab != -1) {
+            tabbedPane.setTitleAt(indexOfTab, child.getName());
+        }
     }
 
     public JTabbedPane getTabbedPane() {
@@ -76,6 +85,10 @@ public class PackageView extends JPanel implements ISubscriber {
         }
         else if(typeNotify == TreeNotificationType.DELETED_CHILD){
             removeTab(child);
+        }
+
+        else if(typeNotify == TreeNotificationType.RENAMED_CHILD){
+            changeTabTitle(child, notificationTree.getOldNameNode());
         }
     }
 

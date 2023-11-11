@@ -7,6 +7,7 @@ public class NotificationTree {
     private TreeNotificationType treeNotificationType;
     private ClassyNode classyNode;
 
+    private String oldNameNode;
 
     public NotificationTree(ClassyNode classyNode,TreeNotificationType treeNotificationType) {
         this.classyNode = classyNode;
@@ -14,6 +15,12 @@ public class NotificationTree {
     }
     public NotificationTree(){
 
+    }
+
+    public NotificationTree(ClassyNode classyNode,TreeNotificationType treeNotificationType, String oldNameNode) {
+        this.classyNode = classyNode;
+        this.treeNotificationType = treeNotificationType;
+        this.oldNameNode = oldNameNode;
     }
 
     public TreeNotificationType getTreeNotificationType() {
@@ -30,5 +37,13 @@ public class NotificationTree {
 
     public void setClassyNode(ClassyNode classyNode) {
         this.classyNode = classyNode;
+    }
+
+    public String getOldNameNode() {
+        return oldNameNode;
+    }
+
+    public void setOldNameNode(String oldNameNode) {
+        this.oldNameNode = oldNameNode;
     }
 }

@@ -80,5 +80,17 @@ public class Diagrams extends ClassyNode implements IPublisher {
         return project;
     }
 
+    public Package findPackage(){
+        ClassyNode currentNode = this;
 
+        while (!(currentNode instanceof Package)) {
+            ClassyNode parent = currentNode.getParent();
+            if (parent == null) {
+                return null;
+            }
+            currentNode = parent;
+        }
+        Package packageParent = (Package) currentNode;
+        return packageParent;
+    }
 }
