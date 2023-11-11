@@ -1,9 +1,8 @@
 package raf.classycraft.app.model.messageGenerator;
 
 
-import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
-import raf.classycraft.app.observer.Notification;
+import raf.classycraft.app.observer.NotificationMessageGenerator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
         
 
-        Notification notification = new Notification(message, eventType, type, messageText);
+        NotificationMessageGenerator notification = new NotificationMessageGenerator(message, eventType, type, messageText);
         notifySub(notification);
 
     }
@@ -75,7 +74,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
     @Override
     public void notifySub(Object notify) {
-        Notification notification = (Notification) notify;
+        NotificationMessageGenerator notification = (NotificationMessageGenerator) notify;
         for(ISubscriber listener : subscribers){
             listener.update(notification);
         }

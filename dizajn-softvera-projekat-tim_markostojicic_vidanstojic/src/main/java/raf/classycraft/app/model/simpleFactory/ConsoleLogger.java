@@ -1,8 +1,7 @@
 package raf.classycraft.app.model.simpleFactory;
 
 import raf.classycraft.app.core.ApplicationFramework;
-import raf.classycraft.app.model.simpleFactory.Logger;
-import raf.classycraft.app.observer.Notification;
+import raf.classycraft.app.observer.NotificationMessageGenerator;
 
 public class ConsoleLogger implements Logger {
 
@@ -15,7 +14,7 @@ public class ConsoleLogger implements Logger {
 
     @Override
     public void update(Object notify) {
-        Notification notification = (Notification) notify;
+        NotificationMessageGenerator notification = (NotificationMessageGenerator) notify;
         this.log(notification.getMessage());
     }
 

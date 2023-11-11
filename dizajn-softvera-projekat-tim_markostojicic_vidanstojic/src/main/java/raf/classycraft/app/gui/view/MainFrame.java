@@ -5,7 +5,7 @@ import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.ClassyTree;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.observer.ISubscriber;
-import raf.classycraft.app.observer.Notification;
+import raf.classycraft.app.observer.NotificationMessageGenerator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -86,7 +86,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     public void update(Object notify) {
         //  JOptionPane.showMessageDialog(null, "Uh-oh!", "Error", JOptionPane.ERROR_MESSAGE);
         // uh oh je tekst, a error je naslov
-        Notification notification = (Notification) notify;
+        NotificationMessageGenerator notification = (NotificationMessageGenerator) notify;
         if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.ERROR){
             JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.ERROR_MESSAGE);
         }

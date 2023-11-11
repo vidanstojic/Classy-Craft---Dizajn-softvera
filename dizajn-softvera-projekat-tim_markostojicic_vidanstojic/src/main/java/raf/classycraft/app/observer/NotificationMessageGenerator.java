@@ -6,14 +6,14 @@ import raf.classycraft.app.model.messageGenerator.Type;
 
 
 
-public class Notification{
+public class NotificationMessageGenerator {
     private String message;
 
     private Type type;
     private EventTypes eventTypes;
     private String messageText;
 
-    public Notification(String message, EventTypes eventTypes, Type type,String messageText) {
+    public NotificationMessageGenerator(String message, EventTypes eventTypes, Type type, String messageText) {
         this.message = message;
         this.eventTypes = eventTypes;
         this.type = type;

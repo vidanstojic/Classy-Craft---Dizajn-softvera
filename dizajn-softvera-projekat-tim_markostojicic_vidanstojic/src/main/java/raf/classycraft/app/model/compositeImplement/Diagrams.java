@@ -1,16 +1,17 @@
 package raf.classycraft.app.model.compositeImplement;
 
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
-import raf.classycraft.app.observer.IPublisherTree;
-import raf.classycraft.app.observer.ISubscriberView;
-import raf.classycraft.app.observer.TreeNotification;
+import raf.classycraft.app.observer.IPublisher;
+import raf.classycraft.app.observer.ISubscriber;
+import raf.classycraft.app.observer.NotificationTree;
+import raf.classycraft.app.observer.TreeNotificationType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Diagrams extends ClassyNode implements IPublisherTree {
+public class Diagrams extends ClassyNode implements IPublisher {
 
-    List<ISubscriberView> subscriberViews = new ArrayList<>();
+    List<ISubscriber> subscriberViews = new ArrayList<>();
     public Diagrams(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
@@ -35,7 +36,6 @@ public class Diagrams extends ClassyNode implements IPublisherTree {
     @Override
     public void setName(String name) {
         super.setName(name);
-        notifySub(name, TreeNotification.RENAMED_CHILD);
     }
 
     @Override
@@ -49,20 +49,21 @@ public class Diagrams extends ClassyNode implements IPublisherTree {
     }
 
     @Override
-    public void addSubscriber(ISubscriberView iSubscriber) {
+    public void addSubscriber(ISubscriber iSubscriber) {
         this.subscriberViews.add(iSubscriber);
     }
 
     @Override
-    public void removeSubscriber(ISubscriberView iSubscriber) {
+    public void removeSubscriber(ISubscriber iSubscriber) {
         this.subscriberViews.remove(iSubscriber);
     }
 
     @Override
-    public void notifySub(Object notify, TreeNotification typeNotify) {
-
-        for(ISubscriberView subscriberView : this.subscriberViews){
-            subscriberView.update(notify, typeNotify);
+    public void notifySub(Object notify) {
+        NotificationTree notificationTree = new NotificationTree();// ovde ce tek biti potrebno da se promeni nesto kasnije u toku projekta
+        // kada bude bilo bitno da DijagramView slusa Dijagram
+        for(ISubscriber subscriberView : this.subscriberViews){
+            subscriberView.update(notificationTree);
         }
     }
 

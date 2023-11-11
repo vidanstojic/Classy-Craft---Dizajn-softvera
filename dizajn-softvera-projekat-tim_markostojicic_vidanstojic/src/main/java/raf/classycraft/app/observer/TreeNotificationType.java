@@ -1,5 +1,5 @@
 package raf.classycraft.app.observer;
 
-public enum TreeNotification {
+public enum TreeNotificationType {
     DELETED_CHILD, ADDED_CHILD, RENAMED_CHILD;
 }

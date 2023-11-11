@@ -1,16 +1,15 @@
 package raf.classycraft.app.gui.view;
 
-import com.sun.tools.javac.Main;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.observer.ISubscriber;
-import raf.classycraft.app.observer.ISubscriberView;
-import raf.classycraft.app.observer.TreeNotification;
+import raf.classycraft.app.observer.NotificationTree;
+import raf.classycraft.app.observer.TreeNotificationType;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PackageView extends JPanel implements ISubscriberView {
+public class PackageView extends JPanel implements ISubscriber {
 
     private JTabbedPane tabbedPane;
     private Label author;
@@ -52,20 +51,23 @@ public class PackageView extends JPanel implements ISubscriberView {
     }
 
     @Override
-    public void update(Object notify, TreeNotification typeNotify) {
+    public void update(Object notify) {
         if(flag == false){
             return;
         }
-        ClassyNode child = (ClassyNode) notify;
-        //   System.out.println("Update called with typeNotify: " + typeNotify);
-        if(typeNotify == TreeNotification.ADDED_CHILD){
+        NotificationTree notificationTree = (NotificationTree) notify;
+        ClassyNode child = notificationTree.getClassyNode();
+        TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
+
+
+        if(typeNotify == TreeNotificationType.ADDED_CHILD){
             if( child.getParent().getParent() != null && child.getParent().getParent() instanceof Project){
                 Project project = (Project) child.getParent().getParent();
                 addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
             }
 
         }
-        else if(typeNotify == TreeNotification.DELETED_CHILD){
+        else if(typeNotify == TreeNotificationType.DELETED_CHILD){
             removeTab(child);
         }
     }

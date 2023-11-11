@@ -1,13 +1,13 @@
 
 package raf.classycraft.app.gui.view;
-import raf.classycraft.app.observer.ISubscriberView;
-import raf.classycraft.app.observer.TreeNotification;
+import raf.classycraft.app.observer.ISubscriber;
+import raf.classycraft.app.observer.TreeNotificationType;
 
 import javax.swing.*;
 import java.awt.*;
 
 
-public class DiagramView extends JPanel implements ISubscriberView {
+public class DiagramView extends JPanel implements ISubscriber {
 
 
     private Label authorL;
@@ -32,7 +32,7 @@ public class DiagramView extends JPanel implements ISubscriberView {
 
 
     @Override
-    public void update(Object notify, TreeNotification typeNotify) {
-
+    public void update(Object notify) {
+        // ovo ce se tek popunjavati kasnije u toku projekta, za sada neka stoji ovako
     }
 }

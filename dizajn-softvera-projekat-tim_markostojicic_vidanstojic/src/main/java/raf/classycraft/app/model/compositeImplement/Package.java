@@ -1,8 +1,6 @@
 package raf.classycraft.app.model.compositeImplement;
 
-import com.sun.tools.javac.Main;
 import raf.classycraft.app.gui.view.MainFrame;
-import raf.classycraft.app.gui.view.PackageView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.observer.*;
@@ -10,10 +8,10 @@ import raf.classycraft.app.observer.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Package extends ClassyNodeComposite implements IPublisherTree {
+public class Package extends ClassyNodeComposite implements IPublisher {
 
 
-    List<ISubscriberView> subscribers = new ArrayList<>();
+    List<ISubscriber> subscribers = new ArrayList<>();
     public Package(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
@@ -26,7 +24,8 @@ public class Package extends ClassyNodeComposite implements IPublisherTree {
             Diagrams diagrams = (Diagrams) child;
             if (!this.getChildren().contains(diagrams)){
                 this.getChildren().add(diagrams);
-                notifySub(diagrams, TreeNotification.ADDED_CHILD);
+                NotificationTree notificationTree = new NotificationTree(diagrams, TreeNotificationType.ADDED_CHILD);
+                notifySub(notificationTree);
             }
         }
         else if (child != null &&  child instanceof Package){
@@ -42,25 +41,26 @@ public class Package extends ClassyNodeComposite implements IPublisherTree {
         if(this.getChildren().contains(child)){
             this.getChildren().remove(child);
         }
-        notifySub(child, TreeNotification.DELETED_CHILD);
+        NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.DELETED_CHILD);
+        notifySub(notificationTree);
     }
 
 
     @Override
-    public void addSubscriber(ISubscriberView iSubscriber) {
+    public void addSubscriber(ISubscriber iSubscriber) {
         this.subscribers.add(iSubscriber);
     }
 
     @Override
-    public void removeSubscriber(ISubscriberView iSubscriber) {
+    public void removeSubscriber(ISubscriber iSubscriber) {
         this.subscribers.remove(iSubscriber);
     }
 
     @Override
-    public void notifySub(Object notify, TreeNotification typeNotify) {
-        ClassyNode child = (ClassyNode) notify;
-        for(ISubscriberView iSubscriberView : this.subscribers){
-            iSubscriberView.update(child, typeNotify);
+    public void notifySub(Object notify) {
+        NotificationTree notificationTree = (NotificationTree) notify;
+        for(ISubscriber iSubscriber : this.subscribers){
+            iSubscriber.update(notificationTree);
         }
     }
 
