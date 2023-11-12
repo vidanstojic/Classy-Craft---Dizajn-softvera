@@ -3,9 +3,7 @@ package raf.classycraft.app.model.compositeImplement;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
-import raf.classycraft.app.observer.IPublisher;
-import raf.classycraft.app.observer.ISubscriber;
-import raf.classycraft.app.observer.ProjectNotificationType;
+import raf.classycraft.app.observer.*;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -87,4 +85,5 @@ public class Project extends ClassyNodeComposite implements IPublisher {
         }
 
     }
+
 }

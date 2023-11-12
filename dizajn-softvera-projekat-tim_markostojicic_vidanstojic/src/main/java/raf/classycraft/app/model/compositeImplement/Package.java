@@ -84,4 +84,9 @@ public class Package extends ClassyNodeComposite implements IPublisher {
             notifySub(notificationTree);
     }
 
+    public void packageDeleted(ClassyNode node){
+        NotificationTree notificationTree = new NotificationTree(node,TreeNotificationType.PACKAGE_DELETED);
+        notifySub(notificationTree);
+    }
+
 }

@@ -4,6 +4,8 @@ import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.MessageGeneratorImplementation;
@@ -33,6 +35,11 @@ public class RemoveItemAction extends AbstractClassyAction{
         else if(selected.getClassyNode() instanceof ProjectExplorer){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_CANNOT_BE_DELETED, Type.ERROR);
             return;
+        }
+
+        if(selected.getClassyNode() instanceof Package){
+            Package selectedPackage = (Package)selected.getClassyNode();
+            selectedPackage.packageDeleted(selectedPackage);
         }
         MainFrame.getInstance().getClassyTree().removeChild(selected);/// videti sta je parent i promeniti argumente
     }

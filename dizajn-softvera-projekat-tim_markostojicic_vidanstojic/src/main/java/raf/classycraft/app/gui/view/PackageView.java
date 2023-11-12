@@ -2,6 +2,7 @@ package raf.classycraft.app.gui.view;
 
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagrams;
+import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
@@ -102,7 +103,7 @@ public class PackageView extends JPanel implements ISubscriber {
             if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Diagrams){
                 child = (Diagrams) notificationTree.getClassyNode();
             }
-            else{
+            else if( !(notificationTree.getClassyNode() instanceof Package) ){
                 return;
             }
             TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
@@ -121,6 +122,11 @@ public class PackageView extends JPanel implements ISubscriber {
 
             else if(typeNotify == TreeNotificationType.RENAMED_CHILD){
                 changeTabTitle(child, notificationTree.getOldNameNode());
+            }
+
+            else if(typeNotify == TreeNotificationType.PACKAGE_DELETED){
+                System.out.println("Uslo u if koji brise tabove");
+                this.tabbedPane.removeAll();
             }
         }
         else if(notify instanceof ProjectNotificationType){

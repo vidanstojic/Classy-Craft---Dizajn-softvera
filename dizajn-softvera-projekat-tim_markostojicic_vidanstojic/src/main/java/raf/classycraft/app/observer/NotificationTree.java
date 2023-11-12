@@ -32,6 +32,11 @@ public class NotificationTree {
         this.treeNotificationType = treeNotificationType;
     }
 
+    public NotificationTree(TreeNotificationType treeNotificationType, ClassyNode classyNode) {
+        this.treeNotificationType = treeNotificationType;
+        this.classyNode = classyNode;
+    }
+
     public TreeNotificationType getTreeNotificationType() {
         return treeNotificationType;
     }
