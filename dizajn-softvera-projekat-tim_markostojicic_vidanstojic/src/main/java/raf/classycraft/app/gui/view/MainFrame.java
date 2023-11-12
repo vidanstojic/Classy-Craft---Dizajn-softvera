@@ -19,6 +19,8 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private PackageView packageView;
 
+    private DiagramView diagramView;
+
 
 
     // buduca polja za glavni view
@@ -64,7 +66,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
         this.packageView = new PackageView();
-
+        this.diagramView = new DiagramView();
         split.setRightComponent(new JScrollPane(packageView));
     }
 
@@ -84,8 +86,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     @Override
     public void update(Object notify) {
-        //  JOptionPane.showMessageDialog(null, "Uh-oh!", "Error", JOptionPane.ERROR_MESSAGE);
-        // uh oh je tekst, a error je naslov
+
         NotificationMessageGenerator notification = (NotificationMessageGenerator) notify;
         if(notification.getType() == raf.classycraft.app.model.messageGenerator.Type.ERROR){
             JOptionPane.showMessageDialog(null,notification.getMessageText(), notification.getType().toString(), JOptionPane.ERROR_MESSAGE);
@@ -110,5 +111,13 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setPackageView(PackageView packageView) {
         this.packageView = packageView;
+    }
+
+    public DiagramView getDiagramView() {
+        return diagramView;
+    }
+
+    public void setDiagramView(DiagramView diagramView) {
+        this.diagramView = diagramView;
     }
 }

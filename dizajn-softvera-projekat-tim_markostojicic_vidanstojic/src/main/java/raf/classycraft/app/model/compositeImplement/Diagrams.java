@@ -1,5 +1,6 @@
 package raf.classycraft.app.model.compositeImplement;
 
+import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
@@ -10,8 +11,9 @@ import java.util.List;
 
 public class Diagrams extends ClassyNode implements IPublisher {
 
-    List<ISubscriber> subscribers = new ArrayList<>(); // nije jos dodan DijagramView u listu
+    List<ISubscriber> subscribers = new ArrayList<>();
     public Diagrams(String name, ClassyNode parent){
+        this.addSubscriber(MainFrame.getInstance().getDiagramView());
         super.setName(name);
         super.setParent(parent);
     }
