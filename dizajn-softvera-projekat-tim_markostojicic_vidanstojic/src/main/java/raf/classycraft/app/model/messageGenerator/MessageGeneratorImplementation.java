@@ -47,8 +47,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             messageText = "Node will be deleted.";
             message = "["+Type.WARNING+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
-        else if(type == Type.INFORMATION && eventType == EventTypes.NODE_SUCCESSFULLY_RENAMED){
-            messageText = "Node is successfully renamed.";
+        else if(type == Type.INFORMATION && eventType == EventTypes.NAME_IS_UNAVAILABLE){
+            messageText = "Name is unavailable.";
             message = "["+Type.INFORMATION+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
         else if(type == Type.INFORMATION && eventType == EventTypes.NODE_SUCCESSFULLY_DELETED){

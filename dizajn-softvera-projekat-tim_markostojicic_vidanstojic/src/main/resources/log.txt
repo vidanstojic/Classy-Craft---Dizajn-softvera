@@ -1,1 +1,2 @@
-[ERROR][2023-11-12T17:21:27.063679200]Node can not be deleted.
+[INFORMATION][2023-11-12T18:13:58.816384300]Name is unavailable.
+[INFORMATION][2023-11-12T18:14:17.578145900]Name is unavailable.
