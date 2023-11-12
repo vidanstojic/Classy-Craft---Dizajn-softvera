@@ -28,6 +28,11 @@ public class ProjectAuthorAction extends AbstractClassyAction {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
             return;
         }
+        ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
+        if(parent == null){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+            return;
+        }
         if (selected.getClassyNode() instanceof Project) {
             Project project = (Project) selected.getClassyNode();
             String userInput = JOptionPane.showInputDialog("Input name of the author:");
