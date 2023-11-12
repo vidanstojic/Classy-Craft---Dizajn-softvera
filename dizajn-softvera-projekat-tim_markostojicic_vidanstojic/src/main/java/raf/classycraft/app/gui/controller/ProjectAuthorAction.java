@@ -31,13 +31,13 @@ public class ProjectAuthorAction extends AbstractClassyAction {
         if (selected.getClassyNode() instanceof Project) {
             Project project = (Project) selected.getClassyNode();
             String userInput = JOptionPane.showInputDialog("Input name of the author:");
-            if (!(project.getAuthor() != null)) {
+
                 if (userInput == null) {
                     project.setAuthor(null);
                 } else {
                     project.setAuthor(userInput);
                 }
-            }
+
         } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.ONLY_PROJECT_HAS_AUTHOR, Type.WARNING);
             return;
