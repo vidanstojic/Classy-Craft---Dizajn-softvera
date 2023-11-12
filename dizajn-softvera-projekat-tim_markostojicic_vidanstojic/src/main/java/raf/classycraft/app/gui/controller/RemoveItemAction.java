@@ -47,6 +47,6 @@ public class RemoveItemAction extends AbstractClassyAction{
             MainFrame.getInstance().getPackageView().getAuthor().setText("");
             MainFrame.getInstance().getPackageView().getNameOfProject().setText("");
         }
-        MainFrame.getInstance().getClassyTree().removeChild(selected);/// videti sta je parent i promeniti argumente
+        MainFrame.getInstance().getClassyTree().removeChild(selected);
     }
 }

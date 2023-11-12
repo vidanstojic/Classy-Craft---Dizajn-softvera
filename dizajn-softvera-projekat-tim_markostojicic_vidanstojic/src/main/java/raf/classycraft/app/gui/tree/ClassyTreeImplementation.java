@@ -53,7 +53,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         if(selected ==null){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
             return;
-        }//Puca izuzetak ako se klikne na brisanje elementa a element nije selektovan
+        }
         if(selected != null){
            ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
            if(parent == null) {

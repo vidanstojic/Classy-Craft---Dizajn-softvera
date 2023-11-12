@@ -26,7 +26,7 @@ public class ApplicationFramework {
         MainFrame.getInstance().setVisible(true);
 
         LoggerFactory loggerFactory = new LoggerFactory();
-        // proveriti
+
         consoleLogger = (ConsoleLogger) loggerFactory.createLogger("consoleLogger");
         fileLogger = (FileLogger) loggerFactory.createLogger("fileLogger");
 
