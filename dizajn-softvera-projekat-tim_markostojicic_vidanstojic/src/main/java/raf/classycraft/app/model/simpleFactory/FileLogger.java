@@ -9,8 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileLogger implements Logger {
-
-    private File file = new File("dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/log.txt");
+    private File file = new File("src/main/resources/log.txt");
     private FileWriter fileWriter;
     private BufferedWriter bufferedWriter;
     public  FileLogger(){

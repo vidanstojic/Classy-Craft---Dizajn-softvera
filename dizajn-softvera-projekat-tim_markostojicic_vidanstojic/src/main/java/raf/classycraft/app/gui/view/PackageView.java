@@ -5,6 +5,7 @@ import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
+import raf.classycraft.app.observer.ProjectNotificationType;
 import raf.classycraft.app.observer.TreeNotificationType;
 
 import javax.swing.*;
@@ -92,40 +93,40 @@ public class PackageView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notify) {
-        if(flag == false){
-            return;
-        }
-        NotificationTree notificationTree = (NotificationTree) notify;
-        Diagrams child = null;
-        if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Diagrams){
-            child = (Diagrams) notificationTree.getClassyNode();
-        }
-        else{
-            return;
-        }
-        TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
+        if(notify instanceof NotificationTree){
+            if(flag == false)
+                return;
+
+            NotificationTree notificationTree = (NotificationTree) notify;
+            Diagrams child = null;
+            if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Diagrams){
+                child = (Diagrams) notificationTree.getClassyNode();
+            }
+            else{
+                return;
+            }
+            TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
 
 
-        if(typeNotify == TreeNotificationType.ADDED_CHILD){
-            if( child.findProject() != null && child.findProject() instanceof Project){
-                Project project = child.findProject();
-                addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+            if(typeNotify == TreeNotificationType.ADDED_CHILD){
+                if( child.findProject() != null && child.findProject() instanceof Project){
+                    Project project = child.findProject();
+                    addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+                }
+
+            }
+            else if(typeNotify == TreeNotificationType.DELETED_CHILD){
+                removeTab(child);
             }
 
+            else if(typeNotify == TreeNotificationType.RENAMED_CHILD){
+                changeTabTitle(child, notificationTree.getOldNameNode());
+            }
         }
-        else if(typeNotify == TreeNotificationType.DELETED_CHILD){
-            removeTab(child);
-        }
-
-        else if(typeNotify == TreeNotificationType.RENAMED_CHILD){
-            changeTabTitle(child, notificationTree.getOldNameNode());
-        }
-
-        else if(typeNotify == TreeNotificationType.PROJECT_AUTHOR_NAME){
-            this.nameP = notificationTree.getProjectName();
-            this.nameA = notificationTree.getAuthorName();
-            nameOfProject.setText("Project name: "+nameP);
-            author.setText("Author: "+nameA);
+        else if(notify instanceof ProjectNotificationType){
+            ProjectNotificationType projectNotificationType = (ProjectNotificationType) notify;
+            this.getAuthor().setText(projectNotificationType.getAuthor());
+            this.getNameOfProject().setText(projectNotificationType.getName());
         }
     }
 

@@ -39,8 +39,6 @@ public class PackageMouseListener extends MouseAdapter {
                             //PackageView packageView = new PackageView(project.getName(),project.getAuthor());
                             //MainFrame.getInstance().setPackageView(packageView);
                             packageView.addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
-                            packageView.getAuthor().setText(project.getAuthor());
-                            packageView.getNameOfProject().setText(project.getName());
                             packageView.setFlag(true);
                         }
                     }

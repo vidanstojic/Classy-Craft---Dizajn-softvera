@@ -1,18 +1,26 @@
 package raf.classycraft.app.model.compositeImplement;
 
+import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.observer.IPublisher;
+import raf.classycraft.app.observer.ISubscriber;
+import raf.classycraft.app.observer.ProjectNotificationType;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Project extends ClassyNodeComposite {
+public class Project extends ClassyNodeComposite implements IPublisher {
 
     private String author;
     private URL filepath;
 
+    private List<ISubscriber> subscribers = new ArrayList<>();
     public Project(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
+        this.addSubscriber(MainFrame.getInstance().getPackageView());
     }
 
     public Project(String author) {
@@ -42,7 +50,15 @@ public class Project extends ClassyNodeComposite {
 
     public void setAuthor(String author) {
         this.author = author;
+        ProjectNotificationType projectNotificationType = new ProjectNotificationType(getName(), author);
+        notifySub(projectNotificationType);
+    }
 
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+        ProjectNotificationType projectNotificationType = new ProjectNotificationType(getName(), author);
+        notifySub(projectNotificationType);
     }
 
     public URL getFilepath() {
@@ -51,5 +67,24 @@ public class Project extends ClassyNodeComposite {
 
     public void setFilepath(URL filepath) {
         this.filepath = filepath;
+    }
+
+    @Override
+    public void addSubscriber(ISubscriber iSubscriber) {
+        this.subscribers.add(iSubscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber iSubscriber) {
+        this.subscribers.remove(iSubscriber);
+    }
+
+    @Override
+    public void notifySub(Object notify) {
+        ProjectNotificationType projectNotificationType = (ProjectNotificationType) notify;
+        for(ISubscriber subscriber : this.subscribers){
+            subscriber.update(projectNotificationType);
+        }
+
     }
 }
