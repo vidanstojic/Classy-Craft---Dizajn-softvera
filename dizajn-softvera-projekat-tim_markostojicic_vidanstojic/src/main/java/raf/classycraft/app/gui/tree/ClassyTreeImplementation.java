@@ -53,11 +53,14 @@ public class ClassyTreeImplementation implements ClassyTree{
             return;
         }//Puca izuzetak ako se klikne na brisanje elementa a element nije selektovan
         if(selected != null){
-            ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
+           ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
+           if(parent == null) {
+               ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+               return;
+           }
             parent.remove(selected);
             ((ClassyNodeComposite) parent.getClassyNode()).removeChild(selected.getClassyNode());
             SwingUtilities.updateComponentTreeUI(treeView);
-            return;
         }
 
 
