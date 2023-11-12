@@ -1,6 +1,7 @@
 package raf.classycraft.app.gui.tree;
 
 import raf.classycraft.app.core.ApplicationFramework;
+import raf.classycraft.app.gui.tree.factory.FactoryUtils;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
@@ -34,7 +35,8 @@ public class ClassyTreeImplementation implements ClassyTree{
         if(!(parent.getClassyNode() instanceof ClassyNodeComposite))
             return;
 
-        ClassyNode child = createChild(parent.getClassyNode());
+        ClassyNodeComposite parentComposite = (ClassyNodeComposite) parent.getClassyNode();
+        ClassyNode child = createChild(parentComposite);
         if(child == null){
             return;
         }
@@ -71,33 +73,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         return (ClassyTreeItem) treeView.getLastSelectedPathComponent();
     }
 
-    private ClassyNode createChild(ClassyNode parent) {
-        if (parent instanceof ProjectExplorer)
-            return  new Project("Project" +new Random().nextInt(100),parent);
-        else if(parent instanceof Project)
-            return new Package("Package"+new Random().nextInt(100), parent);
-        else if(parent instanceof Package){
-            Object[] selectionValues = {"Package","Diagram"};
-            String initialSelection = "Diagram";
-            Object selection = JOptionPane.showInputDialog(null, "Do you want a new subpackage, or would you like a new diagram?",
-                    "Add new item", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-            // proveriti da li ovaj JOptionPane sme da stoji ovde
-            if(selection == null){
-                return null;
-            }
-
-            else if(selection.equals("Diagram")){
-                return new Diagrams("Diagram"+new Random().nextInt(100), parent);
-            }
-            else if(selection.equals("Package")){
-                return new Package("Package"+new Random().nextInt(100), parent);
-            }
-
-
-
-        }
-
-
-        return null;
+    private ClassyNode createChild(ClassyNodeComposite parent) {
+        return FactoryUtils.initNode(parent);
     }
 }
