@@ -30,8 +30,8 @@ public class PackageView extends JPanel implements ISubscriber {
         this.setLayout(new BorderLayout());
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        nameOfProject = new Label("");
-        author = new Label("");
+        nameOfProject = new Label();
+        author = new Label();
         nameOfProject.setAlignment(Label.CENTER);
         author.setAlignment(Label.CENTER);
 
