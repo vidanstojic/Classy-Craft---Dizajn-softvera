@@ -103,7 +103,7 @@ public class PackageView extends JPanel implements ISubscriber {
             if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Diagrams){
                 child = (Diagrams) notificationTree.getClassyNode();
             }
-            else if( !(notificationTree.getClassyNode() instanceof Package) ){
+            else if( !(notificationTree.getClassyNode() instanceof Package || notificationTree.getClassyNode() instanceof Project) ){
                 return;
             }
             TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
@@ -125,7 +125,9 @@ public class PackageView extends JPanel implements ISubscriber {
             }
 
             else if(typeNotify == TreeNotificationType.PACKAGE_DELETED){
-                System.out.println("Uslo u if koji brise tabove");
+                this.tabbedPane.removeAll();
+            }
+            else if(typeNotify == TreeNotificationType.PROJECT_DELETED){
                 this.tabbedPane.removeAll();
             }
         }

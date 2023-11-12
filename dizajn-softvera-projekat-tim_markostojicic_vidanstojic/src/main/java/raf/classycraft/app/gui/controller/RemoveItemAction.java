@@ -41,6 +41,10 @@ public class RemoveItemAction extends AbstractClassyAction{
             Package selectedPackage = (Package)selected.getClassyNode();
             selectedPackage.packageDeleted(selectedPackage);
         }
+        else if(selected.getClassyNode() instanceof Project){
+            Project project = (Project) selected.getClassyNode();
+            project.projectDeleted(project);
+        }
         MainFrame.getInstance().getClassyTree().removeChild(selected);/// videti sta je parent i promeniti argumente
     }
 }

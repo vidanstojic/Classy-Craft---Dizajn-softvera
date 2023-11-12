@@ -40,7 +40,6 @@ public class ProjectAuthorAction extends AbstractClassyAction {
             }
         } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.ONLY_PROJECT_HAS_AUTHOR, Type.WARNING);
-            return;
         }
     }
 }

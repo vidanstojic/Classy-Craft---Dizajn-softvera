@@ -79,11 +79,13 @@ public class Project extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void notifySub(Object notify) {
-        ProjectNotificationType projectNotificationType = (ProjectNotificationType) notify;
         for(ISubscriber subscriber : this.subscribers){
-            subscriber.update(projectNotificationType);
+            subscriber.update(notify);
         }
 
     }
-
+    public void projectDeleted(ClassyNode node){
+        NotificationTree notificationTree = new NotificationTree(node,TreeNotificationType.PROJECT_DELETED);
+        notifySub(notificationTree);
+    }
 }
