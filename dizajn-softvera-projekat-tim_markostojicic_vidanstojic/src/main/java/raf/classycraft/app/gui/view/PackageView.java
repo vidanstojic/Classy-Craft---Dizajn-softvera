@@ -187,4 +187,6 @@ public class PackageView extends JPanel implements ISubscriber {
     public void setNameA(String nameA) {
         this.nameA = nameA;
     }
+
+
 }
