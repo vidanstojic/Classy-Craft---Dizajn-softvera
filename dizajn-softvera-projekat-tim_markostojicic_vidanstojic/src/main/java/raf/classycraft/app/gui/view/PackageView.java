@@ -1,5 +1,6 @@
 package raf.classycraft.app.gui.view;
 
+import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
@@ -11,10 +12,13 @@ import raf.classycraft.app.observer.TreeNotificationType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PackageView extends JPanel implements ISubscriber {
 
     private JTabbedPane tabbedPane;
+    private List<String> stringTabs = new ArrayList<>();
     private Label author;
     private Label nameOfProject;
     private String nameP;
@@ -63,7 +67,11 @@ public class PackageView extends JPanel implements ISubscriber {
     }
 
     public void addTab(String title, Component component ) {
+        if(stringTabs.contains(title)){
+            return;
+        }
         tabbedPane.addTab(title, component);
+        this.stringTabs.add(title);
     }
 
     public void removeTab(ClassyNode child){
@@ -99,12 +107,18 @@ public class PackageView extends JPanel implements ISubscriber {
                 return;
 
             NotificationTree notificationTree = (NotificationTree) notify;
+            Package parentP = null;
+            Project parent = null;
             Diagrams child = null;
             if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Diagrams){
                 child = (Diagrams) notificationTree.getClassyNode();
             }
             else if( !(notificationTree.getClassyNode() instanceof Package || notificationTree.getClassyNode() instanceof Project) ){
                 return;
+            }else if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Project){
+                parent = (Project) notificationTree.getClassyNode();
+            }else if (notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Package) {
+                parentP = (Package) notificationTree.getClassyNode();
             }
             TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
 
@@ -124,11 +138,23 @@ public class PackageView extends JPanel implements ISubscriber {
                 changeTabTitle(child, notificationTree.getOldNameNode());
             }
 
-            else if(typeNotify == TreeNotificationType.PACKAGE_DELETED){
-                this.tabbedPane.removeAll();
+            else if(typeNotify == TreeNotificationType.PACKAGE_DELETED) {
+
+                    for(ClassyNode classyNode: parentP.getChildren()){
+                        removeTab(classyNode);
+                    }
+
             }
             else if(typeNotify == TreeNotificationType.PROJECT_DELETED){
-                this.tabbedPane.removeAll();
+
+                for(ClassyNode classyNode: parent.getChildren()){
+                    if(classyNode instanceof Package) {
+                        Package p = (Package) classyNode;
+                        for(ClassyNode classyNode1: p.getChildren()){
+                            removeTab(classyNode1);
+                        }
+                    }
+                }
             }
         }
         else if(notify instanceof ProjectNotificationType){
