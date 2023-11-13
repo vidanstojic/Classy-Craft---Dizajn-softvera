@@ -148,7 +148,11 @@ public class PackageView extends JPanel implements ISubscriber {
                             update(notificationTree1);
                         }else {
                             removeTab(classyNode);
+                            if(tabbedPane.getComponents() == null) {
+                                return;
+                            }
                         }
+
                     }
 
             }
