@@ -76,26 +76,10 @@ public class PackageView extends JPanel implements ISubscriber {
     }
 
     public void removeTab(ClassyNode child) {
-        if (child == null) {
-            return;
-        }if(child instanceof Diagrams){
-            int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
-            if (indexOfTabRemove != -1) {
-                tabbedPane.removeTabAt(indexOfTabRemove);
-                return;
-            }
-        } /*else if (child instanceof Package) {
-            System.out.println("PRVO");//NE ISPISUJE SE
-            ClassyNodeComposite parent = (ClassyNodeComposite) child.getParent();
-            Package package1 = (Package) child;
-            for (ClassyNode classyNode2 : parent.getChildren()) {
-                int indexOfTabRemove = tabbedPane.indexOfTab(classyNode2.getName());
-                if (indexOfTabRemove != -1) {
-                    tabbedPane.removeTabAt(indexOfTabRemove);
-                    return;
-                }
-            }
-        }*/
+        int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
+        if (indexOfTabRemove != -1) {
+            tabbedPane.removeTabAt(indexOfTabRemove);
+        }
     }
     public void changeTabTitle(ClassyNode child, String oldName){
         int indexOfTab = tabbedPane.indexOfTab(oldName);
@@ -158,12 +142,13 @@ public class PackageView extends JPanel implements ISubscriber {
 
                     for(ClassyNode classyNode: parentP.getChildren()){
                         if(classyNode instanceof Package){
+                            System.out.println("MARE FEGET");
                             Package package1 = (Package) classyNode;
-                            for(ClassyNode classyNode2: package1.getChildren()){
-                                removeTab(classyNode2);
-                            }
+                            NotificationTree notificationTree1 = new NotificationTree(package1, TreeNotificationType.PACKAGE_DELETED);
+                            update(notificationTree1);
+                        }else {
+                            removeTab(classyNode);
                         }
-                        removeTab(classyNode);
                     }
 
             }
