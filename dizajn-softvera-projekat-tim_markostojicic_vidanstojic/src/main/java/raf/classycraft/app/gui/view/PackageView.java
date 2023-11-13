@@ -174,7 +174,8 @@ public class PackageView extends JPanel implements ISubscriber {
                         Package p = (Package) classyNode;
                         for(ClassyNode classyNode1: p.getChildren()){
                             if(classyNode1 instanceof Package){
-                                Package package1 = (Package) classyNode;
+                                System.out.println("Vidan");
+                                Package package1 = (Package) classyNode1;
                                 for(ClassyNode classyNode2: package1.getChildren()){
                                     removeTab(classyNode2);
                                 }
