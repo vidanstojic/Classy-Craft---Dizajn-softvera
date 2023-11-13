@@ -2,6 +2,7 @@ package raf.classycraft.app.gui.view;
 
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
@@ -74,13 +75,28 @@ public class PackageView extends JPanel implements ISubscriber {
         this.stringTabs.add(title);
     }
 
-    public void removeTab(ClassyNode child){
-        int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
-        if (indexOfTabRemove != -1) {
-            tabbedPane.removeTabAt(indexOfTabRemove);
-        }
+    public void removeTab(ClassyNode child) {
+        if (child == null) {
+            return;
+        }if(child instanceof Diagrams){
+            int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
+            if (indexOfTabRemove != -1) {
+                tabbedPane.removeTabAt(indexOfTabRemove);
+                return;
+            }
+        } /*else if (child instanceof Package) {
+            System.out.println("PRVO");//NE ISPISUJE SE
+            ClassyNodeComposite parent = (ClassyNodeComposite) child.getParent();
+            Package package1 = (Package) child;
+            for (ClassyNode classyNode2 : parent.getChildren()) {
+                int indexOfTabRemove = tabbedPane.indexOfTab(classyNode2.getName());
+                if (indexOfTabRemove != -1) {
+                    tabbedPane.removeTabAt(indexOfTabRemove);
+                    return;
+                }
+            }
+        }*/
     }
-
     public void changeTabTitle(ClassyNode child, String oldName){
         int indexOfTab = tabbedPane.indexOfTab(oldName);
         if (indexOfTab != -1) {
@@ -141,6 +157,12 @@ public class PackageView extends JPanel implements ISubscriber {
             else if(typeNotify == TreeNotificationType.PACKAGE_DELETED) {
 
                     for(ClassyNode classyNode: parentP.getChildren()){
+                        if(classyNode instanceof Package){
+                            Package package1 = (Package) classyNode;
+                            for(ClassyNode classyNode2: package1.getChildren()){
+                                removeTab(classyNode2);
+                            }
+                        }
                         removeTab(classyNode);
                     }
 
@@ -151,6 +173,12 @@ public class PackageView extends JPanel implements ISubscriber {
                     if(classyNode instanceof Package) {
                         Package p = (Package) classyNode;
                         for(ClassyNode classyNode1: p.getChildren()){
+                            if(classyNode1 instanceof Package){
+                                Package package1 = (Package) classyNode;
+                                for(ClassyNode classyNode2: package1.getChildren()){
+                                    removeTab(classyNode2);
+                                }
+                            }
                             removeTab(classyNode1);
                         }
                     }
