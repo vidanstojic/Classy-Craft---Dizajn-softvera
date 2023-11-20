@@ -79,12 +79,18 @@ public class PackageView extends JPanel implements ISubscriber {
         int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
         if (indexOfTabRemove != -1) {
             tabbedPane.removeTabAt(indexOfTabRemove);
+            String tabToRemove= child.getName();
+            System.out.println(stringTabs.size());
+            this.stringTabs.remove(tabToRemove);
+            System.out.println(stringTabs.size());
         }
     }
     public void changeTabTitle(ClassyNode child, String oldName){
         int indexOfTab = tabbedPane.indexOfTab(oldName);
         if (indexOfTab != -1) {
             tabbedPane.setTitleAt(indexOfTab, child.getName());
+            this.stringTabs.remove(oldName);
+            this.stringTabs.add(child.getName());
         }
     }
 
