@@ -2,6 +2,7 @@ package raf.classycraft.app.gui.view;
 
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
@@ -74,13 +75,12 @@ public class PackageView extends JPanel implements ISubscriber {
         this.stringTabs.add(title);
     }
 
-    public void removeTab(ClassyNode child){
+    public void removeTab(ClassyNode child) {
         int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
         if (indexOfTabRemove != -1) {
             tabbedPane.removeTabAt(indexOfTabRemove);
         }
     }
-
     public void changeTabTitle(ClassyNode child, String oldName){
         int indexOfTab = tabbedPane.indexOfTab(oldName);
         if (indexOfTab != -1) {
@@ -141,7 +141,17 @@ public class PackageView extends JPanel implements ISubscriber {
             else if(typeNotify == TreeNotificationType.PACKAGE_DELETED) {
 
                     for(ClassyNode classyNode: parentP.getChildren()){
-                        removeTab(classyNode);
+                        if(classyNode instanceof Package){
+                            Package package1 = (Package) classyNode;
+                            NotificationTree notificationTree1 = new NotificationTree(package1, TreeNotificationType.PACKAGE_DELETED);
+                            update(notificationTree1);
+                        }else {
+                            removeTab(classyNode);
+                            if(tabbedPane.getComponents() == null) {
+                                return;
+                            }
+                        }
+
                     }
 
             }
@@ -151,6 +161,12 @@ public class PackageView extends JPanel implements ISubscriber {
                     if(classyNode instanceof Package) {
                         Package p = (Package) classyNode;
                         for(ClassyNode classyNode1: p.getChildren()){
+                            if(classyNode1 instanceof Package){
+                                Package package1 = (Package) classyNode1;
+                                for(ClassyNode classyNode2: package1.getChildren()){
+                                    removeTab(classyNode2);
+                                }
+                            }
                             removeTab(classyNode1);
                         }
                     }
