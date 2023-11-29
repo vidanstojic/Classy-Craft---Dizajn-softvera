@@ -109,8 +109,6 @@ public class PackageView extends JPanel implements ISubscriber {
     @Override
     public void update(Object notify) {
         if(notify instanceof NotificationTree){
-            if(flag == false)
-                return;
 
             NotificationTree notificationTree = (NotificationTree) notify;
             Package parentP = null;
@@ -130,11 +128,12 @@ public class PackageView extends JPanel implements ISubscriber {
 
 
             if(typeNotify == TreeNotificationType.ADDED_CHILD){
-                if( child.findProject() != null && child.findProject() instanceof Project){
-                    Project project = child.findProject();
-                    addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+                if (flag) {
+                    if (child.findProject() != null && child.findProject() instanceof Project) {
+                        Project project = child.findProject();
+                        addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+                    }
                 }
-
             }
             else if(typeNotify == TreeNotificationType.DELETED_CHILD){
                 removeTab(child);
@@ -166,15 +165,8 @@ public class PackageView extends JPanel implements ISubscriber {
                 for(ClassyNode classyNode: parent.getChildren()){
                     if(classyNode instanceof Package) {
                         Package p = (Package) classyNode;
-                        for(ClassyNode classyNode1: p.getChildren()){
-                            if(classyNode1 instanceof Package){
-                                Package package1 = (Package) classyNode1;
-                                for(ClassyNode classyNode2: package1.getChildren()){
-                                    removeTab(classyNode2);
-                                }
-                            }
-                            removeTab(classyNode1);
-                        }
+                        NotificationTree notificationTree1 = new NotificationTree(p, TreeNotificationType.PACKAGE_DELETED);
+                        update(notificationTree1);
                     }
                 }
             }
