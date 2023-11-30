@@ -76,13 +76,14 @@ public class PackageView extends JPanel implements ISubscriber {
     }
 
     public void removeTab(ClassyNode child) {
+        if(child == null)
+            return;
         int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
         if (indexOfTabRemove != -1) {
             tabbedPane.removeTabAt(indexOfTabRemove);
             String tabToRemove= child.getName();
-            System.out.println(stringTabs.size());
             this.stringTabs.remove(tabToRemove);
-            System.out.println(stringTabs.size());
+
         }
     }
     public void changeTabTitle(ClassyNode child, String oldName){
@@ -147,14 +148,19 @@ public class PackageView extends JPanel implements ISubscriber {
 
                     for(ClassyNode classyNode: parentP.getChildren()){
                         if(classyNode instanceof Package){
+                            if(tabbedPane.getComponents() == null) {
+                                return;
+                            }
                             Package package1 = (Package) classyNode;
                             NotificationTree notificationTree1 = new NotificationTree(package1, TreeNotificationType.PACKAGE_DELETED);
                             update(notificationTree1);
                         }else {
-                            removeTab(classyNode);
                             if(tabbedPane.getComponents() == null) {
                                 return;
                             }
+                            printNameOfTabs();
+                            removeTab(classyNode);
+
                         }
 
                     }
@@ -175,6 +181,12 @@ public class PackageView extends JPanel implements ISubscriber {
             ProjectNotificationType projectNotificationType = (ProjectNotificationType) notify;
             this.getAuthor().setText(projectNotificationType.getAuthor());
             this.getNameOfProject().setText(projectNotificationType.getName());
+        }
+    }
+
+    public void printNameOfTabs(){
+        for( Component element :this.tabbedPane.getComponents()){
+            System.out.println(element.getName());
         }
     }
 
