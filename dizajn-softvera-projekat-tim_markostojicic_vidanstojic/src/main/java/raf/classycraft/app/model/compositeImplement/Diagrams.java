@@ -2,6 +2,7 @@ package raf.classycraft.app.model.compositeImplement;
 
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
@@ -9,7 +10,7 @@ import raf.classycraft.app.observer.NotificationTree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Diagrams extends ClassyNode implements IPublisher {
+public class Diagrams extends ClassyNodeComposite implements IPublisher {
 
     List<ISubscriber> subscribers = new ArrayList<>();
     public Diagrams(String name, ClassyNode parent){
@@ -94,5 +95,15 @@ public class Diagrams extends ClassyNode implements IPublisher {
         }
         Package packageParent = (Package) currentNode;
         return packageParent;
+    }
+
+    @Override
+    public void addChild(ClassyNode child) {
+
+    }
+
+    @Override
+    public void removeChild(ClassyNode child) {
+
     }
 }
