@@ -2,13 +2,11 @@ package raf.classycraft.app.gui.tree.factory;
 
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
-import raf.classycraft.app.model.compositeImplement.Diagrams;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 
 import javax.swing.*;
-import java.util.Random;
 
 public class FactoryUtils {
 

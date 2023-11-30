@@ -5,7 +5,6 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.observer.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class Package extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void addChild(ClassyNode child) {
-        if (child != null &&  child instanceof Diagrams){
-            Diagrams diagrams = (Diagrams) child;
+        if (child != null &&  child instanceof Diagram){
+            Diagram diagrams = (Diagram) child;
             if (!this.getChildren().contains(diagrams)){
                 this.getChildren().add(diagrams);
                 NotificationTree notificationTree = new NotificationTree(diagrams, TreeNotificationType.ADDED_CHILD);

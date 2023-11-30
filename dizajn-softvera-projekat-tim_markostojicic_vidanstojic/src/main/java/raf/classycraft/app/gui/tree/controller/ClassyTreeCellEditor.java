@@ -4,7 +4,7 @@ import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
-import raf.classycraft.app.model.compositeImplement.Diagrams;
+import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
@@ -69,7 +69,7 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
                 break;
             }
         }
-        if(clicked.getClassyNode() instanceof Diagrams){
+        if(clicked.getClassyNode() instanceof Diagram){
             Package packageParent = (Package) clicked.getClassyNode().getParent();
             packageParent.nameChangedDiagram(clicked.getClassyNode(), oldName);
         }

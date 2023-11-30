@@ -10,10 +10,10 @@ import raf.classycraft.app.observer.NotificationTree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Diagrams extends ClassyNodeComposite implements IPublisher {
+public class Diagram extends ClassyNodeComposite implements IPublisher {
 
     List<ISubscriber> subscribers = new ArrayList<>();
-    public Diagrams(String name, ClassyNode parent){
+    public Diagram(String name, ClassyNode parent){
         this.addSubscriber(MainFrame.getInstance().getDiagramView());
         super.setName(name);
         super.setParent(parent);
@@ -99,11 +99,11 @@ public class Diagrams extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void addChild(ClassyNode child) {
-
+        this.getChildren().add(child);
     }
 
     @Override
     public void removeChild(ClassyNode child) {
-
+        this.getChildren().remove(child);
     }
 }

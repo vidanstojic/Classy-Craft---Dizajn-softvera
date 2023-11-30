@@ -1,9 +1,7 @@
 package raf.classycraft.app.gui.view;
 
-import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
-import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
-import raf.classycraft.app.model.compositeImplement.Diagrams;
+import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.observer.ISubscriber;
@@ -114,9 +112,9 @@ public class PackageView extends JPanel implements ISubscriber {
             NotificationTree notificationTree = (NotificationTree) notify;
             Package parentP = null;
             Project parent = null;
-            Diagrams child = null;
-            if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Diagrams){
-                child = (Diagrams) notificationTree.getClassyNode();
+            Diagram child = null;
+            if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof Diagram){
+                child = (Diagram) notificationTree.getClassyNode();
             }
             else if( !(notificationTree.getClassyNode() instanceof Package || notificationTree.getClassyNode() instanceof Project) ){
                 return;
