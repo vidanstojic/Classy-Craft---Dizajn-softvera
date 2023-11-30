@@ -39,11 +39,20 @@ public class Package extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void removeChild(ClassyNode child) {
-        if(this.getChildren().contains(child)){
-            this.getChildren().remove(child);
+        if (child instanceof Diagrams) {
+            if (this.getChildren().contains(child)) {
+                this.getChildren().remove(child);
+            }
+            NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.DELETED_CHILD);
+            notifySub(notificationTree);
+        }else if (child instanceof Package){
+            Package p = (Package) child;
+            if(p.getChildren().isEmpty()) {
+                this.getChildren().remove(p);
+                return;
+            }
+            p.packageDeleted(p);
         }
-        NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.DELETED_CHILD);
-        notifySub(notificationTree);
     }
 
 

@@ -80,9 +80,7 @@ public class PackageView extends JPanel implements ISubscriber {
         if (indexOfTabRemove != -1) {
             tabbedPane.removeTabAt(indexOfTabRemove);
             String tabToRemove= child.getName();
-            System.out.println(stringTabs.size());
             this.stringTabs.remove(tabToRemove);
-            System.out.println(stringTabs.size());
         }
     }
     public void changeTabTitle(ClassyNode child, String oldName){
@@ -146,19 +144,31 @@ public class PackageView extends JPanel implements ISubscriber {
             else if(typeNotify == TreeNotificationType.PACKAGE_DELETED) {
 
                     for(ClassyNode classyNode: parentP.getChildren()){
+                        System.out.println(classyNode.getName());
                         if(classyNode instanceof Package){
                             Package package1 = (Package) classyNode;
                             NotificationTree notificationTree1 = new NotificationTree(package1, TreeNotificationType.PACKAGE_DELETED);
                             update(notificationTree1);
                         }else {
-                            removeTab(classyNode);
                             if(tabbedPane.getComponents() == null) {
                                 return;
-                            }
+                                }
+                            parentP.removeChild(classyNode);
+                            System.out.println(classyNode.getName());
                         }
-
+                        if(parentP.getChildren().isEmpty()){
+                            if(parentP.getParent() instanceof Project)
+                            {
+                                Project proj = (Project) parentP.getParent();
+                                proj.removeChild(parentP);
+                            } else if (parentP.getParent() instanceof Package) {
+                                Package pack = (Package) parentP.getParent();
+                                pack.removeChild(parentP);
+                            }
+                            System.out.println("Velicina" + parentP.getChildren().size());
+                            return;
+                        }
                     }
-
             }
             else if(typeNotify == TreeNotificationType.PROJECT_DELETED){
 
