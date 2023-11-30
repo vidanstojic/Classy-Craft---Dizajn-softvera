@@ -146,6 +146,9 @@ public class PackageView extends JPanel implements ISubscriber {
                     for(ClassyNode classyNode: parentP.getChildren()){
                         System.out.println(classyNode.getName());
                         if(classyNode instanceof Package){
+                            if(tabbedPane.getComponents() == null) {
+                                return;
+                            }
                             Package package1 = (Package) classyNode;
                             NotificationTree notificationTree1 = new NotificationTree(package1, TreeNotificationType.PACKAGE_DELETED);
                             update(notificationTree1);
@@ -167,6 +170,9 @@ public class PackageView extends JPanel implements ISubscriber {
                             }
                             System.out.println("Velicina" + parentP.getChildren().size());
                             return;
+                            }
+                            printNameOfTabs();
+                            removeTab(classyNode);
                         }
                     }
             }
@@ -180,11 +186,16 @@ public class PackageView extends JPanel implements ISubscriber {
                     }
                 }
             }
-        }
         else if(notify instanceof ProjectNotificationType){
             ProjectNotificationType projectNotificationType = (ProjectNotificationType) notify;
             this.getAuthor().setText(projectNotificationType.getAuthor());
             this.getNameOfProject().setText(projectNotificationType.getName());
+        }
+    }
+
+    public void printNameOfTabs(){
+        for( Component element :this.tabbedPane.getComponents()){
+            System.out.println(element.getName());
         }
     }
 
