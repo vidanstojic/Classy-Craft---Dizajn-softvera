@@ -31,38 +31,28 @@ public class PackageView extends JPanel implements ISubscriber {
 
 
     public void tabbedPaneInit(){
-        this.tabbedPane = new JTabbedPane();
+        
         this.setLayout(new BorderLayout());
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+
+        tabbedPane = new JTabbedPane();
+        this.add(tabbedPane, BorderLayout.CENTER);
+
         nameOfProject = new Label();
         author = new Label();
         nameOfProject.setAlignment(Label.CENTER);
         author.setAlignment(Label.CENTER);
+        JPanel labelPanel = new JPanel(new GridLayout(2, 1));
+        labelPanel.add(nameOfProject);
+        labelPanel.add(author);
+        this.add(labelPanel, BorderLayout.NORTH);
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0; // x osa kolona
-        gbc.gridy = 0;// y osa red
-        gbc.gridwidth = 1;// broj kolona koje zauzima
-        gbc.weightx = 1.0;
-        add(nameOfProject, gbc);
+        MyDrawingToolBar toolBar = new MyDrawingToolBar();
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.weightx = 1.0;
-        add(author, gbc);
+        Dimension screenSize = MainFrame.getInstance().getSize();
+        int visina = screenSize.height;
+        toolBar.setBorder(BorderFactory.createEmptyBorder(visina / 10, 3, 0, 3)); // Prilagodite gornji prostor prema potrebi
 
-        tabbedPane = new JTabbedPane();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        add(tabbedPane, gbc);
-
+        this.add(toolBar, BorderLayout.EAST);
     }
 
     public void addTab(String title, Component component ) {
