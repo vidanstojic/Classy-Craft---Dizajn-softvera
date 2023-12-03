@@ -1,7 +1,11 @@
 package raf.classycraft.app.state;
 
+import raf.classycraft.app.gui.view.DiagramView;
+
+import java.awt.event.MouseEvent;
+
 public interface State {
-    void stateMousePressed();
-    void stateMouseReleased();
-    void stateMouseDragged();
+    void stateMousePressed(MouseEvent e, DiagramView tempTab);
+    void stateMouseReleased(MouseEvent e, DiagramView tempTab);
+    void stateMouseDragged(MouseEvent e, DiagramView tempTab);
 }

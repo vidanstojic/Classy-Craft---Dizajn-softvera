@@ -1,6 +1,7 @@
 package raf.classycraft.app.gui.controller;
 
 import raf.classycraft.app.gui.view.DiagramView;
+import raf.classycraft.app.gui.view.MainFrame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,17 +17,18 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         // potrebno
+        MainFrame.getInstance().getPackageView().getStateManager().getCurrentState().stateMousePressed(e, diagramView);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         // potrebno
+        MainFrame.getInstance().getPackageView().getStateManager().getCurrentState().stateMouseReleased(e, diagramView);
     }
 
     @Override
@@ -42,6 +44,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         // potrebno
+        MainFrame.getInstance().getPackageView().getStateManager().getCurrentState().stateMouseDragged(e, diagramView);
     }
 
     @Override

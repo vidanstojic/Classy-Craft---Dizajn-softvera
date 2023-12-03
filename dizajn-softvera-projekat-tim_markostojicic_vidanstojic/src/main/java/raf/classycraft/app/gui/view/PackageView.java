@@ -223,5 +223,7 @@ public class PackageView extends JPanel implements ISubscriber {
         this.nameA = nameA;
     }
 
-
+    public StateManager getStateManager() {
+        return stateManager;
+    }
 }
