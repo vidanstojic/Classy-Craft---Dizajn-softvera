@@ -1,5 +1,6 @@
 
 package raf.classycraft.app.gui.view;
+import raf.classycraft.app.gui.controller.MyMouseListener;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.TreeNotificationType;
 
@@ -9,10 +10,12 @@ import java.awt.*;
 
 public class DiagramView extends JPanel implements ISubscriber {
 
-
+    private MyMouseListener myMouseListener;
  
     public DiagramView(String name,String author){
-
+        this.myMouseListener = new MyMouseListener(this);
+        addMouseListener(myMouseListener);
+        addMouseMotionListener(myMouseListener);
     }
 
 

@@ -11,6 +11,8 @@ public class ActionManager {
     private ProjectAuthorAction projectAuthorAction;
     private EraserAction eraserAction;
     private SelectAction selectAction;
+
+    private MyMouseListener myMouseListener;
     public ActionManager(){
         initialiseActions();
     }
