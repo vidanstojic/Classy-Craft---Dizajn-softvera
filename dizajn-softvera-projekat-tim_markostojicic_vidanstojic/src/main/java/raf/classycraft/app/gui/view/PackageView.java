@@ -54,7 +54,7 @@ public class PackageView extends JPanel implements ISubscriber {
 
         Dimension screenSize = MainFrame.getInstance().getSize();
         int visina = screenSize.height;
-        toolBar.setBorder(BorderFactory.createEmptyBorder(visina / 10, 3, 0, 3)); // Prilagodite gornji prostor prema potrebi
+        toolBar.setBorder(BorderFactory.createEmptyBorder(visina / 10, 3, 0, 3));
 
         this.add(toolBar, BorderLayout.EAST);
     }
@@ -70,13 +70,11 @@ public class PackageView extends JPanel implements ISubscriber {
     public void removeTab(ClassyNode child) {
         if(child == null)
             return;
-        Package p = (Package) child.getParent();
         int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
         if (indexOfTabRemove != -1) {
             tabbedPane.removeTabAt(indexOfTabRemove);
             String tabToRemove= child.getName();
             this.stringTabs.remove(tabToRemove);
-            p.ispisDece();
         }
     }
     public void changeTabTitle(ClassyNode child, String oldName){
@@ -139,27 +137,15 @@ public class PackageView extends JPanel implements ISubscriber {
 
             else if(typeNotify == TreeNotificationType.PACKAGE_DELETED) {
 
+                    List<ClassyNode> nodesToRemove = new ArrayList<>();
                     for(ClassyNode classyNode: parentP.getChildren()){
-                        System.out.println(classyNode.getName());
-                        /*if(classyNode instanceof Package){
                             if(tabbedPane.getComponents() == null) {
                                 return;
                             }
-                            Package package1 = (Package) classyNode;
-                            NotificationTree notificationTree1 = new NotificationTree(package1, TreeNotificationType.PACKAGE_DELETED);
-                            update(notificationTree1);
-                        }else {*/
-                            if(tabbedPane.getComponents() == null) {
-                                return;
-                            }
-                            System.out.println(classyNode.getName());
-                            printNameOfTabs();
-                            parentP.removeChild(classyNode);
-                        //}
-                            /*if(parentP.getChildren().isEmpty()){
-                                return;
-                            }*/
-                            System.out.println("drugi" + classyNode.getName());
+                            nodesToRemove.add(classyNode);
+                    }
+                    for(ClassyNode element : nodesToRemove){
+                        parentP.removeChild(element);
                     }
 
             }

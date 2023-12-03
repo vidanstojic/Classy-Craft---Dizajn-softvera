@@ -85,11 +85,7 @@ public class Package extends ClassyNodeComposite implements IPublisher {
         Project project = (Project) currentNode;
         return project;
     }
-    public void ispisDece()
-    {
-        for(ClassyNode classyNode : this.getChildren())
-            System.out.println(classyNode.getName());
-    }
+ 
     public void nameChangedDiagram(ClassyNode child, String oldName){
             NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.RENAMED_CHILD, oldName);
             notifySub(notificationTree);
