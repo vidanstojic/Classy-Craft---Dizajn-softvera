@@ -1,4 +1,4 @@
-package raf.classycraft.app.model.elementDiagram;
+package raf.classycraft.app.model.elementDiagram.concreteInterclass;
 
 import raf.classycraft.app.model.elementDiagram.Interclass;
 

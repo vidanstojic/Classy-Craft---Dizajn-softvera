@@ -1,6 +1,7 @@
-package raf.classycraft.app.model.elementDiagram;
+package raf.classycraft.app.model.elementDiagram.concreteConnections;
 
 import raf.classycraft.app.model.elementDiagram.Connection;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 
 import java.awt.*;
 

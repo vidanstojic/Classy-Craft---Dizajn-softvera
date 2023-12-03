@@ -18,7 +18,10 @@ public class DiagramView extends JPanel implements ISubscriber {
         addMouseMotionListener(myMouseListener);
     }
 
-
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
 
     public DiagramView(){
 
