@@ -70,12 +70,13 @@ public class PackageView extends JPanel implements ISubscriber {
     public void removeTab(ClassyNode child) {
         if(child == null)
             return;
+        Package p = (Package) child.getParent();
         int indexOfTabRemove = tabbedPane.indexOfTab(child.getName());
         if (indexOfTabRemove != -1) {
             tabbedPane.removeTabAt(indexOfTabRemove);
             String tabToRemove= child.getName();
             this.stringTabs.remove(tabToRemove);
-
+            p.ispisDece();
         }
     }
     public void changeTabTitle(ClassyNode child, String oldName){
@@ -139,22 +140,26 @@ public class PackageView extends JPanel implements ISubscriber {
             else if(typeNotify == TreeNotificationType.PACKAGE_DELETED) {
 
                     for(ClassyNode classyNode: parentP.getChildren()){
-                        if(classyNode instanceof Package){
+                        System.out.println(classyNode.getName());
+                        /*if(classyNode instanceof Package){
                             if(tabbedPane.getComponents() == null) {
                                 return;
                             }
                             Package package1 = (Package) classyNode;
                             NotificationTree notificationTree1 = new NotificationTree(package1, TreeNotificationType.PACKAGE_DELETED);
                             update(notificationTree1);
-                        }else {
+                        }else {*/
                             if(tabbedPane.getComponents() == null) {
                                 return;
                             }
+                            System.out.println(classyNode.getName());
                             printNameOfTabs();
-                            removeTab(classyNode);
-
-                        }
-
+                            parentP.removeChild(classyNode);
+                        //}
+                            /*if(parentP.getChildren().isEmpty()){
+                                return;
+                            }*/
+                            System.out.println("drugi" + classyNode.getName());
                     }
 
             }

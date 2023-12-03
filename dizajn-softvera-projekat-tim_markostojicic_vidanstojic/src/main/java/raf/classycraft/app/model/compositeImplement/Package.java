@@ -38,11 +38,19 @@ public class Package extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void removeChild(ClassyNode child) {
-        if(this.getChildren().contains(child)){
-            this.getChildren().remove(child);
+        if(child != null && child instanceof Diagram){
+            if(getChildren().contains(child)){
+                getChildren().remove(child);
+                NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.DELETED_CHILD);
+                notifySub(notificationTree);
+            }
+        }else if (child != null && child instanceof Package){
+            if(getChildren().contains(child)){
+                getChildren().remove(child);
+                NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.PACKAGE_DELETED);
+                notifySub(notificationTree);
+            }
         }
-        NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.DELETED_CHILD);
-        notifySub(notificationTree);
     }
 
 
@@ -77,7 +85,11 @@ public class Package extends ClassyNodeComposite implements IPublisher {
         Project project = (Project) currentNode;
         return project;
     }
-
+    public void ispisDece()
+    {
+        for(ClassyNode classyNode : this.getChildren())
+            System.out.println(classyNode.getName());
+    }
     public void nameChangedDiagram(ClassyNode child, String oldName){
             NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.RENAMED_CHILD, oldName);
             notifySub(notificationTree);

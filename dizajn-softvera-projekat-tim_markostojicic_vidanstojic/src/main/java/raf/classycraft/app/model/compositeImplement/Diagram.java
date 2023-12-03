@@ -3,6 +3,7 @@ package raf.classycraft.app.model.compositeImplement;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.observer.IPublisher;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
@@ -99,11 +100,13 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void addChild(ClassyNode child) {
+        if(child != null && child instanceof DiagramElement)
         this.getChildren().add(child);
     }
 
     @Override
     public void removeChild(ClassyNode child) {
+        if(child != null && getChildren().contains(child))
         this.getChildren().remove(child);
     }
 }
