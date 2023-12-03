@@ -1,5 +1,8 @@
 package raf.classycraft.app.gui.controller;
 
+import com.sun.tools.javac.Main;
+import raf.classycraft.app.gui.view.MainFrame;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
@@ -15,6 +18,6 @@ public class SelectAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        MainFrame.getInstance().getPackageView().startSelectionState();
     }
 }

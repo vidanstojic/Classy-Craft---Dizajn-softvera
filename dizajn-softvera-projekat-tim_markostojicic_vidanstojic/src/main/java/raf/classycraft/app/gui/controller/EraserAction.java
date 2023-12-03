@@ -1,5 +1,7 @@
 package raf.classycraft.app.gui.controller;
 
+import raf.classycraft.app.gui.view.MainFrame;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -15,6 +17,6 @@ public class EraserAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        MainFrame.getInstance().getPackageView().startRemoveState();
     }
 }
