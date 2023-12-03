@@ -3,13 +3,14 @@ package raf.classycraft.app.gui.controller;
 public class ActionManager {
     private ExitAction ea;
     private AboutUsAction aboutUs;
-
+    private AddAction addAction;
     private NewProjectAction newProjectAction;
-
+    private AddConnectionAction addConnectionAction;
     private RemoveItemAction removeItemAction;
-
+    private EditAction editAction;
     private ProjectAuthorAction projectAuthorAction;
-
+    private EraserAction eraserAction;
+    private SelectAction selectAction;
     public ActionManager(){
         initialiseActions();
     }
@@ -20,6 +21,11 @@ public class ActionManager {
         newProjectAction = new NewProjectAction();
         removeItemAction = new RemoveItemAction();
         projectAuthorAction = new ProjectAuthorAction();
+        addAction = new AddAction();
+        addConnectionAction = new AddConnectionAction();
+        editAction = new EditAction();
+        eraserAction = new EraserAction();
+        selectAction = new SelectAction();
     }
 
     public ExitAction getEa() {
@@ -40,5 +46,25 @@ public class ActionManager {
 
     public ProjectAuthorAction getProjectAuthorAction() {
         return projectAuthorAction;
+    }
+
+    public AddAction getAddAction() {
+        return addAction;
+    }
+
+    public AddConnectionAction getAddConnectionAction() {
+        return addConnectionAction;
+    }
+
+    public EditAction getEditAction() {
+        return editAction;
+    }
+
+    public EraserAction getEraserAction() {
+        return eraserAction;
+    }
+
+    public SelectAction getSelectAction() {
+        return selectAction;
     }
 }

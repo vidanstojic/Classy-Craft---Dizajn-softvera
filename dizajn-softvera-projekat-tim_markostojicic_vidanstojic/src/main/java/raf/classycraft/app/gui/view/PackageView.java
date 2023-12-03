@@ -31,7 +31,7 @@ public class PackageView extends JPanel implements ISubscriber {
 
 
     public void tabbedPaneInit(){
-        
+
         this.setLayout(new BorderLayout());
 
         tabbedPane = new JTabbedPane();
