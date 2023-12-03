@@ -8,6 +8,7 @@ import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
 import raf.classycraft.app.observer.ProjectNotificationType;
 import raf.classycraft.app.observer.TreeNotificationType;
+import raf.classycraft.app.state.StateManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +26,11 @@ public class PackageView extends JPanel implements ISubscriber {
 
     public static boolean flag = false;
 
+    private StateManager stateManager;
+
     public PackageView(){
         tabbedPaneInit();
+        stateManager = new StateManager();
     }
 
 
@@ -177,6 +181,23 @@ public class PackageView extends JPanel implements ISubscriber {
             System.out.println(element.getName());
         }
     }
+    // Start metode posto je PackageView mediator
+    public void startAddClassState(){
+        this.stateManager.setAddClassState();
+    }
+    public void startAddConnectionState(){
+        this.stateManager.setAddConnectionState();
+    }
+    public void startEditClassState(){
+        this.stateManager.setEditClassState();
+    }
+    public void startRemoveState(){
+        this.stateManager.setRemoveState();
+    }
+    public void startSelectionState(){
+        this.stateManager.setSelectionState();
+    }
+
 
     public static boolean isFlag() {
         return flag;
