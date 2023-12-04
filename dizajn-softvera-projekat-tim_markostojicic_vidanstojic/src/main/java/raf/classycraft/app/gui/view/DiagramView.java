@@ -1,18 +1,25 @@
 
 package raf.classycraft.app.gui.view;
-import raf.classycraft.app.gui.controller.MyMouseListener;
+import raf.classycraft.app.gui.controller.drawingToolbarActions.MyMouseListener;
+import raf.classycraft.app.gui.view.paint.ElementPainter;
+import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.observer.ISubscriber;
-import raf.classycraft.app.observer.TreeNotificationType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DiagramView extends JPanel implements ISubscriber {
 
+    private Diagram diagram;
     private MyMouseListener myMouseListener;
- 
-    public DiagramView(String name,String author){
+    private List<ElementPainter> listOfPainters = new ArrayList<>();
+
+    public DiagramView(Diagram diagram){
+        this.diagram = diagram;
+        diagram.addSubscriber(this);/// proveriti da li je ovo dozvoljeno zbog MVC-A
         this.myMouseListener = new MyMouseListener(this);
         addMouseListener(myMouseListener);
         addMouseMotionListener(myMouseListener);
@@ -21,6 +28,10 @@ public class DiagramView extends JPanel implements ISubscriber {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        for(ElementPainter painter : listOfPainters){
+            painter.paint(g);
+        }
+
     }
 
     public DiagramView(){
@@ -30,6 +41,18 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notify) {
-        // ovo ce se tek popunjavati kasnije u toku projekta, za sada neka stoji ovako
+        repaint();
+    }
+
+    public List<ElementPainter> getListOfPainters() {
+        return listOfPainters;
+    }
+
+    public void setListOfPainters(List<ElementPainter> listOfPainters) {
+        this.listOfPainters = listOfPainters;
+    }
+
+    public Diagram getDiagram() {
+        return diagram;
     }
 }

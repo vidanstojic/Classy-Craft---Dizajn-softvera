@@ -9,7 +9,7 @@ public class MyDrawingToolBar extends JToolBar {
         super(VERTICAL);
         setFloatable(false);
 
-        add(MainFrame.getInstance().getActionManager().getAddAction());
+        add(MainFrame.getInstance().getActionManager().getAddClassAction());
         add (MainFrame.getInstance().getActionManager().getAddConnectionAction());
         add (MainFrame.getInstance().getActionManager().getSelectAction());
         add (MainFrame.getInstance().getActionManager().getEditAction());

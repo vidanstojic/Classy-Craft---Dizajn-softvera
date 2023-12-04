@@ -1,4 +1,4 @@
-package raf.classycraft.app.gui.controller;
+package raf.classycraft.app.gui.controller.drawingToolbarActions;
 
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.MainFrame;

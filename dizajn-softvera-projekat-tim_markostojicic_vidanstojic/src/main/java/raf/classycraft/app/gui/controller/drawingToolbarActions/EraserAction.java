@@ -1,12 +1,13 @@
-package raf.classycraft.app.gui.controller;
+package raf.classycraft.app.gui.controller.drawingToolbarActions;
 
+import raf.classycraft.app.gui.controller.AbstractClassyAction;
 import raf.classycraft.app.gui.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class EraserAction extends AbstractClassyAction{
+public class EraserAction extends AbstractClassyAction {
 
     public EraserAction(){
 

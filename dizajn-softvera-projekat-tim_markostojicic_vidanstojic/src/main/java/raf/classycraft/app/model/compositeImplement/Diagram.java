@@ -4,9 +4,7 @@ import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
-import raf.classycraft.app.observer.IPublisher;
-import raf.classycraft.app.observer.ISubscriber;
-import raf.classycraft.app.observer.NotificationTree;
+import raf.classycraft.app.observer.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,6 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
 
     List<ISubscriber> subscribers = new ArrayList<>();
     public Diagram(String name, ClassyNode parent){
-        this.addSubscriber(MainFrame.getInstance().getDiagramView());
         super.setName(name);
         super.setParent(parent);
     }
@@ -63,11 +60,13 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void notifySub(Object notify) {
-        NotificationTree notificationTree = new NotificationTree();// ovde ce tek biti potrebno da se promeni nesto kasnije u toku projekta
-        // kada bude bilo bitno da DijagramView slusa Dijagram
-        for(ISubscriber subscriberView : this.subscribers){
-            subscriberView.update(notificationTree);
+        if(notify instanceof NotificationDiagramView){
+            NotificationDiagramView notificationDiagramView = (NotificationDiagramView) notify;
+            for(ISubscriber subscriberView : this.subscribers){
+                subscriberView.update(notificationDiagramView);
+            }
         }
+
     }
 
     public Project findProject() {
@@ -84,24 +83,18 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
         return project;
     }
 
-    public Package findPackage(){
-        ClassyNode currentNode = this;
-
-        while (!(currentNode instanceof Package)) {
-            ClassyNode parent = currentNode.getParent();
-            if (parent == null) {
-                return null;
-            }
-            currentNode = parent;
-        }
-        Package packageParent = (Package) currentNode;
-        return packageParent;
-    }
 
     @Override
     public void addChild(ClassyNode child) {
-        if(child != null && child instanceof DiagramElement)
-        this.getChildren().add(child);
+        if(child != null && child instanceof DiagramElement) {
+            DiagramElement diagramElement = (DiagramElement) child;
+            if (!this.getChildren().contains(diagramElement)){
+                this.getChildren().add(diagramElement);
+                NotificationDiagramView notificationDiagramView = new NotificationDiagramView(TypeDiagramView.ADD_DIAGRAM_ELEMENT,diagramElement);
+                notifySub(notificationDiagramView);
+            }
+
+        }
     }
 
     @Override

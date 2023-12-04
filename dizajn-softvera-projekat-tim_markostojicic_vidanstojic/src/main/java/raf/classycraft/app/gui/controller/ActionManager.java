@@ -1,9 +1,11 @@
 package raf.classycraft.app.gui.controller;
 
+import raf.classycraft.app.gui.controller.drawingToolbarActions.*;
+
 public class ActionManager {
     private ExitAction ea;
     private AboutUsAction aboutUs;
-    private AddClassAction addAction;
+    private AddClassAction addClassAction;
     private NewProjectAction newProjectAction;
     private AddConnectionAction addConnectionAction;
     private RemoveItemAction removeItemAction;
@@ -23,7 +25,7 @@ public class ActionManager {
         newProjectAction = new NewProjectAction();
         removeItemAction = new RemoveItemAction();
         projectAuthorAction = new ProjectAuthorAction();
-        addAction = new AddClassAction();
+        addClassAction = new AddClassAction();
         addConnectionAction = new AddConnectionAction();
         editAction = new EditAction();
         eraserAction = new EraserAction();
@@ -50,8 +52,8 @@ public class ActionManager {
         return projectAuthorAction;
     }
 
-    public AddClassAction getAddAction() {
-        return addAction;
+    public AddClassAction getAddClassAction() {
+        return addClassAction;
     }
 
     public AddConnectionAction getAddConnectionAction() {

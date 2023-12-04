@@ -1,5 +1,6 @@
-package raf.classycraft.app.gui.controller;
+package raf.classycraft.app.gui.controller.drawingToolbarActions;
 
+import raf.classycraft.app.gui.controller.AbstractClassyAction;
 import raf.classycraft.app.gui.view.MainFrame;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-public class EditAction extends AbstractClassyAction{
+public class EditAction extends AbstractClassyAction {
 
     public EditAction(){
 

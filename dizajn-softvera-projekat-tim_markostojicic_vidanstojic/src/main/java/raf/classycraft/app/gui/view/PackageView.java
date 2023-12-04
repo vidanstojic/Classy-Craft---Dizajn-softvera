@@ -123,7 +123,7 @@ public class PackageView extends JPanel implements ISubscriber {
                 if (flag) {
                     if (child.findProject() != null && child.findProject() instanceof Project) {
                         Project project = child.findProject();
-                        addTab(child.getName(), new DiagramView(project.getName(), project.getAuthor()));
+                        addTab(child.getName(), new DiagramView(child));
                     }
                 }
             }
