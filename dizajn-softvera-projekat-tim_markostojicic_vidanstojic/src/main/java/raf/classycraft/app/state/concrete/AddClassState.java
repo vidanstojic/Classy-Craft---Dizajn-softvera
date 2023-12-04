@@ -54,7 +54,7 @@ public class AddClassState implements State {
         else if (selection.equals("Enum")) {
             System.out.println("Dodavanje enuma");
             String name = JOptionPane.showInputDialog("Name of the enum");
-            EnumInterclass enumInterclass = new EnumInterclass(Color.BLACK, 2, "asd", "public");
+            EnumInterclass enumInterclass = new EnumInterclass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
             EnumPainter enumPainter = new EnumPainter(point, enumInterclass);
             tempTab.getListOfPainters().add(enumPainter);
