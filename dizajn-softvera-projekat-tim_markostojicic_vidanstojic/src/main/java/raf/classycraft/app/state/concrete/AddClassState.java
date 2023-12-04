@@ -4,7 +4,11 @@ import raf.classycraft.app.gui.tree.factory.DiagramFactory;
 import raf.classycraft.app.gui.tree.factory.FactoryChild;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.ClassPainter;
+import raf.classycraft.app.gui.view.paint.EnumPainter;
+import raf.classycraft.app.gui.view.paint.InterfacePainter;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 import raf.classycraft.app.state.State;
 
 import javax.swing.*;
@@ -34,9 +38,21 @@ public class AddClassState implements State {
         }
         else if (selection.equals("Interface")) {
             System.out.println("Dodavanje interfejsa");
+            String name = JOptionPane.showInputDialog("Name of the interface");
+            InterfaceInterclass interfaceInterclass = new InterfaceInterclass(Color.BLACK, 2, name, "public");
+            Point point = new Point(e.getX(), e.getY());
+            InterfacePainter interfacePainter = new InterfacePainter(point, interfaceInterclass);
+            tempTab.getListOfPainters().add(interfacePainter);
+            tempTab.getDiagram().addChild(interfaceInterclass);
         }
         else if (selection.equals("Enum")) {
             System.out.println("Dodavanje enuma");
+            String name = JOptionPane.showInputDialog("Name of the enum");
+            EnumInterclass enumInterclass = new EnumInterclass(Color.BLACK, 2, "asd", "public");
+            Point point = new Point(e.getX(), e.getY());
+            EnumPainter enumPainter = new EnumPainter(point, enumInterclass);
+            tempTab.getListOfPainters().add(enumPainter);
+            tempTab.getDiagram().addChild(enumInterclass);
         }
     }
 
