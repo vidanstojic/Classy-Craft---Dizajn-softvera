@@ -18,6 +18,8 @@ public class ClassPainter extends InterClassPainter{
         Stroke stroke = new BasicStroke(diagramElement.getStroke());
         graphics2D.setStroke(stroke);
         graphics2D.drawRect(point.x, point.y, 100,120);
+        graphics2D.drawString("C", point.x + 5, point.y + 15);
+        graphics2D.drawLine(point.x, point.y + 20, point.x + 100, point.y + 20);
         //graphics2D.setBackground(Color.WHITE);
         
     }
