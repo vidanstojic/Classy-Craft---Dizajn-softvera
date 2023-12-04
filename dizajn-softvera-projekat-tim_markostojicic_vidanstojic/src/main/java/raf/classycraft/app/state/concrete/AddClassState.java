@@ -24,7 +24,8 @@ public class AddClassState implements State {
         }
         else if (selection.equals("Class")) {
             System.out.println("Dodavanje klase");
-            ClassInterClass classInterClass = new ClassInterClass(Color.BLACK, 2, "Klasa1", "public");
+            String name = JOptionPane.showInputDialog("Name of the class");
+            ClassInterClass classInterClass = new ClassInterClass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
             ClassPainter classPainter = new ClassPainter(point,classInterClass);
             tempTab.getListOfPainters().add(classPainter);
