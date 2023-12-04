@@ -13,4 +13,20 @@ public abstract class DiagramElement extends ClassyNode {
         this.color = color;
         this.stroke = stroke;
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public int getStroke() {
+        return stroke;
+    }
+
+    public void setStroke(int stroke) {
+        this.stroke = stroke;
+    }
 }

@@ -6,8 +6,12 @@ import java.awt.*;
 
 public class InterfacePainter extends InterClassPainter{
 
+    public InterfacePainter(Point point) {
+        super(point);
+    }
+
     @Override
-    public void paint(Graphics g, DiagramElement diagramElement) {
+    public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
 
     }
 

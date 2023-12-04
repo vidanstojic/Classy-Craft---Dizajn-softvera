@@ -8,13 +8,17 @@ import java.awt.*;
 public class ClassPainter extends InterClassPainter{
     public ClassInterClass classInterClass; // recept za pravljenje paintera
 
-    public ClassPainter(ClassInterClass classInterClass){
+    public ClassPainter(Point point, ClassInterClass classInterClass) {
+        super(point);
         this.classInterClass = classInterClass;
     }
 
     @Override
-    public void paint(Graphics g, DiagramElement diagramElement) {
-        Graphics2D graphics2D = (Graphics2D) g;
+    public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
+        graphics2D.setColor(diagramElement.getColor());
+        Stroke stroke = new BasicStroke(diagramElement.getStroke());
+        graphics2D.setStroke(stroke);
+        graphics2D.drawRect(point.x, point.y, 20,10);
         
     }
 

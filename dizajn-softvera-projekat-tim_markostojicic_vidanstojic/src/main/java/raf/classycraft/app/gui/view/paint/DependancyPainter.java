@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class DependancyPainter extends ConnectionPainter{
     @Override
-    public void paint(Graphics g, DiagramElement diagramElement) {
+    public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
 
     }
 

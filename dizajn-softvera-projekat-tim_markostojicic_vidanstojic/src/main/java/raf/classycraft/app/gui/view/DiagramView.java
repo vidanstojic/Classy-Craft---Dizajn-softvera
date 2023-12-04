@@ -32,8 +32,9 @@ public class DiagramView extends JPanel implements ISubscriber {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D graphics2D = (Graphics2D) g;
         for(ElementPainter painter : listOfPainters){
-            painter.paint(g, this.diagramElement);
+            painter.paint(graphics2D, this.diagramElement);
         }
 
     }

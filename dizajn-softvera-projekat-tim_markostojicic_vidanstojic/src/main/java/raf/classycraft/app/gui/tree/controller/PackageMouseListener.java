@@ -31,7 +31,6 @@ public class PackageMouseListener extends MouseAdapter {
                 for(ClassyNode child : parentPackage.getChildren()){
                     if(child instanceof Diagram){
                         if(parentPackage.findProject() != null && parentPackage.findProject() instanceof  Project) {
-                            Project project = parentPackage.findProject();
                             packageView.addTab(child.getName(), new DiagramView((Diagram) child));
                             packageView.setFlag(true);
                         }
