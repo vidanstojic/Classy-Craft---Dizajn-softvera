@@ -15,10 +15,10 @@ public class ClassPainter extends InterClassPainter{
 
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
-        graphics2D.setColor(diagramElement.getColor());
         Stroke stroke = new BasicStroke(diagramElement.getStroke());
         graphics2D.setStroke(stroke);
-        graphics2D.drawRect(point.x, point.y, 20,10);
+        graphics2D.drawRect(point.x, point.y, 100,120);
+        //graphics2D.setBackground(Color.WHITE);
         
     }
 
