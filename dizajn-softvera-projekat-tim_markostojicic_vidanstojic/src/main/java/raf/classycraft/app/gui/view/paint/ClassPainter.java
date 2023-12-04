@@ -19,13 +19,14 @@ public class ClassPainter extends InterClassPainter{
         String string = classInterClass.getName();
         Font font = new Font("Times New Roman", Font.PLAIN, 10);
         FontMetrics fontMetrics = graphics2D.getFontMetrics(font);
+        int duzina = graphics2D.getFontMetrics().stringWidth(string);
         int length = fontMetrics.stringWidth(string);
         System.out.println(length);
         graphics2D.setStroke(stroke);
-        graphics2D.drawRect(point.x, point.y, (int) (10 + length*1.5 + 10),120);
+        graphics2D.drawRect(point.x, point.y, (int) (15 + duzina + 15),120);
         graphics2D.drawString("C", point.x + 5, point.y + 15);
         graphics2D.drawString(classInterClass.getName(), point.x + 20, point.y + 15);
-        graphics2D.drawLine(point.x, point.y + 20, point.x + (int) (10 + length*1.5 + 10), point.y + 20);
+        graphics2D.drawLine(point.x, point.y + 20, point.x + (int) (15 + duzina + 15), point.y + 20);
         //graphics2D.setBackground(Color.WHITE);
         Rectangle rectangle = new Rectangle();
         

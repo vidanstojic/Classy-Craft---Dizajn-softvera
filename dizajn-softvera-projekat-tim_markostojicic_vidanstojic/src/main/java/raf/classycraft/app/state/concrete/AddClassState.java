@@ -69,7 +69,6 @@ public class AddClassState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-
     }
     private String message(String name){
         if (name == null){
@@ -77,6 +76,6 @@ public class AddClassState implements State {
             name = JOptionPane.showInputDialog("Name of the class");
             name = message(name);
         }
-            return name;
+        return name;
     }
 }
