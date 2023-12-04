@@ -1,10 +1,12 @@
 package raf.classycraft.app.gui.view.paint;
 
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
+
 import java.awt.*;
 
 public class CompositionPainter extends ConnectionPainter{
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics g, DiagramElement diagramElement) {
 
     }
 

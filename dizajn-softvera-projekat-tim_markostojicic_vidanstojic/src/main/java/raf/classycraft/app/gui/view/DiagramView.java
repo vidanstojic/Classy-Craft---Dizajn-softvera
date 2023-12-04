@@ -3,7 +3,9 @@ package raf.classycraft.app.gui.view;
 import raf.classycraft.app.gui.controller.drawingToolbarActions.MyMouseListener;
 import raf.classycraft.app.gui.view.paint.ElementPainter;
 import raf.classycraft.app.model.compositeImplement.Diagram;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.observer.ISubscriber;
+import raf.classycraft.app.observer.NotificationDiagramView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +19,8 @@ public class DiagramView extends JPanel implements ISubscriber {
     private MyMouseListener myMouseListener;
     private List<ElementPainter> listOfPainters = new ArrayList<>();
 
+    private DiagramElement diagramElement;
+
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
         diagram.addSubscriber(this);/// proveriti da li je ovo dozvoljeno zbog MVC-A
@@ -29,7 +33,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(ElementPainter painter : listOfPainters){
-            painter.paint(g);
+            painter.paint(g, this.diagramElement);
         }
 
     }
@@ -41,7 +45,12 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notify) {
+        if(notify instanceof NotificationDiagramView){
+            NotificationDiagramView notificationDiagramView = (NotificationDiagramView) notify;
+            this.diagramElement = notificationDiagramView.getDiagramElement();
+        }
         repaint();
+
     }
 
     public List<ElementPainter> getListOfPainters() {
