@@ -21,6 +21,7 @@ public class StateManager {
         editClassState = new EditClassState();
         addConnectionState = new AddConnectionState();
         addClassState = new AddClassState();
+        currentState = addClassState;
     }
 
     public State getCurrentState(){
