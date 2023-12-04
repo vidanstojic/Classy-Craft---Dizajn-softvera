@@ -21,7 +21,7 @@ public class AddConnectionState implements State {
             return;
         }
         else if (selection.equals("Association")) {
-            System.out.println("Dodavanje klase");
+            System.out.println("Dodavanje asocijacije");
         }
         else if (selection.equals("Dependency")) {
             System.out.println("Dodavanje dependency");
