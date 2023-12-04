@@ -33,8 +33,7 @@ public class AddClassState implements State {
             System.out.println("Dodavanje klase");
             String name = JOptionPane.showInputDialog("Name of the class");
             if (name == null){
-                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
-                name = JOptionPane.showInputDialog("Name of the class");
+                name = message(name);
             }
             ClassInterClass classInterClass = new ClassInterClass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
@@ -71,5 +70,13 @@ public class AddClassState implements State {
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
 
+    }
+    private String message(String name){
+        if (name == null){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NAME_CANNOT_BE_EMPTY, Type.ERROR);
+            name = JOptionPane.showInputDialog("Name of the class");
+            name = message(name);
+        }
+            return name;
     }
 }

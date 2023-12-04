@@ -17,9 +17,10 @@ public class ClassPainter extends InterClassPainter{
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
         Stroke stroke = new BasicStroke(diagramElement.getStroke());
         String string = classInterClass.getName();
-        Font font = new Font("Arial", Font.PLAIN, 10);
+        Font font = new Font("Times New Roman", Font.PLAIN, 10);
         FontMetrics fontMetrics = graphics2D.getFontMetrics(font);
         int length = fontMetrics.stringWidth(string);
+        System.out.println(length);
         graphics2D.setStroke(stroke);
         graphics2D.drawRect(point.x, point.y, (int) (10 + length*1.5 + 10),120);
         graphics2D.drawString("C", point.x + 5, point.y + 15);
