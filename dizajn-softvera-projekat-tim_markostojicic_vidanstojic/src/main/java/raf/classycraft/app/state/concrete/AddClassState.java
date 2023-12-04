@@ -1,5 +1,6 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.factory.DiagramFactory;
 import raf.classycraft.app.gui.tree.factory.FactoryChild;
 import raf.classycraft.app.gui.view.DiagramView;
@@ -9,6 +10,8 @@ import raf.classycraft.app.gui.view.paint.InterfacePainter;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
+import raf.classycraft.app.model.messageGenerator.EventTypes;
+import raf.classycraft.app.model.messageGenerator.Type;
 import raf.classycraft.app.state.State;
 
 import javax.swing.*;
@@ -29,6 +32,10 @@ public class AddClassState implements State {
         else if (selection.equals("Class")) {
             System.out.println("Dodavanje klase");
             String name = JOptionPane.showInputDialog("Name of the class");
+            if (name == null){
+                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+                name = JOptionPane.showInputDialog("Name of the class");
+            }
             ClassInterClass classInterClass = new ClassInterClass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
             ClassPainter classPainter = new ClassPainter(point,classInterClass);
