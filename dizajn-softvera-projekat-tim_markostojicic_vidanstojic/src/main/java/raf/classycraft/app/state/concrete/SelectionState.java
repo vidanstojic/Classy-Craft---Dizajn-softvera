@@ -31,7 +31,6 @@ public class SelectionState implements State {
         for(ElementPainter elementPainter : tempTab.getListOfPainters()) {
             if (elementPainter.elementAt(point) == true) {
                 if (elementPainter instanceof ClassPainter){
-                    System.out.println("selektovan");
                     ClassPainter classPainter = (ClassPainter) elementPainter;
                     rectangle = classPainter.getRectangle();
                     classInterClass = classPainter.getClassInterClass();
@@ -48,7 +47,6 @@ public class SelectionState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
 
-        System.out.println("usao u rel");
         Diagram diagram = (Diagram) tempTab.getDiagram();
         NotificationDiagramView notificationDiagramView = new NotificationDiagramView(TypeDiagramView.ADD_DIAGRAM_ELEMENT, diagramElement);
         diagram.notifySub(notificationDiagramView);
@@ -58,9 +56,9 @@ public class SelectionState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        System.out.println("usao u drag");
         Point point = new Point(e.getX(), e.getY());
         rectangle.setLocation(point);
+        classInterClass.setPoint(point);
         tempTab.repaint(rectangle);
     }
 }

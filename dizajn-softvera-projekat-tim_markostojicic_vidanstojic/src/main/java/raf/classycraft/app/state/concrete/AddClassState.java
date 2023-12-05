@@ -33,8 +33,8 @@ public class AddClassState implements State {
             if (name == null || name.length() == 0){
                 name = message(name);
             }
-            ClassInterClass classInterClass = new ClassInterClass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
+            ClassInterClass classInterClass = new ClassInterClass(point, Color.BLACK, 2, name, "public");
             ClassPainter classPainter = new ClassPainter(point,classInterClass);
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if (elementPainter.elementAt(point) == true) {

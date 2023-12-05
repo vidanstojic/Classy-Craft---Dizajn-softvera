@@ -21,13 +21,12 @@ public class ClassPainter extends InterClassPainter{
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
         graphics2D.setColor(classInterClass.getColor());
         graphics2D.setStroke(stroke);
-        this.rectangle = new Rectangle(point.x, point.y, (int) (15 + length + 15),120);
-
+        this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15),120);
         graphics2D.drawRect((int)rectangle.getX(),(int) rectangle.getY(),(int) rectangle.getWidth(),(int) rectangle.getHeight());
         graphics2D.drawString("C", point.x + 5, point.y + 15);
         graphics2D.drawString(classInterClass.getName(), point.x + 20, point.y + 15);
         graphics2D.drawLine(point.x, point.y + 20, point.x + (int) (15 + length + 15), point.y + 20);
-        
+
     }
 
     @Override
