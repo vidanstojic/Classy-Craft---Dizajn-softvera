@@ -19,6 +19,7 @@ public class ClassPainter extends InterClassPainter{
         Stroke stroke = new BasicStroke(diagramElement.getStroke());
         String nameOfClass = classInterClass.getName();
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
+        graphics2D.setColor(classInterClass.getColor());
         graphics2D.setStroke(stroke);
         this.rectangle = new Rectangle(point.x, point.y, (int) (15 + length + 15),120);
 
@@ -34,5 +35,11 @@ public class ClassPainter extends InterClassPainter{
         return (rectangle != null && rectangle.contains(pos));
     }
 
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
 
+    public ClassInterClass getClassInterClass() {
+        return classInterClass;
+    }
 }

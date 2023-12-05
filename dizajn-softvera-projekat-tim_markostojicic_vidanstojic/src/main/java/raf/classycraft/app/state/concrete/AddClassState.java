@@ -44,7 +44,6 @@ public class AddClassState implements State {
             }
             tempTab.getListOfPainters().add(classPainter);
             tempTab.getDiagram().addChild(classInterClass);
-
         }
         else if (selection.equals("Interface")) {
             String name = JOptionPane.showInputDialog("Name of the interface");
