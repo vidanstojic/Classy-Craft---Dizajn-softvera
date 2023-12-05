@@ -36,7 +36,7 @@ public class SelectionState implements State {
                     classInterClass = classPainter.getClassInterClass();
                     classInterClass.setColor(Color.BLUE);
                     elementRemoveList.add(elementPainter);
-                    tempTab.repaint(rectangle);
+                    tempTab.repaint();
                     diagramElement = (DiagramElement) classInterClass;
                 }
             }
@@ -51,7 +51,7 @@ public class SelectionState implements State {
         NotificationDiagramView notificationDiagramView = new NotificationDiagramView(TypeDiagramView.ADD_DIAGRAM_ELEMENT, diagramElement);
         diagram.notifySub(notificationDiagramView);
         classInterClass.setColor(Color.BLACK);
-        tempTab.repaint(rectangle);
+        tempTab.repaint();
     }
 
     @Override
@@ -59,6 +59,6 @@ public class SelectionState implements State {
         Point point = new Point(e.getX(), e.getY());
         rectangle.setLocation(point);
         classInterClass.setPoint(point);
-        tempTab.repaint(rectangle);
+        tempTab.repaint();
     }
 }
