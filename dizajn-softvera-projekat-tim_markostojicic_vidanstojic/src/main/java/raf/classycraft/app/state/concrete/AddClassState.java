@@ -32,9 +32,10 @@ public class AddClassState implements State {
         else if (selection.equals("Class")) {
             System.out.println("Dodavanje klase");
             String name = JOptionPane.showInputDialog("Name of the class");
-            if (name == null){
+            if (name == null || name.length() == 0){
                 name = message(name);
             }
+            System.out.println(name.length());
             ClassInterClass classInterClass = new ClassInterClass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
             ClassPainter classPainter = new ClassPainter(point,classInterClass);
@@ -45,6 +46,9 @@ public class AddClassState implements State {
         else if (selection.equals("Interface")) {
             System.out.println("Dodavanje interfejsa");
             String name = JOptionPane.showInputDialog("Name of the interface");
+            if (name == null || name.length() == 0){
+                name = message(name);
+            }
             InterfaceInterclass interfaceInterclass = new InterfaceInterclass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
             InterfacePainter interfacePainter = new InterfacePainter(point, interfaceInterclass);
@@ -54,6 +58,9 @@ public class AddClassState implements State {
         else if (selection.equals("Enum")) {
             System.out.println("Dodavanje enuma");
             String name = JOptionPane.showInputDialog("Name of the enum");
+            if (name == null || name.length() == 0){
+                name = message(name);
+            }
             EnumInterclass enumInterclass = new EnumInterclass(Color.BLACK, 2, name, "public");
             Point point = new Point(e.getX(), e.getY());
             EnumPainter enumPainter = new EnumPainter(point, enumInterclass);
@@ -71,7 +78,7 @@ public class AddClassState implements State {
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
     }
     private String message(String name){
-        if (name == null){
+        if (name == null || name.length() == 0){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NAME_CANNOT_BE_EMPTY, Type.ERROR);
             name = JOptionPane.showInputDialog("Name of the class");
             name = message(name);
