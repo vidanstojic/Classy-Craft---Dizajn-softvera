@@ -7,7 +7,8 @@ import java.awt.*;
 
 public class InterfacePainter extends InterClassPainter{
 
-    InterfaceInterclass interfaceInterclass;
+    private InterfaceInterclass interfaceInterclass;
+    private Rectangle rectangle;
     public InterfacePainter(Point point, InterfaceInterclass interfaceInterclass) {
         super(point);
         this.interfaceInterclass = interfaceInterclass;
@@ -19,14 +20,16 @@ public class InterfacePainter extends InterClassPainter{
         String string = interfaceInterclass.getName();
         int lentgh = graphics2D.getFontMetrics().stringWidth(string);
         graphics2D.setStroke(stroke);
-        graphics2D.drawRect(point.x, point.y, (int) (15 + lentgh + 15),120);
+        this.rectangle = new Rectangle(point.x, point.y, (int) (15 + lentgh + 15),120);
+
+        graphics2D.drawRect((int)rectangle.getX(),(int) rectangle.getY(),(int) rectangle.getWidth(),(int) rectangle.getHeight());
         graphics2D.drawString("I", point.x + 5, point.y + 15);
         graphics2D.drawString(interfaceInterclass.getName(), point.x + 20, point.y + 15);
         graphics2D.drawLine(point.x, point.y + 20, point.x + (int) (15 + lentgh + 15), point.y + 20);
     }
 
     @Override
-    public void elementAt() {
-
+    public boolean elementAt(Point pos) {
+        return (rectangle != null && rectangle.contains(pos));
     }
 }

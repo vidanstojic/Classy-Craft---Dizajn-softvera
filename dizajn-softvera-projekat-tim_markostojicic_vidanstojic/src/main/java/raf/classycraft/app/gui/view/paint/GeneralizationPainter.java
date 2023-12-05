@@ -11,7 +11,7 @@ public class GeneralizationPainter extends ConnectionPainter {
     }
 
     @Override
-    public void elementAt() {
-
+    public boolean elementAt(Point pos) {
+        return true;
     }
 }

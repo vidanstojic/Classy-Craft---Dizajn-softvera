@@ -60,6 +60,9 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         } else if (type == Type.WARNING && eventType == EventTypes.ONLY_PROJECT_HAS_AUTHOR) {
             messageText = "Only project has author.";
             message = "["+Type.WARNING+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
+        }else if(type == Type.ERROR && eventType == EventTypes.WRONG_POSITION){
+            messageText = "You cannot create a class through an existing class.";
+            message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
 
 

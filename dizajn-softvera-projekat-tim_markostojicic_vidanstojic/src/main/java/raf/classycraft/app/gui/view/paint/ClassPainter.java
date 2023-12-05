@@ -6,7 +6,8 @@ import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterCla
 import java.awt.*;
 
 public class ClassPainter extends InterClassPainter{
-    public ClassInterClass classInterClass; // recept za pravljenje paintera
+    private ClassInterClass classInterClass; // recept za pravljenje paintera
+    private Rectangle rectangle;
 
     public ClassPainter(Point point, ClassInterClass classInterClass) {
         super(point);
@@ -16,20 +17,22 @@ public class ClassPainter extends InterClassPainter{
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
         Stroke stroke = new BasicStroke(diagramElement.getStroke());
-        String string = classInterClass.getName();
-        int length = graphics2D.getFontMetrics().stringWidth(string);
+        String nameOfClass = classInterClass.getName();
+        int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
         graphics2D.setStroke(stroke);
-        graphics2D.drawRect(point.x, point.y, (int) (15 + length + 15),120);
+        this.rectangle = new Rectangle(point.x, point.y, (int) (15 + length + 15),120);
+
+        graphics2D.drawRect((int)rectangle.getX(),(int) rectangle.getY(),(int) rectangle.getWidth(),(int) rectangle.getHeight());
         graphics2D.drawString("C", point.x + 5, point.y + 15);
         graphics2D.drawString(classInterClass.getName(), point.x + 20, point.y + 15);
         graphics2D.drawLine(point.x, point.y + 20, point.x + (int) (15 + length + 15), point.y + 20);
-        //graphics2D.setBackground(Color.WHITE);
-        Rectangle rectangle = new Rectangle();
         
     }
 
     @Override
-    public void elementAt() {
-
+    public boolean elementAt(Point pos) {
+        return (rectangle != null && rectangle.contains(pos));
     }
+
+
 }

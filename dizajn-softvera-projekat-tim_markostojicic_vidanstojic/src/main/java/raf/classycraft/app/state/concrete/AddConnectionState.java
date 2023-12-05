@@ -2,6 +2,8 @@ package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.ClassPainter;
+import raf.classycraft.app.gui.view.paint.ElementPainter;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.Association;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.state.State;
 
@@ -22,6 +24,7 @@ public class AddConnectionState implements State {
         }
         else if (selection.equals("Association")) {
             System.out.println("Dodavanje asocijacije");
+            Point point = new Point(e.getX(), e.getY());
         }
         else if (selection.equals("Dependency")) {
             System.out.println("Dodavanje dependency");
