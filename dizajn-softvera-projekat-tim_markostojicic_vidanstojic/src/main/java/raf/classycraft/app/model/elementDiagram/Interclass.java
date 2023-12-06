@@ -2,6 +2,7 @@ package raf.classycraft.app.model.elementDiagram;
 
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
+import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 
 import java.awt.*;
@@ -16,6 +17,8 @@ public abstract class Interclass extends DiagramElement {
 
     private List<Attribute> attributes = new ArrayList<>();
     private List<Method> methods = new ArrayList<>();
+
+    private List<ClassContent> classContents = new ArrayList<>();
 
     public Interclass(Point point,Color color, int stroke, String name, String visibility) {
         super(color, stroke);
@@ -64,5 +67,9 @@ public abstract class Interclass extends DiagramElement {
 
     public void setMethods(List<Method> methods) {
         this.methods = methods;
+    }
+
+    public List<ClassContent> getClassContents() {
+        return classContents;
     }
 }

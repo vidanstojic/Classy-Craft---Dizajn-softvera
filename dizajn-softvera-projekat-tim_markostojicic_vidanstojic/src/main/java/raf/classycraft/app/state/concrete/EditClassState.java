@@ -3,11 +3,15 @@ package raf.classycraft.app.state.concrete;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.ClassPainter;
 import raf.classycraft.app.gui.view.paint.ElementPainter;
+import raf.classycraft.app.gui.view.paint.EnumPainter;
+import raf.classycraft.app.gui.view.paint.InterfacePainter;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 import raf.classycraft.app.state.State;
 
 import javax.swing.*;
@@ -53,6 +57,24 @@ public class EditClassState implements State {
                         if(returnType == null) return;
 
                         Method method = new Method(name, visibilityEnum, returnType);
+                        if(elementPainter instanceof ClassPainter){
+                            ClassInterClass classInterClass = (ClassInterClass) ((ClassPainter) elementPainter).getClassInterClass();
+                            classInterClass.getMethods().add(method);
+                            classInterClass.getClassContents().add(method);
+                            tempTab.repaint();
+                        }
+                        else if(elementPainter instanceof EnumPainter){
+                            EnumInterclass enumInterclass = (EnumInterclass) ((EnumPainter) elementPainter).getEnumInterclass();
+                            enumInterclass.getMethods().add(method);
+                            enumInterclass.getClassContents().add(method);
+                            tempTab.repaint();
+                        }
+                        else if(elementPainter instanceof InterfacePainter){
+                            InterfaceInterclass interfaceInterclass = (InterfaceInterclass) ((InterfacePainter) elementPainter).getInterfaceInterclass();
+                            interfaceInterclass.getMethods().add(method);
+                            interfaceInterclass.getClassContents().add(method);
+                            tempTab.repaint();
+                        }
                     }
                 }
                 else if(selection == "Attribute"){
@@ -84,6 +106,19 @@ public class EditClassState implements State {
                         if(elementPainter instanceof ClassPainter){
                             ClassInterClass classInterClass = (ClassInterClass) ((ClassPainter) elementPainter).getClassInterClass();
                             classInterClass.getAttributes().add(attribute);
+                            classInterClass.getClassContents().add(attribute);
+                            tempTab.repaint();
+                        }
+                        else if(elementPainter instanceof EnumPainter){
+                            EnumInterclass enumInterclass = (EnumInterclass) ((EnumPainter) elementPainter).getEnumInterclass();
+                            enumInterclass.getAttributes().add(attribute);
+                            enumInterclass.getClassContents().add(attribute);
+                            tempTab.repaint();
+                        }
+                        else if(elementPainter instanceof InterfacePainter){
+                            InterfaceInterclass interfaceInterclass = (InterfaceInterclass) ((InterfacePainter) elementPainter).getInterfaceInterclass();
+                            interfaceInterclass.getAttributes().add(attribute);
+                            interfaceInterclass.getClassContents().add(attribute);
                             tempTab.repaint();
                         }
                     }

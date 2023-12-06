@@ -2,6 +2,7 @@ package raf.classycraft.app.model.elementDiagram.concreteInterclass;
 
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
+import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 
 import java.awt.*;
@@ -61,5 +62,9 @@ public class InterfaceInterclass extends Interclass {
     @Override
     public void setMethods(List<Method> methods) {
         super.setMethods(methods);
+    }
+    @Override
+    public List<ClassContent> getClassContents() {
+        return super.getClassContents();
     }
 }
