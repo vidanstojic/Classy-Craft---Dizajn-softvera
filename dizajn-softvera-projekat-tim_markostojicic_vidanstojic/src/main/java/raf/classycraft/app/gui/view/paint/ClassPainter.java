@@ -27,6 +27,7 @@ public class ClassPainter extends InterClassPainter{
         point1.y = classInterClass.getPoint().y + 35;
 
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
+        int heightOfString = graphics2D.getFontMetrics().getMaxAscent();
         for(Attribute attribute : classInterClass.getAttributes()){
             String visibilityChar;
             if(attribute.getVisibility() == Visibility.PUBLIC){
@@ -78,8 +79,9 @@ public class ClassPainter extends InterClassPainter{
             graphics2D.drawLine(pointForLine.x, pointForLine.y, pointForLine.x+ (int) (15 + length + 15), pointForLine.y);
         }
 
+        int heightOfRectangle = ( (classInterClass.getClassContents().size() * heightOfString + 10) < 100) ? (120) : (classInterClass.getClassContents().size() * heightOfString + 10);
 
-        this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15),120);
+        this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15),heightOfRectangle);
         graphics2D.drawRect((int)rectangle.getX(),(int) rectangle.getY(),(int) rectangle.getWidth(),(int) rectangle.getHeight());
         graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
         graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
