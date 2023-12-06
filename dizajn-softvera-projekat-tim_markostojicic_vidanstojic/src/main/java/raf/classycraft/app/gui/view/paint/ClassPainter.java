@@ -23,9 +23,9 @@ public class ClassPainter extends InterClassPainter{
         graphics2D.setStroke(stroke);
         this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15),120);
         graphics2D.drawRect((int)rectangle.getX(),(int) rectangle.getY(),(int) rectangle.getWidth(),(int) rectangle.getHeight());
-        graphics2D.drawString("C", point.x + 5, point.y + 15);
-        graphics2D.drawString(classInterClass.getName(), point.x + 20, point.y + 15);
-        graphics2D.drawLine(point.x, point.y + 20, point.x + (int) (15 + length + 15), point.y + 20);
+        graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
+        graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
+        graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
 
     }
 
