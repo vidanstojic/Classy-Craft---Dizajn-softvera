@@ -3,12 +3,15 @@ package raf.classycraft.app.model.elementDiagram;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 
 import java.awt.*;
+import java.util.List;
 
 public abstract class Interclass extends DiagramElement {
     private String name;
     private String visibility;
 
     private Point point;
+
+
 
     public Interclass(Point point,Color color, int stroke, String name, String visibility) {
         super(color, stroke);
