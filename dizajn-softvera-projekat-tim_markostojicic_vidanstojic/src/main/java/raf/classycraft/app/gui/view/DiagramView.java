@@ -6,6 +6,7 @@ import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationDiagramView;
+import raf.classycraft.app.observer.TypeDiagramView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,6 @@ public class DiagramView extends JPanel implements ISubscriber {
     private Diagram diagram;
     private MyMouseListener myMouseListener;
     private List<ElementPainter> listOfPainters = new ArrayList<>();
-    private List<DiagramElement> diagramElements = new ArrayList<>();
 
     private DiagramElement diagramElement;
 
@@ -47,9 +47,11 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notify) {
-        if(notify instanceof NotificationDiagramView){
+        if(notify instanceof  NotificationDiagramView){
             NotificationDiagramView notificationDiagramView = (NotificationDiagramView) notify;
-            this.diagramElement = notificationDiagramView.getDiagramElement();
+            if(notificationDiagramView.getTypeDiagramView() == TypeDiagramView.ADD_DIAGRAM_ELEMENT){
+                this.diagramElement = notificationDiagramView.getDiagramElement();
+            }
         }
         repaint();
 

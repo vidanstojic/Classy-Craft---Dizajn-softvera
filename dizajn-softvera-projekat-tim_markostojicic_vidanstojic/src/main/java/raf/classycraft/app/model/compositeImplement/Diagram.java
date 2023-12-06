@@ -99,7 +99,12 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void removeChild(ClassyNode child) {
-        if(child != null && getChildren().contains(child))
-        this.getChildren().remove(child);
+        if(child != null && getChildren().contains(child)){
+            DiagramElement diagramElement = (DiagramElement) child;
+            this.getChildren().remove(child);
+            NotificationDiagramView notificationDiagramView = new NotificationDiagramView(TypeDiagramView.REMOVE_DIAGRAM_ELEMENT,diagramElement);
+            notifySub(notificationDiagramView);
+        }
+
     }
 }
