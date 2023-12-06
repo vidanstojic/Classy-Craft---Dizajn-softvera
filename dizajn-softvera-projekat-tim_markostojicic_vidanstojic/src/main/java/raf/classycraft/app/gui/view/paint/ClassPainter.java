@@ -24,9 +24,7 @@ public class ClassPainter extends InterClassPainter{
         String nameOfClass = classInterClass.getName();
         graphics2D.setColor(classInterClass.getColor());
         graphics2D.setStroke(stroke);
-        ///System.out.println("class y" + classInterClass.getPoint().y);
         point1.y = classInterClass.getPoint().y + 35;
-
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
         int heightOfString = graphics2D.getFontMetrics().getMaxAscent();
         for(Attribute attribute : classInterClass.getAttributes()){
@@ -53,7 +51,6 @@ public class ClassPainter extends InterClassPainter{
         }
         Point pointForLine = new Point(classInterClass.getPoint().x, point1.y);
         point1.y = point1.y + 15;
-        ///System.out.println("pointforline " + pointForLine);
 
         for(Method method : classInterClass.getMethods()){
             String visibilityChar;
@@ -77,18 +74,15 @@ public class ClassPainter extends InterClassPainter{
             point1.y = point1.y + 15;
         }
         if(classInterClass.getAttributes().size() >= 1){
-           /// System.out.println("pointforline " + pointForLine);
             graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x+ (int) (15 + length + 15), pointForLine.y - 10);
         }
-        int proba = classInterClass.getClassContents().size() * heightOfString + 13;
-        int heightOfRectangle = ( (classInterClass.getClassContents().size() * heightOfString + 30) < 500) ? (100) : (classInterClass.getClassContents().size() * heightOfString + 13);
-        System.out.println(proba);
-        this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15),classInterClass.getPoint().y + proba);
+        int heightOfRectangle = classInterClass.getClassContents().size() * heightOfString;
+        this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15),classInterClass.getPoint().y + heightOfRectangle - 30);
         graphics2D.drawRect((int)rectangle.getX(),(int) rectangle.getY(),(int) rectangle.getWidth(),(int) rectangle.getHeight());
         graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
         graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
         graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
-        point1.y = classInterClass.getPoint().y + 30;
+        this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15),classInterClass.getPoint().y + heightOfRectangle - 30);
     }
 
     @Override
