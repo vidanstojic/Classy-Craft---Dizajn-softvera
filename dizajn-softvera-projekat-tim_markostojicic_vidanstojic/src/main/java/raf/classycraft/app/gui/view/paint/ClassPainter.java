@@ -17,6 +17,7 @@ public class ClassPainter extends InterClassPainter{
 
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
+        Point point1 = new Point();
         Stroke stroke = new BasicStroke(diagramElement.getStroke());
         String nameOfClass = classInterClass.getName();
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
@@ -27,9 +28,10 @@ public class ClassPainter extends InterClassPainter{
         graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
         graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
         graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
+        point1.y = classInterClass.getPoint().y + 30;
         for(Attribute attribute : classInterClass.getAttributes()){
-            classInterClass.getPoint().y = classInterClass.getPoint().y + 30;
-            graphics2D.drawString(attribute.getName(),classInterClass.getPoint().x+5, classInterClass.getPoint().y);
+            graphics2D.drawString(attribute.getName(),classInterClass.getPoint().x+5, point1.y);
+            point1.y = point1.y + 10;
         }
     }
 
