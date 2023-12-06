@@ -19,9 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectionState implements State {
-
-    private Rectangle rectangle;
-    private DiagramElement diagramElement;
+    
     private ClassInterClass classInterClass;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
@@ -32,13 +30,14 @@ public class SelectionState implements State {
             if (elementPainter.elementAt(point) == true) {
                 if (elementPainter instanceof ClassPainter){
                     ClassPainter classPainter = (ClassPainter) elementPainter;
-                    rectangle = classPainter.getRectangle();
                     classInterClass = classPainter.getClassInterClass();
                     classInterClass.setColor(Color.BLUE);
                     elementRemoveList.add(elementPainter);
                     tempTab.repaint();
-                    diagramElement = (DiagramElement) classInterClass;
                 }
+            }else {
+                classInterClass = null;
+                return;
             }
         }
 
@@ -47,18 +46,18 @@ public class SelectionState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
 
-        Diagram diagram = (Diagram) tempTab.getDiagram();
-        NotificationDiagramView notificationDiagramView = new NotificationDiagramView(TypeDiagramView.ADD_DIAGRAM_ELEMENT, diagramElement);
-        diagram.notifySub(notificationDiagramView);
-        classInterClass.setColor(Color.BLACK);
-        tempTab.repaint();
+        if (classInterClass != null) {
+            classInterClass.setColor(Color.BLACK);
+            tempTab.repaint();
+        }
     }
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        Point point = new Point(e.getX(), e.getY());
-        rectangle.setLocation(point);
-        classInterClass.setPoint(point);
-        tempTab.repaint();
+        if(classInterClass != null) {
+            Point point = new Point(e.getX(), e.getY());
+            classInterClass.setPoint(point);
+            tempTab.repaint();
+        }
     }
 }
