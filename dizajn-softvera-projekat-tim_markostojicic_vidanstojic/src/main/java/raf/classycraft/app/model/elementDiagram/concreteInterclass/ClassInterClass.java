@@ -1,8 +1,11 @@
 package raf.classycraft.app.model.elementDiagram.concreteInterclass;
 
 import raf.classycraft.app.model.elementDiagram.Interclass;
+import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
+import raf.classycraft.app.model.elementDiagram.classContent.Method;
 
 import java.awt.*;
+import java.util.List;
 
 public class ClassInterClass extends Interclass {
 
@@ -30,6 +33,36 @@ public class ClassInterClass extends Interclass {
     @Override
     public void setPoint(Point point) {
         super.setPoint(point);
+    }
+
+    @Override
+    public String getVisibility() {
+        return super.getVisibility();
+    }
+
+    @Override
+    public void setVisibility(String visibility) {
+        super.setVisibility(visibility);
+    }
+
+    @Override
+    public List<Attribute> getAttributes() {
+        return super.getAttributes();
+    }
+
+    @Override
+    public void setAttributes(List<Attribute> attributes) {
+        super.setAttributes(attributes);
+    }
+
+    @Override
+    public List<Method> getMethods() {
+        return super.getMethods();
+    }
+
+    @Override
+    public void setMethods(List<Method> methods) {
+        super.setMethods(methods);
     }
 }
 

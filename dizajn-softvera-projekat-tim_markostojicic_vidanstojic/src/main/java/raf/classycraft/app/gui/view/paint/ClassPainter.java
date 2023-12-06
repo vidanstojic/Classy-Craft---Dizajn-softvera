@@ -1,6 +1,7 @@
 package raf.classycraft.app.gui.view.paint;
 
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 
 import java.awt.*;
@@ -26,7 +27,10 @@ public class ClassPainter extends InterClassPainter{
         graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
         graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
         graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
-
+        for(Attribute attribute : classInterClass.getAttributes()){
+            classInterClass.getPoint().y = classInterClass.getPoint().y + 30;
+            graphics2D.drawString(attribute.getName(),classInterClass.getPoint().x+5, classInterClass.getPoint().y);
+        }
     }
 
     @Override
