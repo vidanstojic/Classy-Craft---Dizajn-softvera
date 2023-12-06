@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class InterfaceInterclass extends Interclass {
     public String name;
-    public InterfaceInterclass(Color color, int stroke, String name, String visibility) {
-        super(color, stroke, name, visibility);
+    public InterfaceInterclass(Point point,Color color, int stroke, String name, String visibility) {
+        super(point,color, stroke, name, visibility);
         this.name = name;
     }
     @Override
@@ -20,4 +20,13 @@ public class InterfaceInterclass extends Interclass {
         this.name = name;
     }
 
+    @Override
+    public Point getPoint() {
+        return super.getPoint();
+    }
+
+    @Override
+    public void setPoint(Point point) {
+        super.setPoint(point);
+    }
 }

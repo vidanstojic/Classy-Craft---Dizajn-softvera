@@ -7,11 +7,9 @@ import java.awt.*;
 public class ClassInterClass extends Interclass {
 
     private String name;
-    private Point point;
     public ClassInterClass(Point point, Color color, int stroke, String name, String visibility) {
-        super(color, stroke, name, visibility);
+        super(point,color, stroke, name, visibility);
         this.name = name;
-        this.point = point;
     }
 
     @Override
@@ -24,12 +22,14 @@ public class ClassInterClass extends Interclass {
         this.name = name;
     }
 
+    @Override
     public Point getPoint() {
-        return point;
+        return super.getPoint();
     }
 
+    @Override
     public void setPoint(Point point) {
-        this.point = point;
+        super.setPoint(point);
     }
 }
 

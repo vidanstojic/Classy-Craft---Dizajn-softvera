@@ -7,8 +7,8 @@ import java.awt.*;
 public class EnumInterclass extends Interclass {
 
     private String name;
-    public EnumInterclass(Color color, int stroke, String name, String visibility) {
-        super(color, stroke, name, visibility);
+    public EnumInterclass(Point point,Color color, int stroke, String name, String visibility) {
+        super(point,color, stroke, name, visibility);
         this.name = name;
     }
     @Override
@@ -19,5 +19,15 @@ public class EnumInterclass extends Interclass {
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public Point getPoint() {
+        return super.getPoint();
+    }
+
+    @Override
+    public void setPoint(Point point) {
+        super.setPoint(point);
     }
 }

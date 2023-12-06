@@ -17,19 +17,27 @@ public class EnumPainter extends InterClassPainter{
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
         Stroke stroke = new BasicStroke(diagramElement.getStroke());
-        String string = enumInterclass.getName();
-        int lentgh = graphics2D.getFontMetrics().stringWidth(string);
+        String nameOfClass = enumInterclass.getName();
+        int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
+        graphics2D.setColor(enumInterclass.getColor());
         graphics2D.setStroke(stroke);
-        this.rectangle = new Rectangle(point.x, point.y, (int) (15 + lentgh + 15),120);
-
+        this.rectangle = new Rectangle(enumInterclass.getPoint().x, enumInterclass.getPoint().y, (int) (15 + length + 15),120);
         graphics2D.drawRect((int)rectangle.getX(),(int) rectangle.getY(),(int) rectangle.getWidth(),(int) rectangle.getHeight());
-        graphics2D.drawString("E", point.x + 5, point.y + 15);
-        graphics2D.drawString(enumInterclass.getName(), point.x + 20, point.y + 15);
-        graphics2D.drawLine(point.x, point.y + 20, point.x + (int) (15 + lentgh + 15), point.y + 20);
+        graphics2D.drawString("E", enumInterclass.getPoint().x + 5, enumInterclass.getPoint().y + 15);
+        graphics2D.drawString(enumInterclass.getName(), enumInterclass.getPoint().x + 20, enumInterclass.getPoint().y + 15);
+        graphics2D.drawLine(enumInterclass.getPoint().x, enumInterclass.getPoint().y + 20, enumInterclass.getPoint().x + (int) (15 + length + 15), enumInterclass.getPoint().y + 20);
     }
 
     @Override
     public boolean elementAt(Point pos) {
         return (rectangle != null && rectangle.contains(pos));
+    }
+
+    public EnumInterclass getEnumInterclass() {
+        return enumInterclass;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 }
