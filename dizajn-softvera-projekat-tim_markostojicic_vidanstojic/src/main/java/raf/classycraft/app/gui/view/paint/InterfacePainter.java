@@ -29,26 +29,6 @@ public class InterfacePainter extends InterClassPainter{
         mainPoint.y = interfaceInterclass.getPoint().y + 35;
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
         int heightOfString = graphics2D.getFontMetrics().getMaxAscent();
-        for (Attribute attribute : interfaceInterclass.getAttributes()) {
-            String visibilityChar;
-            if (attribute.getVisibility() == Visibility.PUBLIC) {
-                visibilityChar = "+ ";
-            } else if (attribute.getVisibility() == Visibility.PRIVATE) {
-                visibilityChar = "- ";
-            } else if (attribute.getVisibility() == Visibility.PROTECTED) {
-                visibilityChar = "# ";
-            } else {
-                visibilityChar = " ";
-            }
-            String attributeFullName = visibilityChar + attribute.getName() + ":" + attribute.getReturnType();
-            if (length < graphics2D.getFontMetrics().stringWidth(attributeFullName)) {
-                length = graphics2D.getFontMetrics().stringWidth(attributeFullName);
-            }
-            graphics2D.drawString(attributeFullName, interfaceInterclass.getPoint().x + 5, mainPoint.y);
-            mainPoint.y = mainPoint.y + 13;
-            heightPoint.y += 13;
-        }
-        Point pointForLine = new Point(interfaceInterclass.getPoint().x, mainPoint.y);
         mainPoint.y = mainPoint.y + 15;
         heightPoint.y += 15;
         for (Method method : interfaceInterclass.getMethods()) {
@@ -69,9 +49,6 @@ public class InterfacePainter extends InterClassPainter{
             graphics2D.drawString(methodeFullName, interfaceInterclass.getPoint().x + 5, mainPoint.y - 10);
             mainPoint.y = mainPoint.y + 15;
             heightPoint.y += 15;
-        }
-        if (interfaceInterclass.getAttributes().size() >= 1) {
-            graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x + (int) (15 + length + 15), pointForLine.y - 10);
         }
         int heightOfRectangle = ((interfaceInterclass.getClassContents().size()) == 0) ? (heightPoint.y) : (interfaceInterclass.getClassContents().size() * heightOfString + 33);
         this.rectangle = new Rectangle(interfaceInterclass.getPoint().x, interfaceInterclass.getPoint().y, (int) (15 + length + 15), heightOfRectangle);

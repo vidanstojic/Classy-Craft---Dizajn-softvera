@@ -30,49 +30,17 @@ public class EnumPainter extends InterClassPainter{
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
         int heightOfString = graphics2D.getFontMetrics().getMaxAscent();
         for (Attribute attribute : enumInterclass.getAttributes()) {
-            String visibilityChar;
-            if (attribute.getVisibility() == Visibility.PUBLIC) {
-                visibilityChar = "+ ";
-            } else if (attribute.getVisibility() == Visibility.PRIVATE) {
-                visibilityChar = "- ";
-            } else if (attribute.getVisibility() == Visibility.PROTECTED) {
-                visibilityChar = "# ";
-            } else {
-                visibilityChar = " ";
-            }
+            String visibilityChar = "";
             String attributeFullName = visibilityChar + attribute.getName() + ":" + attribute.getReturnType();
             if (length < graphics2D.getFontMetrics().stringWidth(attributeFullName)) {
                 length = graphics2D.getFontMetrics().stringWidth(attributeFullName);
             }
-            graphics2D.drawString(attributeFullName, enumInterclass.getPoint().x + 5, mainPoint.y);
+            graphics2D.drawString(attributeFullName.toUpperCase(), enumInterclass.getPoint().x + 5, mainPoint.y);
             mainPoint.y = mainPoint.y + 13;
             heightPoint.y += 13;
         }
-        Point pointForLine = new Point(enumInterclass.getPoint().x, mainPoint.y);
         mainPoint.y = mainPoint.y + 15;
         heightPoint.y += 15;
-        for (Method method : enumInterclass.getMethods()) {
-            String visibilityChar;
-            if (method.getVisibility() == Visibility.PUBLIC) {
-                visibilityChar = "+ ";
-            } else if (method.getVisibility() == Visibility.PRIVATE) {
-                visibilityChar = "- ";
-            } else if (method.getVisibility() == Visibility.PROTECTED) {
-                visibilityChar = "# ";
-            } else {
-                visibilityChar = " ";
-            }
-            String methodeFullName = visibilityChar + method.getName() + ":" + method.getReturnType();
-            if (length < graphics2D.getFontMetrics().stringWidth(methodeFullName)) {
-                length = graphics2D.getFontMetrics().stringWidth(methodeFullName);
-            }
-            graphics2D.drawString(methodeFullName, enumInterclass.getPoint().x + 5, mainPoint.y - 10);
-            mainPoint.y = mainPoint.y + 15;
-            heightPoint.y += 15;
-        }
-        if (enumInterclass.getAttributes().size() >= 1) {
-            graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x + (int) (15 + length + 15), pointForLine.y - 10);
-        }
         int heightOfRectangle = ((enumInterclass.getClassContents().size()) == 0) ? (heightPoint.y) : (enumInterclass.getClassContents().size() * heightOfString + 33);
         this.rectangle = new Rectangle(enumInterclass.getPoint().x, enumInterclass.getPoint().y, (int) (15 + length + 15), heightOfRectangle);
         graphics2D.drawRect((int) rectangle.getX(), (int) rectangle.getY(), (int) rectangle.getWidth(), (int) rectangle.getHeight());
