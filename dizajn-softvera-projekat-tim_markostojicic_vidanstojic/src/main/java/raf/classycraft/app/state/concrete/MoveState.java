@@ -58,18 +58,17 @@ public class MoveState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         if (interclass != null) {
-            Point point = oldPoint;
             if(tempTab.getListOfPainters().size() > 1) {
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
-                    if (interclass.getRectangle().intersects(elementPainter.getRectangle()) == false) {
-                        System.out.println(interclass.getName() + interclass.getPoint());
-                        point = newPoint;
-                    }else
-                        point = oldPoint;
-
+                    if(elementPainter.getRectangle().equals(interclass.getRectangle()))
+                        continue;
+                    if (elementPainter.getRectangle().intersects(interclass.getRectangle())) {
+                        interclass.setPoint(oldPoint);
+                        break;
+                    }
                 }
             }
-            interclass.setPoint(point);
+
             interclass.setColor(Color.BLACK);
             tempTab.repaint();
             interclass = null;
