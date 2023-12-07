@@ -7,14 +7,34 @@ import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClassPainter extends InterClassPainter{
     private ClassInterClass classInterClass; // recept za pravljenje paintera
     private Rectangle rectangle;
+    List<Point> connectionDots = new ArrayList<>();
 
     public ClassPainter(Point point, ClassInterClass classInterClass) {
         super(point);
         this.classInterClass = classInterClass;
+    }
+
+    private void calculateConnectionDots() {
+        connectionDots.clear();
+
+
+        int centerX = (int) rectangle.getCenterX();
+        int centerY = (int) rectangle.getCenterY();
+
+        // Gornja tacka
+        connectionDots.add(new Point(centerX, (int) rectangle.getY()));
+        // Donja tacka
+        connectionDots.add(new Point(centerX, (int) rectangle.getMaxY()));
+        // Leva tacka
+        connectionDots.add(new Point((int) rectangle.getX(), centerY));
+        // Desna tacka
+        connectionDots.add(new Point((int) rectangle.getMaxX(), centerY));
     }
 
     @Override
@@ -27,6 +47,7 @@ public class ClassPainter extends InterClassPainter{
         graphics2D.setColor(classInterClass.getColor());
         graphics2D.setStroke(stroke);
         mainPoint.y = classInterClass.getPoint().y + 35;
+
         int length = graphics2D.getFontMetrics().stringWidth(nameOfClass);
         int heightOfString = graphics2D.getFontMetrics().getMaxAscent();
         for (Attribute attribute : classInterClass.getAttributes()) {
@@ -48,9 +69,11 @@ public class ClassPainter extends InterClassPainter{
             mainPoint.y = mainPoint.y + 13;
             heightPoint.y += 13;
         }
+
         Point pointForLine = new Point(classInterClass.getPoint().x, mainPoint.y);
         mainPoint.y = mainPoint.y + 15;
         heightPoint.y += 15;
+
         for (Method method : classInterClass.getMethods()) {
             String visibilityChar;
             if (method.getVisibility() == Visibility.PUBLIC) {
@@ -70,15 +93,20 @@ public class ClassPainter extends InterClassPainter{
             mainPoint.y = mainPoint.y + 15;
             heightPoint.y += 15;
         }
+
         if (classInterClass.getAttributes().size() >= 1) {
             graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x + (int) (15 + length + 15), pointForLine.y - 10);
         }
+
         int heightOfRectangle = ((classInterClass.getClassContents().size()) == 0) ? (heightPoint.y) : (classInterClass.getClassContents().size() * heightOfString + 33);
         this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15), heightOfRectangle);
         graphics2D.drawRect((int) rectangle.getX(), (int) rectangle.getY(), (int) rectangle.getWidth(), (int) rectangle.getHeight());
         graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
         graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
         graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
+
+        calculateConnectionDots();
+
     }
 
     @Override
@@ -92,5 +120,9 @@ public class ClassPainter extends InterClassPainter{
 
     public ClassInterClass getClassInterClass() {
         return classInterClass;
+    }
+
+    public List<Point> getConnectionDots() {
+        return connectionDots;
     }
 }
