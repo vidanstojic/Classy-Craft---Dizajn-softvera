@@ -73,11 +73,31 @@ public class AddConnectionState implements State {
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         flagForSelection = false;
         selection = null;
+        boolean flag = false;
+        for(ElementPainter elementPainter : tempTab.getListOfPainters()){
+            if(elementPainter.elementAt(endPoint) == true){
+                if(elementPainter instanceof  ClassPainter){
+                    ClassPainter classPainter = (ClassPainter) elementPainter;
+                    endPoint = classPainter.getConnectionDots().get(0);
+                    flag = true;
+                    tempTab.lineRefresh(startPoint,endPoint);
+                    connection.setLine2D(tempTab.getLine2D());
+                    tempTab.repaint();
+                }
+            }
+        }
+        if(flag == false){
+            tempTab.setLine2D(null);
+            connection.setLine2D(tempTab.getLine2D());
+            tempTab.repaint();
+        }
+
     }
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
         endPoint = e.getPoint();
+
         tempTab.lineRefresh(startPoint,endPoint);
         connection.setLine2D(tempTab.getLine2D());
         tempTab.repaint();

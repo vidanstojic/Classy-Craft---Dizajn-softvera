@@ -18,6 +18,8 @@ public class GeneralizationPainter extends ConnectionPainter {
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
         if(diagramElement instanceof Connection){
             Connection connection = super.getConnection();
+            if(connection.getLine2D() == null) return;
+
             graphics2D.drawLine((int) connection.getLine2D().getX1(), (int) connection.getLine2D().getY1(), (int) connection.getLine2D().getX2(), (int) connection.getLine2D().getY2());
         }
     }

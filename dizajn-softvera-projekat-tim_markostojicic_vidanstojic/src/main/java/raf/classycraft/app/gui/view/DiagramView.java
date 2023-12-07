@@ -79,5 +79,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         return line2D;
     }
 
-
+    public void setLine2D(Line2D line2D) {
+        this.line2D = line2D;
+    }
 }
