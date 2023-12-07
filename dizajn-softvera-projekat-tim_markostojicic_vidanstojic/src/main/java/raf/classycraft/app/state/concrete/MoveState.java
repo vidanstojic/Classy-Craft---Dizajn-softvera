@@ -1,29 +1,20 @@
 package raf.classycraft.app.state.concrete;
 
-import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.ClassPainter;
 import raf.classycraft.app.gui.view.paint.ElementPainter;
 import raf.classycraft.app.gui.view.paint.EnumPainter;
 import raf.classycraft.app.gui.view.paint.InterfacePainter;
-import raf.classycraft.app.model.compositeImplement.Diagram;
-import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
-import raf.classycraft.app.model.messageGenerator.EventTypes;
-import raf.classycraft.app.model.messageGenerator.Type;
-import raf.classycraft.app.observer.NotificationDiagramView;
-import raf.classycraft.app.observer.TypeDiagramView;
 import raf.classycraft.app.state.State;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
-public class SelectionState implements State {
+public class MoveState implements State {
 
 
     private Interclass interclass;

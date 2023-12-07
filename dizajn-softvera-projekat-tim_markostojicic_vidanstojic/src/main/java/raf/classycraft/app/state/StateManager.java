@@ -4,7 +4,7 @@ import raf.classycraft.app.state.concrete.*;
 
 public class StateManager {
     private State currentState;
-    private SelectionState selectionState;
+    private MoveState moveState;
     private RemoveState removeState;
     private EditClassState editClassState;
     private AddConnectionState addConnectionState;
@@ -16,7 +16,7 @@ public class StateManager {
     }
 
     private void initStates(){
-        selectionState = new SelectionState();
+        moveState = new MoveState();
         removeState = new RemoveState();
         editClassState = new EditClassState();
         addConnectionState = new AddConnectionState();
@@ -29,7 +29,7 @@ public class StateManager {
     }
 
     public void setSelectionState() {
-        this.currentState = selectionState;
+        this.currentState = moveState;
     }
 
     public void setRemoveState() {
