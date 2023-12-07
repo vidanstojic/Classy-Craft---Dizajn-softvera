@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class Interclass extends DiagramElement {
     private String name;
     private String visibility;
-
+    private Rectangle rectangle;
     private Point point;
 
     private List<Attribute> attributes = new ArrayList<>();
@@ -71,5 +71,13 @@ public abstract class Interclass extends DiagramElement {
 
     public List<ClassContent> getClassContents() {
         return classContents;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 }

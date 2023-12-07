@@ -104,7 +104,8 @@ public class ClassPainter extends InterClassPainter{
         graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
         graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
         graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
-
+        rectangle.setRect(rectangle);
+        classInterClass.setRectangle(rectangle);
         calculateConnectionDots();
 
     }
@@ -114,8 +115,14 @@ public class ClassPainter extends InterClassPainter{
         return (rectangle != null && rectangle.contains(pos));
     }
 
+    @Override
     public Rectangle getRectangle() {
         return rectangle;
+    }
+
+    @Override
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 
     public ClassInterClass getClassInterClass() {

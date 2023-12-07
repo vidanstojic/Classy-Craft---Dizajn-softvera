@@ -79,6 +79,8 @@ public class InterfacePainter extends InterClassPainter{
         graphics2D.drawString("I", interfaceInterclass.getPoint().x + 5, interfaceInterclass.getPoint().y + 15);
         graphics2D.drawString(interfaceInterclass.getName(), interfaceInterclass.getPoint().x + 20, interfaceInterclass.getPoint().y + 15);
         graphics2D.drawLine(interfaceInterclass.getPoint().x, interfaceInterclass.getPoint().y + 20, interfaceInterclass.getPoint().x + (int) (15 + length + 15), interfaceInterclass.getPoint().y + 20);
+        rectangle.setRect(rectangle);
+        interfaceInterclass.setRectangle(rectangle);
     }
 
     @Override
@@ -90,7 +92,12 @@ public class InterfacePainter extends InterClassPainter{
         return interfaceInterclass;
     }
 
+    @Override
     public Rectangle getRectangle() {
         return rectangle;
+    }
+    @Override
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 }

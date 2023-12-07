@@ -27,6 +27,8 @@ public class SelectionState implements State {
 
 
     private Interclass interclass;
+    private Point oldPoint;
+    private Point newPoint;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
 
@@ -36,6 +38,7 @@ public class SelectionState implements State {
                     if (elementPainter instanceof ClassPainter) {
                         ClassPainter classPainter = (ClassPainter) elementPainter;
                         interclass = classPainter.getClassInterClass();
+                        oldPoint = new Point(interclass.getPoint());
                         ClassInterClass classInterClass = (ClassInterClass) interclass;
                         classInterClass.setColor(Color.BLUE);
                         tempTab.repaint();
@@ -43,6 +46,7 @@ public class SelectionState implements State {
                     } else if (elementPainter instanceof EnumPainter) {
                         EnumPainter enumPainter = (EnumPainter) elementPainter;
                         interclass = enumPainter.getEnumInterclass();
+                        oldPoint = new Point(interclass.getPoint());
                         EnumInterclass enumInterclass = (EnumInterclass) interclass;
                         enumInterclass.setColor(Color.BLUE);
                         tempTab.repaint();
@@ -50,6 +54,7 @@ public class SelectionState implements State {
                     } else if (elementPainter instanceof InterfacePainter) {
                         InterfacePainter interfacePainter = (InterfacePainter) elementPainter;
                         interclass = interfacePainter.getInterfaceInterclass();
+                        oldPoint = new Point(interclass.getPoint());
                         InterfaceInterclass interfaceInterclass = (InterfaceInterclass) interclass;
                         interfaceInterclass.setColor(Color.BLUE);
                         tempTab.repaint();
@@ -62,6 +67,14 @@ public class SelectionState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         if (interclass != null) {
+            if(tempTab.getListOfPainters().size() > 1) {
+                for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
+                    if (elementPainter.getRectangle().intersects(interclass.getRectangle()) == true) {
+                        interclass.setPoint(oldPoint);
+                    } else
+                        interclass.setPoint(newPoint);
+                }
+            }
             interclass.setColor(Color.BLACK);
             tempTab.repaint();
             interclass = null;
@@ -71,8 +84,8 @@ public class SelectionState implements State {
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
         if(interclass != null) {
-            Point point = new Point(e.getX(), e.getY());
-            interclass.setPoint(point);
+            newPoint = new Point(e.getX(), e.getY());
+            interclass.setPoint(newPoint);
             tempTab.repaint();
         }
     }

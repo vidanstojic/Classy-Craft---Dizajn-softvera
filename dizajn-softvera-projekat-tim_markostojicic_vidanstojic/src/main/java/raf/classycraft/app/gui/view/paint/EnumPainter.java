@@ -79,6 +79,8 @@ public class EnumPainter extends InterClassPainter{
         graphics2D.drawString("E", enumInterclass.getPoint().x + 5, enumInterclass.getPoint().y + 15);
         graphics2D.drawString(enumInterclass.getName(), enumInterclass.getPoint().x + 20, enumInterclass.getPoint().y + 15);
         graphics2D.drawLine(enumInterclass.getPoint().x, enumInterclass.getPoint().y + 20, enumInterclass.getPoint().x + (int) (15 + length + 15), enumInterclass.getPoint().y + 20);
+        rectangle.setRect(rectangle);
+        enumInterclass.setRectangle(rectangle);
     }
 
     @Override
@@ -90,7 +92,13 @@ public class EnumPainter extends InterClassPainter{
         return enumInterclass;
     }
 
+    @Override
     public Rectangle getRectangle() {
         return rectangle;
+    }
+
+    @Override
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 }
