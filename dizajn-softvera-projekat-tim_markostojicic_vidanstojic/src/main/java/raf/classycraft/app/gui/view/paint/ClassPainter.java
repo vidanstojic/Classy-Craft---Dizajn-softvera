@@ -104,7 +104,7 @@ public class ClassPainter extends InterClassPainter{
         graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
         graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
         graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
-        rectangle.setRect(rectangle);
+        this.setRectangle(rectangle);
         classInterClass.setRectangle(rectangle);
         calculateConnectionDots();
 

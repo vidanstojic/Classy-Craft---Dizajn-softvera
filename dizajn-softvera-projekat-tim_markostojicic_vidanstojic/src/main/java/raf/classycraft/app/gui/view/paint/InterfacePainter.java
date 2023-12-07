@@ -79,7 +79,7 @@ public class InterfacePainter extends InterClassPainter{
         graphics2D.drawString("I", interfaceInterclass.getPoint().x + 5, interfaceInterclass.getPoint().y + 15);
         graphics2D.drawString(interfaceInterclass.getName(), interfaceInterclass.getPoint().x + 20, interfaceInterclass.getPoint().y + 15);
         graphics2D.drawLine(interfaceInterclass.getPoint().x, interfaceInterclass.getPoint().y + 20, interfaceInterclass.getPoint().x + (int) (15 + length + 15), interfaceInterclass.getPoint().y + 20);
-        rectangle.setRect(rectangle);
+        this.setRectangle(rectangle);
         interfaceInterclass.setRectangle(rectangle);
     }
 
