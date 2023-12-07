@@ -31,37 +31,32 @@ public class SelectionState implements State {
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
 
         Point point = new Point(e.getX(), e.getY());
-        List<ElementPainter> elementRemoveList = new ArrayList<>();
-        for(ElementPainter elementPainter : tempTab.getListOfPainters()) {
-            if (elementPainter.elementAt(point) == true) {
-                if (elementPainter instanceof ClassPainter){
-                    ClassPainter classPainter = (ClassPainter) elementPainter;
-                    interclass = classPainter.getClassInterClass();
-                    ClassInterClass classInterClass = (ClassInterClass) interclass;
-                    classInterClass.setColor(Color.BLUE);
-                    tempTab.repaint();
-                }
-                else if(elementPainter instanceof EnumPainter){
-                    EnumPainter enumPainter = (EnumPainter)elementPainter;
-                    interclass = enumPainter.getEnumInterclass();
-                    EnumInterclass enumInterclass = (EnumInterclass) interclass;
-                    enumInterclass.setColor(Color.BLUE);
-                    tempTab.repaint();
-                }
-                else if(elementPainter instanceof InterfacePainter){
-                    InterfacePainter interfacePainter = (InterfacePainter) elementPainter;
-                    interclass = interfacePainter.getInterfaceInterclass();
-                    InterfaceInterclass interfaceInterclass = (InterfaceInterclass) interclass;
-                    interfaceInterclass.setColor(Color.BLUE);
-                    tempTab.repaint();
+            for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
+                if (elementPainter.elementAt(point) == true) {
+                    if (elementPainter instanceof ClassPainter) {
+                        ClassPainter classPainter = (ClassPainter) elementPainter;
+                        interclass = classPainter.getClassInterClass();
+                        ClassInterClass classInterClass = (ClassInterClass) interclass;
+                        classInterClass.setColor(Color.BLUE);
+                        tempTab.repaint();
+                        break;
+                    } else if (elementPainter instanceof EnumPainter) {
+                        EnumPainter enumPainter = (EnumPainter) elementPainter;
+                        interclass = enumPainter.getEnumInterclass();
+                        EnumInterclass enumInterclass = (EnumInterclass) interclass;
+                        enumInterclass.setColor(Color.BLUE);
+                        tempTab.repaint();
+                        break;
+                    } else if (elementPainter instanceof InterfacePainter) {
+                        InterfacePainter interfacePainter = (InterfacePainter) elementPainter;
+                        interclass = interfacePainter.getInterfaceInterclass();
+                        InterfaceInterclass interfaceInterclass = (InterfaceInterclass) interclass;
+                        interfaceInterclass.setColor(Color.BLUE);
+                        tempTab.repaint();
+                        break;
+                    }
                 }
             }
-            else {
-                interclass = null;
-                return;
-            }
-        }
-
     }
 
     @Override
@@ -69,6 +64,7 @@ public class SelectionState implements State {
         if (interclass != null) {
             interclass.setColor(Color.BLACK);
             tempTab.repaint();
+            interclass = null;
         }
     }
 
