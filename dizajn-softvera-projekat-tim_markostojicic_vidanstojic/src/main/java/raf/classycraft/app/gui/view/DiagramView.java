@@ -10,6 +10,7 @@ import raf.classycraft.app.observer.TypeDiagramView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class DiagramView extends JPanel implements ISubscriber {
     private List<ElementPainter> listOfPainters = new ArrayList<>();
 
     private DiagramElement diagramElement;
+
+    private Line2D line2D;
 
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
@@ -44,6 +47,9 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     }
 
+    public void lineRefresh(Point start, Point end){
+       Line2D line2D = new Line2D.Double(start.x, start.y, end.x, end.y);
+    }
 
     @Override
     public void update(Object notify) {
@@ -68,4 +74,10 @@ public class DiagramView extends JPanel implements ISubscriber {
     public Diagram getDiagram() {
         return diagram;
     }
+
+    public Line2D getLine2D() {
+        return line2D;
+    }
+
+
 }
