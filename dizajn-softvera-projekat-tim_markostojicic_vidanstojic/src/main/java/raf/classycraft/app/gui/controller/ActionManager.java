@@ -12,7 +12,7 @@ public class ActionManager {
     private EditAction editAction;
     private ProjectAuthorAction projectAuthorAction;
     private EraserAction eraserAction;
-    private SelectAction selectAction;
+    private MoveAction moveAction;
 
     private MyMouseListener myMouseListener;
     public ActionManager(){
@@ -29,7 +29,7 @@ public class ActionManager {
         addConnectionAction = new AddConnectionAction();
         editAction = new EditAction();
         eraserAction = new EraserAction();
-        selectAction = new SelectAction();
+        moveAction = new MoveAction();
     }
 
     public ExitAction getEa() {
@@ -68,7 +68,7 @@ public class ActionManager {
         return eraserAction;
     }
 
-    public SelectAction getSelectAction() {
-        return selectAction;
+    public MoveAction getSelectAction() {
+        return moveAction;
     }
 }
