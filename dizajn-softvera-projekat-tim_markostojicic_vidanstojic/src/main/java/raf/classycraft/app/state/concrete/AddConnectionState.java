@@ -25,7 +25,6 @@ public class AddConnectionState implements State {
 
     private Connection connection;
 
-
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         if(flagForSelection == false && selection == null) {
@@ -44,16 +43,17 @@ public class AddConnectionState implements State {
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if(elementPainter.elementAt(point) == true){
                     if(elementPainter instanceof  ClassPainter){
-                        Interclass interclassFrom = ((ClassPainter) elementPainter).getClassInterClass();
-                        tempTab.lineRefresh(((ClassPainter) elementPainter).getConnectionDots().get(0),e.getPoint() );
-                        startPoint = ((ClassPainter) elementPainter).getConnectionDots().get(0);
-                        connection = new Generalization(Color.BLACK, 2,interclassFrom, null, tempTab.getLine2D());
-                        GeneralizationPainter generalizationPainter = new GeneralizationPainter(connection);
-                        tempTab.getListOfPainters().add(generalizationPainter);
+                        startPoint = ((ClassPainter) elementPainter).getConnectionDots().get(2);
+                        endPoint = startPoint;
+                        tempTab.lineRefresh(startPoint, endPoint);
+                        connection = new Generalization(Color.BLACK, 2, tempTab.getLine2D());
                         tempTab.getDiagram().addChild(connection);
                     }
                 }
             }
+            GeneralizationPainter generalizationPainter = new GeneralizationPainter((Generalization) connection);
+            tempTab.getListOfPainters().add(generalizationPainter);
+            tempTab.getDiagram().addChild(connection);
 
         }
         else if (selection.equals("Dependency")) {
@@ -77,8 +77,9 @@ public class AddConnectionState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        tempTab.lineRefresh(startPoint, e.getPoint());
-        this.connection.setLine2D(tempTab.getLine2D());
+        endPoint = e.getPoint();
+        tempTab.lineRefresh(startPoint,endPoint);
+        connection.setLine2D(tempTab.getLine2D());
         tempTab.repaint();
     }
 

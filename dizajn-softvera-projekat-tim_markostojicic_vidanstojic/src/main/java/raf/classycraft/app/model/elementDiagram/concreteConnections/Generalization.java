@@ -13,6 +13,10 @@ public class Generalization extends Connection {
         super(color, stroke, from, to, line2D);
     }
 
+    public Generalization(Color color, int stroke, Line2D line2D) {
+        super(color, stroke, line2D);
+    }
+
     @Override
     public Interclass getFrom() {
         return super.getFrom();

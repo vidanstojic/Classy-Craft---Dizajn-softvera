@@ -48,7 +48,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     }
 
     public void lineRefresh(Point start, Point end){
-       Line2D line2D = new Line2D.Double(start.x, start.y, end.x, end.y);
+       line2D = new Line2D.Double(start.x, start.y, end.x, end.y);
     }
 
     @Override

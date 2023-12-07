@@ -18,6 +18,11 @@ public abstract class Connection extends DiagramElement {
         this.to = to;
         this.line2D = line2D;
     }
+    public Connection(Color color, int stroke,Line2D line2D){
+        super(color, stroke);
+        this.line2D = line2D;
+    }
+
 
     public Interclass getFrom() {
         return from;

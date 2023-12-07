@@ -12,6 +12,10 @@ public class Aggregation extends Connection {
         super(color, stroke, from, to, line2D);
     }
 
+    public Aggregation(Color color, int stroke, Line2D line2D) {
+        super(color, stroke, line2D);
+    }
+
     @Override
     public Interclass getFrom() {
         return super.getFrom();
