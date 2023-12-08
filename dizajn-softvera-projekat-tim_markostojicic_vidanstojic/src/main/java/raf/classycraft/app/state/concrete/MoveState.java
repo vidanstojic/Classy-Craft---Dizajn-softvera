@@ -11,6 +11,8 @@ import raf.classycraft.app.state.State;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+import static java.lang.Math.abs;
+
 public class MoveState implements State {
 
 
@@ -22,6 +24,10 @@ public class MoveState implements State {
 
         Point point = new Point(e.getX(), e.getY());
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
+                if (!tempTab.getListOfSelectedPainters().isEmpty()){
+                    //oldPoint = new Point(interclass.getPoint());
+                    break;
+                }
                 if (elementPainter.elementAt(point) == true) {
                     if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                         interclass = ((InterClassPainter) elementPainter).getInterclass();
@@ -36,7 +42,23 @@ public class MoveState implements State {
 
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
-        if (interclass != null) {
+        /*if (!tempTab.getListOfSelectedPainters().isEmpty()){
+            for (ElementPainter elementPainter : tempTab.getListOfPainters()){
+                if (elementPainter.getRectangle() == null)
+                    continue;
+                if(elementPainter.getRectangle().equals(interclass.getRectangle()))
+                    continue;
+                if (elementPainter.getRectangle().intersects(interclass.getRectangle())) {
+                    interclass.setPoint(oldPoint);
+                    break;
+                }
+            }
+            interclass.setColor(Color.BLACK);
+            tempTab.repaint();
+            tempTab.removeListOfSelectedPainters(tempTab.getListOfSelectedPainters());
+            interclass = null;
+        }*/
+        if (interclass != null && tempTab.getListOfSelectedPainters().isEmpty()) {
             if(tempTab.getListOfPainters().size() > 1) {
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                     if (elementPainter.getRectangle() == null)
@@ -58,8 +80,18 @@ public class MoveState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        if(interclass != null) {
-            newPoint = new Point(e.getX(), e.getY());
+        newPoint = new Point(e.getX(), e.getY());
+        if (!tempTab.getListOfSelectedPainters().isEmpty()){
+            for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
+                interclass = ((InterClassPainter) elementPainter).getInterclass();
+                interclass.setPoint(new Point(interclass.getPoint().x + abs(e.getX() - interclass.getPoint().x), interclass.getPoint().y + abs(e.getY() - interclass.getPoint().y)));
+                //interclass.setPoint(new Point(interclass.getPoint().x + e.getX() , interclass.getPoint().y + e.getY()));
+
+            }
+            tempTab.repaint();
+        }
+
+        if(interclass != null && tempTab.getListOfSelectedPainters().isEmpty()) {
             interclass.setPoint(newPoint);
             tempTab.repaint();
         }

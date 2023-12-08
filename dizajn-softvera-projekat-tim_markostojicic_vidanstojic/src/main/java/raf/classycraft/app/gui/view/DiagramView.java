@@ -71,7 +71,13 @@ public class DiagramView extends JPanel implements ISubscriber {
         repaint();
 
     }
-
+    public void removeListOfSelectedPainters(List<ElementPainter> listOfSelectedPainters){
+        List<ElementPainter> elementPainters = new ArrayList<>();
+        elementPainters.addAll(listOfSelectedPainters);
+        for (ElementPainter elementPainter : elementPainters){
+            listOfSelectedPainters.remove(elementPainter);
+        }
+    }
     public List<ElementPainter> getListOfPainters() {
         return listOfPainters;
     }
