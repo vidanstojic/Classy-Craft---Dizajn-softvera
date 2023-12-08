@@ -1,10 +1,7 @@
 package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
-import raf.classycraft.app.gui.view.paint.ClassPainter;
-import raf.classycraft.app.gui.view.paint.ConnectionPainter;
-import raf.classycraft.app.gui.view.paint.ElementPainter;
-import raf.classycraft.app.gui.view.paint.GeneralizationPainter;
+import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalization;
@@ -49,9 +46,9 @@ public class AddConnectionState implements State {
             boolean flagForAdd = false;
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if(elementPainter.elementAt(point) == true){
-                    if(elementPainter instanceof  ClassPainter){
-                        startPoint = ((ClassPainter) elementPainter).getClassInterClass().getConnectionDots().get(0);
-                        classFrom = ((ClassPainter) elementPainter).getClassInterClass();
+                    if(elementPainter instanceof  ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter){
+                        startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
+                        classFrom =  ((InterClassPainter) elementPainter).getInterclass();
                         connection = new Generalization(Color.BLACK, 2, tempTab.getLine2D());
                         connection.setFrom(classFrom);
                         flagForAdd = true;
@@ -85,9 +82,9 @@ public class AddConnectionState implements State {
         minDistance = Double.MAX_VALUE;
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if(elementPainter.elementAt(endPoint) == true){
-                if(elementPainter instanceof  ClassPainter){
+                if(elementPainter instanceof  ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter){
                     flag = true;
-                    classTo = ((ClassPainter) elementPainter).getClassInterClass();
+                    classTo = ((InterClassPainter) elementPainter).getInterclass();
                     connection.setTo(classTo);
                     for(Point connectionDot : classTo.getConnectionDots()){
                         double distance = Math.sqrt(Math.pow(startPoint.x - connectionDot.x,2) + Math.pow(startPoint.y - connectionDot.y, 2));

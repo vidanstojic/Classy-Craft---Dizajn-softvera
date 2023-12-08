@@ -1,6 +1,7 @@
 package raf.classycraft.app.gui.view.paint;
 
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
@@ -11,34 +12,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassPainter extends InterClassPainter{
-    private ClassInterClass classInterClass; // recept za pravljenje paintera
     private Rectangle rectangle;
 
 
     public ClassPainter(Point point, ClassInterClass classInterClass) {
-        super(point);
-        this.classInterClass = classInterClass;
+        super(point, classInterClass);
     }
 
     private void calculateConnectionDots() {
-        this.classInterClass.getConnectionDots().clear();
+        ClassInterClass classInterClass = (ClassInterClass) super.getInterclass();
+
+        classInterClass.getConnectionDots().clear();
 
 
         int centerX = (int) rectangle.getCenterX();
         int centerY = (int) rectangle.getCenterY();
 
         // Gornja tacka
-        this.classInterClass.getConnectionDots().add(new Point(centerX, (int) rectangle.getY()));
+        classInterClass.getConnectionDots().add(new Point(centerX, (int) rectangle.getY()));
         // Donja tacka
-        this.classInterClass.getConnectionDots().add(new Point(centerX, (int) rectangle.getMaxY()));
+        classInterClass.getConnectionDots().add(new Point(centerX, (int) rectangle.getMaxY()));
         // Leva tacka
-        this.classInterClass.getConnectionDots().add(new Point((int) rectangle.getX(), centerY));
+        classInterClass.getConnectionDots().add(new Point((int) rectangle.getX(), centerY));
         // Desna tacka
-        this.classInterClass.getConnectionDots().add(new Point((int) rectangle.getMaxX(), centerY));
+        classInterClass.getConnectionDots().add(new Point((int) rectangle.getMaxX(), centerY));
     }
 
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
+        ClassInterClass classInterClass = (ClassInterClass) super.getInterclass();
+
+
         Point mainPoint = new Point();
         Point heightPoint = new Point();
         heightPoint.y = 35;
@@ -125,9 +129,11 @@ public class ClassPainter extends InterClassPainter{
         this.rectangle = rectangle;
     }
 
-    public ClassInterClass getClassInterClass() {
-        return classInterClass;
-    }
 
+
+    @Override
+    public Interclass getInterclass() {
+        return super.getInterclass();
+    }
 
 }

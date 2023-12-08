@@ -1,10 +1,7 @@
 package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
-import raf.classycraft.app.gui.view.paint.ClassPainter;
-import raf.classycraft.app.gui.view.paint.ElementPainter;
-import raf.classycraft.app.gui.view.paint.EnumPainter;
-import raf.classycraft.app.gui.view.paint.InterfacePainter;
+import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
@@ -26,28 +23,10 @@ public class MoveState implements State {
         Point point = new Point(e.getX(), e.getY());
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                 if (elementPainter.elementAt(point) == true) {
-                    if (elementPainter instanceof ClassPainter) {
-                        ClassPainter classPainter = (ClassPainter) elementPainter;
-                        interclass = classPainter.getClassInterClass();
+                    if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
+                        interclass = ((InterClassPainter) elementPainter).getInterclass();
                         oldPoint = new Point(interclass.getPoint());
-                        ClassInterClass classInterClass = (ClassInterClass) interclass;
-                        classInterClass.setColor(Color.BLUE);
-                        tempTab.repaint();
-                        break;
-                    } else if (elementPainter instanceof EnumPainter) {
-                        EnumPainter enumPainter = (EnumPainter) elementPainter;
-                        interclass = enumPainter.getEnumInterclass();
-                        oldPoint = new Point(interclass.getPoint());
-                        EnumInterclass enumInterclass = (EnumInterclass) interclass;
-                        enumInterclass.setColor(Color.BLUE);
-                        tempTab.repaint();
-                        break;
-                    } else if (elementPainter instanceof InterfacePainter) {
-                        InterfacePainter interfacePainter = (InterfacePainter) elementPainter;
-                        interclass = interfacePainter.getInterfaceInterclass();
-                        oldPoint = new Point(interclass.getPoint());
-                        InterfaceInterclass interfaceInterclass = (InterfaceInterclass) interclass;
-                        interfaceInterclass.setColor(Color.BLUE);
+                        interclass.setColor(Color.BLUE);
                         tempTab.repaint();
                         break;
                     }

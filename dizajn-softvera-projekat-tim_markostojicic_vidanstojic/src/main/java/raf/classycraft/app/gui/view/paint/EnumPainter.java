@@ -1,24 +1,46 @@
 package raf.classycraft.app.gui.view.paint;
 
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
 
 import java.awt.*;
 
 public class EnumPainter extends InterClassPainter{
 
-    private EnumInterclass enumInterclass;
+
     private Rectangle rectangle;
     public EnumPainter(Point point, EnumInterclass enumInterclass) {
-        super(point);
-        this.enumInterclass = enumInterclass;
+        super(point, enumInterclass);
+    }
+
+    private void calculateConnectionDots() {
+        EnumInterclass enumInterclass = (EnumInterclass) super.getInterclass();
+
+        enumInterclass.getConnectionDots().clear();
+
+
+        int centerX = (int) rectangle.getCenterX();
+        int centerY = (int) rectangle.getCenterY();
+
+        // Gornja tacka
+        enumInterclass.getConnectionDots().add(new Point(centerX, (int) rectangle.getY()));
+        // Donja tacka
+        enumInterclass.getConnectionDots().add(new Point(centerX, (int) rectangle.getMaxY()));
+        // Leva tacka
+        enumInterclass.getConnectionDots().add(new Point((int) rectangle.getX(), centerY));
+        // Desna tacka
+        enumInterclass.getConnectionDots().add(new Point((int) rectangle.getMaxX(), centerY));
     }
 
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement)  {
+        EnumInterclass enumInterclass = (EnumInterclass) super.getInterclass();
+
         Point mainPoint = new Point();
         Point heightPoint = new Point();
         heightPoint.y = 35;
@@ -49,6 +71,8 @@ public class EnumPainter extends InterClassPainter{
         graphics2D.drawLine(enumInterclass.getPoint().x, enumInterclass.getPoint().y + 20, enumInterclass.getPoint().x + (int) (15 + length + 15), enumInterclass.getPoint().y + 20);
         this.setRectangle(rectangle);
         enumInterclass.setRectangle(rectangle);
+
+        this.calculateConnectionDots();
     }
 
     @Override
@@ -56,9 +80,6 @@ public class EnumPainter extends InterClassPainter{
         return (rectangle != null && rectangle.contains(pos));
     }
 
-    public EnumInterclass getEnumInterclass() {
-        return enumInterclass;
-    }
 
     @Override
     public Rectangle getRectangle() {
@@ -68,5 +89,10 @@ public class EnumPainter extends InterClassPainter{
     @Override
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
+    }
+
+    @Override
+    public Interclass getInterclass() {
+        return super.getInterclass();
     }
 }

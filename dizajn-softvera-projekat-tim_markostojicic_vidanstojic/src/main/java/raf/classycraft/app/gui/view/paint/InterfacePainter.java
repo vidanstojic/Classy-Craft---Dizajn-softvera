@@ -1,24 +1,45 @@
 package raf.classycraft.app.gui.view.paint;
 
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 
 import java.awt.*;
 
 public class InterfacePainter extends InterClassPainter{
 
-    private InterfaceInterclass interfaceInterclass;
     private Rectangle rectangle;
     public InterfacePainter(Point point, InterfaceInterclass interfaceInterclass) {
-        super(point);
-        this.interfaceInterclass = interfaceInterclass;
+        super(point, interfaceInterclass);
     }
 
+
+    private void calculateConnectionDots() {
+        InterfaceInterclass interfaceInterclass = (InterfaceInterclass) super.getInterclass();
+
+        interfaceInterclass.getConnectionDots().clear();
+
+
+        int centerX = (int) rectangle.getCenterX();
+        int centerY = (int) rectangle.getCenterY();
+
+        // Gornja tacka
+        interfaceInterclass.getConnectionDots().add(new Point(centerX, (int) rectangle.getY()));
+        // Donja tacka
+        interfaceInterclass.getConnectionDots().add(new Point(centerX, (int) rectangle.getMaxY()));
+        // Leva tacka
+        interfaceInterclass.getConnectionDots().add(new Point((int) rectangle.getX(), centerY));
+        // Desna tacka
+        interfaceInterclass.getConnectionDots().add(new Point((int) rectangle.getMaxX(), centerY));
+    }
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement)  {
+        InterfaceInterclass interfaceInterclass = (InterfaceInterclass) super.getInterclass();
+
         Point mainPoint = new Point();
         Point heightPoint = new Point();
         heightPoint.y = 35;
@@ -58,6 +79,7 @@ public class InterfacePainter extends InterClassPainter{
         graphics2D.drawLine(interfaceInterclass.getPoint().x, interfaceInterclass.getPoint().y + 20, interfaceInterclass.getPoint().x + (int) (15 + length + 15), interfaceInterclass.getPoint().y + 20);
         this.setRectangle(rectangle);
         interfaceInterclass.setRectangle(rectangle);
+        this.calculateConnectionDots();
     }
 
     @Override
@@ -65,9 +87,6 @@ public class InterfacePainter extends InterClassPainter{
         return (rectangle != null && rectangle.contains(pos));
     }
 
-    public InterfaceInterclass getInterfaceInterclass() {
-        return interfaceInterclass;
-    }
 
     @Override
     public Rectangle getRectangle() {
@@ -76,5 +95,10 @@ public class InterfacePainter extends InterClassPainter{
     @Override
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
+    }
+
+    @Override
+    public Interclass getInterclass() {
+        return super.getInterclass();
     }
 }

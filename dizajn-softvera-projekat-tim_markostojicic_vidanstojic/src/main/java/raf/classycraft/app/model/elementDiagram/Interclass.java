@@ -86,4 +86,5 @@ public abstract class Interclass extends DiagramElement {
     public List<Point> getConnectionDots() {
         return connectionDots;
     }
+
 }

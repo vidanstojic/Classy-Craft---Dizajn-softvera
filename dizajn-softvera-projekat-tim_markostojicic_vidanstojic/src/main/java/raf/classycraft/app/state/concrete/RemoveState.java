@@ -1,10 +1,7 @@
 package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
-import raf.classycraft.app.gui.view.paint.ClassPainter;
-import raf.classycraft.app.gui.view.paint.ElementPainter;
-import raf.classycraft.app.gui.view.paint.EnumPainter;
-import raf.classycraft.app.gui.view.paint.InterfacePainter;
+import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.state.State;
 
 import java.awt.*;
@@ -20,17 +17,9 @@ public class RemoveState implements State {
         List<ElementPainter> elementPaintersToRemove = new ArrayList<>();
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if(elementPainter.elementAt(point) == true){
-               if(elementPainter instanceof ClassPainter){
+               if(elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter){
                    elementPaintersToRemove.add(elementPainter);
-                   tempTab.getDiagram().removeChild(((ClassPainter) elementPainter).getClassInterClass());
-               }
-               else if(elementPainter instanceof EnumPainter){
-                   elementPaintersToRemove.add(elementPainter);
-                   tempTab.getDiagram().removeChild(((EnumPainter) elementPainter).getEnumInterclass());
-               }
-               else if(elementPainter instanceof InterfacePainter){
-                   elementPaintersToRemove.add(elementPainter);
-                   tempTab.getDiagram().removeChild(((InterfacePainter) elementPainter).getInterfaceInterclass());
+                   tempTab.getDiagram().removeChild(((InterClassPainter) elementPainter).getInterclass());
                }
             }
         }
