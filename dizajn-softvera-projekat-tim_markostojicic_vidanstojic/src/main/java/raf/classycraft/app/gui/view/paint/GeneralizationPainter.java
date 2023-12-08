@@ -39,13 +39,9 @@ public class GeneralizationPainter extends ConnectionPainter {
         double angle = Math.atan2(y2 - y1, x2 - x1);
         double sin = Math.sin(angle);
         double cos = Math.cos(angle);
-        
-        double endX = x2;
-        double endY = y2;
 
-
-        double triangleX = endX;
-        double triangleY = endY;
+        double triangleX = x2;
+        double triangleY = y2;
 
         double arrowPoint1X = triangleX - arrowSize * cos - arrowSize * 0.4 * sin;
         double arrowPoint1Y = triangleY - arrowSize * sin + arrowSize * 0.4 * cos;

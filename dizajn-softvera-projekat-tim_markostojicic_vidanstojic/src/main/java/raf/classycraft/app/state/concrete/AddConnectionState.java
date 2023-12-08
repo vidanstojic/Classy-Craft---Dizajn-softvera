@@ -52,8 +52,6 @@ public class AddConnectionState implements State {
                     if(elementPainter instanceof  ClassPainter){
                         startPoint = ((ClassPainter) elementPainter).getClassInterClass().getConnectionDots().get(0);
                         classFrom = ((ClassPainter) elementPainter).getClassInterClass();
-                        endPoint = startPoint;
-                        tempTab.lineRefresh(startPoint, endPoint);
                         connection = new Generalization(Color.BLACK, 2, tempTab.getLine2D());
                         connection.setFrom(classFrom);
                         flagForAdd = true;
