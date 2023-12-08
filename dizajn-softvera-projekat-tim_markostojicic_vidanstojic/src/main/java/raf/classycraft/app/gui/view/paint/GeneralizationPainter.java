@@ -10,6 +10,8 @@ import java.awt.geom.Line2D;
 
 public class GeneralizationPainter extends ConnectionPainter {
 
+    private Line2D line2D;
+
 
     public GeneralizationPainter(Generalization connection) {
         super(connection);
@@ -22,6 +24,7 @@ public class GeneralizationPainter extends ConnectionPainter {
             if (connection.getLine2D() == null) return;
             if (connection.getTo() == null && connection.getFrom() == null) return;
 
+            this.line2D = connection.getLine2D();
             graphics2D.drawLine((int) connection.getLine2D().getX1(), (int) connection.getLine2D().getY1(),
                     (int) connection.getLine2D().getX2(), (int) connection.getLine2D().getY2());
 
@@ -67,6 +70,7 @@ public class GeneralizationPainter extends ConnectionPainter {
 
     @Override
     public boolean elementAt(Point pos) {
-        return true;
+        return (line2D != null && line2D.contains(pos));
+
     }
 }

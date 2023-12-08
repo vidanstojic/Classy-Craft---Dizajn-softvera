@@ -59,6 +59,7 @@ public class AddConnectionState implements State {
             GeneralizationPainter generalizationPainter = new GeneralizationPainter((Generalization) connection);
             tempTab.getListOfPainters().add(generalizationPainter);
             tempTab.getDiagram().addChild(connection);
+            tempTab.repaint();
 
         }
         else if (selection.equals("Dependency")) {
