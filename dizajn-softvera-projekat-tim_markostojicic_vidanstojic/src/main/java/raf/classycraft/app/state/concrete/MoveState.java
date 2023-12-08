@@ -60,6 +60,8 @@ public class MoveState implements State {
         if (interclass != null) {
             if(tempTab.getListOfPainters().size() > 1) {
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
+                    if (elementPainter.getRectangle() == null)
+                        continue;
                     if(elementPainter.getRectangle().equals(interclass.getRectangle()))
                         continue;
                     if (elementPainter.getRectangle().intersects(interclass.getRectangle())) {

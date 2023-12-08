@@ -22,7 +22,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private List<ElementPainter> listOfPainters = new ArrayList<>();
 
     private DiagramElement diagramElement;
-
+    private JScrollBar jScrollBar;
     private Line2D line2D;
 
     public DiagramView(Diagram diagram){
