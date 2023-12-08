@@ -53,8 +53,8 @@ public class PackageView extends JPanel implements ISubscriber {
         MyDrawingToolBar toolBar = new MyDrawingToolBar();
 
         Dimension screenSize = MainFrame.getInstance().getSize();
-        int visina = screenSize.height;
-        toolBar.setBorder(BorderFactory.createEmptyBorder(visina / 10, 3, 0, 3));
+        int height = screenSize.height;
+        toolBar.setBorder(BorderFactory.createEmptyBorder(height / 50, 3, 0, 3));
 
         this.add(toolBar, BorderLayout.EAST);
     }
@@ -185,10 +185,12 @@ public class PackageView extends JPanel implements ISubscriber {
     public void startRemoveState(){
         this.stateManager.setRemoveState();
     }
+    public void startMoveState(){
+        this.stateManager.setMoveState();
+    }
     public void startSelectionState(){
         this.stateManager.setSelectionState();
     }
-
 
     public static boolean isFlag() {
         return flag;

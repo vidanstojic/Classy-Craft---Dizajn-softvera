@@ -9,7 +9,7 @@ public class StateManager {
     private EditClassState editClassState;
     private AddConnectionState addConnectionState;
     private AddClassState addClassState;
-
+    private SelectionState selectionState;
 
     public StateManager(){
         initStates();
@@ -21,6 +21,7 @@ public class StateManager {
         editClassState = new EditClassState();
         addConnectionState = new AddConnectionState();
         addClassState = new AddClassState();
+        selectionState = new SelectionState();
         currentState = addClassState;
     }
 
@@ -28,7 +29,7 @@ public class StateManager {
         return currentState;
     }
 
-    public void setSelectionState() {
+    public void setMoveState() {
         this.currentState = moveState;
     }
 
@@ -45,4 +46,7 @@ public class StateManager {
     }
 
     public void setAddClassState() {this.currentState = addClassState;}
+    public void setSelectionState() {
+        this.currentState = selectionState;
+    }
 }
