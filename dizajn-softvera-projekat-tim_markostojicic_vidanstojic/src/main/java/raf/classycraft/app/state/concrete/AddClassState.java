@@ -21,7 +21,6 @@ public class AddClassState implements State {
 
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
-        tempTab.repaint();
         Object[] selectionValues = {"Class", "Interface", "Enum"};
         String initialSelection = "Class";
         Object selection = JOptionPane.showInputDialog(null, "What element do you want to add?",
@@ -44,9 +43,7 @@ public class AddClassState implements State {
                 }
             }
             tempTab.getListOfPainters().add(classPainter);
-            tempTab.repaint();
             tempTab.getDiagram().addChild(classInterClass);
-
         }
         else if (selection.equals("Interface")) {
             String name = JOptionPane.showInputDialog("Name of the interface");
@@ -63,9 +60,8 @@ public class AddClassState implements State {
                 }
             }
             tempTab.getListOfPainters().add(interfacePainter);
-            tempTab.repaint();
             tempTab.getDiagram().addChild(interfaceInterclass);
-
+            tempTab.repaint();
         }
         else if (selection.equals("Enum")) {
             String name = JOptionPane.showInputDialog("Name of the enum");
@@ -83,8 +79,9 @@ public class AddClassState implements State {
             }
             tempTab.getListOfPainters().add(enumPainter);
             tempTab.getDiagram().addChild(enumInterclass);
-
+            tempTab.repaint();
         }
+        tempTab.repaint();
     }
 
     @Override

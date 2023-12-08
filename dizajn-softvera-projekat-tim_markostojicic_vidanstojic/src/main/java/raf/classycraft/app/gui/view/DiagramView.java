@@ -40,8 +40,10 @@ public class DiagramView extends JPanel implements ISubscriber {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
         for(ElementPainter painter : listOfPainters){
+            System.out.println(painter);
             painter.paint(graphics2D, this.diagramElement);
         }
+        System.out.println(" ");
         if(rectangle != null){
             graphics2D.setColor(new Color(200, 240, 255, 100));
             graphics2D.setBackground(new Color(200, 240, 255, 100));

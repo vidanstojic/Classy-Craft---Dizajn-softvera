@@ -2,6 +2,7 @@ package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
+import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalization;
@@ -28,6 +29,8 @@ public class AddConnectionState implements State {
     private Double minDistance = Double.MAX_VALUE;
 
     private Point closestConnectionDot;
+
+    private ConnectionPainter painter;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         if(flagForSelection == false && selection == null) {
@@ -56,8 +59,8 @@ public class AddConnectionState implements State {
                 }
             }
             if (flagForAdd == false) return;
-            GeneralizationPainter generalizationPainter = new GeneralizationPainter((Generalization) connection);
-            tempTab.getListOfPainters().add(generalizationPainter);
+            painter = new GeneralizationPainter((Generalization) connection);
+            tempTab.getListOfPainters().add(painter);
             tempTab.getDiagram().addChild(connection);
             tempTab.repaint();
 
@@ -72,7 +75,7 @@ public class AddConnectionState implements State {
             System.out.println("Dodavanje agregacije");
         }
 
-
+        tempTab.repaint();
     }
 
     @Override
@@ -104,11 +107,12 @@ public class AddConnectionState implements State {
             }
         }
         if(flag == false){
-            tempTab.setLine2D(null);
+            tempTab.setLine2D(null);  // Resetovanje Line2D
             connection.setLine2D(tempTab.getLine2D());
+            tempTab.getDiagram().removeChild(connection);
+            tempTab.getListOfPainters().remove(painter);
             tempTab.repaint();
         }
-
     }
 
     @Override
@@ -126,8 +130,6 @@ public class AddConnectionState implements State {
         connection.setLine2D(tempTab.getLine2D());
         tempTab.repaint();
     }
-
-
 
 
 }
