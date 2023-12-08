@@ -19,6 +19,8 @@ public abstract class Interclass extends DiagramElement {
     private List<Method> methods = new ArrayList<>();
 
     private List<ClassContent> classContents = new ArrayList<>();
+    List<Point> connectionDots = new ArrayList<>();
+
 
     public Interclass(Point point,Color color, int stroke, String name, String visibility) {
         super(color, stroke);
@@ -79,5 +81,9 @@ public abstract class Interclass extends DiagramElement {
 
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
+    }
+
+    public List<Point> getConnectionDots() {
+        return connectionDots;
     }
 }

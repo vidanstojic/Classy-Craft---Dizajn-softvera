@@ -25,6 +25,9 @@ public class AddConnectionState implements State {
 
     private Connection connection;
 
+    private Interclass classFrom;
+    private Interclass classTo;
+
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         if(flagForSelection == false && selection == null) {
@@ -43,7 +46,8 @@ public class AddConnectionState implements State {
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if(elementPainter.elementAt(point) == true){
                     if(elementPainter instanceof  ClassPainter){
-                        startPoint = ((ClassPainter) elementPainter).getConnectionDots().get(2);
+                        startPoint = ((ClassPainter) elementPainter).getClassInterClass().getConnectionDots().get(0);
+                        classFrom = ((ClassPainter) elementPainter).getClassInterClass();
                         endPoint = startPoint;
                         tempTab.lineRefresh(startPoint, endPoint);
                         connection = new Generalization(Color.BLACK, 2, tempTab.getLine2D());
@@ -77,9 +81,9 @@ public class AddConnectionState implements State {
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if(elementPainter.elementAt(endPoint) == true){
                 if(elementPainter instanceof  ClassPainter){
-                    ClassPainter classPainter = (ClassPainter) elementPainter;
-                    endPoint = classPainter.getConnectionDots().get(0);
+                    endPoint = ((ClassPainter) elementPainter).getClassInterClass().getConnectionDots().get(0);
                     flag = true;
+                    classTo = ((ClassPainter) elementPainter).getClassInterClass();
                     tempTab.lineRefresh(startPoint,endPoint);
                     connection.setLine2D(tempTab.getLine2D());
                     tempTab.repaint();

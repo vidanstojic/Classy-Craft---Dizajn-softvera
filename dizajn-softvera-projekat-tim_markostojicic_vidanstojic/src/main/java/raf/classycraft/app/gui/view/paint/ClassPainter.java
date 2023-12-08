@@ -13,7 +13,7 @@ import java.util.List;
 public class ClassPainter extends InterClassPainter{
     private ClassInterClass classInterClass; // recept za pravljenje paintera
     private Rectangle rectangle;
-    List<Point> connectionDots = new ArrayList<>();
+
 
     public ClassPainter(Point point, ClassInterClass classInterClass) {
         super(point);
@@ -21,20 +21,20 @@ public class ClassPainter extends InterClassPainter{
     }
 
     private void calculateConnectionDots() {
-        connectionDots.clear();
+        this.classInterClass.getConnectionDots().clear();
 
 
         int centerX = (int) rectangle.getCenterX();
         int centerY = (int) rectangle.getCenterY();
 
         // Gornja tacka
-        connectionDots.add(new Point(centerX, (int) rectangle.getY()));
+        this.classInterClass.getConnectionDots().add(new Point(centerX, (int) rectangle.getY()));
         // Donja tacka
-        connectionDots.add(new Point(centerX, (int) rectangle.getMaxY()));
+        this.classInterClass.getConnectionDots().add(new Point(centerX, (int) rectangle.getMaxY()));
         // Leva tacka
-        connectionDots.add(new Point((int) rectangle.getX(), centerY));
+        this.classInterClass.getConnectionDots().add(new Point((int) rectangle.getX(), centerY));
         // Desna tacka
-        connectionDots.add(new Point((int) rectangle.getMaxX(), centerY));
+        this.classInterClass.getConnectionDots().add(new Point((int) rectangle.getMaxX(), centerY));
     }
 
     @Override
@@ -129,7 +129,5 @@ public class ClassPainter extends InterClassPainter{
         return classInterClass;
     }
 
-    public List<Point> getConnectionDots() {
-        return connectionDots;
-    }
+
 }

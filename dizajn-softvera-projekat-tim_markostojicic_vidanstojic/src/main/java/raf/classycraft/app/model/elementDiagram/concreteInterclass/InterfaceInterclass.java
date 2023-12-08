@@ -67,4 +67,9 @@ public class InterfaceInterclass extends Interclass {
     public List<ClassContent> getClassContents() {
         return super.getClassContents();
     }
+
+    @Override
+    public List<Point> getConnectionDots() {
+        return super.getConnectionDots();
+    }
 }
