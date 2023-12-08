@@ -8,6 +8,8 @@ import raf.classycraft.app.state.State;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Math.abs;
 
@@ -16,12 +18,15 @@ public class SelectionState implements State {
     private Rectangle rectangle;
     private Point point;
     private Interclass interclass;
+    private List<ElementPainter> helpList = new ArrayList<>();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         for(ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
             interclass = ((InterClassPainter) elementPainter).getInterclass();
             interclass.setColor(Color.BLACK);
-        }///IZBACITI IZ LISTE SELEKTOVANIH
+        }for(ElementPainter elementPainter : helpList){
+            tempTab.getListOfSelectedPainters().remove(elementPainter);
+        }
             rectangle = tempTab.getRectangle();
             point = new Point(e.getX(), e.getY());
             tempTab.repaint();
@@ -46,6 +51,7 @@ public class SelectionState implements State {
                 interclass = ((InterClassPainter) elementPainter).getInterclass();
                 interclass.setColor(Color.BLUE);
                 tempTab.getListOfSelectedPainters().add(elementPainter);
+                helpList.add(elementPainter);
                 tempTab.repaint();
             }
         }

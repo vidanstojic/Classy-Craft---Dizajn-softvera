@@ -13,8 +13,13 @@ public class RemoveState implements State {
 
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
-        Point point = new Point(e.getX(), e.getY());
         List<ElementPainter> elementPaintersToRemove = new ArrayList<>();
+        for(ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
+            elementPaintersToRemove.add(elementPainter);
+            tempTab.getDiagram().removeChild(((InterClassPainter) elementPainter).getInterclass());
+        }
+        Point point = new Point(e.getX(), e.getY());
+
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if(elementPainter.elementAt(point) == true){
                if(elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter){
