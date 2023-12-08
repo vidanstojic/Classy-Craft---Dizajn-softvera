@@ -20,6 +20,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private Diagram diagram;
     private MyMouseListener myMouseListener;
     private List<ElementPainter> listOfPainters = new ArrayList<>();
+    private List<ElementPainter>listOfSelectedPainters = new ArrayList<>();
     private Rectangle rectangle;
     private DiagramElement diagramElement;
     private JScrollBar jScrollBar;
@@ -42,8 +43,8 @@ public class DiagramView extends JPanel implements ISubscriber {
             painter.paint(graphics2D, this.diagramElement);
         }
         if(rectangle != null){
-            graphics2D.setColor(new Color(225, 240, 255));
-            graphics2D.setBackground(new Color(225, 240, 255));
+            graphics2D.setColor(new Color(200, 240, 255, 100));
+            graphics2D.setBackground(new Color(200, 240, 255, 100));
             graphics2D.fill(rectangle);
             graphics2D.draw(rectangle);
 
@@ -97,5 +98,13 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
+    }
+
+    public List<ElementPainter> getListOfSelectedPainters() {
+        return listOfSelectedPainters;
+    }
+
+    public void setListOfSelectedPainters(List<ElementPainter> listOfSelectedPainters) {
+        this.listOfSelectedPainters = listOfSelectedPainters;
     }
 }
