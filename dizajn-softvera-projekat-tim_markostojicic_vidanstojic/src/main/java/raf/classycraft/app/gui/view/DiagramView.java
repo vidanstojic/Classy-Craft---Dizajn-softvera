@@ -20,7 +20,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private Diagram diagram;
     private MyMouseListener myMouseListener;
     private List<ElementPainter> listOfPainters = new ArrayList<>();
-
+    private Rectangle rectangle;
     private DiagramElement diagramElement;
     private JScrollBar jScrollBar;
     private Line2D line2D;
@@ -31,6 +31,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.myMouseListener = new MyMouseListener(this);
         addMouseListener(myMouseListener);
         addMouseMotionListener(myMouseListener);
+        this.rectangle = new Rectangle();
     }
 
     @Override
@@ -39,6 +40,13 @@ public class DiagramView extends JPanel implements ISubscriber {
         Graphics2D graphics2D = (Graphics2D) g;
         for(ElementPainter painter : listOfPainters){
             painter.paint(graphics2D, this.diagramElement);
+        }
+        if(rectangle != null){
+            graphics2D.setColor(new Color(225, 240, 255));
+            graphics2D.setBackground(new Color(225, 240, 255));
+            graphics2D.fill(rectangle);
+            graphics2D.draw(rectangle);
+
         }
 
     }
@@ -81,5 +89,13 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setLine2D(Line2D line2D) {
         this.line2D = line2D;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 }
