@@ -14,7 +14,7 @@ public abstract class Interclass extends DiagramElement {
     private String visibility;
     private Rectangle rectangle;
     private Point point;
-
+    private Point specialPoint;
     private List<Attribute> attributes = new ArrayList<>();
     private List<Method> methods = new ArrayList<>();
 
@@ -27,6 +27,7 @@ public abstract class Interclass extends DiagramElement {
         this.name = name;
         this.visibility = visibility;
         this.point = point;
+        this.specialPoint = point;
     }
 
     public Point getPoint() {
@@ -36,7 +37,12 @@ public abstract class Interclass extends DiagramElement {
     public void setPoint(Point point) {
         this.point = point;
     }
-
+    public Point getSpecialPoint(){
+        return this.specialPoint;
+    }
+    public Point setSpecialPoint(Point point){
+        return this.specialPoint = point;
+    }
     @Override
     public String getName() {
         return name;

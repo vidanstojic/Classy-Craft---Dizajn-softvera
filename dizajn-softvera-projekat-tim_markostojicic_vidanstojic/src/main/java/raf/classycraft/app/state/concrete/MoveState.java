@@ -19,7 +19,7 @@ public class MoveState implements State {
     private Interclass interclass;
     private Point oldPoint;
     private Point newPoint;
-
+    private Point polazna;
     private Point pointProba;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
@@ -89,7 +89,8 @@ public class MoveState implements State {
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
             for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
                 interclass = ((InterClassPainter) elementPainter).getInterclass();
-                Point point = new Point(interclass.getPoint().x + weight, interclass.getPoint().y + height);
+                Point point2 = new Point(interclass.getSpecialPoint());
+                Point point = new Point(point2.x + weight, point2.y + height);
                 interclass.setPoint(point);
                 tempTab.repaint();
             }
