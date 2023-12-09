@@ -46,7 +46,7 @@ public class MoveState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
-            for (ElementPainter elementPainter : tempTab.getListOfPainters()){
+            /*for (ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if (elementPainter.getRectangle() == null)
                     continue;
                 if(elementPainter.getRectangle().equals(interclass.getRectangle()))
@@ -55,7 +55,7 @@ public class MoveState implements State {
                     Point point = new Point(interclass.getPoint().x + abs(pointProba.x - newPoint.x), interclass.getPoint().y + abs(pointProba.y - newPoint.y));
                     interclass.setPoint(point);
                 }
-            }
+            }*/
             interclass.setColor(Color.BLACK);
             tempTab.repaint();
             tempTab.removeListOfSelectedPainters(tempTab.getListOfSelectedPainters());
@@ -84,19 +84,13 @@ public class MoveState implements State {
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
         newPoint = new Point(e.getX(), e.getY());
+        int weight = newPoint.x - pointProba.x;
+        int height = newPoint.y - pointProba.y;
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
             for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
                 interclass = ((InterClassPainter) elementPainter).getInterclass();
-                /*System.out.println(interclass.getPoint());
-                System.out.println(newPoint);
-                System.out.println(pointProba);
-                System.out.println(abs(pointProba.x - newPoint.x));
-                //interclass.setPoint(new Point(interclass.getPoint().x + (pointProba.x - newPoint.x), interclass.getPoint().y + (pointProba.y - newPoint.y)));
-                System.out.println(interclass.getPoint().x +  " " + interclass.getPoint().y);
-                //interclass.getPoint().x + abs(pointProba.x - newPoint.x), interclass.getPoint().y + abs(pointProba.y - newPoint.y));
-                //interclass.setPoint(new Point(interclass.getPoint().x + e.getX() , interclass.getPoint().y + e.getY()));
-                */
-                interclass.setPoint(newPoint);
+                Point point = new Point(interclass.getPoint().x + weight, interclass.getPoint().y + height);
+                interclass.setPoint(point);
                 tempTab.repaint();
             }
 
