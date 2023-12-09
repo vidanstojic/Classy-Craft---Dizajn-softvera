@@ -16,7 +16,11 @@ public class RemoveState implements State {
         List<ElementPainter> elementPaintersToRemove = new ArrayList<>();
         for(ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
             elementPaintersToRemove.add(elementPainter);
+            if (elementPainter.getRectangle() != null)
             tempTab.getDiagram().removeChild(((InterClassPainter) elementPainter).getInterclass());
+            else if (elementPainter.getLine2D() != null) {
+                tempTab.getDiagram().removeChild(((ConnectionPainter) elementPainter).getConnection());
+            }
         }
         Point point = new Point(e.getX(), e.getY());
 

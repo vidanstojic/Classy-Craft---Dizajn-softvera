@@ -26,8 +26,13 @@ public class SelectionState implements State {
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         if(!tempTab.getListOfSelectedPainters().isEmpty()) {
             for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()) {
-                interclass = ((InterClassPainter) elementPainter).getInterclass();
-                interclass.setColor(Color.BLACK);
+                if (elementPainter.getRectangle() != null) {
+                    interclass = ((InterClassPainter) elementPainter).getInterclass();
+                    interclass.setColor(Color.BLACK);
+                } else if (elementPainter.getLine2D() != null) {
+                    connection = ((ConnectionPainter) elementPainter).getConnection();
+                    connection.setColor(Color.BLACK);
+                }
             }
             for (ElementPainter elementPainter : helpList) {
                 tempTab.getListOfSelectedPainters().remove(elementPainter);
