@@ -101,6 +101,18 @@ public class AddConnectionState implements State {
                         flag = true;
                         classTo = ((InterClassPainter) elementPainter).getInterclass();
                         connection.setTo(classTo);
+
+                        endPoint = e.getPoint();
+                        for(Point connectionDot : classFrom.getConnectionDots()){
+                            double distance = Math.sqrt(Math.pow(connectionDot.x - endPoint.x, 2) + Math.pow(connectionDot.y - endPoint.y, 2));
+                            if(distance < minDistance){
+                                minDistance = distance;
+                                closestConnectionDot = connectionDot;
+                            }
+                        }
+                        startPoint = closestConnectionDot;
+                        minDistance = Double.MAX_VALUE;
+
                         for (Point connectionDot : classTo.getConnectionDots()) {
                             double distance = Math.sqrt(Math.pow(startPoint.x - connectionDot.x, 2) + Math.pow(startPoint.y - connectionDot.y, 2));
                             if (distance < minDistance) {

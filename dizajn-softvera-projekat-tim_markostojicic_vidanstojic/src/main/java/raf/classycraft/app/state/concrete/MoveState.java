@@ -3,9 +3,6 @@ package raf.classycraft.app.state.concrete;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Interclass;
-import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
-import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
-import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 import raf.classycraft.app.state.State;
 
 import java.awt.*;
@@ -19,16 +16,15 @@ public class MoveState implements State {
     private Interclass interclass;
     private Point oldPoint;
     private Point newPoint;
-    private Point polazna;
-    private Point pointProba;
+
+    private Point startPointInInterClass;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
 
         Point point = new Point(e.getX(), e.getY());
-        pointProba = point;
+        startPointInInterClass = point;
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                 if (!tempTab.getListOfSelectedPainters().isEmpty()){
-                    //oldPoint = new Point(interclass.getPoint());
                     break;
                 }
                 if (elementPainter.elementAt(point) == true) {
@@ -46,18 +42,23 @@ public class MoveState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
-            for (ElementPainter elementPainter1 : tempTab.getListOfSelectedPainters()){
-                for (ElementPainter elementPainter2 : tempTab.getListOfPainters()) {
-                    if (elementPainter1.getRectangle() == null || elementPainter1.getRectangle().equals(elementPainter2.getRectangle()))
-                        continue;
-                    interclass = ((InterClassPainter) elementPainter1).getInterclass();
-                    if (interclass.getRectangle().intersects(elementPainter2.getRectangle())) {
-                       interclass.setPoint(interclass.getSpecialPoint());
+            for (ElementPainter elementPainter1 : tempTab.getListOfSelectedPainters()) {
+                if (elementPainter1 instanceof InterClassPainter) {
+                    for (ElementPainter elementPainter2 : tempTab.getListOfPainters()) {
+                        if (elementPainter2 instanceof InterClassPainter) {
+                            if (elementPainter1.getRectangle() == null || elementPainter1.getRectangle().equals(elementPainter2.getRectangle()))
+                                continue;
+                            interclass = ((InterClassPainter) elementPainter1).getInterclass();
+                            if (interclass.getRectangle().intersects(elementPainter2.getRectangle())) {
+                                interclass.setPoint(interclass.getSpecialPoint());
+                            }
+                        }
                     }
+                        interclass.setColor(Color.BLACK);
+                        interclass.setSpecialPoint(interclass.getPoint());
+                        tempTab.repaint();
+
                 }
-                interclass.setColor(Color.BLACK);
-                interclass.setSpecialPoint(interclass.getPoint());
-                tempTab.repaint();
             }
 
             tempTab.removeListOfSelectedPainters(tempTab.getListOfSelectedPainters());
@@ -86,15 +87,17 @@ public class MoveState implements State {
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
         newPoint = new Point(e.getX(), e.getY());
-        int weight = newPoint.x - pointProba.x;
-        int height = newPoint.y - pointProba.y;
+        int weight = newPoint.x - startPointInInterClass.x;
+        int height = newPoint.y - startPointInInterClass.y;
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
             for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
-                interclass = ((InterClassPainter) elementPainter).getInterclass();
-                Point point2 = new Point(interclass.getSpecialPoint());
-                Point point = new Point(point2.x + weight, point2.y + height);
-                interclass.setPoint(point);
-                tempTab.repaint();
+                if(elementPainter instanceof InterClassPainter) {
+                    interclass = ((InterClassPainter) elementPainter).getInterclass();
+                    Point point2 = new Point(interclass.getSpecialPoint());
+                    Point point = new Point(point2.x + weight, point2.y + height);
+                    interclass.setPoint(point);
+                    tempTab.repaint();
+                }
             }
 
         }
