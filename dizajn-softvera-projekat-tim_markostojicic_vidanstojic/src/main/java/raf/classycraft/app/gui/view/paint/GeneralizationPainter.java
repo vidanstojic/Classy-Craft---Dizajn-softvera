@@ -31,7 +31,7 @@ public class GeneralizationPainter extends ConnectionPainter {
             drawArrow(graphics2D, (int) connection.getLine2D().getX1(), (int) connection.getLine2D().getY1(),
                     (int) connection.getLine2D().getX2(), (int) connection.getLine2D().getY2());
 
-
+            this.setLine2D(line2D);
     }
 
 
