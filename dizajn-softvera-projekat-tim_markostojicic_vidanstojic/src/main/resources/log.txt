@@ -1,0 +1,1 @@
+[ERROR][2023-12-09T15:47:00.368732600]Node can not be deleted.
