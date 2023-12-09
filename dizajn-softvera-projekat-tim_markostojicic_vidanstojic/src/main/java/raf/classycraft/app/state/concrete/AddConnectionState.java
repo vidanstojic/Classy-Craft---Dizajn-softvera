@@ -36,10 +36,21 @@ public class AddConnectionState implements State {
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         if(connectionMode == ConnectionMode.NONE) {
+            boolean askUser = false;
+            Point point = new Point(e.getX(), e.getY());
+            for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
+                if((elementPainter.elementAt(point) == true)){
+                    askUser = true;
+                }
+            }
+            if(askUser == false) return;
             Object[] selectionValues = {"Dependency", "Composition", "Aggregation", "Generalisation"};
             String initialSelection = "Generalisation";
             selection = JOptionPane.showInputDialog(null, "What type of connection do you want to add?",
                     "Add new connection", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+            if (selection == null) {
+                return;
+            }
             connectionMode = ConnectionMode.START_CONNECTION;
             return;
         }
