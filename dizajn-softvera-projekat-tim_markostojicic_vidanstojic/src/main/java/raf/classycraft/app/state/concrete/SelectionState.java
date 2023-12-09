@@ -21,11 +21,14 @@ public class SelectionState implements State {
     private List<ElementPainter> helpList = new ArrayList<>();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
-        for(ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
-            interclass = ((InterClassPainter) elementPainter).getInterclass();
-            interclass.setColor(Color.BLACK);
-        }for(ElementPainter elementPainter : helpList){
-            tempTab.getListOfSelectedPainters().remove(elementPainter);
+        if(!tempTab.getListOfSelectedPainters().isEmpty()) {
+            for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()) {
+                interclass = ((InterClassPainter) elementPainter).getInterclass();
+                interclass.setColor(Color.BLACK);
+            }
+            for (ElementPainter elementPainter : helpList) {
+                tempTab.getListOfSelectedPainters().remove(elementPainter);
+            }
         }
             rectangle = tempTab.getRectangle();
             point = new Point(e.getX(), e.getY());
@@ -38,10 +41,23 @@ public class SelectionState implements State {
         rectangle.setSize(0,0);
         tempTab.repaint();
     }
+/*
+ p2 = e.getPoint();
 
+        int x = Math.min(p1.x, p2.x);
+        int y = Math.min(p1.y, p2.y);
+        int width = Math.abs(p2.x - p1.x);
+        int height = Math.abs(p2.y - p1.y);
+
+        rectangle.setRect(x, y, width, height);
+ */
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        rectangle.setRect(point.x, point.y, abs(point.x - e.getX()), abs(point.y - e.getY()));
+        int x = Math.min(point.x,e.getX());
+        int y = Math.min(point.y, e.getY());
+        int width = Math.abs(e.getX() - point.x);
+        int height = Math.abs(e.getY() - point.y);
+        rectangle.setRect(x, y, width, height);
         tempTab.setRectangle(rectangle);
         tempTab.repaint();
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
@@ -50,13 +66,11 @@ public class SelectionState implements State {
             if (tempTab.getRectangle().intersects(elementPainter.getRectangle())){
                 interclass = ((InterClassPainter) elementPainter).getInterclass();
                 interclass.setColor(Color.BLUE);
+                if (tempTab.getListOfSelectedPainters().contains(elementPainter)) continue;
                 tempTab.getListOfSelectedPainters().add(elementPainter);
                 helpList.add(elementPainter);
                 tempTab.repaint();
             }
         }
-
-
-
     }
 }
