@@ -41,16 +41,6 @@ public class SelectionState implements State {
         rectangle.setSize(0,0);
         tempTab.repaint();
     }
-/*
- p2 = e.getPoint();
-
-        int x = Math.min(p1.x, p2.x);
-        int y = Math.min(p1.y, p2.y);
-        int width = Math.abs(p2.x - p1.x);
-        int height = Math.abs(p2.y - p1.y);
-
-        rectangle.setRect(x, y, width, height);
- */
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
         int x = Math.min(point.x,e.getX());
