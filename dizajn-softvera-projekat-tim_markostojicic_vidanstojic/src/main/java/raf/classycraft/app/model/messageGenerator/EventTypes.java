@@ -11,7 +11,9 @@ public enum EventTypes {
     NAME_IS_UNAVAILABLE,
     NODE_SUCCESSFULLY_DELETED,
 
-    WRONG_POSITION
+    WRONG_POSITION,
+
+    CANT_COPY_CLASS;
 
 
 
