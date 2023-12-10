@@ -192,6 +192,8 @@ public class PackageView extends JPanel implements ISubscriber {
         this.stateManager.setSelectionState();
     }
 
+    public void startDuplicateState(){this.stateManager.setDuplicateState();}
+
     public static boolean isFlag() {
         return flag;
     }

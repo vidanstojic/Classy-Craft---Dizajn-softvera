@@ -11,6 +11,8 @@ public class StateManager {
     private AddClassState addClassState;
     private SelectionState selectionState;
 
+    private DuplicateState duplicateState;
+
     public StateManager(){
         initStates();
     }
@@ -22,6 +24,7 @@ public class StateManager {
         addConnectionState = new AddConnectionState();
         addClassState = new AddClassState();
         selectionState = new SelectionState();
+        duplicateState = new DuplicateState();
         currentState = addClassState;
     }
 
@@ -49,4 +52,6 @@ public class StateManager {
     public void setSelectionState() {
         this.currentState = selectionState;
     }
+
+    public void setDuplicateState(){this.currentState = duplicateState;}
 }

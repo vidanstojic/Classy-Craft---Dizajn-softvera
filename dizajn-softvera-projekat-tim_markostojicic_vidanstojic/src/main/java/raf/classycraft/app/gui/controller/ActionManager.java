@@ -14,6 +14,8 @@ public class ActionManager {
     private EraserAction eraserAction;
     private MoveAction moveAction;
     private SelectionAction selectionAction;
+
+    private DuplicateAction duplicateAction;
     private MyMouseListener myMouseListener;
     public ActionManager(){
         initialiseActions();
@@ -31,6 +33,7 @@ public class ActionManager {
         eraserAction = new EraserAction();
         moveAction = new MoveAction();
         selectionAction = new SelectionAction();
+        duplicateAction = new DuplicateAction();
     }
 
     public ExitAction getEa() {
@@ -73,5 +76,9 @@ public class ActionManager {
         return moveAction;
     }
 
-    public SelectionAction getSelectionAcstion(){return selectionAction;}
+    public SelectionAction getSelectionAction(){return selectionAction;}
+
+    public DuplicateAction getDuplicateAction() {
+        return duplicateAction;
+    }
 }
