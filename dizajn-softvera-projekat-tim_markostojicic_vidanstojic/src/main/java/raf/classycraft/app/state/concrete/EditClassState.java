@@ -88,11 +88,9 @@ public class EditClassState implements State {
                     }
                 }
             }else if (elementPainter.elementAt(point) && elementPainter instanceof EnumPainter) {
-                    String name = JOptionPane.showInputDialog("What is name of your enum?");
+                    String name = JOptionPane.showInputDialog("What is name of your element?");
                     if (name == null) return;
-                    String returnType = JOptionPane.showInputDialog("What is type of your enum?");
-                    if (returnType == null) return;
-                    Attribute attribute = new Attribute(name, returnType);
+                    Attribute attribute = new Attribute(name, null);
                     Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
                     interClass.getAttributes().add(attribute);
                     interClass.getClassContents().add(attribute);

@@ -53,7 +53,7 @@ public class EnumPainter extends InterClassPainter{
         int heightOfString = graphics2D.getFontMetrics().getMaxAscent();
         for (Attribute attribute : enumInterclass.getAttributes()) {
             String visibilityChar = "";
-            String attributeFullName = visibilityChar + attribute.getName() + ":" + attribute.getReturnType();
+            String attributeFullName = visibilityChar + attribute.getName();
             if (length < graphics2D.getFontMetrics().stringWidth(attributeFullName)) {
                 length = graphics2D.getFontMetrics().stringWidth(attributeFullName);
             }
