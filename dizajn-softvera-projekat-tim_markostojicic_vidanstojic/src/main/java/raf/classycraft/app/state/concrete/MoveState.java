@@ -77,7 +77,7 @@ public class MoveState implements State {
                     }
                 }
             }
-
+            interclass.setSpecialPoint(interclass.getPoint());
             interclass.setColor(Color.BLACK);
             tempTab.repaint();
             interclass = null;
