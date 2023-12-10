@@ -99,16 +99,22 @@ public class ClassPainter extends InterClassPainter{
         }
 
         if (classInterClass.getAttributes().size() >= 1) {
-            graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x + (int) (15 + length + 15), pointForLine.y - 10);
+            graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x + (int) (15 + length + 20), pointForLine.y - 10);
         }
 
         int heightOfRectangle = ((classInterClass.getClassContents().size()) == 0) ? (heightPoint.y) : (classInterClass.getClassContents().size() * heightOfString + 33);
         this.rectangle = new Rectangle(classInterClass.getPoint().x, classInterClass.getPoint().y, (int) (15 + length + 15), heightOfRectangle);
         graphics2D.drawRect((int) rectangle.getX(), (int) rectangle.getY(), (int) rectangle.getWidth(), (int) rectangle.getHeight());
-        if(abstractString.equals("Yes")) graphics2D.drawString("Ⓐ", classInterClass.getPoint().x + 2, classInterClass.getPoint().y + 15);
-        graphics2D.drawString("C", classInterClass.getPoint().x + 13, classInterClass.getPoint().y + 15);
-        graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 23, classInterClass.getPoint().y + 15);
-        graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
+        if(abstractString.equals("Yes")) {
+            graphics2D.drawString("Ⓐ", classInterClass.getPoint().x + 2, classInterClass.getPoint().y + 15);
+            graphics2D.drawString("C", classInterClass.getPoint().x + 13, classInterClass.getPoint().y + 15);
+            graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 25, classInterClass.getPoint().y + 15);
+            graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
+        }else {
+            graphics2D.drawString("C", classInterClass.getPoint().x + 5, classInterClass.getPoint().y + 15);
+            graphics2D.drawString(classInterClass.getName(), classInterClass.getPoint().x + 20, classInterClass.getPoint().y + 15);
+            graphics2D.drawLine(classInterClass.getPoint().x, classInterClass.getPoint().y + 20, classInterClass.getPoint().x + (int) (15 + length + 15), classInterClass.getPoint().y + 20);
+        }
         this.setRectangle(rectangle);
         classInterClass.setRectangle(rectangle);
         calculateConnectionDots();
