@@ -11,10 +11,12 @@ import java.util.List;
 public class ClassInterClass extends Interclass {
 
     private String name;
+    private String abstractClass;
 
-    public ClassInterClass(Point point, Color color, int stroke, String name, String visibility) {
+    public ClassInterClass(Point point, Color color, int stroke, String name, String visibility, String abstractClass) {
         super(point,color, stroke, name, visibility);
         this.name = name;
+        this.abstractClass = abstractClass;
     }
 
     @Override
@@ -74,6 +76,14 @@ public class ClassInterClass extends Interclass {
     @Override
     public List<Point> getConnectionDots() {
         return super.getConnectionDots();
+    }
+
+    public String getAbstractClass() {
+        return abstractClass;
+    }
+
+    public void setAbstractClass(String abstractClass) {
+        this.abstractClass = abstractClass;
     }
 }
 

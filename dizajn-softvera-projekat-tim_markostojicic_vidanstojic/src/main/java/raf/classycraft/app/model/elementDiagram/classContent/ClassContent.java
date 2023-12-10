@@ -11,6 +11,11 @@ public abstract class ClassContent {
         this.returnType = returnType;
     }
 
+    public ClassContent(String name, String returnType){
+        this.name = name;
+        this.returnType = returnType;
+    }
+
     public String getName() {
         return name;
     }

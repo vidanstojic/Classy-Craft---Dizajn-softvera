@@ -6,6 +6,7 @@ public class Attribute extends ClassContent {
     public Attribute(String name, Visibility visibility, String returnType) {
         super(name, visibility, returnType);
     }
+    public Attribute(String name, String returnType){super(name, returnType);}
     @Override
     public String getName() {
         return super.getName();

@@ -33,8 +33,13 @@ public class AddClassState implements State {
             if (name == null || name.length() == 0){
                 name = message(name);
             }
+            Object[] selectionClass = {"No" , "Yes"};
+            String initialSelectionClass = "No";
+            Object selection2 = JOptionPane.showInputDialog(null, "Is your class abstract?",
+                    "Abstract class", JOptionPane.QUESTION_MESSAGE, null, selectionClass, initialSelectionClass);
+            String string = (String)selection2;
             Point point = new Point(e.getX(), e.getY());
-            ClassInterClass classInterClass = new ClassInterClass(point, Color.BLACK, 2, name, "public");
+            ClassInterClass classInterClass = new ClassInterClass(point, Color.BLACK, 2, name, "public", string);
             ClassPainter classPainter = new ClassPainter(point,classInterClass);
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if (elementPainter.elementAt(point) == true) {
