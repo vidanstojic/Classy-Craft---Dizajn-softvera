@@ -63,6 +63,9 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         }else if(type == Type.ERROR && eventType == EventTypes.WRONG_POSITION){
             messageText = "You cannot create a class through an existing class.";
             message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
+        }else if(type == Type.ERROR && eventType == EventTypes.CANT_COPY_CLASS){
+            messageText = "You need to clikck on the class you want to copy";
+            message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
 
 

@@ -1,0 +1,4 @@
+[ERROR][2023-12-10T14:42:35.960624500]You need to clikck on the class you want to copy
+[ERROR][2023-12-10T14:42:39.432337300]You need to clikck on the class you want to copy
+[ERROR][2023-12-10T14:42:40.657216300]You need to clikck on the class you want to copy
+[ERROR][2023-12-10T14:42:41.968171500]You need to clikck on the class you want to copy
