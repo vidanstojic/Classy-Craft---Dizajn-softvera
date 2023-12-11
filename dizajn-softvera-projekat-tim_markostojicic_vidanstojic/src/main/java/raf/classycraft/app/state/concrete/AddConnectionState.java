@@ -2,12 +2,10 @@ package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
-import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.ConnectionMode;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalization;
-import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.state.State;
 
 import javax.swing.*;
@@ -67,7 +65,7 @@ public class AddConnectionState implements State {
                             startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Generalization(Color.BLACK, 2, tempTab.getLine2D());
-                            connection.setFrom(classFrom);
+                            connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
                     }
@@ -100,7 +98,7 @@ public class AddConnectionState implements State {
                     if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                         flag = true;
                         classTo = ((InterClassPainter) elementPainter).getInterclass();
-                        connection.setTo(classTo);
+                        connection.setClassTo(classTo);
 
                         endPoint = e.getPoint();
                         for(Point connectionDot : classFrom.getConnectionDots()){

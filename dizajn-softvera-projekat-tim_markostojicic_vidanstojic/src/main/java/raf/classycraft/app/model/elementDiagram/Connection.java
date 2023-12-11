@@ -1,43 +1,65 @@
 package raf.classycraft.app.model.elementDiagram;
 
-import raf.classycraft.app.model.elementDiagram.DiagramElement;
-import raf.classycraft.app.model.elementDiagram.Interclass;
-
-import javax.sound.sampled.Line;
 import java.awt.*;
 import java.awt.geom.Line2D;
 
 public abstract class Connection extends DiagramElement {
-    private Interclass from;
-    private Interclass to;
+    private Interclass classFrom;
+    private Interclass classTo;
 
     private Line2D line2D;
     public Connection(Color color, int stroke, Interclass from, Interclass to, Line2D line2D) {
         super(color, stroke);
-        this.from = from;
-        this.to = to;
+        this.classFrom = from;
+        this.classTo = to;
         this.line2D = line2D;
     }
     public Connection(Color color, int stroke,Line2D line2D){
         super(color, stroke);
         this.line2D = line2D;
     }
+    public void lineUpdate(){
+        if(this.classFrom != null && this.classTo != null){
+            Point startPoint = classFrom.getPoint();
+            Point endPoint = classTo.getPoint();
+            Point closestConnectionDot = null;
+            Double minDistance = Double.MAX_VALUE;
+            for(Point connectionDot : classFrom.getConnectionDots()){
+                double distance = Math.sqrt(Math.pow(connectionDot.x - endPoint.x, 2) + Math.pow(connectionDot.y - endPoint.y, 2));
+                if(distance < minDistance){
+                    minDistance = distance;
+                    closestConnectionDot = connectionDot;
+                }
+            }
+            startPoint = closestConnectionDot;
+            minDistance = Double.MAX_VALUE;
 
-
-    public Interclass getFrom() {
-        return from;
+            for (Point connectionDot : classTo.getConnectionDots()) {
+                double distance = Math.sqrt(Math.pow(startPoint.x - connectionDot.x, 2) + Math.pow(startPoint.y - connectionDot.y, 2));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestConnectionDot = connectionDot;
+                }
+            }
+            endPoint = closestConnectionDot;
+            this.setLine2D(new Line2D.Double(startPoint, endPoint));
+        }
     }
 
-    public void setFrom(Interclass from) {
-        this.from = from;
+    public Interclass getClassFrom() {
+        return classFrom;
     }
 
-    public Interclass getTo() {
-        return to;
+    public void setClassFrom(Interclass classFrom) {
+        this.classFrom = classFrom;
     }
 
-    public void setTo(Interclass to) {
-        this.to = to;
+    public Interclass getClassTo() {
+        return classTo;
+    }
+
+    public void setClassTo(Interclass classTo) {
+        this.classTo = classTo;
     }
 
     public Line2D getLine2D() {

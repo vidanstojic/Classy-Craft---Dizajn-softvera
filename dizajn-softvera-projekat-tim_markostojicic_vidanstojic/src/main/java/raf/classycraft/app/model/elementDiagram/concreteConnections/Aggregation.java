@@ -17,23 +17,23 @@ public class Aggregation extends Connection {
     }
 
     @Override
-    public Interclass getFrom() {
-        return super.getFrom();
+    public Interclass getClassFrom() {
+        return super.getClassFrom();
     }
 
     @Override
-    public void setFrom(Interclass from) {
-        super.setFrom(from);
+    public void setClassFrom(Interclass classFrom) {
+        super.setClassFrom(classFrom);
     }
 
     @Override
-    public Interclass getTo() {
-        return super.getTo();
+    public Interclass getClassTo() {
+        return super.getClassTo();
     }
 
     @Override
-    public void setTo(Interclass to) {
-        super.setTo(to);
+    public void setClassTo(Interclass classTo) {
+        super.setClassTo(classTo);
     }
     @Override
     public Line2D getLine2D() {
