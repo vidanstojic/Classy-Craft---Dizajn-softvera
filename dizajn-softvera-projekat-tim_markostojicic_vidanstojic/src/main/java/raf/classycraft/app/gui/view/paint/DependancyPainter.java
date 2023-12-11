@@ -53,7 +53,7 @@ public class DependancyPainter extends ConnectionPainter {
 
         double arrowPoint2X = triangleX - arrowSize * cos + arrowSize * 0.4 * sin;
         double arrowPoint2Y = triangleY - arrowSize * sin - arrowSize * 0.4 * cos;
-        
+
         g.drawLine(x2, y2, (int) arrowPoint1X, (int) arrowPoint1Y);
         g.drawLine(x2, y2, (int) arrowPoint2X, (int) arrowPoint2Y);
     }

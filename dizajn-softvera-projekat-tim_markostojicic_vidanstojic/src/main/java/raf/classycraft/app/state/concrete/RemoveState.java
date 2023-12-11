@@ -2,6 +2,7 @@ package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.state.State;
 
 import java.awt.*;
@@ -34,6 +35,13 @@ public class RemoveState implements State {
                 if (rectangle.intersects(elementPainter.getRectangle())) {
                     if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                         elementPaintersToRemove.add(elementPainter);
+                        for(ElementPainter connectionElement : tempTab.getListOfPainters()){
+                            // ovde se samo proverava da li se klasa/enum/ interfejs koji brisemo nalazi u nekoj vezi kao interClassTo ili from
+                            // ukoliko se nalazi onda dodajemo tu vezu u listu elemenata za brisanje
+                            if(connectionElement instanceof ConnectionPainter && ( ((ConnectionPainter) connectionElement).getConnection().getClassFrom() == (Interclass) ((InterClassPainter) elementPainter).getInterclass() || ((ConnectionPainter) connectionElement).getConnection().getClassTo() == (Interclass) ((InterClassPainter) elementPainter).getInterclass())){
+                                elementPaintersToRemove.add(connectionElement);
+                            }
+                        }
                         tempTab.getDiagram().removeChild(((InterClassPainter) elementPainter).getInterclass());
                     }
                 }
