@@ -181,18 +181,17 @@ public class EditClassState implements State {
                 "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesRename, initialSelectionRename);
         if (selectionRename == "Rename class name") {
             String inputText = JOptionPane.showInputDialog("Enter new name");
-            if (inputText.length() == 0)return;
+            if (inputText == null || inputText.isEmpty())return;
             interclass.setName(inputText);
             tempTab.repaint();
         }else if (!interclass.getClassContents().isEmpty()){
-
-            String inputText = JOptionPane.showInputDialog("Enter full name of attribute that exist");
+            String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
             if (inputText == null) return;
             elementsEdit(interclass, tempTab, inputText);
         }
     }
     private void elementsEdit(Interclass interclass, DiagramView tempTab, String input){
-        Object[] selectionValuesEdit = {"Rename element name", "Change element type", "Change element visibility", "Nothing"};
+        Object[] selectionValuesEdit = {"Rename element name", "Change element type", "Change element visibility", "Nothing", "Change some other element"};
         String initialSelectionEdit = "Rename element name";
         Object selectionEdit = JOptionPane.showInputDialog(null, "Select edit mode",
                 "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEdit, initialSelectionEdit);
@@ -202,6 +201,7 @@ public class EditClassState implements State {
             for (ClassContent classContent : interclass.getClassContents()){
                 if (classContent.getName().equals(input)){
                     String inputName = JOptionPane.showInputDialog("Enter new name");
+                    if (inputName == null || inputName.isEmpty())return;
                     classContent.setName(inputName);
                     input = inputName;
                     tempTab.repaint();
@@ -211,7 +211,8 @@ public class EditClassState implements State {
         } else if (selectionEdit == "Change element type") {
             for (ClassContent classContent : interclass.getClassContents()){
                 if (classContent.getName().equals(input)){
-                    String inputType = JOptionPane.showInputDialog("Enter new name");
+                    String inputType = JOptionPane.showInputDialog("Enter new element type");
+                    if (inputType == null || inputType.isEmpty())return;
                     classContent.setReturnType(inputType);
                     tempTab.repaint();
                     elementsEdit(interclass, tempTab, input);
@@ -244,6 +245,10 @@ public class EditClassState implements State {
                     elementsEdit(interclass, tempTab, input);
                 }
             }
+        }else if (selectionEdit == "Change some other element"){
+            String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
+            if (inputText == null) return;
+            elementsEdit(interclass, tempTab, inputText);
         }
     }
 }
