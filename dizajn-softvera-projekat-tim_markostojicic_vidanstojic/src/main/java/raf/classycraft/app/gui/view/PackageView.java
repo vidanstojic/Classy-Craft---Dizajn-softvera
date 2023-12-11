@@ -21,8 +21,6 @@ public class PackageView extends JPanel implements ISubscriber {
     private List<String> stringTabs = new ArrayList<>();
     private Label author;
     private Label nameOfProject;
-    private String nameP;
-    private String nameA;
 
     public static boolean flag = false;
 
@@ -167,11 +165,6 @@ public class PackageView extends JPanel implements ISubscriber {
         }
     }
 
-    public void printNameOfTabs(){
-        for( Component element :this.tabbedPane.getComponents()){
-            System.out.println(element.getName());
-        }
-    }
     // Start metode posto je PackageView mediator
     public void startAddClassState(){
         this.stateManager.setAddClassState();
@@ -202,21 +195,6 @@ public class PackageView extends JPanel implements ISubscriber {
         PackageView.flag = flag;
     }
 
-    public String getNameP() {
-        return nameP;
-    }
-
-    public void setNameP(String nameP) {
-        this.nameP = nameP;
-    }
-
-    public String getNameA() {
-        return nameA;
-    }
-
-    public void setNameA(String nameA) {
-        this.nameA = nameA;
-    }
 
     public StateManager getStateManager() {
         return stateManager;

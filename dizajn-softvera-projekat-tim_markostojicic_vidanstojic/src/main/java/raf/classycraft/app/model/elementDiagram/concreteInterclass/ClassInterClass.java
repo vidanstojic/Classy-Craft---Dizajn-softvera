@@ -85,5 +85,7 @@ public class ClassInterClass extends Interclass {
     public void setAbstractClass(String abstractClass) {
         this.abstractClass = abstractClass;
     }
+
+
 }
 

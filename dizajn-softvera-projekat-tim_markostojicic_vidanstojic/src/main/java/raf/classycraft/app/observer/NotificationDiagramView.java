@@ -10,6 +10,9 @@ public class NotificationDiagramView {
         this.typeDiagramView = typeDiagramView;
         this.diagramElement = diagramElement;
     }
+    public NotificationDiagramView(TypeDiagramView typeDiagramView){
+        this.typeDiagramView = typeDiagramView;
+    }
 
     public TypeDiagramView getTypeDiagramView() {
         return typeDiagramView;

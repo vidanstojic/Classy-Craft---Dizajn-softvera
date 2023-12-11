@@ -12,9 +12,7 @@ public abstract class ConnectionPainter extends ElementPainter {
         this.connection = connection;
     }
 
-    public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
-
-    }
+    public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {}
 
 
     public boolean elementAt(Point pos) {

@@ -32,8 +32,10 @@ public class DuplicateState implements State {
             if(classToCopy instanceof ClassInterClass){
                 ClassInterClass classInterClass = (ClassInterClass) classToCopy;
                 ClassInterClass copiedClass = new ClassInterClass(tempPoint, classInterClass.getColor(), classInterClass.getStroke(), classInterClass.getName(),classInterClass.getVisibility() ,classInterClass.getAbstractClass());
+                copiedClass.getListOfSubscribers().add(tempTab);
                 copiedClass.setAttributes(classInterClass.getAttributes());
                 copiedClass.setMethods(classInterClass.getMethods());
+
 
                 ClassPainter classPainter = new ClassPainter(tempPoint,copiedClass);
                 tempTab.getListOfPainters().add(classPainter);
@@ -42,6 +44,7 @@ public class DuplicateState implements State {
             else if(classToCopy instanceof EnumInterclass){
                 EnumInterclass enumInterclass = (EnumInterclass) classToCopy;
                 EnumInterclass copiedEnum = new EnumInterclass(tempPoint, enumInterclass.getColor(), enumInterclass.getStroke(), enumInterclass.getName(),enumInterclass.getVisibility());
+                copiedEnum.getListOfSubscribers().add(tempTab);
                 copiedEnum.setAttributes(enumInterclass.getAttributes());
 
                 EnumPainter enumPainter = new EnumPainter(tempPoint, copiedEnum);
@@ -51,6 +54,7 @@ public class DuplicateState implements State {
             else if(classToCopy instanceof InterfaceInterclass){
                 InterfaceInterclass interfaceInterclass = (InterfaceInterclass) classToCopy;
                 InterfaceInterclass copiedInterface = new InterfaceInterclass(tempPoint, interfaceInterclass.getColor(), interfaceInterclass.getStroke(), interfaceInterclass.getName(),interfaceInterclass.getVisibility());
+                copiedInterface.getListOfSubscribers().add(tempTab);
                 copiedInterface.setMethods(interfaceInterclass.getMethods());
 
                 InterfacePainter interfacePainter = new InterfacePainter(tempPoint, copiedInterface);

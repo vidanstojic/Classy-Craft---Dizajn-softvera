@@ -4,6 +4,7 @@ import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
+import raf.classycraft.app.observer.ISubscriber;
 
 import java.awt.*;
 import java.util.List;
@@ -71,5 +72,25 @@ public class InterfaceInterclass extends Interclass {
     @Override
     public List<Point> getConnectionDots() {
         return super.getConnectionDots();
+    }
+
+    @Override
+    public void addSubscriber(ISubscriber iSubscriber) {
+        super.addSubscriber(iSubscriber);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber iSubscriber) {
+        super.removeSubscriber(iSubscriber);
+    }
+
+    @Override
+    public void notifySub(Object notify) {
+        super.notifySub(notify);
+    }
+
+    @Override
+    public List<ISubscriber> getListOfSubscribers() {
+        return super.getListOfSubscribers();
     }
 }

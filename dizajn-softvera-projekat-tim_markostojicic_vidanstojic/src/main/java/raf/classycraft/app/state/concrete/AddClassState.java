@@ -40,6 +40,7 @@ public class AddClassState implements State {
             String string = (String)selection2;
             Point point = new Point(e.getX(), e.getY());
             ClassInterClass classInterClass = new ClassInterClass(point, Color.BLACK, 2, name, "public", string);
+            classInterClass.getListOfSubscribers().add(tempTab);
             ClassPainter classPainter = new ClassPainter(point,classInterClass);
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if (elementPainter.elementAt(point) == true) {
@@ -57,6 +58,7 @@ public class AddClassState implements State {
             }
             Point point = new Point(e.getX(), e.getY());
             InterfaceInterclass interfaceInterclass = new InterfaceInterclass(point,Color.BLACK, 2, name, "public");
+            interfaceInterclass.getListOfSubscribers().add(tempTab);
             InterfacePainter interfacePainter = new InterfacePainter(point, interfaceInterclass);
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if (elementPainter.elementAt(point) == true) {
@@ -75,6 +77,7 @@ public class AddClassState implements State {
             }
             Point point = new Point(e.getX(), e.getY());
             EnumInterclass enumInterclass = new EnumInterclass(point,Color.BLACK, 2, name, "public");
+            enumInterclass.getListOfSubscribers().add(tempTab);
             EnumPainter enumPainter = new EnumPainter(point, enumInterclass);
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
                 if (elementPainter.elementAt(point) == true) {
