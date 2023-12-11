@@ -12,6 +12,8 @@ import raf.classycraft.app.state.State;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddConnectionState implements State {
 
@@ -34,6 +36,7 @@ public class AddConnectionState implements State {
     private ConnectionMode connectionMode = ConnectionMode.NONE;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
+        deselect(tempTab);
         if(connectionMode == ConnectionMode.NONE) {
             boolean askUser = false;
             Point point = new Point(e.getX(), e.getY());
@@ -173,6 +176,25 @@ public class AddConnectionState implements State {
         connection.setLine2D(tempTab.getLine2D());
         tempTab.repaint();
     }
-
+    private void deselect(DiagramView tempTab){
+        if(!tempTab.getListOfSelectedPainters().isEmpty()) {
+            List<ElementPainter> helpList = new ArrayList<>();
+            Interclass interclass;
+            Connection connection;
+            for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()) {
+                if (elementPainter.getRectangle() != null) {
+                    interclass = ((InterClassPainter) elementPainter).getInterclass();
+                    interclass.setColor(Color.BLACK);
+                } else if (elementPainter.getLine2D() != null) {
+                    connection = ((ConnectionPainter) elementPainter).getConnection();
+                    connection.setColor(Color.BLACK);
+                }
+            }
+            for (ElementPainter elementPainter : helpList) {
+                tempTab.getListOfSelectedPainters().remove(elementPainter);
+            }
+            tempTab.repaint();
+        }
+    }
 
 }

@@ -2,6 +2,7 @@ package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
+import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
@@ -21,6 +22,7 @@ public class EditClassState implements State {
     private List<ClassContent>listForRemoveContent = new ArrayList<>();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
+        deselect(tempTab);
         ElementPainter classToEdit;
         Point point = new Point(e.getX(), e.getY());
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
@@ -249,6 +251,26 @@ public class EditClassState implements State {
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
             if (inputText == null) return;
             elementsEdit(interclass, tempTab, inputText);
+        }
+    }
+    private void deselect(DiagramView tempTab){
+        if(!tempTab.getListOfSelectedPainters().isEmpty()) {
+            List<ElementPainter> helpList = new ArrayList<>();
+            Interclass interclass;
+            Connection connection;
+            for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()) {
+                if (elementPainter.getRectangle() != null) {
+                    interclass = ((InterClassPainter) elementPainter).getInterclass();
+                    interclass.setColor(Color.BLACK);
+                } else if (elementPainter.getLine2D() != null) {
+                    connection = ((ConnectionPainter) elementPainter).getConnection();
+                    connection.setColor(Color.BLACK);
+                }
+            }
+            for (ElementPainter elementPainter : helpList) {
+                tempTab.getListOfSelectedPainters().remove(elementPainter);
+            }
+            tempTab.repaint();
         }
     }
 }

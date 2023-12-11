@@ -3,6 +3,7 @@ package raf.classycraft.app.state.concrete;
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
+import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
@@ -13,10 +14,13 @@ import raf.classycraft.app.state.State;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DuplicateState implements State {
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
+        deselect(tempTab);
         Point tempPoint = new Point(e.getX(), e.getY());
         Interclass classToCopy = null;
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
@@ -72,5 +76,25 @@ public class DuplicateState implements State {
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
 
+    }
+    private void deselect(DiagramView tempTab){
+        if(!tempTab.getListOfSelectedPainters().isEmpty()) {
+            List<ElementPainter> helpList = new ArrayList<>();
+            Interclass interclass;
+            Connection connection;
+            for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()) {
+                if (elementPainter.getRectangle() != null) {
+                    interclass = ((InterClassPainter) elementPainter).getInterclass();
+                    interclass.setColor(Color.BLACK);
+                } else if (elementPainter.getLine2D() != null) {
+                    connection = ((ConnectionPainter) elementPainter).getConnection();
+                    connection.setColor(Color.BLACK);
+                }
+            }
+            for (ElementPainter elementPainter : helpList) {
+                tempTab.getListOfSelectedPainters().remove(elementPainter);
+            }
+            tempTab.repaint();
+        }
     }
 }
