@@ -99,7 +99,7 @@ public class ClassPainter extends InterClassPainter{
         }
 
         if (classInterClass.getAttributes().size() >= 1) {
-            graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x + (int) (15 + length + 20), pointForLine.y - 10);
+            graphics2D.drawLine(pointForLine.x, pointForLine.y - 10, pointForLine.x + (int) (15 + length + 15), pointForLine.y - 10);
         }
 
         int heightOfRectangle = ((classInterClass.getClassContents().size()) == 0) ? (heightPoint.y) : (classInterClass.getClassContents().size() * heightOfString + 33);
