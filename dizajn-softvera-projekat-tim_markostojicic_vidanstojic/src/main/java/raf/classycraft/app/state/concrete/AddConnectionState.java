@@ -5,6 +5,7 @@ import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.ConnectionMode;
 import raf.classycraft.app.model.elementDiagram.Interclass;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.Aggregation;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Dependency;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalization;
 import raf.classycraft.app.state.State;
@@ -104,6 +105,25 @@ public class AddConnectionState implements State {
                 System.out.println("Dodavanje kompozicije");
             } else if (selection.equals("Aggregation")) {
                 System.out.println("Dodavanje agregacije");
+                Point point = new Point(e.getX(), e.getY());
+                boolean flagForAdd = false;
+                for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
+                    if (elementPainter.elementAt(point) == true) {
+                        if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
+                            startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
+                            classFrom = ((InterClassPainter) elementPainter).getInterclass();
+                            connection = new Aggregation(Color.BLACK, 2, tempTab.getLine2D());
+                            connection.setClassFrom(classFrom);
+                            flagForAdd = true;
+                        }
+                    }
+                }
+                if (flagForAdd == false) return;
+                painter = new AggregationPainter((Aggregation) connection);
+                tempTab.getListOfPainters().add(painter);
+                tempTab.getDiagram().addChild(connection);
+                tempTab.repaint();
+
             }
 
         }
