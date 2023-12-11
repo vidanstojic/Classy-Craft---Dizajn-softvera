@@ -36,6 +36,7 @@ public class DependancyPainter extends ConnectionPainter {
 
         drawArrow(graphics2D, (int) line2D.getX1(), (int) line2D.getY1(),
                 (int) line2D.getX2(), (int) line2D.getY2());
+        this.setLine2D(line2D);
     }
 
     private void drawArrow(Graphics2D g, int x1, int y1, int x2, int y2) {
