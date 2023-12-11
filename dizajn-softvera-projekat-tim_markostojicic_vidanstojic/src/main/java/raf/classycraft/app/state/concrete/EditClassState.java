@@ -200,7 +200,7 @@ public class EditClassState implements State {
             return;
         }else if (selectionEdit == "Rename element name"){
             for (ClassContent classContent : interclass.getClassContents()){
-                if (classContent.equals(input)){
+                if (classContent.getName().equals(input)){
                     String inputName = JOptionPane.showInputDialog("Enter new name");
                     classContent.setName(inputName);
                     tempTab.repaint();
@@ -209,7 +209,7 @@ public class EditClassState implements State {
             }
         } else if (selectionEdit == "Change element type") {
             for (ClassContent classContent : interclass.getClassContents()){
-                if (classContent.equals(input)){
+                if (classContent.getName().equals(input)){
                     String inputType = JOptionPane.showInputDialog("Enter new name");
                     classContent.setReturnType(inputType);
                     tempTab.repaint();
@@ -218,7 +218,7 @@ public class EditClassState implements State {
             }
         } else if (selectionEdit == "Change element visibility") {
             for (ClassContent classContent : interclass.getClassContents()){
-                if (classContent.equals(input)){
+                if (classContent.getName().equals(input)){
                     Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
                     String initialSelectionVisibility = "Public";
                     Object visibility = JOptionPane.showInputDialog(null, "What is your method visibility?",
