@@ -203,6 +203,7 @@ public class EditClassState implements State {
                 if (classContent.getName().equals(input)){
                     String inputName = JOptionPane.showInputDialog("Enter new name");
                     classContent.setName(inputName);
+                    input = inputName;
                     tempTab.repaint();
                     elementsEdit(interclass, tempTab, input);
                 }
