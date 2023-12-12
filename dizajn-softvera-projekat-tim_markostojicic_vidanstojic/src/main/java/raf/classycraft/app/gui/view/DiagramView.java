@@ -113,4 +113,6 @@ public class DiagramView extends JPanel implements ISubscriber {
     public void setListOfSelectedPainters(List<ElementPainter> listOfSelectedPainters) {
         this.listOfSelectedPainters = listOfSelectedPainters;
     }
+
+  
 }

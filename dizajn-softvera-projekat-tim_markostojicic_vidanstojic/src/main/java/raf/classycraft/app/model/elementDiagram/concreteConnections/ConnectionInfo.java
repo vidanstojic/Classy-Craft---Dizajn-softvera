@@ -22,4 +22,36 @@ public class ConnectionInfo {
     public ConnectionInfo(String nameOfConnection) {
         this.nameOfConnection = nameOfConnection;
     }
+
+    public String getNameOfConnection() {
+        return nameOfConnection;
+    }
+
+    public void setNameOfConnection(String nameOfConnection) {
+        this.nameOfConnection = nameOfConnection;
+    }
+
+    public String getNameofAttribute() {
+        return nameofAttribute;
+    }
+
+    public void setNameofAttribute(String nameofAttribute) {
+        this.nameofAttribute = nameofAttribute;
+    }
+
+    public String getCardinaliy() {
+        return cardinaliy;
+    }
+
+    public void setCardinaliy(String cardinaliy) {
+        this.cardinaliy = cardinaliy;
+    }
+
+    public Visibility getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(Visibility visibility) {
+        this.visibility = visibility;
+    }
 }

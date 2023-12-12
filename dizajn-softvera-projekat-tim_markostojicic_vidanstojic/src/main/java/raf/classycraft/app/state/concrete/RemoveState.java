@@ -45,7 +45,8 @@ public class RemoveState implements State {
                         tempTab.getDiagram().removeChild(((InterClassPainter) elementPainter).getInterclass());
                     }
                 }
-            }else if (elementPainter instanceof ConnectionPainter){
+            }
+            else if (elementPainter instanceof ConnectionPainter){
                 if (rectangle.intersectsLine(elementPainter.getLine2D())){
                     if (elementPainter instanceof AggregationPainter || elementPainter instanceof CompositionPainter || elementPainter instanceof DependancyPainter || elementPainter instanceof GeneralizationPainter) {
                         elementPaintersToRemove.add(elementPainter);

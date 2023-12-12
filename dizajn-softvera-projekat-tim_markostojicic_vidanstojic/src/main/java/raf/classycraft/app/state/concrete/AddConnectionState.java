@@ -38,15 +38,27 @@ public class AddConnectionState implements State {
     private ConnectionMode connectionMode = ConnectionMode.NONE;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
-
+        rectangle = tempTab.getRectangle();
+        rectangle.setRect(e.getX(), e.getY(), 3, 3);
+        tempTab.setRectangle(rectangle);
         deselect(tempTab);
         if(connectionMode == ConnectionMode.NONE) {
             boolean askUser = false;
             Point point = new Point(e.getX(), e.getY());
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
-                if((elementPainter.elementAt(point) == true)){
+                if((elementPainter.elementAt(point) == true) && elementPainter instanceof InterClassPainter){
+                    System.out.println("Marko car");
                     askUser = true;
                 }
+
+                else if(elementPainter instanceof ConnectionPainter && rectangle.intersectsLine(elementPainter.getLine2D())){
+                    Connection tempConnection = ((ConnectionPainter) elementPainter).getConnection();
+                    if(tempConnection instanceof Aggregation || tempConnection instanceof Composition){
+                        JOptionPane.showMessageDialog(null, tempConnection.getConnectionInfo().getNameOfConnection()+"\n"+tempConnection.getConnectionInfo().getVisibility(), "Informacije", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    JOptionPane.showMessageDialog(null, "Ovo su informacije", "Informacije", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             }
             if(askUser == false) return;
             Object[] selectionValues = {"Dependency", "Composition", "Aggregation", "Generalisation"};
@@ -77,6 +89,7 @@ public class AddConnectionState implements State {
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
+
                     }
                 }
                 if (flagForAdd == false) return;
@@ -109,7 +122,7 @@ public class AddConnectionState implements State {
                 tempTab.repaint();
             } else if (selection.equals("Composition")) {
                 System.out.println("Dodavanje kompozicije");
-                String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
+         /*       String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
                 if(nameOfAttribute == null || nameOfAttribute.length() == 0) return;
                 Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
                 String initialSelectionVisibility = "Public";
@@ -131,7 +144,7 @@ public class AddConnectionState implements State {
 
 
                 ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
-                Point point = new Point(e.getX(), e.getY());
+           */     Point point = new Point(e.getX(), e.getY());
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                     if (elementPainter.elementAt(point) == true) {
@@ -139,7 +152,7 @@ public class AddConnectionState implements State {
                             startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Composition(Color.BLACK, 2, tempTab.getLine2D());
-                            connection.setConnectionInfo(connectionInfo);
+                          //  connection.setConnectionInfo(connectionInfo);
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
@@ -208,6 +221,8 @@ public class AddConnectionState implements State {
         if (connection == null){tempTab.repaint();return;}
         if (connectionMode == ConnectionMode.DRAW_CONNECTION) {
             boolean flag = false;
+            rectangle.setSize(0,0);
+            tempTab.setRectangle(rectangle);
             minDistance = Double.MAX_VALUE;
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                 if (elementPainter.elementAt(endPoint) == true) {

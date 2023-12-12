@@ -61,7 +61,12 @@ public class PackageView extends JPanel implements ISubscriber {
         if(stringTabs.contains(title)){
             return;
         }
-        tabbedPane.addTab(title, component);
+        JScrollPane scrollPane = new JScrollPane(component);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        tabbedPane.addTab(title, scrollPane);
+      //  tabbedPane.addTab(title, component);
         this.stringTabs.add(title);
     }
 
