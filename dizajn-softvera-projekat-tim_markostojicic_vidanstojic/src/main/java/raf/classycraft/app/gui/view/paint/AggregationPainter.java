@@ -10,6 +10,7 @@ import java.awt.geom.Line2D;
 public class AggregationPainter extends ConnectionPainter {
 
     private Line2D line2D;
+
     public AggregationPainter(Connection connection) {
         super(connection);
     }
@@ -22,44 +23,46 @@ public class AggregationPainter extends ConnectionPainter {
 
         connection.lineUpdate();
         this.line2D = connection.getLine2D();
+
         graphics2D.drawLine((int) connection.getLine2D().getX1(), (int) connection.getLine2D().getY1(),
                 (int) connection.getLine2D().getX2(), (int) connection.getLine2D().getY2());
 
 
-        drawArrow(graphics2D, (int) connection.getLine2D().getX1(), (int) connection.getLine2D().getY1(),
+        drawDiamond(graphics2D, (int) connection.getLine2D().getX1(), (int) connection.getLine2D().getY1(),
                 (int) connection.getLine2D().getX2(), (int) connection.getLine2D().getY2());
+
+
 
         this.setLine2D(line2D);
     }
 
-
-    private void drawArrow(Graphics2D g, int x1, int y1, int x2, int y2) {
-        int arrowSize = 5;
+    private void drawDiamond(Graphics2D g, int x1, int y1, int x2, int y2) {
+        int diamondSize = 15;
 
         double angle = Math.atan2(y2 - y1, x2 - x1);
         double sin = Math.sin(angle);
         double cos = Math.cos(angle);
 
-        double triangleX = x2;
-        double triangleY = y2;
+        double centerX = x1;
+        double centerY = y1;
 
-        double arrowPoint1X = triangleX - arrowSize * cos;
-        double arrowPoint1Y = triangleY - arrowSize * sin;
+        double diamondPoint1X = centerX - diamondSize * cos * 0.35;
+        double diamondPoint1Y = centerY - diamondSize * sin * 0.35;
 
-        double arrowPoint2X = triangleX + arrowSize * sin;
-        double arrowPoint2Y = triangleY - arrowSize * cos;
+        double diamondPoint2X = centerX + diamondSize * sin * 0.35;
+        double diamondPoint2Y = centerY + diamondSize * cos * 0.35;
 
-        double arrowPoint3X = triangleX + arrowSize * cos;
-        double arrowPoint3Y = triangleY + arrowSize * sin;
+        double diamondPoint3X = centerX + diamondSize * cos * 0.35;
+        double diamondPoint3Y = centerY + diamondSize * sin * 0.35;
 
-        double arrowPoint4X = triangleX - arrowSize * sin;
-        double arrowPoint4Y = triangleY + arrowSize * cos;
+        double diamondPoint4X = centerX - diamondSize * sin * 0.35;
+        double diamondPoint4Y = centerY - diamondSize * cos * 0.35;
 
         GeneralPath path = new GeneralPath();
-        path.moveTo(arrowPoint1X, arrowPoint1Y);
-        path.lineTo(arrowPoint2X, arrowPoint2Y);
-        path.lineTo(arrowPoint3X, arrowPoint3Y);
-        path.lineTo(arrowPoint4X, arrowPoint4Y);
+        path.moveTo(diamondPoint4X, diamondPoint4Y);
+        path.lineTo(diamondPoint3X, diamondPoint3Y);
+        path.lineTo(diamondPoint2X, diamondPoint2Y);
+        path.lineTo(diamondPoint1X, diamondPoint1Y);
         path.closePath();
 
         g.setColor(Color.WHITE);
@@ -72,6 +75,5 @@ public class AggregationPainter extends ConnectionPainter {
     @Override
     public boolean elementAt(Point pos) {
         return (line2D != null && line2D.contains(pos));
-
     }
 }
