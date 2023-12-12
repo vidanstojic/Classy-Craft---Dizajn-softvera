@@ -23,7 +23,6 @@ public class DiagramView extends JPanel implements ISubscriber {
     private List<ElementPainter>listOfSelectedPainters = new ArrayList<>();
     private Rectangle rectangle;
     private DiagramElement diagramElement;
-    private JScrollBar jScrollBar;
     private Line2D line2D;
 
     public DiagramView(Diagram diagram){
@@ -42,6 +41,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         Graphics2D graphics2D = (Graphics2D) g;
         for(ElementPainter painter : listOfPainters){
             painter.paint(graphics2D, this.diagramElement);
+            if (painter.getRectangle() != null) scrollRectToVisible(painter.getRectangle());
         }
         if(rectangle != null){
             graphics2D.setColor(new Color(200, 240, 255, 100));
@@ -50,7 +50,7 @@ public class DiagramView extends JPanel implements ISubscriber {
             graphics2D.draw(rectangle);
 
         }
-
+        revalidate();
     }
 
     public DiagramView(){

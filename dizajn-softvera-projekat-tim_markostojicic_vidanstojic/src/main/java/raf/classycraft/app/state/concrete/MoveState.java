@@ -106,5 +106,12 @@ public class MoveState implements State {
             interclass.setPoint(newPoint);
          //   tempTab.repaint();
         }
+        if (newPoint.x > tempTab.getSize().width){
+            tempTab.setPreferredSize(new Dimension(tempTab.getWidth() + 50, tempTab.getHeight()));
+            tempTab.repaint();
+        }if (newPoint.y > tempTab.getSize().height){
+            tempTab.setPreferredSize(new Dimension(tempTab.getWidth(), tempTab.getHeight() + 50));
+            tempTab.repaint();
+        }
     }
 }
