@@ -132,6 +132,7 @@ public class AddConnectionState implements State {
 
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
+        if (connection == null){tempTab.repaint();return;}
         if (connectionMode == ConnectionMode.DRAW_CONNECTION) {
             boolean flag = false;
             minDistance = Double.MAX_VALUE;
@@ -182,6 +183,7 @@ public class AddConnectionState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
+        if (classFrom == null){ tempTab.repaint(); return;}
         connectionMode = ConnectionMode.DRAW_CONNECTION;
         endPoint = e.getPoint();
         for(Point connectionDot : classFrom.getConnectionDots()){

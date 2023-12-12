@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 
+import static java.lang.Math.abs;
+
 public class AggregationPainter extends ConnectionPainter {
 
     private Line2D line2D;
@@ -39,13 +41,23 @@ public class AggregationPainter extends ConnectionPainter {
     private void drawDiamond(Graphics2D g, int x1, int y1, int x2, int y2) {
         int diamondSize = 15;
 
-        double angle = Math.atan2(y2 - y1, x2 - x1);
-        double sin = Math.sin(angle);
-        double cos = Math.cos(angle);
+        double angle = Math.atan2(abs(y2 - y1), abs(x2 - x1));
+        double diamondAngle = 0;
+        double angleInDegrees = Math.toDegrees(angle);
+        double sin = Math.sin(diamondAngle);
+        double cos = Math.cos(diamondAngle);
+        double centerX = 0;
+        double centerY = 0;
+        System.out.println(y1 + " " + y2);
+        System.out.println(angleInDegrees);
 
-        double centerX = x1;
-        double centerY = y1;
-
+        if (angleInDegrees >= 30 && angleInDegrees <= 90){
+            centerX = x1;
+            centerY = (y1 < y2)? y1 + 5 : y1 - 5;
+        }else {
+            centerX = (x1 < x2) ? x1 + 5 : x1 - 5;
+            centerY = y1;
+        }
         double diamondPoint1X = centerX - diamondSize * cos * 0.35;
         double diamondPoint1Y = centerY - diamondSize * sin * 0.35;
 
