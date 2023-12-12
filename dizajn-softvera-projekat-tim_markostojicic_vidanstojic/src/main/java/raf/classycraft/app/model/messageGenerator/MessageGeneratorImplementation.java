@@ -17,9 +17,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
     private List<ISubscriber> subscribers = new ArrayList<>();
     private NotificationMessageGenerator notification;
 
-    public MessageGeneratorImplementation(){
-
-    }
+    public MessageGeneratorImplementation(){}
 
     @Override
     public void generateMessage(EventTypes eventType,Type type){
