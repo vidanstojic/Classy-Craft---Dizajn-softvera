@@ -32,9 +32,12 @@ public class AddClassState implements State {
         }
         else if (selection.equals("Class")) {
             String name = JOptionPane.showInputDialog("Name of the class");
-            if (name == null || name.length() == 0){
+
+            if(name == null) return;
+            if (name.length() == 0){
                 name = message(name);
             }
+            if(name == null) return;
             Object[] selectionClass = {"No" , "Yes"};
             String initialSelectionClass = "No";
             Object selection2 = JOptionPane.showInputDialog(null, "Is your class abstract?",
@@ -103,7 +106,9 @@ public class AddClassState implements State {
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
     }
     private String message(String name){
-        if (name == null || name.length() == 0){
+        if(name == null)
+            return null;
+        if (name.length() == 0){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NAME_CANNOT_BE_EMPTY, Type.ERROR);
             name = JOptionPane.showInputDialog("Name of the class");
             name = message(name);
