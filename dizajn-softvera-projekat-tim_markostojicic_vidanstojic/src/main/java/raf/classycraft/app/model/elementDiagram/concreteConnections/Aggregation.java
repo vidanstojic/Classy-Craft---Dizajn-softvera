@@ -8,8 +8,8 @@ import java.awt.geom.Line2D;
 
 public class Aggregation extends Connection {
 
-    public Aggregation(Color color, int stroke, Interclass from, Interclass to, Line2D line2D) {
-        super(color, stroke, from, to, line2D);
+    public Aggregation(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
+        super(color, stroke, from, to, line2D, connectionInfo);
     }
 
     public Aggregation(Color color, int stroke, Line2D line2D) {
@@ -43,5 +43,15 @@ public class Aggregation extends Connection {
     @Override
     public void setLine2D(Line2D line2D) {
         super.setLine2D(line2D);
+    }
+
+    @Override
+    public ConnectionInfo getConnectionInfo() {
+        return super.getConnectionInfo();
+    }
+
+    @Override
+    public void setConnectionInfo(ConnectionInfo connectionInfo) {
+        super.setConnectionInfo(connectionInfo);
     }
 }

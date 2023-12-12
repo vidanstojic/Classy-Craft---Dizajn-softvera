@@ -1,5 +1,7 @@
 package raf.classycraft.app.model.elementDiagram;
 
+import raf.classycraft.app.model.elementDiagram.concreteConnections.ConnectionInfo;
+
 import java.awt.*;
 import java.awt.geom.Line2D;
 
@@ -7,12 +9,15 @@ public abstract class Connection extends DiagramElement {
     private Interclass classFrom;
     private Interclass classTo;
 
+    private ConnectionInfo connectionInfo;
+
     private Line2D line2D;
-    public Connection(Color color, int stroke, Interclass from, Interclass to, Line2D line2D) {
+    public Connection(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
         super(color, stroke);
         this.classFrom = from;
         this.classTo = to;
         this.line2D = line2D;
+        this.connectionInfo = connectionInfo;
     }
     public Connection(Color color, int stroke,Line2D line2D){
         super(color, stroke);
@@ -68,5 +73,13 @@ public abstract class Connection extends DiagramElement {
 
     public void setLine2D(Line2D line2D) {
         this.line2D = line2D;
+    }
+
+    public ConnectionInfo getConnectionInfo() {
+        return connectionInfo;
+    }
+
+    public void setConnectionInfo(ConnectionInfo connectionInfo) {
+        this.connectionInfo = connectionInfo;
     }
 }

@@ -5,10 +5,8 @@ import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.ConnectionMode;
 import raf.classycraft.app.model.elementDiagram.Interclass;
-import raf.classycraft.app.model.elementDiagram.concreteConnections.Aggregation;
-import raf.classycraft.app.model.elementDiagram.concreteConnections.Composition;
-import raf.classycraft.app.model.elementDiagram.concreteConnections.Dependency;
-import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalization;
+import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.*;
 import raf.classycraft.app.state.State;
 
 import javax.swing.*;
@@ -35,9 +33,12 @@ public class AddConnectionState implements State {
 
     private ConnectionPainter painter;
 
+    private Rectangle rectangle;
+
     private ConnectionMode connectionMode = ConnectionMode.NONE;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
+
         deselect(tempTab);
         if(connectionMode == ConnectionMode.NONE) {
             boolean askUser = false;
@@ -71,6 +72,8 @@ public class AddConnectionState implements State {
                             startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Generalization(Color.BLACK, 2, tempTab.getLine2D());
+                            ConnectionInfo connectionInfo = new ConnectionInfo("Generalisation connection");
+                            connection.setConnectionInfo(connectionInfo);
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
@@ -92,6 +95,8 @@ public class AddConnectionState implements State {
                             startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Dependency(Color.BLACK, 2, tempTab.getLine2D());
+                            ConnectionInfo connectionInfo = new ConnectionInfo("Dependacy connection");
+                            connection.setConnectionInfo(connectionInfo);
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
@@ -104,6 +109,28 @@ public class AddConnectionState implements State {
                 tempTab.repaint();
             } else if (selection.equals("Composition")) {
                 System.out.println("Dodavanje kompozicije");
+                String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
+                if(nameOfAttribute == null || nameOfAttribute.length() == 0) return;
+                Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
+                String initialSelectionVisibility = "Public";
+                Object visibility = JOptionPane.showInputDialog(null, "What is your attribute visibility?",
+                        "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
+                String cardinality = JOptionPane.showInputDialog("Cardinality:");
+                if(visibility == null) return;
+                Visibility visibilityEnum;
+                if (visibility == "Public") {
+                    visibilityEnum = Visibility.PUBLIC;
+                } else if (visibility == "Private") {
+                    visibilityEnum = Visibility.PRIVATE;
+                } else if (visibility == "Protected") {
+                    visibilityEnum = Visibility.PROTECTED;
+                } else {
+                    visibilityEnum = Visibility.DEFAULT;
+                }
+                if(cardinality == null || cardinality.length() == 0) return;
+
+
+                ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
                 Point point = new Point(e.getX(), e.getY());
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
@@ -112,6 +139,7 @@ public class AddConnectionState implements State {
                             startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Composition(Color.BLACK, 2, tempTab.getLine2D());
+                            connection.setConnectionInfo(connectionInfo);
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
@@ -121,9 +149,34 @@ public class AddConnectionState implements State {
                 painter = new CompositionPainter((Composition) connection);
                 tempTab.getListOfPainters().add(painter);
                 tempTab.getDiagram().addChild(connection);
+
+
+
                 tempTab.repaint();
             } else if (selection.equals("Aggregation")) {
                 System.out.println("Dodavanje agregacije");
+                String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
+                if(nameOfAttribute == null || nameOfAttribute.length() == 0) return;
+                Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
+                String initialSelectionVisibility = "Public";
+                Object visibility = JOptionPane.showInputDialog(null, "What is your attribute visibility?",
+                        "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
+                String cardinality = JOptionPane.showInputDialog("Cardinality:");
+                if(visibility == null) return;
+                Visibility visibilityEnum;
+                if (visibility == "Public") {
+                    visibilityEnum = Visibility.PUBLIC;
+                } else if (visibility == "Private") {
+                    visibilityEnum = Visibility.PRIVATE;
+                } else if (visibility == "Protected") {
+                    visibilityEnum = Visibility.PROTECTED;
+                } else {
+                    visibilityEnum = Visibility.DEFAULT;
+                }
+                if(cardinality == null || cardinality.length() == 0) return;
+
+
+                ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
                 Point point = new Point(e.getX(), e.getY());
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
@@ -132,6 +185,7 @@ public class AddConnectionState implements State {
                             startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Aggregation(Color.BLACK, 2, tempTab.getLine2D());
+                            connection.setConnectionInfo(connectionInfo);
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
