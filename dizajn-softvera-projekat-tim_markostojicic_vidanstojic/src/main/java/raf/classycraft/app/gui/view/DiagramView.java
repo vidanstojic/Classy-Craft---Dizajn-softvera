@@ -33,6 +33,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         addMouseListener(myMouseListener);
         addMouseMotionListener(myMouseListener);
         this.rectangle = new Rectangle();
+        this.setPreferredSize(new Dimension(MainFrame.getInstance().getWidth() * 2, MainFrame.getInstance().getHeight() * 2));
     }
 
     @Override

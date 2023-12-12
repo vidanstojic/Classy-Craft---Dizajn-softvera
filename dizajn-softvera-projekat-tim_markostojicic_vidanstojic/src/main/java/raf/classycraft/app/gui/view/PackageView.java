@@ -49,12 +49,12 @@ public class PackageView extends JPanel implements ISubscriber {
         this.add(labelPanel, BorderLayout.NORTH);
 
         MyDrawingToolBar toolBar = new MyDrawingToolBar();
-
         Dimension screenSize = MainFrame.getInstance().getSize();
         int height = screenSize.height;
         toolBar.setBorder(BorderFactory.createEmptyBorder(height / 50, 3, 0, 3));
 
         this.add(toolBar, BorderLayout.EAST);
+        this.setPreferredSize(MainFrame.getInstance().getPreferredSize());
     }
 
     public void addTab(String title, Component component ) {
@@ -62,11 +62,16 @@ public class PackageView extends JPanel implements ISubscriber {
             return;
         }
         JScrollPane scrollPane = new JScrollPane(component);
+        Dimension dimension = new Dimension(MainFrame.getInstance().getWidth(),MainFrame.getInstance().getHeight());
+        //component.setPreferredSize(dimension);
+        //scrollPane.setSize(dimension);
+        scrollPane.setMaximumSize(this.getSize());
+        //scrollPane.setPreferredSize(dimension);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         tabbedPane.addTab(title, scrollPane);
-      //  tabbedPane.addTab(title, component);
+        //tabbedPane.addTab(title, component);
         this.stringTabs.add(title);
     }
 
