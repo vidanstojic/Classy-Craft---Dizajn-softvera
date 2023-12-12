@@ -213,7 +213,6 @@ public class AddConnectionState implements State {
             }
 
         }
-
     }
 
     @Override
@@ -259,7 +258,7 @@ public class AddConnectionState implements State {
                     }
                 }
             }
-            if (flag == false) {
+            if (flag == false && classTo == null) {
                 tempTab.setLine2D(null);  // Resetovanje Line2D
                 connection.setLine2D(tempTab.getLine2D());
                 tempTab.getDiagram().removeChild(connection);
