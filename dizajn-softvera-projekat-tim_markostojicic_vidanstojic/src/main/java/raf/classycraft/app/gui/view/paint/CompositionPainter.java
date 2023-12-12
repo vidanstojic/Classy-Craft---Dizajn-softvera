@@ -86,6 +86,6 @@ public class CompositionPainter extends ConnectionPainter{
 
     @Override
     public boolean elementAt(Point pos) {
-        return true;
+        return (line2D != null && line2D.contains(pos));
     }
 }
