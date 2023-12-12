@@ -1,3 +1,1 @@
-[ERROR][2023-12-12T18:13:35.832920900]Name can not be empty.
-[ERROR][2023-12-12T18:13:43.214878300]Name can not be empty.
-[ERROR][2023-12-12T18:13:46.397875400]Name can not be empty.
+[ERROR][2023-12-12T18:17:02.485077700]Name can not be empty.

@@ -42,9 +42,10 @@ public class AddClassState implements State {
             String initialSelectionClass = "No";
             Object selection2 = JOptionPane.showInputDialog(null, "Is your class abstract?",
                     "Abstract class", JOptionPane.QUESTION_MESSAGE, null, selectionClass, initialSelectionClass);
-            String string = (String)selection2;
+            if(selection2 == null) return;
+            String abstractClassOrNot = (String)selection2;
             Point point = new Point(e.getX(), e.getY());
-            ClassInterClass classInterClass = new ClassInterClass(point, Color.BLACK, 2, name, "public", string);
+            ClassInterClass classInterClass = new ClassInterClass(point, Color.BLACK, 2, name, "public", abstractClassOrNot);
             classInterClass.getListOfSubscribers().add(tempTab);
             ClassPainter classPainter = new ClassPainter(point,classInterClass);
             for(ElementPainter elementPainter : tempTab.getListOfPainters()){
