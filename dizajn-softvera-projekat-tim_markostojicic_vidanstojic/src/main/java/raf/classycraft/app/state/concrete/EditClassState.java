@@ -29,7 +29,7 @@ public class EditClassState implements State {
             if (elementPainter.elementAt(point))
                 interclass = ((InterClassPainter) elementPainter).getInterclass();
             Object[] selectionValuesMode = {"Add elements", "Rename", "Remove"};
-            String initialSelectionMode = "Add attributes";
+            String initialSelectionMode = "Add elements";
             Object selectionMode = JOptionPane.showInputDialog(null, "Select edit mode",
                     "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMode, initialSelectionMode);
             if (selectionMode == "Rename"){
@@ -105,9 +105,7 @@ public class EditClassState implements State {
                 } else if (elementPainter.elementAt(point) && elementPainter instanceof EnumPainter) {
                     String name = JOptionPane.showInputDialog("What is name of your enum?");
                     if (name == null) return;
-                    String returnType = JOptionPane.showInputDialog("What is type of your enum?");
-                    if (returnType == null) return;
-                    Attribute attribute = new Attribute(name, returnType);
+                    Attribute attribute = new Attribute(name);
                     Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
                     interClass.getAttributes().add(attribute);
                     interClass.getClassContents().add(attribute);
@@ -158,7 +156,7 @@ public class EditClassState implements State {
         if (interclass.getClassContents().isEmpty()){
             return;
         } else {
-            String inputText = JOptionPane.showInputDialog("Enter full name of attribute that exist");
+            String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
             if (inputText == null)return;
             for (ClassContent classContent : interclass.getClassContents()){
                 if (classContent.getName().equals(inputText)){
@@ -177,7 +175,7 @@ public class EditClassState implements State {
     }
     private void renameMethod(Interclass interclass, DiagramView tempTab){
 
-        Object[] selectionValuesRename = {"Rename class name", "Rename attributes/methods"};
+        Object[] selectionValuesRename = {"Rename class name", "Rename element"};
         String initialSelectionRename = "Rename class name";
         Object selectionRename = JOptionPane.showInputDialog(null, "Select edit mode",
                 "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesRename, initialSelectionRename);
