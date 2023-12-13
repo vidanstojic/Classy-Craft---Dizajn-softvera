@@ -186,7 +186,12 @@ public class EditClassState implements State {
             tempTab.repaint();
         }else if (!interclass.getClassContents().isEmpty() && selectionRename == "Rename element"){
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
-            if (inputText == null) return;
+            int counter = 0;
+            for (ClassContent classContent : interclass.getClassContents()){
+                if (classContent.getName().equals(inputText))
+                    counter++;
+            }
+            if (inputText == null && counter == 0) return;
             elementsEdit(interclass, tempTab, inputText);
         }
     }
