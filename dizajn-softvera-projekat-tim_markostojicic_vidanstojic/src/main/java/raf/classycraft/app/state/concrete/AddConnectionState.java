@@ -59,7 +59,8 @@ public class AddConnectionState implements State {
                         return;
                     }
                     else if(selectConnection == "Check your connection"){
-                        String name = tempConnection.getConnectionInfo().getNameOfConnection();
+                        String nameOfConnection = tempConnection.getConnectionInfo().getNameOfConnection();
+                        String nameofAttribute = tempConnection.getConnectionInfo().getNameofAttribute();
                         String visibilityOfConnection;
                         String cardinality = tempConnection.getConnectionInfo().getCardinaliy();
                         if(tempConnection.getConnectionInfo().getVisibility() == Visibility.PUBLIC){
@@ -74,10 +75,47 @@ public class AddConnectionState implements State {
                         else{
                             visibilityOfConnection = " ";
                         }
-                        JOptionPane.showMessageDialog(null, visibilityOfConnection + name + "\n"+ cardinality,"Information about connection",JOptionPane.INFORMATION_MESSAGE,null);
+                        JOptionPane.showMessageDialog(null, nameOfConnection+ "\n" + visibilityOfConnection + nameofAttribute + "\n"+ cardinality,"Information about connection",JOptionPane.INFORMATION_MESSAGE,null);
                     }
                     else if(selectConnection == "Change info"){
-
+                        Object[] select = {"Cardinality", "Name of attribute", "Visibility"};
+                        String initial = "Check your connection";
+                        Object selectInfo = JOptionPane.showInputDialog(null, "Select which information you want to change:",
+                                "Select information", JOptionPane.QUESTION_MESSAGE, null, select, initial);
+                        if (selectConnection == null) {
+                            return;
+                        }
+                        else if(selectInfo == "Cardinality"){
+                            String inputText = JOptionPane.showInputDialog("Enter new cardinality:");
+                            if (inputText == null || inputText.isEmpty())return;
+                            tempConnection.getConnectionInfo().setCardinaliy(inputText);
+                            tempTab.repaint();
+                        }
+                        else if(selectInfo == "Name of attribute"){
+                            String inputText = JOptionPane.showInputDialog("Enter new name of attribute:");
+                            if (inputText == null || inputText.isEmpty())return;
+                            tempConnection.getConnectionInfo().setNameofAttribute(inputText);
+                            tempTab.repaint();
+                        }
+                        else if (selectInfo == "Visibility"){
+                            Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
+                            String initialSelectionVisibility = "Public";
+                            Object visibility = JOptionPane.showInputDialog(null, "Select new visibility",
+                                    "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
+                            if(visibility == null) return;
+                            Visibility visibilityEnum;
+                            if (visibility == "Public") {
+                                visibilityEnum = Visibility.PUBLIC;
+                            } else if (visibility == "Private") {
+                                visibilityEnum = Visibility.PRIVATE;
+                            } else if (visibility == "Protected") {
+                                visibilityEnum = Visibility.PROTECTED;
+                            } else {
+                                visibilityEnum = Visibility.DEFAULT;
+                            }
+                            tempConnection.getConnectionInfo().setVisibility(visibilityEnum);
+                            tempTab.repaint();
+                        }
                     }
                 }
                 else if(tempConnection instanceof Dependency || tempConnection instanceof Generalization){
