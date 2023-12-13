@@ -63,15 +63,11 @@ public class PackageView extends JPanel implements ISubscriber {
         }
         JScrollPane scrollPane = new JScrollPane(component);
         Dimension dimension = new Dimension(MainFrame.getInstance().getWidth(),MainFrame.getInstance().getHeight());
-        //component.setPreferredSize(dimension);
-        //scrollPane.setSize(dimension);
         scrollPane.setMaximumSize(this.getSize());
-        //scrollPane.setPreferredSize(dimension);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         tabbedPane.addTab(title, scrollPane);
-        //tabbedPane.addTab(title, component);
         this.stringTabs.add(title);
     }
 
@@ -194,7 +190,8 @@ public class PackageView extends JPanel implements ISubscriber {
     public void startSelectionState(){
         this.stateManager.setSelectionState();
     }
-
+    public void startZoomInState(){this.stateManager.setZoomInState();}
+    public void startZoomOutState(){this.stateManager.setZoomOutState();}
     public void startDuplicateState(){this.stateManager.setDuplicateState();}
 
     public static boolean isFlag() {

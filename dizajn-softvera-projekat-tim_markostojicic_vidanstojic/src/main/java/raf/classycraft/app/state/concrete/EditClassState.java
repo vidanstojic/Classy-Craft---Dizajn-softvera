@@ -184,7 +184,7 @@ public class EditClassState implements State {
             if (inputText == null || inputText.isEmpty())return;
             interclass.setName(inputText);
             tempTab.repaint();
-        }else if (!interclass.getClassContents().isEmpty()){
+        }else if (!interclass.getClassContents().isEmpty() && selectionRename == "Rename element"){
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
             if (inputText == null) return;
             elementsEdit(interclass, tempTab, inputText);
