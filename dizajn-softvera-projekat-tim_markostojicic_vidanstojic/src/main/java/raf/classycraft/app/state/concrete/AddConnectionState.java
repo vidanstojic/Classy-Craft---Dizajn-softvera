@@ -35,6 +35,10 @@ public class AddConnectionState implements State {
 
     private Rectangle rectangle;
 
+    private ConnectionInfo connectionInfo;
+
+    private boolean flagForConnectionInfo = false;
+
     private ConnectionMode connectionMode = ConnectionMode.NONE;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
@@ -51,14 +55,6 @@ public class AddConnectionState implements State {
                     askUser = true;
                 }
 
-                else if(elementPainter instanceof ConnectionPainter && rectangle.intersectsLine(elementPainter.getLine2D())){
-                    Connection tempConnection = ((ConnectionPainter) elementPainter).getConnection();
-                    if(tempConnection instanceof Aggregation || tempConnection instanceof Composition){
-                        JOptionPane.showMessageDialog(null, tempConnection.getConnectionInfo().getNameOfConnection()+"\n"+tempConnection.getConnectionInfo().getVisibility(), "Informacije", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    JOptionPane.showMessageDialog(null, "Ovo su informacije", "Informacije", JOptionPane.INFORMATION_MESSAGE);
-                }
-
             }
             if(askUser == false) return;
             Object[] selectionValues = {"Dependency", "Composition", "Aggregation", "Generalisation"};
@@ -68,6 +64,10 @@ public class AddConnectionState implements State {
             if (selection == null) {
                 return;
             }
+            if(selection == "Composition" || selection == "Aggregation"){
+
+            }
+
             connectionMode = ConnectionMode.START_CONNECTION;
             return;
         }
@@ -102,16 +102,46 @@ public class AddConnectionState implements State {
                 System.out.println("Dodavanje dependency");
                 Point point = new Point(e.getX(), e.getY());
                 boolean flagForAdd = false;
+                int brojac = 0;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                     if (elementPainter.elementAt(point) == true) {
                         if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                             startPoint = ((InterClassPainter) elementPainter).getInterclass().getConnectionDots().get(0);
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Dependency(Color.BLACK, 2, tempTab.getLine2D());
-                            ConnectionInfo connectionInfo = new ConnectionInfo("Dependacy connection");
-                            connection.setConnectionInfo(connectionInfo);
+
+                            if(flagForConnectionInfo == false){
+                                String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
+                                if(nameOfAttribute == null || nameOfAttribute.length() == 0) return;
+                                Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
+                                String initialSelectionVisibility = "Public";
+                                Object visibility = JOptionPane.showInputDialog(null, "What is your attribute visibility?",
+                                        "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
+                                String cardinality = JOptionPane.showInputDialog("Cardinality:");
+                                if(visibility == null) return;
+                                Visibility visibilityEnum;
+                                if (visibility == "Public") {
+                                    visibilityEnum = Visibility.PUBLIC;
+                                } else if (visibility == "Private") {
+                                    visibilityEnum = Visibility.PRIVATE;
+                                } else if (visibility == "Protected") {
+                                    visibilityEnum = Visibility.PROTECTED;
+                                } else {
+                                    visibilityEnum = Visibility.DEFAULT;
+                                }
+                                if(cardinality == null || cardinality.length() == 0) return;
+
+
+                                ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
+                                connection.setConnectionInfo(connectionInfo);
+
+
+                                flagForConnectionInfo = true;
+                            }
+
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
+
                         }
                     }
                 }
@@ -171,7 +201,11 @@ public class AddConnectionState implements State {
 
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
-        if (connection == null){tempTab.repaint();return;}
+        if (connection == null){
+            tempTab.repaint();
+            connectionInfo = null;
+            return;
+        }
         if (connectionMode == ConnectionMode.DRAW_CONNECTION) {
             boolean flag = false;
             rectangle.setSize(0,0);
@@ -210,49 +244,31 @@ public class AddConnectionState implements State {
 
                         connectionMode = ConnectionMode.NONE;
                         tempTab.repaint();
-                        if( (connection instanceof Composition || connection instanceof Aggregation )&&( connection.getClassFrom() != null && connection.getClassTo() != null)){
-                            String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
-                            if(nameOfAttribute == null || nameOfAttribute.length() == 0) return;
-                            Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
-                            String initialSelectionVisibility = "Public";
-                            Object visibility = JOptionPane.showInputDialog(null, "What is your attribute visibility?",
-                                    "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
-                            String cardinality = JOptionPane.showInputDialog("Cardinality:");
-                            if(visibility == null) return;
-                            Visibility visibilityEnum;
-                            if (visibility == "Public") {
-                                visibilityEnum = Visibility.PUBLIC;
-                            } else if (visibility == "Private") {
-                                visibilityEnum = Visibility.PRIVATE;
-                            } else if (visibility == "Protected") {
-                                visibilityEnum = Visibility.PROTECTED;
-                            } else {
-                                visibilityEnum = Visibility.DEFAULT;
-                            }
-                            if(cardinality == null || cardinality.length() == 0) return;
-
-
-                            ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
-                            connection.setConnectionInfo(connectionInfo);
-                        }
-
 
                     }
                 }
             }
-            if (flag == false && classTo == null) {
+
+            if (flag == false) {
                 tempTab.setLine2D(null);  // Resetovanje Line2D
                 connection.setLine2D(tempTab.getLine2D());
                 tempTab.getDiagram().removeChild(connection);
                 tempTab.getListOfPainters().remove(painter);
+
+
                 tempTab.repaint();
+                flagForConnectionInfo = false;
             }
         }
     }
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        if (classFrom == null){ tempTab.repaint(); return;}
+        if (classFrom == null){
+            tempTab.repaint();
+            connectionInfo = null;
+            return;
+        }
         connectionMode = ConnectionMode.DRAW_CONNECTION;
         endPoint = e.getPoint();
         for(Point connectionDot : classFrom.getConnectionDots()){
