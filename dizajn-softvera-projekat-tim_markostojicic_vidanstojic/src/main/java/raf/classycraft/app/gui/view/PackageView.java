@@ -62,7 +62,6 @@ public class PackageView extends JPanel implements ISubscriber {
             return;
         }
         JScrollPane scrollPane = new JScrollPane(component);
-        Dimension dimension = new Dimension(MainFrame.getInstance().getWidth(),MainFrame.getInstance().getHeight());
         scrollPane.setMaximumSize(this.getSize());
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

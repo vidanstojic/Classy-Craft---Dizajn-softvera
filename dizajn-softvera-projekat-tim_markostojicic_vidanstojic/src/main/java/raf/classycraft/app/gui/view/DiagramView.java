@@ -41,7 +41,6 @@ public class DiagramView extends JPanel implements ISubscriber {
         Graphics2D graphics2D = (Graphics2D) g;
         for(ElementPainter painter : listOfPainters){
             painter.paint(graphics2D, this.diagramElement);
-            if (painter.getRectangle() != null) scrollRectToVisible(painter.getRectangle());
         }
         if(rectangle != null){
             graphics2D.setColor(new Color(200, 240, 255, 100));
