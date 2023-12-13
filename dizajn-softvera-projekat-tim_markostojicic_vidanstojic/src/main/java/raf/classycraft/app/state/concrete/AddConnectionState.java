@@ -43,9 +43,51 @@ public class AddConnectionState implements State {
         connection = null;
         painter  = null;
         rectangle = tempTab.getRectangle();
-        rectangle.setRect(e.getX(), e.getY(), 3, 3);
+        rectangle.setRect(e.getX(), e.getY(), 5, 5);
         tempTab.setRectangle(rectangle);
         deselect(tempTab);
+        // provera da li je kliknuto na vezu
+        for(ElementPainter elementPainter : tempTab.getListOfPainters()){
+            if(  elementPainter instanceof ConnectionPainter && elementPainter.getLine2D() != null && rectangle.intersectsLine(elementPainter.getLine2D())){
+                Connection tempConnection = ((ConnectionPainter) elementPainter).getConnection();
+                if(tempConnection instanceof Composition || tempConnection instanceof Aggregation){
+                    Object[] selectionValues = {"Check your connection", "Change info"};
+                    String initialSelection = "Check your connection";
+                    Object selectConnection = JOptionPane.showInputDialog(null, "Do you want to check info about your connection or you want to change information about connection?",
+                            "Connection info", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+                    if (selectConnection == null) {
+                        return;
+                    }
+                    else if(selectConnection == "Check your connection"){
+                        String name = tempConnection.getConnectionInfo().getNameOfConnection();
+                        String visibilityOfConnection;
+                        String cardinality = tempConnection.getConnectionInfo().getCardinaliy();
+                        if(tempConnection.getConnectionInfo().getVisibility() == Visibility.PUBLIC){
+                            visibilityOfConnection = "+ ";
+                        }
+                        else if(tempConnection.getConnectionInfo().getVisibility() == Visibility.PRIVATE){
+                            visibilityOfConnection = "- ";
+                        }
+                        else if(tempConnection.getConnectionInfo().getVisibility() == Visibility.PROTECTED){
+                            visibilityOfConnection = "# ";
+                        }
+                        else{
+                            visibilityOfConnection = " ";
+                        }
+                        JOptionPane.showMessageDialog(null, visibilityOfConnection + name + "\n"+ cardinality,"Information about connection",JOptionPane.INFORMATION_MESSAGE,null);
+                    }
+                    else if(selectConnection == "Change info"){
+
+                    }
+                }
+                else if(tempConnection instanceof Dependency || tempConnection instanceof Generalization){
+                    JOptionPane.showMessageDialog(null, tempConnection.getConnectionInfo().getNameOfConnection(),"Information about connection",JOptionPane.INFORMATION_MESSAGE,null);
+                }
+            }
+        }
+
+
+
         if(connectionMode == ConnectionMode.NONE) {
             boolean askUser = false;
             Point point = new Point(e.getX(), e.getY());
@@ -64,7 +106,7 @@ public class AddConnectionState implements State {
             if (selection == null) {
                 return;
             }
-            
+
             connectionMode = ConnectionMode.START_CONNECTION;
             return;
         }
@@ -203,8 +245,14 @@ public class AddConnectionState implements State {
                             }
                         }
                         endPoint = closestConnectionDot;
-
-
+                     /*   if (classFrom == classTo){
+                            tempTab.setLine2D(null);
+                            connection.setLine2D(tempTab.getLine2D());
+                            tempTab.getDiagram().removeChild(connection);
+                            tempTab.getListOfPainters().remove(painter);
+                            tempTab.repaint();
+                        }
+*/
                         tempTab.lineRefresh(startPoint, endPoint);
                         connection.setLine2D(tempTab.getLine2D());
 
@@ -288,10 +336,11 @@ public class AddConnectionState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        if (classFrom == null && connection == null ){
+        if (classFrom == null ){
             tempTab.repaint();
             return;
         }
+        if(connection == null) return;
         connectionMode = ConnectionMode.DRAW_CONNECTION;
         endPoint = e.getPoint();
         for(Point connectionDot : classFrom.getConnectionDots()){
