@@ -21,7 +21,7 @@ public class DuplicateState implements State {
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         deselect(tempTab);
-        Point tempPoint = new Point(e.getX() + 20, e.getY() + 20);
+        Point tempPoint = new Point(e.getX(), e.getY());
         Interclass classToCopy = null;
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if(elementPainter instanceof InterClassPainter && elementPainter.elementAt(tempPoint)){
@@ -35,33 +35,33 @@ public class DuplicateState implements State {
         else{
             if(classToCopy instanceof ClassInterClass){
                 ClassInterClass classInterClass = (ClassInterClass) classToCopy;
-                ClassInterClass copiedClass = new ClassInterClass(tempPoint, classInterClass.getColor(), classInterClass.getStroke(), classInterClass.getName(),classInterClass.getVisibility() ,classInterClass.getAbstractClass());
+                ClassInterClass copiedClass = new ClassInterClass(new Point(tempPoint.x+20, tempPoint.y+20), classInterClass.getColor(), classInterClass.getStroke(), classInterClass.getName(),classInterClass.getVisibility() ,classInterClass.getAbstractClass());
                 copiedClass.getListOfSubscribers().add(tempTab);
                 copiedClass.setAttributes(classInterClass.getAttributes());
                 copiedClass.setMethods(classInterClass.getMethods());
 
 
-                ClassPainter classPainter = new ClassPainter(tempPoint,copiedClass);
+                ClassPainter classPainter = new ClassPainter(new Point(tempPoint.x+20, tempPoint.y+20),copiedClass);
                 tempTab.getListOfPainters().add(classPainter);
                 tempTab.getDiagram().addChild(copiedClass);
             }
             else if(classToCopy instanceof EnumInterclass){
                 EnumInterclass enumInterclass = (EnumInterclass) classToCopy;
-                EnumInterclass copiedEnum = new EnumInterclass(tempPoint, enumInterclass.getColor(), enumInterclass.getStroke(), enumInterclass.getName(),enumInterclass.getVisibility());
+                EnumInterclass copiedEnum = new EnumInterclass(new Point(tempPoint.x+20, tempPoint.y+20), enumInterclass.getColor(), enumInterclass.getStroke(), enumInterclass.getName(),enumInterclass.getVisibility());
                 copiedEnum.getListOfSubscribers().add(tempTab);
                 copiedEnum.setAttributes(enumInterclass.getAttributes());
 
-                EnumPainter enumPainter = new EnumPainter(tempPoint, copiedEnum);
+                EnumPainter enumPainter = new EnumPainter(new Point(tempPoint.x+20, tempPoint.y+20), copiedEnum);
                 tempTab.getListOfPainters().add(enumPainter);
                 tempTab.getDiagram().addChild(copiedEnum);
             }
             else if(classToCopy instanceof InterfaceInterclass){
                 InterfaceInterclass interfaceInterclass = (InterfaceInterclass) classToCopy;
-                InterfaceInterclass copiedInterface = new InterfaceInterclass(tempPoint, interfaceInterclass.getColor(), interfaceInterclass.getStroke(), interfaceInterclass.getName(),interfaceInterclass.getVisibility());
+                InterfaceInterclass copiedInterface = new InterfaceInterclass(new Point(tempPoint.x+20, tempPoint.y+20), interfaceInterclass.getColor(), interfaceInterclass.getStroke(), interfaceInterclass.getName(),interfaceInterclass.getVisibility());
                 copiedInterface.getListOfSubscribers().add(tempTab);
                 copiedInterface.setMethods(interfaceInterclass.getMethods());
 
-                InterfacePainter interfacePainter = new InterfacePainter(tempPoint, copiedInterface);
+                InterfacePainter interfacePainter = new InterfacePainter(new Point(tempPoint.x+20, tempPoint.y+20), copiedInterface);
                 tempTab.getListOfPainters().add(interfacePainter);
                 tempTab.getDiagram().addChild(copiedInterface);
             }
