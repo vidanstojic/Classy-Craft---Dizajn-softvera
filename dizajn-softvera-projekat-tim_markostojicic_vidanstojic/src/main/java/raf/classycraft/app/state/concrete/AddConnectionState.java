@@ -211,6 +211,7 @@ public class AddConnectionState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         if (connection == null){
+            connectionMode = ConnectionMode.NONE;
             tempTab.repaint();
             return;
         }
