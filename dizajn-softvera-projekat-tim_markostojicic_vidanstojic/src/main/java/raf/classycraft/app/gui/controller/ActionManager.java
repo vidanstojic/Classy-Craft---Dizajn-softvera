@@ -14,6 +14,8 @@ public class ActionManager {
     private EraserAction eraserAction;
     private MoveAction moveAction;
     private SelectionAction selectionAction;
+    private ZoomOutAction zoomOutAction;
+    private ZoomInAction zoomInAction;
 
     private DuplicateAction duplicateAction;
     private MyMouseListener myMouseListener;
@@ -34,6 +36,8 @@ public class ActionManager {
         moveAction = new MoveAction();
         selectionAction = new SelectionAction();
         duplicateAction = new DuplicateAction();
+        zoomInAction = new ZoomInAction();
+        zoomOutAction = new ZoomOutAction();
     }
 
     public ExitAction getEa() {
@@ -80,5 +84,13 @@ public class ActionManager {
 
     public DuplicateAction getDuplicateAction() {
         return duplicateAction;
+    }
+
+    public ZoomOutAction getZoomOutAction() {
+        return zoomOutAction;
+    }
+
+    public ZoomInAction getZoomInAction() {
+        return zoomInAction;
     }
 }

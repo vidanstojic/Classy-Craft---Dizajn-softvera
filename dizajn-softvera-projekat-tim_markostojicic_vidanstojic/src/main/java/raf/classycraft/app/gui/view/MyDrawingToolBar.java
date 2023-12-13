@@ -15,6 +15,8 @@ public class MyDrawingToolBar extends JToolBar {
         add (MainFrame.getInstance().getActionManager().getSelectionAction());
         add (MainFrame.getInstance().getActionManager().getEraserAction());
         add(MainFrame.getInstance().getActionManager().getDuplicateAction());
+        add(MainFrame.getInstance().getActionManager().getZoomInAction());
+        add(MainFrame.getInstance().getActionManager().getZoomOutAction());
 
     }
 }

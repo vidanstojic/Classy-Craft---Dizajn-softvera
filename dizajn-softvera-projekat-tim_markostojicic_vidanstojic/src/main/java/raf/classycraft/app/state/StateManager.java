@@ -10,9 +10,9 @@ public class StateManager {
     private AddConnectionState addConnectionState;
     private AddClassState addClassState;
     private SelectionState selectionState;
-
+    private ZoomOutState zoomOutState;
     private DuplicateState duplicateState;
-
+    private ZoomInState zoomInState;
     public StateManager(){
         initStates();
     }
@@ -25,6 +25,8 @@ public class StateManager {
         addClassState = new AddClassState();
         selectionState = new SelectionState();
         duplicateState = new DuplicateState();
+        zoomInState = new ZoomInState();
+        zoomOutState = new ZoomOutState();
         currentState = addClassState;
     }
 
@@ -47,11 +49,11 @@ public class StateManager {
     public void setAddConnectionState() {
         this.currentState = addConnectionState;
     }
-
+    public void setZoomInState(){this.currentState = zoomInState;}
     public void setAddClassState() {this.currentState = addClassState;}
     public void setSelectionState() {
         this.currentState = selectionState;
     }
-
+    public void setZoomOutState(){this.currentState = zoomOutState;}
     public void setDuplicateState(){this.currentState = duplicateState;}
 }
