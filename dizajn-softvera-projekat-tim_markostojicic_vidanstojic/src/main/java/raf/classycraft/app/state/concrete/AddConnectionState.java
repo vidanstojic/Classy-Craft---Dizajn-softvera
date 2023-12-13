@@ -108,7 +108,7 @@ public class AddConnectionState implements State {
                             classFrom = ((InterClassPainter) elementPainter).getInterclass();
                             connection = new Dependency(Color.BLACK, 2, tempTab.getLine2D());
 
-                            if(flagForConnectionInfo == false){
+                     /*       if(flagForConnectionInfo == false){
                                 String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
                                 if(nameOfAttribute == null || nameOfAttribute.length() == 0) return;
                                 Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
@@ -138,7 +138,7 @@ public class AddConnectionState implements State {
 
                             }
 
-
+*/
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
                         }
@@ -243,6 +243,34 @@ public class AddConnectionState implements State {
 
                         connectionMode = ConnectionMode.NONE;
                         tempTab.repaint();
+                        if(connection instanceof Composition){
+                            String nameOfAttribute = JOptionPane.showInputDialog("Name of the attribute:");
+                            if(nameOfAttribute == null || nameOfAttribute.length() == 0) return;
+                            Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
+                            String initialSelectionVisibility = "Public";
+                            Object visibility = JOptionPane.showInputDialog(null, "What is your attribute visibility?",
+                                    "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
+                            String cardinality = JOptionPane.showInputDialog("Cardinality:");
+                            if(visibility == null) return;
+                            Visibility visibilityEnum;
+                            if (visibility == "Public") {
+                                visibilityEnum = Visibility.PUBLIC;
+                            } else if (visibility == "Private") {
+                                visibilityEnum = Visibility.PRIVATE;
+                            } else if (visibility == "Protected") {
+                                visibilityEnum = Visibility.PROTECTED;
+                            } else {
+                                visibilityEnum = Visibility.DEFAULT;
+                            }
+                            if(cardinality == null || cardinality.length() == 0) return;
+
+
+                            ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
+                            connection.setConnectionInfo(connectionInfo);
+
+
+                        }
+
 
                     }
                 }
@@ -263,7 +291,7 @@ public class AddConnectionState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        if (classFrom == null){
+        if (classFrom == null && connection == null ){
             tempTab.repaint();
             return;
         }
