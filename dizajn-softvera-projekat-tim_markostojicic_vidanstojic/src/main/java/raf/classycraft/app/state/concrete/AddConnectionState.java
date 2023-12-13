@@ -35,13 +35,13 @@ public class AddConnectionState implements State {
 
     private Rectangle rectangle;
 
-    private ConnectionInfo connectionInfo;
-
     private boolean flagForConnectionInfo = false;
 
     private ConnectionMode connectionMode = ConnectionMode.NONE;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
+        connection = null;
+        painter  = null;
         rectangle = tempTab.getRectangle();
         rectangle.setRect(e.getX(), e.getY(), 3, 3);
         tempTab.setRectangle(rectangle);
@@ -64,10 +64,8 @@ public class AddConnectionState implements State {
             if (selection == null) {
                 return;
             }
-            if(selection == "Composition" || selection == "Aggregation"){
 
-            }
-
+            flagForConnectionInfo = false;
             connectionMode = ConnectionMode.START_CONNECTION;
             return;
         }
@@ -137,15 +135,17 @@ public class AddConnectionState implements State {
 
 
                                 flagForConnectionInfo = true;
+
                             }
+
 
                             connection.setClassFrom(classFrom);
                             flagForAdd = true;
-
                         }
                     }
                 }
                 if (flagForAdd == false) return;
+
                 painter = new DependancyPainter((Dependency) connection);
                 tempTab.getListOfPainters().add(painter);
                 tempTab.getDiagram().addChild(connection);
@@ -203,7 +203,6 @@ public class AddConnectionState implements State {
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         if (connection == null){
             tempTab.repaint();
-            connectionInfo = null;
             return;
         }
         if (connectionMode == ConnectionMode.DRAW_CONNECTION) {
@@ -249,7 +248,7 @@ public class AddConnectionState implements State {
                 }
             }
 
-            if (flag == false) {
+            if (flag == false && classTo == null) {
                 tempTab.setLine2D(null);  // Resetovanje Line2D
                 connection.setLine2D(tempTab.getLine2D());
                 tempTab.getDiagram().removeChild(connection);
@@ -266,7 +265,6 @@ public class AddConnectionState implements State {
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
         if (classFrom == null){
             tempTab.repaint();
-            connectionInfo = null;
             return;
         }
         connectionMode = ConnectionMode.DRAW_CONNECTION;
