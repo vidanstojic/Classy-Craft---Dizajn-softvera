@@ -30,7 +30,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private DiagramElement diagramElement;
     private Line2D line2D;
     private AffineTransform affineTransform;
-
+    private AffineTransform originalAffineTransform;
     private ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
 
     public DiagramView(Diagram diagram){
@@ -42,15 +42,20 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.rectangle = new Rectangle();
         this.setPreferredSize(new Dimension(MainFrame.getInstance().getWidth() * 2, MainFrame.getInstance().getHeight() * 2));
         affineTransform = new AffineTransform();
+        originalAffineTransform = new AffineTransform();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
-        graphics2D.scale(affineTransform.getScaleX(), affineTransform.getScaleY());
+        graphics2D.transform(affineTransform);
+
+        //graphics2D.scale(affineTransform.getScaleX(), affineTransform.getScaleY());
         for(ElementPainter painter : listOfPainters){
+
             painter.paint(graphics2D, this.diagramElement);
+            System.out.println(painter.getRectangle().x);
         }
         if(rectangle != null){
             graphics2D.setColor(new Color(200, 240, 255, 100));
@@ -59,6 +64,7 @@ public class DiagramView extends JPanel implements ISubscriber {
             graphics2D.draw(rectangle);
 
         }
+        graphics2D.transform(originalAffineTransform);
         revalidate();
     }
 

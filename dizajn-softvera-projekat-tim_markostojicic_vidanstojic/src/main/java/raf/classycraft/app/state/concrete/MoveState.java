@@ -22,6 +22,7 @@ public class MoveState implements State {
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
 
         Point point = new Point(e.getX(), e.getY());
+        System.out.println(point);
         startPointInInterClass = point;
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                 if (!tempTab.getListOfSelectedPainters().isEmpty()){
