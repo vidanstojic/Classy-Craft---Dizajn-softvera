@@ -181,7 +181,6 @@ public class AddConnectionState implements State {
                 System.out.println("Dodavanje dependency");
                 Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
-                int brojac = 0;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                     if (elementPainter.elementAt(point) == true) {
                         if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
@@ -286,14 +285,6 @@ public class AddConnectionState implements State {
                             }
                         }
                         endPoint = closestConnectionDot;
-                     /*   if (classFrom == classTo){
-                            tempTab.setLine2D(null);
-                            connection.setLine2D(tempTab.getLine2D());
-                            tempTab.getDiagram().removeChild(connection);
-                            tempTab.getListOfPainters().remove(painter);
-                            tempTab.repaint();
-                        }
-*/
                         tempTab.lineRefresh(startPoint, endPoint);
                         connection.setLine2D(tempTab.getLine2D());
 

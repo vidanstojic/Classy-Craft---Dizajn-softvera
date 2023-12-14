@@ -35,7 +35,6 @@ public class RemoveState implements State {
                 elementModelsToRemove.add(((ConnectionPainter) elementPainter).getConnection());
             }
         }
-        Point point = new Point(e.getX(), e.getY());
 
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if (elementPainter instanceof InterClassPainter) {

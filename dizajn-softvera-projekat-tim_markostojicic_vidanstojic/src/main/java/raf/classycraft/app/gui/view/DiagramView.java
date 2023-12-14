@@ -23,8 +23,6 @@ import java.util.List;
 public class DiagramView extends JPanel implements ISubscriber {
 
     private Diagram diagram;
-    private double delta;
-    private double deltaY;
     private MyMouseListener myMouseListener;
     private List<ElementPainter> listOfPainters = new ArrayList<>();
     private List<ElementPainter>listOfSelectedPainters = new ArrayList<>();
@@ -32,7 +30,6 @@ public class DiagramView extends JPanel implements ISubscriber {
     private DiagramElement diagramElement;
     private Line2D line2D;
     private AffineTransform affineTransform;
-    private AffineTransform originalAffineTransform;
     private ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
 
     public DiagramView(Diagram diagram){
@@ -44,17 +41,13 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.rectangle = new Rectangle();
         this.setPreferredSize(new Dimension(MainFrame.getInstance().getWidth() * 2, MainFrame.getInstance().getHeight() * 2));
         affineTransform = new AffineTransform();
-        originalAffineTransform = new AffineTransform();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
-        //graphics2D.translate(this.getDelta(),this.getDeltaY());
         graphics2D.scale(affineTransform.getScaleX(), affineTransform.getScaleY());
-        //graphics2D.setTransform(affineTransform);
-        //graphics2D.scale(affineTransform.getScaleX(), affineTransform.getScaleY());
         for(ElementPainter painter : listOfPainters){
 
             painter.paint(graphics2D, this.diagramElement);
@@ -148,22 +141,6 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setListOfSelectedPainters(List<ElementPainter> listOfSelectedPainters) {
         this.listOfSelectedPainters = listOfSelectedPainters;
-    }
-
-    public double getDelta() {
-        return delta;
-    }
-
-    public void setDelta(double delta) {
-        this.delta = delta;
-    }
-
-    public double getDeltaY() {
-        return deltaY;
-    }
-
-    public void setDeltaY(double deltaY) {
-        this.deltaY = deltaY;
     }
 
     public AffineTransform getAffineTransform() {

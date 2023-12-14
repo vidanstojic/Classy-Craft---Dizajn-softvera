@@ -46,11 +46,11 @@ public class GeneralizationPainter extends ConnectionPainter {
         double triangleX = x2;
         double triangleY = y2;
 
-        double arrowPoint1X = triangleX - arrowSize * cos - arrowSize * 0.4 * sin;
-        double arrowPoint1Y = triangleY - arrowSize * sin + arrowSize * 0.4 * cos;
+        double arrowPoint1X = x2 - arrowSize * cos - arrowSize * 0.4 * sin;
+        double arrowPoint1Y = y2 - arrowSize * sin + arrowSize * 0.4 * cos;
 
-        double arrowPoint2X = triangleX - arrowSize * cos + arrowSize * 0.4 * sin;
-        double arrowPoint2Y = triangleY - arrowSize * sin - arrowSize * 0.4 * cos;
+        double arrowPoint2X = x2 - arrowSize * cos + arrowSize * 0.4 * sin;
+        double arrowPoint2Y = y2 - arrowSize * sin - arrowSize * 0.4 * cos;
 
 
         GeneralPath path = new GeneralPath();

@@ -51,13 +51,13 @@ public class CompositionPainter extends ConnectionPainter{
         System.out.println(y1 + " " + y2);
         System.out.println(angleInDegrees);
 
-        //if (angleInDegrees >= 30 && angleInDegrees <= 90){
-            centerX = (x1 < x2) ? x1 + 5 : x1 - 5;;
+        if (angleInDegrees >= 50 && angleInDegrees <= 90){
+            centerX = x1;
             centerY = (y1 < y2)? y1 + 5 : y1 - 5;
-        //}else {
-            /*centerX = (x1 < x2) ? x1 + 5 : x1 - 5;
-            centerY = y1;;
-        }*/
+        }else {
+            centerX = (x1 < x2) ? x1 + 5 : x1 - 5;
+            centerY = (y1 < y2)? y1 + 5 : y1 - 5;;
+        }
         double diamondPoint1X = centerX - diamondSize * cos * 0.35;
         double diamondPoint1Y = centerY - diamondSize * sin * 0.35;
 
