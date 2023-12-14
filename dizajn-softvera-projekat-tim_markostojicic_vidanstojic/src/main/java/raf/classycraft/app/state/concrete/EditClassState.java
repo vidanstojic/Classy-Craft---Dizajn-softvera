@@ -95,9 +95,9 @@ public class EditClassState implements State {
                                     visibilityEnum = Visibility.DEFAULT;
                                 }
                                 String name = JOptionPane.showInputDialog("What is name of your attribute?");
-                                if (name == null) return;
+                                if (name == null || name.length() == 0) return;
                                 String returnType = JOptionPane.showInputDialog("What is type of your attribute?");
-                                if (returnType == null) return;
+                                if (returnType == null || returnType.length() == 0) return;
 
                                 Attribute attribute = new Attribute(name, visibilityEnum, returnType);
                                 Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
@@ -107,8 +107,8 @@ public class EditClassState implements State {
                             }
                         }
                     } else if (elementPainter.elementAt(point) && elementPainter instanceof EnumPainter) {
-                        String name = JOptionPane.showInputDialog("What is name of your enum?");
-                        if (name == null) return;
+                        String name = JOptionPane.showInputDialog("What is the name of the element you want to add to the enum?");
+                        if (name == null || name.length() == 0) return;
                         Attribute attribute = new Attribute(name);
                         Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
                         interClass.getAttributes().add(attribute);
@@ -132,9 +132,9 @@ public class EditClassState implements State {
                                 visibilityEnum = Visibility.DEFAULT;
                             }
                             String name = JOptionPane.showInputDialog("What is name of your method?");
-                            if (name == null) return;
+                            if (name == null || name.length() == 0) return;
                             String returnType = JOptionPane.showInputDialog("What is return type of your method?");
-                            if (returnType == null) return;
+                            if (returnType == null || returnType.length() == 0) return;
 
                             Method method = new Method(name, visibilityEnum, returnType);
                             Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
@@ -258,7 +258,7 @@ public class EditClassState implements State {
             }
         }else if (selectionEdit == "Change some other element"){
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
-            if (inputText == null) return;
+            if (inputText == null || inputText.length() == 0) return;
             elementsEdit(interclass, tempTab, inputText);
         }
     }
