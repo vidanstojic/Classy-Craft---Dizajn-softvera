@@ -88,7 +88,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         return FactoryUtils.initNode(parent);
     }
 
-    public ClassyTreeItem findTreeItem(ClassyTreeItem root, ClassyNodeComposite targetNode) {
+    public ClassyTreeItem findTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
         if (root.getClassyNode() == targetNode) {
             return root;
         }

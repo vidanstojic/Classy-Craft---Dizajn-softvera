@@ -1,6 +1,9 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
+import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.DiagramView;
+import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.Interclass;
@@ -14,6 +17,8 @@ import java.util.List;
 public class RemoveState implements State {
 
     private Rectangle rectangle;
+    private ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         rectangle = tempTab.getRectangle();
@@ -42,6 +47,7 @@ public class RemoveState implements State {
                             // ukoliko se nalazi onda dodajemo tu vezu u listu elemenata za brisanje
                             if(connectionElement instanceof ConnectionPainter && ( ((ConnectionPainter) connectionElement).getConnection().getClassFrom() == (Interclass) ((InterClassPainter) elementPainter).getInterclass() || ((ConnectionPainter) connectionElement).getConnection().getClassTo() == (Interclass) ((InterClassPainter) elementPainter).getInterclass())){
                                 elementPaintersToRemove.add(connectionElement);
+                                elementModelsToRemove.add(((ConnectionPainter) connectionElement).getConnection());
                             }
                         }
                         elementModelsToRemove.add(((InterClassPainter) elementPainter).getInterclass());
@@ -63,7 +69,8 @@ public class RemoveState implements State {
             tempTab.getListOfPainters().remove(elementPainter);
         }
         for(DiagramElement elementToRemove : elementModelsToRemove){
-            tempTab.getDiagram().removeChild(elementToRemove);
+            ClassyTreeItem itemToRemove = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot() ,elementToRemove);
+            this.classyTreeImplementation.removeChild(itemToRemove);
         }
     }
 

@@ -1,6 +1,8 @@
 
 package raf.classycraft.app.gui.view;
 import raf.classycraft.app.gui.controller.drawingToolbarActions.MyMouseListener;
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
+import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.paint.ConnectionPainter;
 import raf.classycraft.app.gui.view.paint.ElementPainter;
 import raf.classycraft.app.gui.view.paint.InterClassPainter;
@@ -28,6 +30,9 @@ public class DiagramView extends JPanel implements ISubscriber {
     private DiagramElement diagramElement;
     private Line2D line2D;
     private AffineTransform affineTransform;
+
+    private ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
         diagram.addSubscriber(this);/// proveriti da li je ovo dozvoljeno zbog MVC-A
@@ -73,16 +78,21 @@ public class DiagramView extends JPanel implements ISubscriber {
                 this.diagramElement = notificationDiagramView.getDiagramElement();
             }
             if(notificationDiagramView.getTypeDiagramView() == TypeDiagramView.REMOVE_DIAGRAM_ELEMENT){
-                ElementPainter painterToRemove = null;
+                List<ElementPainter> paintersToRemove = new ArrayList<>();
                 for(ElementPainter elementPainter : this.listOfPainters){
                     if(elementPainter instanceof InterClassPainter && ((InterClassPainter) elementPainter).getInterclass().equals(notificationDiagramView.getDiagramElement())){
-                        painterToRemove = elementPainter;
+                        paintersToRemove.add(elementPainter);
                     }
                     else if(elementPainter instanceof ConnectionPainter && ((ConnectionPainter) elementPainter).getConnection().equals(notificationDiagramView.getDiagramElement())){
-                        painterToRemove = elementPainter;
+                        paintersToRemove.add(elementPainter);
+                        ClassyTreeItem itemToRemove = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), ((ConnectionPainter) elementPainter).getConnection());
+                        this.classyTreeImplementation.removeChild(itemToRemove);// krsenje MVC-A ?
                     }
                 }
-                this.getListOfPainters().remove(painterToRemove);
+
+                for(ElementPainter painterToRemove : paintersToRemove){
+                    this.getListOfPainters().remove(painterToRemove);
+                }
             }
         }
         repaint();

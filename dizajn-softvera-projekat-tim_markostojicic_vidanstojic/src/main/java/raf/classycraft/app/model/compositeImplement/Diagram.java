@@ -3,7 +3,9 @@ package raf.classycraft.app.model.compositeImplement;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.observer.*;
 
 import java.util.ArrayList;
@@ -104,7 +106,23 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
             this.getChildren().remove(child);
             NotificationDiagramView notificationDiagramView = new NotificationDiagramView(TypeDiagramView.REMOVE_DIAGRAM_ELEMENT,diagramElement);
             notifySub(notificationDiagramView);
+
+            if(child instanceof Interclass){
+                Interclass interclass = (Interclass) child;
+                ClassyNode childToRemove = null;
+                for(ClassyNode children :this.getChildren()){
+                    if(children instanceof Connection){
+                        Connection tempConnection = (Connection) children;
+                        if(tempConnection.getClassFrom().equals(interclass) || tempConnection.getClassTo().equals(interclass)){
+                            childToRemove = children;
+                        }
+                    }
+                }
+                removeChild(childToRemove);
+            }
+
         }
+
 
     }
 }
