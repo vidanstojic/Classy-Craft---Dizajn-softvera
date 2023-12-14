@@ -8,6 +8,7 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.Connection;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
@@ -67,7 +68,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         }
         if(selected != null){
            ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
-           if(parent == null) {
+           if(parent == null && !(selected.getClassyNode() instanceof DiagramElement) ) {
                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
                return;
            }
