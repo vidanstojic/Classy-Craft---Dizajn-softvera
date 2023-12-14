@@ -1,7 +1,10 @@
 package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.core.ApplicationFramework;
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
+import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.DiagramView;
+import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.Interclass;
@@ -18,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DuplicateState implements State {
+
+    ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         deselect(tempTab);
@@ -42,6 +47,14 @@ public class DuplicateState implements State {
 
 
                 ClassPainter classPainter = new ClassPainter(new Point(tempPoint.x+20, tempPoint.y+20),copiedClass);
+
+                //dodavanje u tree
+                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+                this.classyTreeImplementation.addChild(parentItem);
+                ClassyTreeItem childItem = new ClassyTreeItem(copiedClass);
+                this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
+
+
                 tempTab.getListOfPainters().add(classPainter);
                 tempTab.getDiagram().addChild(copiedClass);
             }
@@ -52,6 +65,14 @@ public class DuplicateState implements State {
                 copiedEnum.setAttributes(enumInterclass.getAttributes());
 
                 EnumPainter enumPainter = new EnumPainter(new Point(tempPoint.x+20, tempPoint.y+20), copiedEnum);
+
+                //dodavanje u tree
+                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+                this.classyTreeImplementation.addChild(parentItem);
+                ClassyTreeItem childItem = new ClassyTreeItem(copiedEnum);
+                this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
+
+
                 tempTab.getListOfPainters().add(enumPainter);
                 tempTab.getDiagram().addChild(copiedEnum);
             }
@@ -62,6 +83,13 @@ public class DuplicateState implements State {
                 copiedInterface.setMethods(interfaceInterclass.getMethods());
 
                 InterfacePainter interfacePainter = new InterfacePainter(new Point(tempPoint.x+20, tempPoint.y+20), copiedInterface);
+                //dodavanje u tree
+                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+                this.classyTreeImplementation.addChild(parentItem);
+                ClassyTreeItem childItem = new ClassyTreeItem(copiedInterface);
+                this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
+
+
                 tempTab.getListOfPainters().add(interfacePainter);
                 tempTab.getDiagram().addChild(copiedInterface);
             }

@@ -363,7 +363,7 @@ public class AddConnectionState implements State {
                 }
             }
 
-            if (flag == false && classTo == null) {
+            if (flag == false) {
                 tempTab.setLine2D(null);  // Resetovanje Line2D
                 connection.setLine2D(tempTab.getLine2D());
                 tempTab.getDiagram().removeChild(connection);
@@ -372,10 +372,13 @@ public class AddConnectionState implements State {
 
                 tempTab.repaint();
             }
-            ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-            this.classyTreeImplementation.addChild(parentItem);
-            ClassyTreeItem childItem = new ClassyTreeItem(connection);
-            this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
+            else{
+                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+                this.classyTreeImplementation.addChild(parentItem);
+                ClassyTreeItem childItem = new ClassyTreeItem(connection);
+                this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
+            }
+
         }
     }
 

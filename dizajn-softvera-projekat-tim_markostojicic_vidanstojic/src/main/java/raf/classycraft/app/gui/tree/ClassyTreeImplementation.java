@@ -51,7 +51,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         if(child.getClassyNode() instanceof Connection){
             child.getClassyNode().setName(((Connection) child.getClassyNode()).getConnectionInfo().getNameOfConnection());
         }
-        
+
         parent.add(child);
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
         treeView.expandPath(treeView.getSelectionPath());
