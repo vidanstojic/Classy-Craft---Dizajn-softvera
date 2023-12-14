@@ -4,8 +4,13 @@ import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 
 public class Method extends ClassContent {
 
+
     public Method(String name, Visibility visibility, String returnType) {
         super(name, visibility, returnType);
+    }
+
+    public Method(String name, Visibility visibility, String returnType, String abstractContentOrNot, String staticContentOrNot) {
+        super(name, visibility, returnType, abstractContentOrNot, staticContentOrNot);
     }
 
     @Override
@@ -36,5 +41,25 @@ public class Method extends ClassContent {
     @Override
     public void setReturnType(String returnType) {
         super.setReturnType(returnType);
+    }
+
+    @Override
+    public String getAbstractContentOrNot() {
+        return super.getAbstractContentOrNot();
+    }
+
+    @Override
+    public void setAbstractContentOrNot(String abstractContentOrNot) {
+        super.setAbstractContentOrNot(abstractContentOrNot);
+    }
+
+    @Override
+    public String getStaticContentOrNot() {
+        return super.getStaticContentOrNot();
+    }
+
+    @Override
+    public void setStaticContentOrNot(String staticContentOrNot) {
+        super.setStaticContentOrNot(staticContentOrNot);
     }
 }
