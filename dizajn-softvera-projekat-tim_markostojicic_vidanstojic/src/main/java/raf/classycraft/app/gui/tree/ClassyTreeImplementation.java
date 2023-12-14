@@ -7,6 +7,7 @@ import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
+import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
@@ -43,6 +44,20 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     }
 
+    public void addDiagramElement(ClassyTreeItem parent, ClassyTreeItem child){
+        if(!(parent.getClassyNode() instanceof ClassyNodeComposite))
+            return;
+
+        if(child.getClassyNode() instanceof Connection){
+            child.getClassyNode().setName(((Connection) child.getClassyNode()).getConnectionInfo().getNameOfConnection());
+        }
+        
+        parent.add(child);
+        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
     @Override
     public void removeChild(ClassyTreeItem selected) {
 
@@ -71,5 +86,29 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     private ClassyNode createChild(ClassyNodeComposite parent) {
         return FactoryUtils.initNode(parent);
+    }
+
+    public ClassyTreeItem findTreeItem(ClassyTreeItem root, ClassyNodeComposite targetNode) {
+        if (root.getClassyNode() == targetNode) {
+            return root;
+        }
+
+        for (int i = 0; i < root.getChildCount(); i++) {
+            ClassyTreeItem child = (ClassyTreeItem) root.getChildAt(i);
+            ClassyTreeItem foundItem = findTreeItem(child, targetNode);
+            if (foundItem != null) {
+                return foundItem;
+            }
+        }
+
+        return null;
+    }
+
+    public DefaultTreeModel getTreeModel() {
+        return treeModel;
+    }
+
+    public ClassyTreeView getTreeView() {
+        return treeView;
     }
 }

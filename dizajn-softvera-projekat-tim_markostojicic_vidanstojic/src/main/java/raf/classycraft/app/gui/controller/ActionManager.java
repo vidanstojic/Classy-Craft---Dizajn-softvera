@@ -6,7 +6,7 @@ public class ActionManager {
     private ExitAction ea;
     private AboutUsAction aboutUs;
     private AddClassAction addClassAction;
-    private NewProjectAction newProjectAction;
+    private NewItemAction newItemAction;
     private AddConnectionAction addConnectionAction;
     private RemoveItemAction removeItemAction;
     private EditAction editAction;
@@ -26,7 +26,7 @@ public class ActionManager {
     private void initialiseActions(){
         ea = new ExitAction();
         aboutUs = new AboutUsAction();
-        newProjectAction = new NewProjectAction();
+        newItemAction = new NewItemAction();
         removeItemAction = new RemoveItemAction();
         projectAuthorAction = new ProjectAuthorAction();
         addClassAction = new AddClassAction();
@@ -48,8 +48,8 @@ public class ActionManager {
         return aboutUs;
     }
 
-    public NewProjectAction getNewProjectAction() {
-        return newProjectAction;
+    public NewItemAction getNewItemAction() {
+        return newItemAction;
     }
 
     public RemoveItemAction getRemoveItemAction() {

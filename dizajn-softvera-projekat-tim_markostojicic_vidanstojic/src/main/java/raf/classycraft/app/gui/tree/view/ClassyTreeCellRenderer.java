@@ -5,6 +5,7 @@ import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -30,6 +31,9 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
         }
         else if (((ClassyTreeItem)value).getClassyNode() instanceof Diagram) {
             imageURL = getClass().getResource("/images/diagram.png");
+        }
+        else if(((ClassyTreeItem)value).getClassyNode() instanceof DiagramElement){
+            imageURL = getClass().getResource("/images/element.png");
         }
 
         Icon icon = null;

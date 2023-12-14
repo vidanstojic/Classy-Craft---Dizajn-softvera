@@ -1,6 +1,9 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
+import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.DiagramView;
+import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.ConnectionMode;
@@ -35,7 +38,7 @@ public class AddConnectionState implements State {
 
     private Rectangle rectangle;
 
-
+    ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
 
     private ConnectionMode connectionMode = ConnectionMode.NONE;
     @Override
@@ -131,7 +134,6 @@ public class AddConnectionState implements State {
             Point point = new Point(e.getX(), e.getY());
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                 if((elementPainter.elementAt(point) == true) && elementPainter instanceof InterClassPainter){
-                    System.out.println("Marko car");
                     askUser = true;
                 }
 
@@ -370,6 +372,10 @@ public class AddConnectionState implements State {
 
                 tempTab.repaint();
             }
+            ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+            this.classyTreeImplementation.addChild(parentItem);
+            ClassyTreeItem childItem = new ClassyTreeItem(connection);
+            this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
         }
     }
 

@@ -10,7 +10,7 @@ public class MyMenyBar extends JMenuBar {
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
         fileMenu.add(MainFrame.getInstance().getActionManager().getEa());
-        fileMenu.add(MainFrame.getInstance().getActionManager().getNewProjectAction());
+        fileMenu.add(MainFrame.getInstance().getActionManager().getNewItemAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getRemoveItemAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getProjectAuthorAction());
         add(fileMenu);
