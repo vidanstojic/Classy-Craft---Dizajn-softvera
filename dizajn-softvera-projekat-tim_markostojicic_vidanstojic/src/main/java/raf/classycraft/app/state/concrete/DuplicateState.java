@@ -26,7 +26,7 @@ public class DuplicateState implements State {
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         deselect(tempTab);
-        Point tempPoint = new Point(e.getX(), e.getY());
+        Point tempPoint = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
         Interclass classToCopy = null;
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if(elementPainter instanceof InterClassPainter && elementPainter.elementAt(tempPoint)){

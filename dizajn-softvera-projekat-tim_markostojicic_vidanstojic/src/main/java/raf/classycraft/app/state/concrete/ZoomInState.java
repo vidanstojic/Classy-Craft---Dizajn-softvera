@@ -23,7 +23,9 @@ public class ZoomInState implements State {
         // scaleFactor = zoom;
         double deltaX = point.x * razlika;
         double deltaY = point.y * razlika;
-        affineTransform.translate(deltaX,deltaY);
+        ///tempTab.setDelta(deltaX);
+        tempTab.setDeltaY(deltaY);
+        //affineTransform.translate(deltaX,deltaY);
         tempTab.setPreferredSize(new Dimension((int) (tempTab.getWidth() * 1.1), (int) (tempTab.getHeight() * 1.1)));
         tempTab.repaint();
     }

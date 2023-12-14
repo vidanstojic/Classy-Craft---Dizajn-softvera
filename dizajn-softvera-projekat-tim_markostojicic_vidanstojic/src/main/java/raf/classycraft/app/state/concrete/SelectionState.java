@@ -39,7 +39,7 @@ public class SelectionState implements State {
             }
         }
             rectangle = tempTab.getRectangle();
-            point = new Point(e.getX(), e.getY());
+            point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
             tempTab.repaint();
     }
 
@@ -51,10 +51,10 @@ public class SelectionState implements State {
     }
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        int x = Math.min(point.x,e.getX());
-        int y = Math.min(point.y, e.getY());
-        int width = Math.abs(e.getX() - point.x);
-        int height = Math.abs(e.getY() - point.y);///ovim sam napravio da se selekcija vrsi u svakom pravcu
+        int x = Math.min(point.x,(int) (e.getX() / tempTab.getAffineTransform().getScaleX()));
+        int y = Math.min(point.y, (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
+        int width = Math.abs((int) (e.getX() / tempTab.getAffineTransform().getScaleX()) - point.x);
+        int height = Math.abs((int) (e.getY() / tempTab.getAffineTransform().getScaleY()) - point.y);///ovim sam napravio da se selekcija vrsi u svakom pravcu
         rectangle.setRect(x, y, width, height);
         tempTab.setRectangle(rectangle);
         tempTab.repaint();

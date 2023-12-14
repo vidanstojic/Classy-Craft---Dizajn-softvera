@@ -11,7 +11,7 @@ public class ZoomOutState implements State {
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         AffineTransform affineTransform = tempTab.getAffineTransform();
-        if (affineTransform.getScaleX() < 0.3 && affineTransform.getScaleY() < 0.3)return;
+        if (affineTransform.getScaleX() < 0.35 && affineTransform.getScaleY() < 0.35)return;
         affineTransform.scale(1.0 / 1.1, 1.0 / 1.1);
         tempTab.setPreferredSize(new Dimension((int) (tempTab.getWidth() * (1.0 / 1.1)), (int) (tempTab.getHeight() * (1.0 / 1.1))));
         tempTab.repaint();

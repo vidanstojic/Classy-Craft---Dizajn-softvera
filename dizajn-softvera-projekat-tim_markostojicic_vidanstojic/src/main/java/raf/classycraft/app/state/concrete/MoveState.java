@@ -20,9 +20,7 @@ public class MoveState implements State {
     private Point startPointInInterClass;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
-
-        Point point = new Point(e.getX(), e.getY());
-        System.out.println(point);
+        Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleX()));
         startPointInInterClass = point;
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                 if (!tempTab.getListOfSelectedPainters().isEmpty()){
@@ -87,7 +85,7 @@ public class MoveState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
-        newPoint = new Point(e.getX(), e.getY());
+        newPoint = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
         int weight = newPoint.x - startPointInInterClass.x;
         int height = newPoint.y - startPointInInterClass.y;
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
@@ -97,7 +95,6 @@ public class MoveState implements State {
                     Point point2 = new Point(interclass.getSpecialPoint());
                     Point point = new Point(point2.x + weight, point2.y + height);
                     interclass.setPoint(point);
-                   // tempTab.repaint();
                 }
             }
 
@@ -105,7 +102,6 @@ public class MoveState implements State {
 
         if(interclass != null && tempTab.getListOfSelectedPainters().isEmpty()) {
             interclass.setPoint(newPoint);
-         //   tempTab.repaint();
         }
         if (newPoint.x > tempTab.getSize().width){
             tempTab.setPreferredSize(new Dimension(tempTab.getWidth() + 50, tempTab.getHeight()));

@@ -27,6 +27,7 @@ public class AddClassState implements State {
 
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
+        Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
         deselect(tempTab);
         Object[] selectionValues = {"Class", "Interface", "Enum"};
         String initialSelection = "Class";
@@ -49,7 +50,6 @@ public class AddClassState implements State {
                     "Abstract class", JOptionPane.QUESTION_MESSAGE, null, selectionClass, initialSelectionClass);
             if(selection2 == null) return;
             String abstractClassOrNot = (String)selection2;
-            Point point = new Point(e.getX(), e.getY());
             System.out.println(point.x);
             ClassInterClass classInterClass = new ClassInterClass(point, Color.BLACK, 2, name, "public", abstractClassOrNot);
             classInterClass.getListOfSubscribers().add(tempTab);
@@ -75,7 +75,6 @@ public class AddClassState implements State {
             if (name == null || name.length() == 0){
                 name = message(name);
             }
-            Point point = new Point(e.getX(), e.getY());
             InterfaceInterclass interfaceInterclass = new InterfaceInterclass(point,Color.BLACK, 2, name, "public");
             interfaceInterclass.getListOfSubscribers().add(tempTab);
             InterfacePainter interfacePainter = new InterfacePainter(point, interfaceInterclass);
@@ -99,7 +98,6 @@ public class AddClassState implements State {
             if (name == null || name.length() == 0){
                 name = message(name);
             }
-            Point point = new Point(e.getX(), e.getY());
             EnumInterclass enumInterclass = new EnumInterclass(point,Color.BLACK, 2, name, "public");
             enumInterclass.getListOfSubscribers().add(tempTab);
             EnumPainter enumPainter = new EnumPainter(point, enumInterclass);

@@ -22,7 +22,7 @@ public class RemoveState implements State {
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         rectangle = tempTab.getRectangle();
-        rectangle.setRect(e.getX(), e.getY(), 3, 3);
+        rectangle.setRect((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()), 3, 3);
         tempTab.setRectangle(rectangle);
         tempTab.repaint();
         List<ElementPainter> elementPaintersToRemove = new ArrayList<>();

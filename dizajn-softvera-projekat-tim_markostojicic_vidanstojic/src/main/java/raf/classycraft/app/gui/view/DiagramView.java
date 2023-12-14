@@ -23,6 +23,8 @@ import java.util.List;
 public class DiagramView extends JPanel implements ISubscriber {
 
     private Diagram diagram;
+    private double delta;
+    private double deltaY;
     private MyMouseListener myMouseListener;
     private List<ElementPainter> listOfPainters = new ArrayList<>();
     private List<ElementPainter>listOfSelectedPainters = new ArrayList<>();
@@ -49,13 +51,14 @@ public class DiagramView extends JPanel implements ISubscriber {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
-        graphics2D.transform(affineTransform);
-
+        //graphics2D.translate(this.getDelta(),this.getDeltaY());
+        graphics2D.scale(affineTransform.getScaleX(), affineTransform.getScaleY());
+        //graphics2D.setTransform(affineTransform);
         //graphics2D.scale(affineTransform.getScaleX(), affineTransform.getScaleY());
         for(ElementPainter painter : listOfPainters){
 
             painter.paint(graphics2D, this.diagramElement);
-            System.out.println(painter.getRectangle().x);
+
         }
         if(rectangle != null){
             graphics2D.setColor(new Color(200, 240, 255, 100));
@@ -64,7 +67,6 @@ public class DiagramView extends JPanel implements ISubscriber {
             graphics2D.draw(rectangle);
 
         }
-        graphics2D.transform(originalAffineTransform);
         revalidate();
     }
 
@@ -145,6 +147,22 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setListOfSelectedPainters(List<ElementPainter> listOfSelectedPainters) {
         this.listOfSelectedPainters = listOfSelectedPainters;
+    }
+
+    public double getDelta() {
+        return delta;
+    }
+
+    public void setDelta(double delta) {
+        this.delta = delta;
+    }
+
+    public double getDeltaY() {
+        return deltaY;
+    }
+
+    public void setDeltaY(double deltaY) {
+        this.deltaY = deltaY;
     }
 
     public AffineTransform getAffineTransform() {

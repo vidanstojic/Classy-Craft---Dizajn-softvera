@@ -46,7 +46,7 @@ public class AddConnectionState implements State {
         connection = null;
         painter  = null;
         rectangle = tempTab.getRectangle();
-        rectangle.setRect(e.getX(), e.getY(), 5, 5);
+        rectangle.setRect((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()), 5, 5);
         tempTab.setRectangle(rectangle);
         deselect(tempTab);
         // provera da li je kliknuto na vezu
@@ -131,7 +131,7 @@ public class AddConnectionState implements State {
 
         if(connectionMode == ConnectionMode.NONE) {
             boolean askUser = false;
-            Point point = new Point(e.getX(), e.getY());
+            Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                 if((elementPainter.elementAt(point) == true) && elementPainter instanceof InterClassPainter){
                     askUser = true;
@@ -155,7 +155,7 @@ public class AddConnectionState implements State {
                 return;
             } else if (selection.equals("Generalisation")) {
                 System.out.println("Dodavanje generalizacije");
-                Point point = new Point(e.getX(), e.getY());
+                Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                     if (elementPainter.elementAt(point) == true) {
@@ -179,7 +179,7 @@ public class AddConnectionState implements State {
 
             } else if (selection.equals("Dependency")) {
                 System.out.println("Dodavanje dependency");
-                Point point = new Point(e.getX(), e.getY());
+                Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 int brojac = 0;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
@@ -201,7 +201,7 @@ public class AddConnectionState implements State {
                 tempTab.repaint();
             } else if (selection.equals("Composition")) {
                 System.out.println("Dodavanje kompozicije");
-               Point point = new Point(e.getX(), e.getY());
+               Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                     if (elementPainter.elementAt(point) == true) {
@@ -224,7 +224,7 @@ public class AddConnectionState implements State {
                 tempTab.repaint();
             } else if (selection.equals("Aggregation")) {
                 System.out.println("Dodavanje agregacije");
-                Point point = new Point(e.getX(), e.getY());
+                Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
                     if (elementPainter.elementAt(point) == true) {
@@ -267,7 +267,7 @@ public class AddConnectionState implements State {
                         classTo = ((InterClassPainter) elementPainter).getInterclass();
                         connection.setClassTo(classTo);
 
-                        endPoint = e.getPoint();
+                        endPoint = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                         for(Point connectionDot : classFrom.getConnectionDots()){
                             double distance = Math.sqrt(Math.pow(connectionDot.x - endPoint.x, 2) + Math.pow(connectionDot.y - endPoint.y, 2));
                             if(distance < minDistance){
@@ -390,7 +390,7 @@ public class AddConnectionState implements State {
         }
         if(connection == null) return;
         connectionMode = ConnectionMode.DRAW_CONNECTION;
-        endPoint = e.getPoint();
+        endPoint = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
         for(Point connectionDot : classFrom.getConnectionDots()){
             double distance = Math.sqrt(Math.pow(connectionDot.x - endPoint.x, 2) + Math.pow(connectionDot.y - endPoint.y, 2));
             if(distance < minDistance){

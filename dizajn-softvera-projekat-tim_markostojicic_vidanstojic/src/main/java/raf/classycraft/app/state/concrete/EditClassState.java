@@ -28,7 +28,7 @@ public class EditClassState implements State {
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         deselect(tempTab);
         ElementPainter classToEdit;
-        Point point = new Point(e.getX(), e.getY());
+        Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
         for(ElementPainter elementPainter : tempTab.getListOfPainters()) {
             if (elementPainter.elementAt(point)) {
                 interclass = ((InterClassPainter) elementPainter).getInterclass();
