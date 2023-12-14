@@ -416,6 +416,7 @@ public class AddConnectionState implements State {
                     connection = ((ConnectionPainter) elementPainter).getConnection();
                     connection.setColor(Color.BLACK);
                 }
+                helpList.add(elementPainter);
             }
             for (ElementPainter elementPainter : helpList) {
                 tempTab.getListOfSelectedPainters().remove(elementPainter);
