@@ -94,6 +94,7 @@ public class DiagramView extends JPanel implements ISubscriber {
                     else if(elementPainter instanceof ConnectionPainter && ((ConnectionPainter) elementPainter).getConnection().equals(notificationDiagramView.getDiagramElement())){
                         paintersToRemove.add(elementPainter);
                         ClassyTreeItem itemToRemove = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), ((ConnectionPainter) elementPainter).getConnection());
+                        if(itemToRemove == null) return;
                         this.classyTreeImplementation.removeChild(itemToRemove);// krsenje MVC-A ?
                     }
                 }
