@@ -1,6 +1,8 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.view.DiagramView;
+import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.Interclass;
@@ -20,30 +22,99 @@ public class EditClassState implements State {
 
     private Interclass interclass;
     private List<ClassContent>listForRemoveContent = new ArrayList<>();
+
+    private ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         deselect(tempTab);
         ElementPainter classToEdit;
         Point point = new Point(e.getX(), e.getY());
-        for(ElementPainter elementPainter : tempTab.getListOfPainters()){
-            if (elementPainter.elementAt(point))
+        for(ElementPainter elementPainter : tempTab.getListOfPainters()) {
+            if (elementPainter.elementAt(point)) {
                 interclass = ((InterClassPainter) elementPainter).getInterclass();
-            Object[] selectionValuesMode = {"Add elements", "Rename", "Remove"};
-            String initialSelectionMode = "Add elements";
-            Object selectionMode = JOptionPane.showInputDialog(null, "Select edit mode",
-                    "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMode, initialSelectionMode);
-            if (selectionMode == "Rename"){
-                renameMethod(interclass, tempTab);
-            } else if (selectionMode == "Remove") {
-                removeMethod(interclass, tempTab);
-            } else if (selectionMode == "Add elements") {
-                if (elementPainter.elementAt(point) && elementPainter instanceof ClassPainter) {
-                    Object[] selectionValues = {"Attribute", "Method"};
-                    String initialSelection = "Attribute";
-                    Object selection = JOptionPane.showInputDialog(null, "Do you want to add method or attribute?",
-                            "Method/Attribute", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-                    if (selection == null) return;
-                    if (selection == "Method") {
+                Object[] selectionValuesMode = {"Add elements", "Rename", "Remove"};
+                String initialSelectionMode = "Add elements";
+                Object selectionMode = JOptionPane.showInputDialog(null, "Select edit mode",
+                        "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMode, initialSelectionMode);
+                if (selectionMode == "Rename") {
+                    renameMethod(interclass, tempTab);
+                } else if (selectionMode == "Remove") {
+                    removeMethod(interclass, tempTab);
+                } else if (selectionMode == "Add elements") {
+                    if (elementPainter.elementAt(point) && elementPainter instanceof ClassPainter) {
+                        Object[] selectionValues = {"Attribute", "Method"};
+                        String initialSelection = "Attribute";
+                        Object selection = JOptionPane.showInputDialog(null, "Do you want to add method or attribute?",
+                                "Method/Attribute", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+                        if (selection == null) return;
+                        if (selection == "Method") {
+                            Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
+                            String initialSelectionVisibility = "Public";
+                            Object visibility = JOptionPane.showInputDialog(null, "What is your method visibility?",
+                                    "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
+                            if (visibility == null) return;
+                            else {
+                                Visibility visibilityEnum;
+                                if (visibility == "Public") {
+                                    visibilityEnum = Visibility.PUBLIC;
+                                } else if (visibility == "Private") {
+                                    visibilityEnum = Visibility.PRIVATE;
+                                } else if (visibility == "Protected") {
+                                    visibilityEnum = Visibility.PROTECTED;
+                                } else {
+                                    visibilityEnum = Visibility.DEFAULT;
+                                }
+                                String name = JOptionPane.showInputDialog("What is name of your method?");
+                                if (name == null) return;
+                                String returnType = JOptionPane.showInputDialog("What is return type of your method?");
+                                if (returnType == null) return;
+
+                                Method method = new Method(name, visibilityEnum, returnType);
+                                Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
+                                interClass.getMethods().add(method);
+                                interClass.getClassContents().add(method);
+                                tempTab.repaint();
+
+                            }
+                        } else if (selection == "Attribute") {
+
+                            Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
+                            String initialSelectionVisibility = "Public";
+                            Object visibility = JOptionPane.showInputDialog(null, "What is your attribute visibility?",
+                                    "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
+                            if (visibility == null) return;
+                            else {
+                                Visibility visibilityEnum;
+                                if (visibility == "Public") {
+                                    visibilityEnum = Visibility.PUBLIC;
+                                } else if (visibility == "Private") {
+                                    visibilityEnum = Visibility.PRIVATE;
+                                } else if (visibility == "Protected") {
+                                    visibilityEnum = Visibility.PROTECTED;
+                                } else {
+                                    visibilityEnum = Visibility.DEFAULT;
+                                }
+                                String name = JOptionPane.showInputDialog("What is name of your attribute?");
+                                if (name == null) return;
+                                String returnType = JOptionPane.showInputDialog("What is type of your attribute?");
+                                if (returnType == null) return;
+
+                                Attribute attribute = new Attribute(name, visibilityEnum, returnType);
+                                Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
+                                interClass.getAttributes().add(attribute);
+                                interClass.getClassContents().add(attribute);
+                                tempTab.repaint();
+                            }
+                        }
+                    } else if (elementPainter.elementAt(point) && elementPainter instanceof EnumPainter) {
+                        String name = JOptionPane.showInputDialog("What is name of your enum?");
+                        if (name == null) return;
+                        Attribute attribute = new Attribute(name);
+                        Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
+                        interClass.getAttributes().add(attribute);
+                        interClass.getClassContents().add(attribute);
+                        tempTab.repaint();
+                    } else if (elementPainter.elementAt(point) && elementPainter instanceof InterfacePainter) {
                         Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
                         String initialSelectionVisibility = "Public";
                         Object visibility = JOptionPane.showInputDialog(null, "What is your method visibility?",
@@ -70,73 +141,7 @@ public class EditClassState implements State {
                             interClass.getMethods().add(method);
                             interClass.getClassContents().add(method);
                             tempTab.repaint();
-
                         }
-                    } else if (selection == "Attribute") {
-
-                        Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
-                        String initialSelectionVisibility = "Public";
-                        Object visibility = JOptionPane.showInputDialog(null, "What is your attribute visibility?",
-                                "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
-                        if (visibility == null) return;
-                        else {
-                            Visibility visibilityEnum;
-                            if (visibility == "Public") {
-                                visibilityEnum = Visibility.PUBLIC;
-                            } else if (visibility == "Private") {
-                                visibilityEnum = Visibility.PRIVATE;
-                            } else if (visibility == "Protected") {
-                                visibilityEnum = Visibility.PROTECTED;
-                            } else {
-                                visibilityEnum = Visibility.DEFAULT;
-                            }
-                            String name = JOptionPane.showInputDialog("What is name of your attribute?");
-                            if (name == null) return;
-                            String returnType = JOptionPane.showInputDialog("What is type of your attribute?");
-                            if (returnType == null) return;
-
-                            Attribute attribute = new Attribute(name, visibilityEnum, returnType);
-                            Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
-                            interClass.getAttributes().add(attribute);
-                            interClass.getClassContents().add(attribute);
-                            tempTab.repaint();
-                        }
-                    }
-                } else if (elementPainter.elementAt(point) && elementPainter instanceof EnumPainter) {
-                    String name = JOptionPane.showInputDialog("What is name of your enum?");
-                    if (name == null) return;
-                    Attribute attribute = new Attribute(name);
-                    Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
-                    interClass.getAttributes().add(attribute);
-                    interClass.getClassContents().add(attribute);
-                    tempTab.repaint();
-                } else if (elementPainter.elementAt(point) && elementPainter instanceof InterfacePainter) {
-                    Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
-                    String initialSelectionVisibility = "Public";
-                    Object visibility = JOptionPane.showInputDialog(null, "What is your method visibility?",
-                            "Visibility", JOptionPane.QUESTION_MESSAGE, null, selectionValuesVisibility, initialSelectionVisibility);
-                    if (visibility == null) return;
-                    else {
-                        Visibility visibilityEnum;
-                        if (visibility == "Public") {
-                            visibilityEnum = Visibility.PUBLIC;
-                        } else if (visibility == "Private") {
-                            visibilityEnum = Visibility.PRIVATE;
-                        } else if (visibility == "Protected") {
-                            visibilityEnum = Visibility.PROTECTED;
-                        } else {
-                            visibilityEnum = Visibility.DEFAULT;
-                        }
-                        String name = JOptionPane.showInputDialog("What is name of your method?");
-                        if (name == null) return;
-                        String returnType = JOptionPane.showInputDialog("What is return type of your method?");
-                        if (returnType == null) return;
-
-                        Method method = new Method(name, visibilityEnum, returnType);
-                        Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
-                        interClass.getMethods().add(method);
-                        interClass.getClassContents().add(method);
-                        tempTab.repaint();
                     }
                 }
             }
@@ -183,6 +188,7 @@ public class EditClassState implements State {
             String inputText = JOptionPane.showInputDialog("Enter new name");
             if (inputText == null || inputText.isEmpty())return;
             interclass.setName(inputText);
+            SwingUtilities.updateComponentTreeUI(this.classyTreeImplementation.getTreeView());
             tempTab.repaint();
         }else if (!interclass.getClassContents().isEmpty() && selectionRename == "Rename element"){
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
