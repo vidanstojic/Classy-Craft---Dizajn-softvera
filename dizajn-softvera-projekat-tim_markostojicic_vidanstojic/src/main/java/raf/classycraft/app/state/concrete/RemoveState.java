@@ -2,6 +2,7 @@ package raf.classycraft.app.state.concrete;
 
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.state.State;
 
@@ -20,12 +21,13 @@ public class RemoveState implements State {
         tempTab.setRectangle(rectangle);
         tempTab.repaint();
         List<ElementPainter> elementPaintersToRemove = new ArrayList<>();
+        List<DiagramElement> elementModelsToRemove = new ArrayList<>();
         for(ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
             elementPaintersToRemove.add(elementPainter);
             if (elementPainter.getRectangle() != null)
-            tempTab.getDiagram().removeChild(((InterClassPainter) elementPainter).getInterclass());
+                elementModelsToRemove.add(((InterClassPainter) elementPainter).getInterclass());
             else if (elementPainter.getLine2D() != null) {
-                tempTab.getDiagram().removeChild(((ConnectionPainter) elementPainter).getConnection());
+                elementModelsToRemove.add(((ConnectionPainter) elementPainter).getConnection());
             }
         }
         Point point = new Point(e.getX(), e.getY());
@@ -42,7 +44,7 @@ public class RemoveState implements State {
                                 elementPaintersToRemove.add(connectionElement);
                             }
                         }
-                        tempTab.getDiagram().removeChild(((InterClassPainter) elementPainter).getInterclass());
+                        elementModelsToRemove.add(((InterClassPainter) elementPainter).getInterclass());
                     }
                 }
             }
@@ -50,13 +52,18 @@ public class RemoveState implements State {
                 if (rectangle.intersectsLine(elementPainter.getLine2D())){
                     if (elementPainter instanceof AggregationPainter || elementPainter instanceof CompositionPainter || elementPainter instanceof DependancyPainter || elementPainter instanceof GeneralizationPainter) {
                         elementPaintersToRemove.add(elementPainter);
-                        tempTab.getDiagram().removeChild(((ConnectionPainter) elementPainter).getConnection());
+                        elementModelsToRemove.add(((ConnectionPainter) elementPainter).getConnection());
                     }
                 }
             }
         }
+
+
         for(ElementPainter elementPainter : elementPaintersToRemove){
             tempTab.getListOfPainters().remove(elementPainter);
+        }
+        for(DiagramElement elementToRemove : elementModelsToRemove){
+            tempTab.getDiagram().removeChild(elementToRemove);
         }
     }
 

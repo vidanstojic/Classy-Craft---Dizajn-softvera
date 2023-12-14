@@ -1,7 +1,9 @@
 
 package raf.classycraft.app.gui.view;
 import raf.classycraft.app.gui.controller.drawingToolbarActions.MyMouseListener;
+import raf.classycraft.app.gui.view.paint.ConnectionPainter;
 import raf.classycraft.app.gui.view.paint.ElementPainter;
+import raf.classycraft.app.gui.view.paint.InterClassPainter;
 import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.observer.ISubscriber;
@@ -66,6 +68,18 @@ public class DiagramView extends JPanel implements ISubscriber {
             NotificationDiagramView notificationDiagramView = (NotificationDiagramView) notify;
             if(notificationDiagramView.getTypeDiagramView() == TypeDiagramView.ADD_DIAGRAM_ELEMENT){
                 this.diagramElement = notificationDiagramView.getDiagramElement();
+            }
+            if(notificationDiagramView.getTypeDiagramView() == TypeDiagramView.REMOVE_DIAGRAM_ELEMENT){
+                ElementPainter painterToRemove = null;
+                for(ElementPainter elementPainter : this.listOfPainters){
+                    if(elementPainter instanceof InterClassPainter && ((InterClassPainter) elementPainter).getInterclass().equals(notificationDiagramView.getDiagramElement())){
+                        painterToRemove = elementPainter;
+                    }
+                    else if(elementPainter instanceof ConnectionPainter && ((ConnectionPainter) elementPainter).getConnection().equals(notificationDiagramView.getDiagramElement())){
+                        painterToRemove = elementPainter;
+                    }
+                }
+                this.getListOfPainters().remove(painterToRemove);
             }
         }
         repaint();
