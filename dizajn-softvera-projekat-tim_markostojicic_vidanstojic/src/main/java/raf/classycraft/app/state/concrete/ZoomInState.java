@@ -3,12 +3,18 @@ package raf.classycraft.app.state.concrete;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.state.State;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 
 public class ZoomInState implements State {
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
-
+        AffineTransform affineTransform = tempTab.getAffineTransform();
+        if (affineTransform.getScaleX() > 2.0 && affineTransform.getScaleY() > 2.0)return;
+        affineTransform.scale(1.1, 1.1);
+        tempTab.setPreferredSize(new Dimension((int) (tempTab.getWidth() * 1.1), (int) (tempTab.getHeight() * 1.1)));
+        tempTab.repaint();
     }
 
     @Override

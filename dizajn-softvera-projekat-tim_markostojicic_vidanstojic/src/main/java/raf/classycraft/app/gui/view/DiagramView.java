@@ -10,6 +10,7 @@ import raf.classycraft.app.observer.TypeDiagramView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private Rectangle rectangle;
     private DiagramElement diagramElement;
     private Line2D line2D;
-
+    private AffineTransform affineTransform;
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
         diagram.addSubscriber(this);/// proveriti da li je ovo dozvoljeno zbog MVC-A
@@ -33,12 +34,14 @@ public class DiagramView extends JPanel implements ISubscriber {
         addMouseMotionListener(myMouseListener);
         this.rectangle = new Rectangle();
         this.setPreferredSize(new Dimension(MainFrame.getInstance().getWidth() * 2, MainFrame.getInstance().getHeight() * 2));
+        affineTransform = new AffineTransform();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.scale(affineTransform.getScaleX(), affineTransform.getScaleY());
         for(ElementPainter painter : listOfPainters){
             painter.paint(graphics2D, this.diagramElement);
         }
@@ -114,5 +117,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.listOfSelectedPainters = listOfSelectedPainters;
     }
 
-  
+    public AffineTransform getAffineTransform() {
+        return affineTransform;
+    }
 }
