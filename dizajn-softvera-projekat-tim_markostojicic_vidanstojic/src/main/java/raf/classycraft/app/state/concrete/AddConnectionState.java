@@ -85,7 +85,7 @@ public class AddConnectionState implements State {
                         String initial = "Check your connection";
                         Object selectInfo = JOptionPane.showInputDialog(null, "Select which information you want to change:",
                                 "Select information", JOptionPane.QUESTION_MESSAGE, null, select, initial);
-                        if (selectConnection == null) {
+                        if (selectInfo == null) {
                             return;
                         }
                         else if(selectInfo == "Cardinality"){
