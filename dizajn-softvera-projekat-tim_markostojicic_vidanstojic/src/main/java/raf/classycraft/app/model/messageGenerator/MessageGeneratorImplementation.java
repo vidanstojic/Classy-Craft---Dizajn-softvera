@@ -67,6 +67,9 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         }else if(type == Type.ERROR && eventType == EventTypes.CANT_RENAME_DIAGRAMELEMENT){
             messageText = "You need to go to the 'editClass' section if you want to rename your element.";
             message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
+        }else if(type == Type.ERROR && eventType == EventTypes.UNENTERED_DATA){
+            messageText = "You have not entered the required information about connection.";
+            message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
 
 

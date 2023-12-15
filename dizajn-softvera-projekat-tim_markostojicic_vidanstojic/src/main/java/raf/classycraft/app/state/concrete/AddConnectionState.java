@@ -1,5 +1,6 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.DiagramView;
@@ -10,6 +11,8 @@ import raf.classycraft.app.model.elementDiagram.ConnectionMode;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.*;
+import raf.classycraft.app.model.messageGenerator.EventTypes;
+import raf.classycraft.app.model.messageGenerator.Type;
 import raf.classycraft.app.state.State;
 
 import javax.swing.*;
@@ -54,6 +57,10 @@ public class AddConnectionState implements State {
             if(  elementPainter instanceof ConnectionPainter && elementPainter.getLine2D() != null && rectangle.intersectsLine(elementPainter.getLine2D())){
                 Connection tempConnection = ((ConnectionPainter) elementPainter).getConnection();
                 if(tempConnection instanceof Composition || tempConnection instanceof Aggregation){
+                    if(tempConnection.getConnectionInfo() == null){
+                        ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.UNENTERED_DATA, Type.ERROR);
+                        return;
+                    }
                     Object[] selectionValues = {"Check your connection", "Change info"};
                     String initialSelection = "Check your connection";
                     Object selectConnection = JOptionPane.showInputDialog(null, "Do you want to check info about your connection or you want to change information about connection?",
