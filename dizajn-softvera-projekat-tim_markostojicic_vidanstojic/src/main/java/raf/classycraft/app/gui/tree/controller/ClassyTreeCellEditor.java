@@ -7,6 +7,7 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.Package;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
@@ -54,6 +55,10 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
         if(clicked.getClassyNode() instanceof ProjectExplorer){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.PROJECTEXPLORER_CANNOT_BE_RENAMED, Type.WARNING);
+            return;
+        }
+        if(clicked.getClassyNode() instanceof DiagramElement){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.CANT_RENAME_DIAGRAMELEMENT, Type.ERROR);
             return;
         }
         String oldName = clicked.getClassyNode().getName();

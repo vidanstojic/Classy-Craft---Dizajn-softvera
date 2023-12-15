@@ -64,6 +64,9 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         }else if(type == Type.ERROR && eventType == EventTypes.CANT_COPY_CLASS){
             messageText = "You need to clikck on the class you want to copy.";
             message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
+        }else if(type == Type.ERROR && eventType == EventTypes.CANT_RENAME_DIAGRAMELEMENT){
+            messageText = "You need to go to the 'editClass' section if you want to rename your element.";
+            message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
 
 

@@ -13,7 +13,8 @@ public enum EventTypes {
 
     WRONG_POSITION,
 
-    CANT_COPY_CLASS;
+    CANT_COPY_CLASS,
+    CANT_RENAME_DIAGRAMELEMENT;
 
 
 
