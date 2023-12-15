@@ -5,8 +5,8 @@ public abstract class ClassContent {
     private Visibility visibility;
     private String returnType;
 
-    private String abstractContentOrNot;
-    private String staticContentOrNot;
+    private String abstractContentOrNot = "";
+    private String staticContentOrNot = "";
 
     public ClassContent(String name, Visibility visibility, String returnType) {
         this.name = name;

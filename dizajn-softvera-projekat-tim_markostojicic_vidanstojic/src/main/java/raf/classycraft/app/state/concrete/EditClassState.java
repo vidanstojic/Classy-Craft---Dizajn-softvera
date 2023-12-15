@@ -68,14 +68,36 @@ public class EditClassState implements State {
                                 String returnType = JOptionPane.showInputDialog("What is return type of your method?");
                                 if (returnType == null) return;
 
-                                Method method = new Method(name, visibilityEnum, returnType);
+                                Object[] selectionValuesAbstractAndStatic = {"Abstract", "Static", "Abstract and Static", "None"};
+                                String initialSelectionAbStatic = "None";
+                                Object abtractAndStatic = JOptionPane.showInputDialog(null, "Do you want your method to be abstract, static, both, or none?",
+                                        "Abstract and Static", JOptionPane.QUESTION_MESSAGE, null, selectionValuesAbstractAndStatic, initialSelectionAbStatic);
+                                String abstractMethod = "";
+                                String staticMethod = "";
+
+                                if (abtractAndStatic == null) return;
+                                else {
+                                    if (abtractAndStatic == "Abstract") {
+                                        abstractMethod = "{abstract}";
+                                    } else if (abtractAndStatic == "Static") {
+                                        staticMethod = "{static}";
+                                    } else if (abtractAndStatic == "Abstract and Static") {
+                                        abstractMethod = "{abstract}";
+                                        staticMethod = "{static}";
+                                    } else {
+                                        abstractMethod = "";
+                                        staticMethod = "";
+                                    }
+                                }
+                                Method method = new Method(name, visibilityEnum, returnType, abstractMethod, staticMethod);
                                 Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
                                 interClass.getMethods().add(method);
                                 interClass.getClassContents().add(method);
                                 tempTab.repaint();
 
                             }
-                        } else if (selection == "Attribute") {
+                        }
+                        else if (selection == "Attribute") {
 
                             Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
                             String initialSelectionVisibility = "Public";
@@ -98,14 +120,36 @@ public class EditClassState implements State {
                                 String returnType = JOptionPane.showInputDialog("What is type of your attribute?");
                                 if (returnType == null || returnType.length() == 0) return;
 
-                                Attribute attribute = new Attribute(name, visibilityEnum, returnType);
+                                Object[] selectionValuesAbstractAndStatic = {"Abstract", "Static", "Abstract and Static", "None"};
+                                String initialSelectionAbStatic = "None";
+                                Object abtractAndStatic = JOptionPane.showInputDialog(null, "Do you want your method to be abstract, static, both, or none?",
+                                        "Abstract and Static", JOptionPane.QUESTION_MESSAGE, null, selectionValuesAbstractAndStatic, initialSelectionAbStatic);
+                                String abstractAttribute = "";
+                                String staticAttribute = "";
+                                if (abtractAndStatic == null) return;
+                                else {
+                                    if (abtractAndStatic == "Abstract") {
+                                        abstractAttribute = "{abstract}";
+                                    } else if (abtractAndStatic == "Static") {
+                                        staticAttribute = "{static}";
+                                    } else if (abtractAndStatic == "Abstract and Static") {
+                                        abstractAttribute = "{abstract}";
+                                        staticAttribute = "{static}";
+                                    } else {
+                                        abstractAttribute = "";
+                                        staticAttribute = "";
+                                    }
+                                }
+
+                                Attribute attribute = new Attribute(name, visibilityEnum, returnType, abstractAttribute, staticAttribute);
                                 Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
                                 interClass.getAttributes().add(attribute);
                                 interClass.getClassContents().add(attribute);
                                 tempTab.repaint();
                             }
                         }
-                    } else if (elementPainter.elementAt(point) && elementPainter instanceof EnumPainter) {
+                    }
+                    else if (elementPainter.elementAt(point) && elementPainter instanceof EnumPainter) {
                         String name = JOptionPane.showInputDialog("What is the name of the element you want to add to the enum?");
                         if (name == null || name.length() == 0) return;
                         Attribute attribute = new Attribute(name);
@@ -113,7 +157,8 @@ public class EditClassState implements State {
                         interClass.getAttributes().add(attribute);
                         interClass.getClassContents().add(attribute);
                         tempTab.repaint();
-                    } else if (elementPainter.elementAt(point) && elementPainter instanceof InterfacePainter) {
+                    }
+                    else if (elementPainter.elementAt(point) && elementPainter instanceof InterfacePainter) {
                         Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
                         String initialSelectionVisibility = "Public";
                         Object visibility = JOptionPane.showInputDialog(null, "What is your method visibility?",

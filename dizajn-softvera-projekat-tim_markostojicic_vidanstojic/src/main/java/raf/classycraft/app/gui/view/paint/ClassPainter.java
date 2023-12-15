@@ -65,7 +65,7 @@ public class ClassPainter extends InterClassPainter{
             } else {
                 visibilityChar = " ";
             }
-            String attributeFullName = visibilityChar + attribute.getName() + ":" + attribute.getReturnType();
+            String attributeFullName = visibilityChar + attribute.getName()+" " +attribute.getStaticContentOrNot()+" "+attribute.getAbstractContentOrNot() +":" + attribute.getReturnType();
             if (length < graphics2D.getFontMetrics().stringWidth(attributeFullName)) {
                 length = graphics2D.getFontMetrics().stringWidth(attributeFullName);
             }
@@ -89,7 +89,7 @@ public class ClassPainter extends InterClassPainter{
             } else {
                 visibilityChar = " ";
             }
-            String methodeFullName = visibilityChar + method.getName() + ":" + method.getReturnType();
+            String methodeFullName = visibilityChar + method.getName()+" " +method.getStaticContentOrNot()+" "+method.getAbstractContentOrNot() + ":" + method.getReturnType();
             if (length < graphics2D.getFontMetrics().stringWidth(methodeFullName)) {
                 length = graphics2D.getFontMetrics().stringWidth(methodeFullName);
             }
