@@ -48,8 +48,6 @@ public class CompositionPainter extends ConnectionPainter{
         double cos = Math.cos(diamondAngle);
         double centerX = 0;
         double centerY = 0;
-        System.out.println(y1 + " " + y2);
-        System.out.println(angleInDegrees);
 
         if (angleInDegrees >= 50 && angleInDegrees <= 90){
             centerX = x1;
