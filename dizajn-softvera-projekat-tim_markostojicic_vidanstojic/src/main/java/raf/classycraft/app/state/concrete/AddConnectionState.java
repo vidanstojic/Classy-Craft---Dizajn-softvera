@@ -245,6 +245,7 @@ public class AddConnectionState implements State {
             }
 
         }
+        rectangle.setSize(0,0);
     }
 
     @Override
@@ -375,6 +376,7 @@ public class AddConnectionState implements State {
 
     @Override
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
+        rectangle.setSize(5,5);
         if (classFrom == null ){
             tempTab.repaint();
             return;
