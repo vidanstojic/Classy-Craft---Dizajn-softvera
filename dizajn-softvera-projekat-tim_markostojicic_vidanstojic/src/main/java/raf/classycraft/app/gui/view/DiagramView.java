@@ -34,7 +34,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
-        diagram.addSubscriber(this);/// proveriti da li je ovo dozvoljeno zbog MVC-A
+        diagram.addSubscriber(this);
         this.myMouseListener = new MyMouseListener(this);
         addMouseListener(myMouseListener);
         addMouseMotionListener(myMouseListener);
@@ -88,7 +88,7 @@ public class DiagramView extends JPanel implements ISubscriber {
                         paintersToRemove.add(elementPainter);
                         ClassyTreeItem itemToRemove = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), ((ConnectionPainter) elementPainter).getConnection());
                         if(itemToRemove == null) return;
-                        this.classyTreeImplementation.removeChild(itemToRemove);// krsenje MVC-A ?
+                        this.classyTreeImplementation.removeChild(itemToRemove);
                     }
                 }
 

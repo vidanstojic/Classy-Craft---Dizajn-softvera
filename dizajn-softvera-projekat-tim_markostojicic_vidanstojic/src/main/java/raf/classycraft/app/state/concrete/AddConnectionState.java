@@ -373,7 +373,7 @@ public class AddConnectionState implements State {
             }
             else{
                 ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-                this.classyTreeImplementation.addChild(parentItem);
+          //      this.classyTreeImplementation.addChild(parentItem);
                 ClassyTreeItem childItem = new ClassyTreeItem(connection);
                 this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
             }

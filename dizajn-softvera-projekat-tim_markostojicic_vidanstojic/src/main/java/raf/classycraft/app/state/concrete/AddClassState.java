@@ -62,7 +62,7 @@ public class AddClassState implements State {
 
             // dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-            this.classyTreeImplementation.addChild(parentItem);
+          //  this.classyTreeImplementation.addChild(parentItem);
             ClassyTreeItem childItem = new ClassyTreeItem(classInterClass);
             this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
 
@@ -85,7 +85,7 @@ public class AddClassState implements State {
             }
             //dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-            this.classyTreeImplementation.addChild(parentItem);
+          //  this.classyTreeImplementation.addChild(parentItem);
             ClassyTreeItem childItem = new ClassyTreeItem(interfaceInterclass);
             this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
 
@@ -109,7 +109,7 @@ public class AddClassState implements State {
 
             //dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-            this.classyTreeImplementation.addChild(parentItem);
+     //       this.classyTreeImplementation.addChild(parentItem);
             ClassyTreeItem childItem = new ClassyTreeItem(enumInterclass);
             this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
 
