@@ -8,6 +8,9 @@ import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.Interclass;
+import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
+import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
+import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
@@ -37,19 +40,27 @@ public class DuplicateState implements State {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.CANT_COPY_CLASS, Type.ERROR);
             return;
         }
-        else{
-            if(classToCopy instanceof ClassInterClass){
+        else {
+            EnumInterclass enumInterclass = null;
+            if (classToCopy instanceof ClassInterClass) {
                 ClassInterClass classInterClass = (ClassInterClass) classToCopy;
-                ClassInterClass copiedClass = new ClassInterClass(new Point(tempPoint.x+20, tempPoint.y+20), classInterClass.getColor(), classInterClass.getStroke(), classInterClass.getName(),classInterClass.getVisibility() ,classInterClass.getAbstractClass());
+                ClassInterClass copiedClass = new ClassInterClass(new Point(tempPoint.x + 20, tempPoint.y + 20), classInterClass.getColor(), classInterClass.getStroke(), classInterClass.getName(), classInterClass.getVisibility(), classInterClass.getAbstractClass());
                 copiedClass.getListOfSubscribers().add(tempTab);
-                copiedClass.setAttributes(classInterClass.getAttributes());
-                copiedClass.setMethods(classInterClass.getMethods());
+                List<Method> methods = new ArrayList<>();
+                methods.addAll(classInterClass.getMethods());
+                List<Attribute> attributes = new ArrayList<>();
+                attributes.addAll(classInterClass.getAttributes());
+                List<ClassContent> classContents = new ArrayList<>();
+                classContents.addAll(classInterClass.getClassContents());
 
+                copiedClass.setAttributes(attributes);
+                copiedClass.setMethods(methods);
+                copiedClass.setClassContents(classContents);
 
-                ClassPainter classPainter = new ClassPainter(new Point(tempPoint.x+20, tempPoint.y+20),copiedClass);
+                ClassPainter classPainter = new ClassPainter(new Point(tempPoint.x + 20, tempPoint.y + 20), copiedClass);
 
                 //dodavanje u tree
-                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), tempTab.getDiagram());
                 this.classyTreeImplementation.addChild(parentItem);
                 ClassyTreeItem childItem = new ClassyTreeItem(copiedClass);
                 this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
@@ -57,17 +68,22 @@ public class DuplicateState implements State {
 
                 tempTab.getListOfPainters().add(classPainter);
                 tempTab.getDiagram().addChild(copiedClass);
-            }
-            else if(classToCopy instanceof EnumInterclass){
-                EnumInterclass enumInterclass = (EnumInterclass) classToCopy;
-                EnumInterclass copiedEnum = new EnumInterclass(new Point(tempPoint.x+20, tempPoint.y+20), enumInterclass.getColor(), enumInterclass.getStroke(), enumInterclass.getName(),enumInterclass.getVisibility());
+            } else if (classToCopy instanceof EnumInterclass) {
+                enumInterclass = (EnumInterclass) classToCopy;
+                EnumInterclass copiedEnum = new EnumInterclass(new Point(tempPoint.x + 20, tempPoint.y + 20), enumInterclass.getColor(), enumInterclass.getStroke(), enumInterclass.getName(), enumInterclass.getVisibility());
                 copiedEnum.getListOfSubscribers().add(tempTab);
-                copiedEnum.setAttributes(enumInterclass.getAttributes());
+                List<Attribute> attributes = new ArrayList<>();
+                attributes.addAll(enumInterclass.getAttributes());
+                List<ClassContent> classContents = new ArrayList<>();
+                classContents.addAll(enumInterclass.getClassContents());
 
-                EnumPainter enumPainter = new EnumPainter(new Point(tempPoint.x+20, tempPoint.y+20), copiedEnum);
+                copiedEnum.setAttributes(attributes);
+                copiedEnum.setClassContents(classContents);
+
+                EnumPainter enumPainter = new EnumPainter(new Point(tempPoint.x + 20, tempPoint.y + 20), copiedEnum);
 
                 //dodavanje u tree
-                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), tempTab.getDiagram());
                 this.classyTreeImplementation.addChild(parentItem);
                 ClassyTreeItem childItem = new ClassyTreeItem(copiedEnum);
                 this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
@@ -75,16 +91,21 @@ public class DuplicateState implements State {
 
                 tempTab.getListOfPainters().add(enumPainter);
                 tempTab.getDiagram().addChild(copiedEnum);
-            }
-            else if(classToCopy instanceof InterfaceInterclass){
+            } else if (classToCopy instanceof InterfaceInterclass) {
                 InterfaceInterclass interfaceInterclass = (InterfaceInterclass) classToCopy;
-                InterfaceInterclass copiedInterface = new InterfaceInterclass(new Point(tempPoint.x+20, tempPoint.y+20), interfaceInterclass.getColor(), interfaceInterclass.getStroke(), interfaceInterclass.getName(),interfaceInterclass.getVisibility());
+                InterfaceInterclass copiedInterface = new InterfaceInterclass(new Point(tempPoint.x + 20, tempPoint.y + 20), interfaceInterclass.getColor(), interfaceInterclass.getStroke(), interfaceInterclass.getName(), interfaceInterclass.getVisibility());
                 copiedInterface.getListOfSubscribers().add(tempTab);
-                copiedInterface.setMethods(interfaceInterclass.getMethods());
+                List<Method> methods = new ArrayList<>();
+                methods.addAll(interfaceInterclass.getMethods());
+                List<ClassContent> classContents = new ArrayList<>();
+                classContents.addAll(interfaceInterclass.getClassContents());
 
-                InterfacePainter interfacePainter = new InterfacePainter(new Point(tempPoint.x+20, tempPoint.y+20), copiedInterface);
+                copiedInterface.setMethods(methods);
+                copiedInterface.setClassContents(classContents);
+
+                InterfacePainter interfacePainter = new InterfacePainter(new Point(tempPoint.x + 20, tempPoint.y + 20), copiedInterface);
                 //dodavanje u tree
-                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
+                ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), tempTab.getDiagram());
                 this.classyTreeImplementation.addChild(parentItem);
                 ClassyTreeItem childItem = new ClassyTreeItem(copiedInterface);
                 this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
