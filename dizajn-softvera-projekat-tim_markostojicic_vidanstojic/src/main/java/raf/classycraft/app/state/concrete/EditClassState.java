@@ -246,11 +246,11 @@ public class EditClassState implements State {
         }
     }
     private void elementsEdit(Interclass interclass, DiagramView tempTab, String input){
-        Object[] selectionValuesEdit = {"Rename element name", "Change element type", "Change element visibility", "Nothing", "Change some other element"};
+        Object[] selectionValuesEdit = {"Rename element name", "Change element type", "Change element visibility","Modify Static/Abstract" ,"Nothing", "Change some other element"};
         String initialSelectionEdit = "Rename element name";
         Object selectionEdit = JOptionPane.showInputDialog(null, "Select edit mode",
                 "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEdit, initialSelectionEdit);
-        if(selectionEdit == "Nothing"){
+        if(selectionEdit == "Nothing" || selectionEdit == null){
             return;
         }else if (selectionEdit == "Rename element name"){
             for (ClassContent classContent : interclass.getClassContents()){
@@ -300,7 +300,39 @@ public class EditClassState implements State {
                     elementsEdit(interclass, tempTab, input);
                 }
             }
-        }else if (selectionEdit == "Change some other element"){
+        }
+        else if(selectionEdit == "Modify Static/Abstract"){
+            for (ClassContent classContent : interclass.getClassContents()){
+                if (classContent.getName().equals(input)){
+                    Object[] selectionValuesAbstractAndStatic = {"Abstract", "Static", "Abstract and Static", "None"};
+                    String initialSelectionAbStatic = "None";
+                    Object abtractAndStatic = JOptionPane.showInputDialog(null, "Do you want your method to be abstract, static, both, or none?",
+                            "Abstract and Static", JOptionPane.QUESTION_MESSAGE, null, selectionValuesAbstractAndStatic, initialSelectionAbStatic);
+                    String abstractElement = "";
+                    String staticElement = "";
+
+                    if (abtractAndStatic == null) return;
+                    else {
+                        if (abtractAndStatic == "Abstract") {
+                            abstractElement = "{abstract}";
+                        } else if (abtractAndStatic == "Static") {
+                            staticElement = "{static}";
+                        } else if (abtractAndStatic == "Abstract and Static") {
+                            abstractElement = "{abstract}";
+                            staticElement = "{static}";
+                        } else {
+                            abstractElement = "";
+                            staticElement = "";
+                        }
+                        classContent.setStaticContentOrNot(staticElement);
+                        classContent.setAbstractContentOrNot(abstractElement);
+                    }
+                    tempTab.repaint();
+                    elementsEdit(interclass, tempTab, input);
+                }
+            }
+        }
+        else if (selectionEdit == "Change some other element"){
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
             if (inputText == null || inputText.length() == 0) return;
             elementsEdit(interclass, tempTab, inputText);
