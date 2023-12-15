@@ -1,6 +1,0 @@
-[ERROR][2023-12-15T13:30:29.277216600]You have not entered the required information about connection.
-[ERROR][2023-12-15T13:30:34.983858400]You have not entered the required information about connection.
-[ERROR][2023-12-15T13:30:36.858915700]You have not entered the required information about connection.
-[ERROR][2023-12-15T13:30:40.378933400]You have not entered the required information about connection.
-[ERROR][2023-12-15T13:30:42.024537300]You have not entered the required information about connection.
-[ERROR][2023-12-15T13:30:43.716289500]You have not entered the required information about connection.

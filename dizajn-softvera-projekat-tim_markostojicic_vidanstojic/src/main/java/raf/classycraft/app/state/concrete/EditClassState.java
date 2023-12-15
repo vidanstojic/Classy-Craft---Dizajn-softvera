@@ -180,7 +180,23 @@ public class EditClassState implements State {
                             String returnType = JOptionPane.showInputDialog("What is return type of your method?");
                             if (returnType == null || returnType.length() == 0) return;
 
-                            Method method = new Method(name, visibilityEnum, returnType);
+                            Object[] selectionValuesStatic = {"Static","Not static"};
+                            String initialSelectionStatic = "Not static";
+                            Object staticAsk = JOptionPane.showInputDialog(null, "Do you want your method to be static or not?",
+                                    "Static method", JOptionPane.QUESTION_MESSAGE, null, selectionValuesStatic, initialSelectionStatic);
+                            String abstractMethod = "";
+                            String staticMethod = "";
+
+                            if (staticAsk == null) return;
+                            else {
+                                if (staticAsk == "Static") {
+                                    staticMethod = "{static}";
+                                }
+                                else{
+                                    staticMethod = "";
+                                }
+                            }
+                            Method method = new Method(name, visibilityEnum, returnType, abstractMethod, staticMethod);
                             Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
                             interClass.getMethods().add(method);
                             interClass.getClassContents().add(method);

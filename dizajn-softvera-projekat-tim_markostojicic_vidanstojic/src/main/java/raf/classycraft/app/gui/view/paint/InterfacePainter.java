@@ -63,7 +63,7 @@ public class InterfacePainter extends InterClassPainter{
             } else {
                 visibilityChar = " ";
             }
-            String methodeFullName = visibilityChar + method.getName() + ":" + method.getReturnType();
+            String methodeFullName = visibilityChar + method.getName()+method.getStaticContentOrNot()+" " + ":" + method.getReturnType();
             if (length < graphics2D.getFontMetrics().stringWidth(methodeFullName)) {
                 length = graphics2D.getFontMetrics().stringWidth(methodeFullName);
             }
