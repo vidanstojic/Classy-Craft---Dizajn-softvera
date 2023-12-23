@@ -20,6 +20,7 @@ public class ActionManager {
     private UndoAction undoAction;
     private RedoAction redoAction;
     private DuplicateAction duplicateAction;
+    private OpenProjectAction openProjectAction;
     private MyMouseListener myMouseListener;
     public ActionManager(){
         initialiseActions();
@@ -43,6 +44,7 @@ public class ActionManager {
         saveAsAction = new SaveAsAction();
         undoAction = new UndoAction();
         redoAction = new RedoAction();
+        openProjectAction = new OpenProjectAction();
     }
 
     public ExitAction getEa() {
@@ -84,7 +86,7 @@ public class ActionManager {
     public MoveAction getMoveAction() {
         return moveAction;
     }
-
+    public OpenProjectAction getOpenProjectAction(){return openProjectAction;}
     public SelectionAction getSelectionAction(){return selectionAction;}
     public UndoAction getUndoAction() {return undoAction;}
     public DuplicateAction getDuplicateAction() {

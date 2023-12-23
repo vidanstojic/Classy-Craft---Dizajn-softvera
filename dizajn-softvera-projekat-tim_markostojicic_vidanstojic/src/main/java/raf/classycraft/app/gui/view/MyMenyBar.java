@@ -14,6 +14,7 @@ public class MyMenyBar extends JMenuBar {
         fileMenu.add(MainFrame.getInstance().getActionManager().getRemoveItemAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getProjectAuthorAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getSaveAsAction());
+        fileMenu.add(MainFrame.getInstance().getActionManager().getOpenProjectAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getUndoAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getRedoAction());
         add(fileMenu);
