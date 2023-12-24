@@ -10,10 +10,11 @@ public class CommandManager {
     public void addCommand(AbstractCommand command){
 
     }
+
     public void doCommand(){
 
     }
-    public void redoCommand(){
+    public void undoCommand(){
 
     }
 }
