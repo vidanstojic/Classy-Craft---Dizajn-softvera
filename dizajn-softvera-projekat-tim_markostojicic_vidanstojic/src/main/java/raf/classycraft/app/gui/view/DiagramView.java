@@ -1,5 +1,6 @@
 
 package raf.classycraft.app.gui.view;
+import raf.classycraft.app.command.CommandManager;
 import raf.classycraft.app.gui.controller.drawingToolbarActions.MyMouseListener;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
@@ -31,7 +32,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private Line2D line2D;
     private AffineTransform affineTransform;
     private ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
-
+    private CommandManager commandManager;
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
         diagram.addSubscriber(this);
@@ -41,6 +42,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.rectangle = new Rectangle();
         this.setPreferredSize(new Dimension(MainFrame.getInstance().getWidth() * 2, MainFrame.getInstance().getHeight() * 2));
         affineTransform = new AffineTransform();
+        commandManager = new CommandManager();
     }
 
     @Override
@@ -141,6 +143,10 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setListOfSelectedPainters(List<ElementPainter> listOfSelectedPainters) {
         this.listOfSelectedPainters = listOfSelectedPainters;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 
     public AffineTransform getAffineTransform() {
