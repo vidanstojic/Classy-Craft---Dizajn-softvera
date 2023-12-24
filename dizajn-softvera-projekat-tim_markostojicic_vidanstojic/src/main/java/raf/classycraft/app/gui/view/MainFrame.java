@@ -108,7 +108,7 @@ public class MainFrame extends JFrame implements ISubscriber {
             Component view = scrollPane.getViewport().getView();
             if (view instanceof DiagramView) {
                 DiagramView currentDiagramView = (DiagramView) view;
-                System.out.println("Nalazi diagramView");
+                System.out.println(currentDiagramView.getDiagram().getName());
                 return currentDiagramView;
             }
         }
