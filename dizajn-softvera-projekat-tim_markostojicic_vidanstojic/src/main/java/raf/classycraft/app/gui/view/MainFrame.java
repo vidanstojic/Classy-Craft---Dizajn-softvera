@@ -19,7 +19,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private PackageView packageView;
 
-    private DiagramView diagramView;
+
 
 
 
@@ -66,7 +66,6 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
         this.packageView = new PackageView();
-        this.diagramView = new DiagramView();
         split.setRightComponent(new JScrollPane(packageView));
     }
 
@@ -101,6 +100,24 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     }
 
+    public DiagramView getCurrentDiagramView() {
+
+        Component selectedComponent = packageView.getTabbedPane().getSelectedComponent();
+        if (selectedComponent instanceof JScrollPane) {
+            JScrollPane scrollPane = (JScrollPane) selectedComponent;
+            Component view = scrollPane.getViewport().getView();
+            if (view instanceof DiagramView) {
+                DiagramView currentDiagramView = (DiagramView) view;
+                System.out.println("Nalazi diagramView");
+                return currentDiagramView;
+            }
+        }
+
+        return null;
+    }
+
+
+
     public ClassyTree getClassyTree() {
         return classyTree;
     }
@@ -113,11 +130,9 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.packageView = packageView;
     }
 
-    public DiagramView getDiagramView() {
-        return diagramView;
-    }
 
-    public void setDiagramView(DiagramView diagramView) {
-        this.diagramView = diagramView;
-    }
+
+
+
+
 }

@@ -16,6 +16,6 @@ public class UndoAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainFrame.getInstance().getDiagramView().getCommandManager().undoCommand();///BACA NULL
+        MainFrame.getInstance().getCurrentDiagramView().getCommandManager().undoCommand();
     }
 }
