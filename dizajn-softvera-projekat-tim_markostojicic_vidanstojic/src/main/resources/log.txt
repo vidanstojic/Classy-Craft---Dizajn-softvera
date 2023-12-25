@@ -1,2 +1,1 @@
-[ERROR][2023-12-25T13:08:07.290660700]Name can not be empty.
-[ERROR][2023-12-25T13:08:08.714656300]Name can not be empty.
+[ERROR][2023-12-25T13:39:51.364523300]You need to clikck on the class you want to copy.
