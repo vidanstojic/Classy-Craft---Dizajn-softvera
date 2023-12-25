@@ -1,5 +1,7 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.command.implementation.AddClassCommand;
+import raf.classycraft.app.command.implementation.MoveCommand;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Interclass;
@@ -16,14 +18,14 @@ public class MoveState implements State {
     private Interclass interclass;
     private Point oldPoint;
     private Point newPoint;
-
     private Point startPointInInterClass;
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleX()));
         startPointInInterClass = point;
+        if (tempTab.getListOfSelectedPainters().isEmpty()) {
             for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
-                if (!tempTab.getListOfSelectedPainters().isEmpty()){
+                if (!tempTab.getListOfSelectedPainters().isEmpty()) {
                     break;
                 }
                 if (elementPainter.elementAt(point) == true) {
@@ -36,6 +38,19 @@ public class MoveState implements State {
                     }
                 }
             }
+        } else if (!tempTab.getListOfSelectedPainters().isEmpty()) {
+            for (ElementPainter elementPainter : tempTab.getListOfSelectedPainters()){
+                if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
+                    interclass = ((InterClassPainter) elementPainter).getInterclass();
+                    oldPoint = new Point(interclass.getPoint());
+                    interclass.setColor(Color.BLUE);
+                    MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPoint, interclass.getSpecialPoint(), interclass.getPoint());
+                    tempTab.getCommandManager().addCommand(moveCommand);
+                    tempTab.repaint();
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -55,7 +70,9 @@ public class MoveState implements State {
                     }
                         interclass.setColor(Color.BLACK);
                         interclass.setSpecialPoint(interclass.getPoint());
-                        tempTab.repaint();
+                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPoint, interclass.getSpecialPoint(), interclass.getPoint());
+                        tempTab.getCommandManager().addCommand(moveCommand);
+                        //tempTab.repaint();
 
                 }
             }
@@ -78,7 +95,9 @@ public class MoveState implements State {
             }
             interclass.setSpecialPoint(interclass.getPoint());
             interclass.setColor(Color.BLACK);
-            tempTab.repaint();
+            MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPoint, interclass.getSpecialPoint(), interclass.getPoint());
+            tempTab.getCommandManager().addCommand(moveCommand);
+            //tempTab.repaint();
             interclass = null;
         }
     }

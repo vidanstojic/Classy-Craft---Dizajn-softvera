@@ -11,12 +11,9 @@ public class AddClassCommand extends AbstractCommand {
 
     private DiagramView diagramView;
     private Interclass interclass;
-
     private InterClassPainter interClassPainter;
-
     private ClassyTreeItem parentTreeItem;
     private ClassyTreeItem childTreeItem;
-
     private  ClassyTreeImplementation classyTreeImplementation;
 
 
