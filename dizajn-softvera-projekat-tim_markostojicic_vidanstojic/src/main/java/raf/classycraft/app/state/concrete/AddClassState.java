@@ -1,5 +1,6 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.command.implementation.AddClassCommand;
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
@@ -62,12 +63,10 @@ public class AddClassState implements State {
 
             // dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-          //  this.classyTreeImplementation.addChild(parentItem);
             ClassyTreeItem childItem = new ClassyTreeItem(classInterClass);
-            this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
 
-            tempTab.getListOfPainters().add(classPainter);
-            tempTab.getDiagram().addChild(classInterClass);
+            AddClassCommand addClassCommand = new AddClassCommand(tempTab, classInterClass, classPainter, parentItem, childItem, classyTreeImplementation);
+            tempTab.getCommandManager().addCommand(addClassCommand);
         }
         else if (selection.equals("Interface")) {
             String name = JOptionPane.showInputDialog("Name of the interface");
@@ -85,12 +84,10 @@ public class AddClassState implements State {
             }
             //dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-          //  this.classyTreeImplementation.addChild(parentItem);
             ClassyTreeItem childItem = new ClassyTreeItem(interfaceInterclass);
-            this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
 
-            tempTab.getListOfPainters().add(interfacePainter);
-            tempTab.getDiagram().addChild(interfaceInterclass);
+            AddClassCommand addClassCommand = new AddClassCommand(tempTab, interfaceInterclass, interfacePainter, parentItem, childItem, classyTreeImplementation);
+            tempTab.getCommandManager().addCommand(addClassCommand);
         }
         else if (selection.equals("Enum")) {
             String name = JOptionPane.showInputDialog("Name of the enum");
@@ -109,13 +106,11 @@ public class AddClassState implements State {
 
             //dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
-     //       this.classyTreeImplementation.addChild(parentItem);
             ClassyTreeItem childItem = new ClassyTreeItem(enumInterclass);
-            this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
 
 
-            tempTab.getListOfPainters().add(enumPainter);
-            tempTab.getDiagram().addChild(enumInterclass);
+            AddClassCommand addClassCommand = new AddClassCommand(tempTab, enumInterclass, enumPainter, parentItem, childItem, classyTreeImplementation);
+            tempTab.getCommandManager().addCommand(addClassCommand);
         }
         tempTab.repaint();
     }
