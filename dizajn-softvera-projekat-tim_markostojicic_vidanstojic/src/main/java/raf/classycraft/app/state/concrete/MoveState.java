@@ -9,6 +9,7 @@ import raf.classycraft.app.state.State;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 
 import static java.lang.Math.abs;
 
@@ -19,6 +20,7 @@ public class MoveState implements State {
     private Point oldPoint;
     private Point newPoint;
     private Point startPointInInterClass;
+    private HashMap<Interclass, Point> oldPointMap = new HashMap<>();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleX()));
@@ -32,6 +34,7 @@ public class MoveState implements State {
                     if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                         interclass = ((InterClassPainter) elementPainter).getInterclass();
                         oldPoint = new Point(interclass.getPoint());
+                        oldPointMap.put(interclass, oldPoint);
                         interclass.setColor(Color.BLUE);
                         tempTab.repaint();
                         break;
@@ -44,10 +47,8 @@ public class MoveState implements State {
                     interclass = ((InterClassPainter) elementPainter).getInterclass();
                     oldPoint = new Point(interclass.getPoint());
                     interclass.setColor(Color.BLUE);
-                    MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPoint, interclass.getSpecialPoint(), interclass.getPoint());
-                    tempTab.getCommandManager().addCommand(moveCommand);
+                    oldPointMap.put(interclass, oldPoint);
                     tempTab.repaint();
-                    break;
                 }
             }
         }
@@ -70,8 +71,14 @@ public class MoveState implements State {
                     }
                         interclass.setColor(Color.BLACK);
                         interclass.setSpecialPoint(interclass.getPoint());
-                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPoint, interclass.getSpecialPoint(), interclass.getPoint());
-                        tempTab.getCommandManager().addCommand(moveCommand);
+                        for (int i = 0; i < tempTab.getListOfSelectedPainters().size(); i++){
+                            if (interclass.getName() == oldPointMap.keySet().getClass().getName()){
+                                MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPointMap.get(interclass), interclass.getPoint());
+                                tempTab.getCommandManager().addCommand(moveCommand);
+                                break;
+                            }
+                        }
+
                         //tempTab.repaint();
 
                 }

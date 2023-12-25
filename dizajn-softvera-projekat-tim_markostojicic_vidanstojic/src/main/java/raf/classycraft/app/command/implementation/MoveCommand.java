@@ -46,4 +46,16 @@ public class MoveCommand extends AbstractCommand {
         interclass.setSpecialPoint(oldPoint);
         diagramView.repaint();
     }
+
+    public void setOldPoint(Point oldPoint) {
+        this.oldPoint = oldPoint;
+    }
+
+    public Point getOldPoint() {
+        return oldPoint;
+    }
+
+    public void setNewPoint(Point newPoint) {
+        this.newPoint = newPoint;
+    }
 }

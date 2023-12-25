@@ -12,6 +12,7 @@ import raf.classycraft.app.observer.TypeDiagramView;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Interclass extends DiagramElement implements IPublisher {
     private String name;
@@ -128,5 +129,18 @@ public abstract class Interclass extends DiagramElement implements IPublisher {
 
     public List<ISubscriber> getListOfSubscribers() {
         return listOfSubscribers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Interclass)) return false;
+        Interclass that = (Interclass) o;
+        return Objects.equals(getName(), that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }
