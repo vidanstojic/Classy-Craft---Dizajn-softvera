@@ -1,5 +1,6 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.command.implementation.AddConnectionCommand;
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
@@ -374,7 +375,10 @@ public class AddConnectionState implements State {
             else{
                 ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
                 ClassyTreeItem childItem = new ClassyTreeItem(connection);
-                this.classyTreeImplementation.addDiagramElement(parentItem, childItem);
+
+
+                AddConnectionCommand addConnectionCommand = new AddConnectionCommand(tempTab, connection,painter,parentItem,childItem,classyTreeImplementation);
+                tempTab.getCommandManager().addCommand(addConnectionCommand);
             }
 
         }

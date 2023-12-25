@@ -1,5 +1,6 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.command.implementation.EditCommand;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.MainFrame;
@@ -91,10 +92,10 @@ public class EditClassState implements State {
                                 }
                                 Method method = new Method(name, visibilityEnum, returnType, abstractMethod, staticMethod);
                                 Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
-                                interClass.getMethods().add(method);
-                                interClass.getClassContents().add(method);
-                                tempTab.repaint();
 
+
+                                EditCommand editCommand = new EditCommand(null, method, tempTab, interClass);
+                                tempTab.getCommandManager().addCommand(editCommand);
                             }
                         }
                         else if (selection == "Attribute") {
@@ -143,9 +144,9 @@ public class EditClassState implements State {
 
                                 Attribute attribute = new Attribute(name, visibilityEnum, returnType, abstractAttribute, staticAttribute);
                                 Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
-                                interClass.getAttributes().add(attribute);
-                                interClass.getClassContents().add(attribute);
-                                tempTab.repaint();
+
+                                EditCommand editCommand = new EditCommand(attribute, null, tempTab, interClass);
+                                tempTab.getCommandManager().addCommand(editCommand);
                             }
                         }
                     }
@@ -154,9 +155,9 @@ public class EditClassState implements State {
                         if (name == null || name.length() == 0) return;
                         Attribute attribute = new Attribute(name);
                         Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
-                        interClass.getAttributes().add(attribute);
-                        interClass.getClassContents().add(attribute);
-                        tempTab.repaint();
+
+                        EditCommand editCommand = new EditCommand(attribute, null, tempTab, interClass);
+                        tempTab.getCommandManager().addCommand(editCommand);
                     }
                     else if (elementPainter.elementAt(point) && elementPainter instanceof InterfacePainter) {
                         Object[] selectionValuesVisibility = {"Public", "Private", "Protected", "Default"};
@@ -198,9 +199,9 @@ public class EditClassState implements State {
                             }
                             Method method = new Method(name, visibilityEnum, returnType, abstractMethod, staticMethod);
                             Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
-                            interClass.getMethods().add(method);
-                            interClass.getClassContents().add(method);
-                            tempTab.repaint();
+
+                            EditCommand editCommand = new EditCommand(null, method, tempTab, interClass);
+                            tempTab.getCommandManager().addCommand(editCommand);
                         }
                     }
                 }

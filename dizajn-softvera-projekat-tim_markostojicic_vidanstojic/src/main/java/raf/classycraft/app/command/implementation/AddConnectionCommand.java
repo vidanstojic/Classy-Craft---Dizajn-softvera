@@ -35,7 +35,10 @@ public class AddConnectionCommand extends AbstractCommand {
         if(diagramView == null || connectionModel == null || connectionPainter == null || parentTreeItem == null || childTreeItem == null || classyTreeImplementation == null){
             return;
         }
-
+        if(!diagramView.getListOfPainters().contains(connectionPainter)){
+            diagramView.getListOfPainters().add(connectionPainter);
+        }
+        this.classyTreeImplementation.addDiagramElement(parentTreeItem, childTreeItem);
     }
 
     @Override
@@ -43,5 +46,7 @@ public class AddConnectionCommand extends AbstractCommand {
         if(diagramView == null || connectionModel == null || connectionPainter == null || parentTreeItem == null || childTreeItem == null || classyTreeImplementation == null){
             return;
         }
+        diagramView.getListOfPainters().remove(connectionPainter);
+        this.classyTreeImplementation.removeChild(childTreeItem);
     }
 }
