@@ -1,6 +1,5 @@
 package raf.classycraft.app.state.concrete;
 
-import raf.classycraft.app.command.implementation.AddClassCommand;
 import raf.classycraft.app.command.implementation.MoveCommand;
 import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.paint.*;
@@ -9,7 +8,8 @@ import raf.classycraft.app.state.State;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Math.abs;
 
@@ -20,7 +20,7 @@ public class MoveState implements State {
     private Point oldPoint;
     private Point newPoint;
     private Point startPointInInterClass;
-    private HashMap<Interclass, Point> oldPointMap = new HashMap<>();
+    private List<Point> pointList = new ArrayList<Point>();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleX()));
@@ -34,7 +34,7 @@ public class MoveState implements State {
                     if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                         interclass = ((InterClassPainter) elementPainter).getInterclass();
                         oldPoint = new Point(interclass.getPoint());
-                        oldPointMap.put(interclass, oldPoint);
+                        //pointList.add(oldPoint);
                         interclass.setColor(Color.BLUE);
                         tempTab.repaint();
                         break;
@@ -47,7 +47,7 @@ public class MoveState implements State {
                     interclass = ((InterClassPainter) elementPainter).getInterclass();
                     oldPoint = new Point(interclass.getPoint());
                     interclass.setColor(Color.BLUE);
-                    oldPointMap.put(interclass, oldPoint);
+                    pointList.add(oldPoint);
                     tempTab.repaint();
                 }
             }
@@ -56,6 +56,7 @@ public class MoveState implements State {
 
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
+        int counter = 0;
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
             for (ElementPainter elementPainter1 : tempTab.getListOfSelectedPainters()) {
                 if (elementPainter1 instanceof InterClassPainter) {
@@ -64,6 +65,7 @@ public class MoveState implements State {
                             if (elementPainter1.getRectangle() == null || elementPainter1.getRectangle().equals(elementPainter2.getRectangle()))
                                 continue;
                             interclass = ((InterClassPainter) elementPainter1).getInterclass();
+                            counter++;
                             if (interclass.getRectangle().intersects(elementPainter2.getRectangle())) {
                                 interclass.setPoint(interclass.getSpecialPoint());
                             }
@@ -71,13 +73,8 @@ public class MoveState implements State {
                     }
                         interclass.setColor(Color.BLACK);
                         interclass.setSpecialPoint(interclass.getPoint());
-                        for (int i = 0; i < tempTab.getListOfSelectedPainters().size(); i++){
-                            if (interclass.getName() == oldPointMap.keySet().getClass().getName()){
-                                MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPointMap.get(interclass), interclass.getPoint());
-                                tempTab.getCommandManager().addCommand(moveCommand);
-                                break;
-                            }
-                        }
+                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter - 1), interclass.getPoint());
+                        tempTab.getCommandManager().addCommand(moveCommand);
 
                         //tempTab.repaint();
 
