@@ -376,7 +376,7 @@ public class AddConnectionState implements State {
                 ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
                 ClassyTreeItem childItem = new ClassyTreeItem(connection);
 
-                
+
                 AddConnectionCommand addConnectionCommand = new AddConnectionCommand(tempTab, connection,painter,parentItem,childItem,classyTreeImplementation);
                 tempTab.getCommandManager().addCommand(addConnectionCommand);
             }
