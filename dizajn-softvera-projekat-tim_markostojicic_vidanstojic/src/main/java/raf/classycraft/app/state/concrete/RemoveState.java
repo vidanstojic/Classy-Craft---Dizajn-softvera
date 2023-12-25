@@ -1,5 +1,6 @@
 package raf.classycraft.app.state.concrete;
 
+import raf.classycraft.app.command.implementation.RemoveCommand;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.DiagramView;
@@ -64,13 +65,17 @@ public class RemoveState implements State {
         }
 
 
-        for(ElementPainter elementPainter : elementPaintersToRemove){
+/*        for(ElementPainter elementPainter : elementPaintersToRemove){
             tempTab.getListOfPainters().remove(elementPainter);
         }
         for(DiagramElement elementToRemove : elementModelsToRemove){
             ClassyTreeItem itemToRemove = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot() ,elementToRemove);
             this.classyTreeImplementation.removeChild(itemToRemove);
         }
+*/
+        RemoveCommand removeCommand = new RemoveCommand(tempTab, elementPaintersToRemove, elementModelsToRemove, classyTreeImplementation);
+        tempTab.getCommandManager().addCommand(removeCommand);
+
     }
 
     @Override

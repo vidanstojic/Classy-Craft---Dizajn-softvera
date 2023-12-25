@@ -1,1 +1,0 @@
-[ERROR][2023-12-25T13:39:51.364523300]You need to clikck on the class you want to copy.

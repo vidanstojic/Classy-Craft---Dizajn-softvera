@@ -69,7 +69,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         if(selected != null){
            ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
            if(parent == null) {
-               ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+     //          ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
                return;
            }
             parent.remove(selected);
