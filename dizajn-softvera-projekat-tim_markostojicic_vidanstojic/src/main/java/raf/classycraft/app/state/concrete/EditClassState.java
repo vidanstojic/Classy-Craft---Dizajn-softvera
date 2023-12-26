@@ -6,6 +6,7 @@ import raf.classycraft.app.gui.view.DiagramView;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
+import raf.classycraft.app.model.elementDiagram.EditClassMode;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
@@ -37,9 +38,9 @@ public class EditClassState implements State {
                 Object selectionMode = JOptionPane.showInputDialog(null, "Select edit mode",
                         "Edit mode", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMode, initialSelectionMode);
                 if (selectionMode == "Rename") {
-                    renameMethod(interclass, tempTab);
+                    renameElement(interclass, tempTab);
                 } else if (selectionMode == "Remove") {
-                    removeMethod(interclass, tempTab);
+                    removeElement(interclass, tempTab);
                 } else if (selectionMode == "Add elements") {
                     if (elementPainter.elementAt(point) && elementPainter instanceof ClassPainter) {
                         Object[] selectionValues = {"Attribute", "Method"};
@@ -93,8 +94,7 @@ public class EditClassState implements State {
                                 Method method = new Method(name, visibilityEnum, returnType, abstractMethod, staticMethod);
                                 Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
 
-
-                                EditCommand editCommand = new EditCommand(null, method, tempTab, interClass);
+                                EditCommand editCommand = new EditCommand(null, method, tempTab, interClass, EditClassMode.ADD_ELEMENT);
                                 tempTab.getCommandManager().addCommand(editCommand);
                             }
                         }
@@ -145,7 +145,7 @@ public class EditClassState implements State {
                                 Attribute attribute = new Attribute(name, visibilityEnum, returnType, abstractAttribute, staticAttribute);
                                 Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
 
-                                EditCommand editCommand = new EditCommand(attribute, null, tempTab, interClass);
+                                EditCommand editCommand = new EditCommand(attribute, null, tempTab, interClass,EditClassMode.ADD_ELEMENT);
                                 tempTab.getCommandManager().addCommand(editCommand);
                             }
                         }
@@ -156,7 +156,7 @@ public class EditClassState implements State {
                         Attribute attribute = new Attribute(name);
                         Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
 
-                        EditCommand editCommand = new EditCommand(attribute, null, tempTab, interClass);
+                        EditCommand editCommand = new EditCommand(attribute, null, tempTab, interClass,EditClassMode.ADD_ELEMENT);
                         tempTab.getCommandManager().addCommand(editCommand);
                     }
                     else if (elementPainter.elementAt(point) && elementPainter instanceof InterfacePainter) {
@@ -200,7 +200,7 @@ public class EditClassState implements State {
                             Method method = new Method(name, visibilityEnum, returnType, abstractMethod, staticMethod);
                             Interclass interClass = ((InterClassPainter) elementPainter).getInterclass();
 
-                            EditCommand editCommand = new EditCommand(null, method, tempTab, interClass);
+                            EditCommand editCommand = new EditCommand(null, method, tempTab, interClass, EditClassMode.ADD_ELEMENT);
                             tempTab.getCommandManager().addCommand(editCommand);
                         }
                     }
@@ -218,7 +218,7 @@ public class EditClassState implements State {
     public void stateMouseDragged(MouseEvent e, DiagramView tempTab) {
 
     }
-    private void removeMethod(Interclass interclass, DiagramView tempTab){
+    private void removeElement(Interclass interclass, DiagramView tempTab){
         if (interclass.getClassContents().isEmpty()){
             return;
         } else {
@@ -228,18 +228,12 @@ public class EditClassState implements State {
                 if (classContent.getName().equals(inputText)){
                     listForRemoveContent.add(classContent);
                 }
-            }for (ClassContent classContent : listForRemoveContent){
-                if (classContent instanceof Attribute)
-                    interclass.getAttributes().remove(classContent);
-                else if (classContent instanceof Method) {
-                    interclass.getMethods().remove(classContent);
-                }
-                interclass.getClassContents().remove(classContent);
-                tempTab.repaint();
             }
+            EditCommand editCommand = new EditCommand(tempTab, interclass, listForRemoveContent, EditClassMode.REMOVE_ELEMENT);
+            tempTab.getCommandManager().addCommand(editCommand);
         }
     }
-    private void renameMethod(Interclass interclass, DiagramView tempTab){
+    private void renameElement(Interclass interclass, DiagramView tempTab){
 
         Object[] selectionValuesRename = {"Rename class name", "Rename element"};
         String initialSelectionRename = "Rename class name";
