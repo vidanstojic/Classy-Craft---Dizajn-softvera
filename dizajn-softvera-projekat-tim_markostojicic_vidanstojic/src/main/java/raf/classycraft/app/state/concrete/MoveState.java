@@ -69,7 +69,6 @@ public class MoveState implements State {
                                 interclass.setPoint(interclass.getSpecialPoint());
                                 interclass.setColor(Color.BLACK);
                                 interclass.setSpecialPoint(interclass.getPoint());
-                                pointList.remove(pointList.get(++counter));///greska
                                 continue;
                             }
                             interclass.setColor(Color.BLACK);
