@@ -67,16 +67,17 @@ public class MoveState implements State {
                             interclass = ((InterClassPainter) elementPainter1).getInterclass();
                             if (interclass.getRectangle().intersects(elementPainter2.getRectangle())) {
                                 interclass.setPoint(interclass.getSpecialPoint());
+                                interclass.setColor(Color.BLACK);
+                                interclass.setSpecialPoint(interclass.getPoint());
+                                pointList.remove(pointList.get(++counter));///greska
+                                continue;
                             }
+                            interclass.setColor(Color.BLACK);
+                            interclass.setSpecialPoint(interclass.getPoint());
+                            MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter++), interclass.getPoint());////ovde baca gresku
+                            tempTab.getCommandManager().addCommand(moveCommand);
                         }
                     }
-                        interclass.setColor(Color.BLACK);
-                        interclass.setSpecialPoint(interclass.getPoint());
-                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter++), interclass.getPoint());
-                        tempTab.getCommandManager().addCommand(moveCommand);
-
-                        //tempTab.repaint();
-
                 }
             }
 
@@ -92,7 +93,11 @@ public class MoveState implements State {
                         continue;
                     if (elementPainter.getRectangle().intersects(interclass.getRectangle())) {
                         interclass.setPoint(oldPoint);
-                        break;
+                        interclass.setSpecialPoint(interclass.getPoint());
+                        interclass.setColor(Color.BLACK);
+                        interclass = null;
+                        pointList.removeAll(pointList);
+                        return;
                     }
                 }
             }
@@ -100,7 +105,6 @@ public class MoveState implements State {
             interclass.setColor(Color.BLACK);
             MoveCommand moveCommand = new MoveCommand(tempTab, interclass, oldPoint, interclass.getSpecialPoint(), interclass.getPoint());
             tempTab.getCommandManager().addCommand(moveCommand);
-            //tempTab.repaint();
             interclass = null;
         }
         pointList.removeAll(pointList);
