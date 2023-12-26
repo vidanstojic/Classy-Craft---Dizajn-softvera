@@ -242,9 +242,9 @@ public class EditClassState implements State {
         if (selectionRename == "Rename class name") {
             String inputText = JOptionPane.showInputDialog("Enter new name");
             if (inputText == null || inputText.isEmpty())return;
-            interclass.setName(inputText);
-            SwingUtilities.updateComponentTreeUI(this.classyTreeImplementation.getTreeView());
-            tempTab.repaint();
+
+            EditCommand editCommand = new EditCommand(tempTab,interclass, inputText, EditClassMode.RENAME_CLASS_NAME, classyTreeImplementation);
+            tempTab.getCommandManager().addCommand(editCommand);
         }else if (!interclass.getClassContents().isEmpty() && selectionRename == "Rename element"){
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
             int counter = 0;
@@ -268,9 +268,11 @@ public class EditClassState implements State {
                 if (classContent.getName().equals(input)){
                     String inputName = JOptionPane.showInputDialog("Enter new name");
                     if (inputName == null || inputName.isEmpty())return;
-                    classContent.setName(inputName);
+
+                    EditCommand editCommand = new EditCommand(tempTab, classContent, inputName, EditClassMode.RENAME_ELEMENT);
+                    tempTab.getCommandManager().addCommand(editCommand);
+
                     input = inputName;
-                    tempTab.repaint();
                     elementsEdit(interclass, tempTab, input);
                 }
             }
@@ -279,8 +281,10 @@ public class EditClassState implements State {
                 if (classContent.getName().equals(input)){
                     String inputType = JOptionPane.showInputDialog("Enter new element type");
                     if (inputType == null || inputType.isEmpty())return;
-                    classContent.setReturnType(inputType);
-                    tempTab.repaint();
+
+                    EditCommand editCommand = new EditCommand(tempTab, classContent, inputType, EditClassMode.CHANGE_ELEMENT_TYPE);
+                    tempTab.getCommandManager().addCommand(editCommand);
+
                     elementsEdit(interclass, tempTab, input);
                 }
             }
@@ -305,9 +309,10 @@ public class EditClassState implements State {
                         } else {
                             visibilityEnum = Visibility.DEFAULT;
                         }
-                        classContent.setVisibility(visibilityEnum);
+                        EditCommand editCommand = new EditCommand(tempTab, classContent, visibilityEnum.toString(), EditClassMode.CHANGE_ELEMENT_VISIBILITY);
+                        tempTab.getCommandManager().addCommand(editCommand);
                     }
-                    tempTab.repaint();
+
                     elementsEdit(interclass, tempTab, input);
                 }
             }
@@ -335,10 +340,9 @@ public class EditClassState implements State {
                             abstractElement = "";
                             staticElement = "";
                         }
-                        classContent.setStaticContentOrNot(staticElement);
-                        classContent.setAbstractContentOrNot(abstractElement);
+                        EditCommand editCommand = new EditCommand(tempTab, classContent, abstractElement, staticElement, EditClassMode.MODIFY_STATIC_ABSTRACT);
+                        tempTab.getCommandManager().addCommand(editCommand);
                     }
-                    tempTab.repaint();
                     elementsEdit(interclass, tempTab, input);
                 }
             }
@@ -347,6 +351,10 @@ public class EditClassState implements State {
             String inputText = JOptionPane.showInputDialog("Enter full name of element that exist");
             if (inputText == null || inputText.length() == 0) return;
             elementsEdit(interclass, tempTab, inputText);
+        }
+        else{
+            tempTab.repaint();
+            return;
         }
     }
     private void deselect(DiagramView tempTab){
