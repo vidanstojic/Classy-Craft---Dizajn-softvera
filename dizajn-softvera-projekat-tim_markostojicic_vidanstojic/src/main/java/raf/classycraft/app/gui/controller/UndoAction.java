@@ -25,6 +25,7 @@ public class UndoAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (MainFrame.getInstance().getCurrentDiagramView() == null)return;
         deselect(MainFrame.getInstance().getCurrentDiagramView());
         MainFrame.getInstance().getCurrentDiagramView().getCommandManager().undoCommand();
     }
