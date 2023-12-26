@@ -20,7 +20,7 @@ public class MoveState implements State {
     private Point oldPoint;
     private Point newPoint;
     private Point startPointInInterClass;
-    private List<Point> pointList = new ArrayList<Point>();
+    private List<Point> pointList = new ArrayList<>();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleX()));
@@ -65,7 +65,6 @@ public class MoveState implements State {
                             if (elementPainter1.getRectangle() == null || elementPainter1.getRectangle().equals(elementPainter2.getRectangle()))
                                 continue;
                             interclass = ((InterClassPainter) elementPainter1).getInterclass();
-                            counter++;
                             if (interclass.getRectangle().intersects(elementPainter2.getRectangle())) {
                                 interclass.setPoint(interclass.getSpecialPoint());
                             }
@@ -73,7 +72,7 @@ public class MoveState implements State {
                     }
                         interclass.setColor(Color.BLACK);
                         interclass.setSpecialPoint(interclass.getPoint());
-                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter - 1), interclass.getPoint());
+                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter++), interclass.getPoint());
                         tempTab.getCommandManager().addCommand(moveCommand);
 
                         //tempTab.repaint();
@@ -104,6 +103,7 @@ public class MoveState implements State {
             //tempTab.repaint();
             interclass = null;
         }
+        pointList.removeAll(pointList);
     }
 
     @Override
