@@ -1,5 +1,6 @@
 package raf.classycraft.app.model.compositeImplement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
@@ -12,9 +13,12 @@ import java.util.List;
 public class Project extends ClassyNodeComposite implements IPublisher {
 
     private String author;
-    private URL filepath;
+    private String filepath;
 
+    @JsonIgnore
     private List<ISubscriber> subscribers = new ArrayList<>();
+
+    protected boolean changed = true;
     public Project(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
@@ -55,15 +59,16 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     @Override
     public void setName(String name) {
         super.setName(name);
+        changed = true;
         ProjectNotificationType projectNotificationType = new ProjectNotificationType(getName(), author);
         notifySub(projectNotificationType);
     }
 
-    public URL getFilepath() {
+    public String getFilepath() {
         return filepath;
     }
 
-    public void setFilepath(URL filepath) {
+    public void setFilepath(String filepath) {
         this.filepath = filepath;
     }
 
@@ -87,5 +92,13 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     public void projectDeleted(ClassyNode node){
         NotificationTree notificationTree = new NotificationTree(node,TreeNotificationType.PROJECT_DELETED);
         notifySub(notificationTree);
+    }
+
+    public boolean isChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 }

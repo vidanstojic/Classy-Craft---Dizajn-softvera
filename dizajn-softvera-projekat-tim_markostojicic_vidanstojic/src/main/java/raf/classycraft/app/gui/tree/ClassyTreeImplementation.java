@@ -6,6 +6,7 @@ import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
@@ -14,6 +15,7 @@ import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 
 public class ClassyTreeImplementation implements ClassyTree{
 
@@ -83,6 +85,18 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public ClassyTreeItem getSelectedNode() {
         return (ClassyTreeItem) treeView.getLastSelectedPathComponent();
+    }
+
+    @Override
+    public void loadProject(Project node) {
+        ClassyTreeItem loadedProject = new ClassyTreeItem(node);
+        ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
+
+        ClassyNodeComposite classyNodeComposite = (ClassyNodeComposite) treeModel.getRoot();
+        classyNodeComposite.addChild(node);
+
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
     }
 
     private ClassyNode createChild(ClassyNodeComposite parent) {

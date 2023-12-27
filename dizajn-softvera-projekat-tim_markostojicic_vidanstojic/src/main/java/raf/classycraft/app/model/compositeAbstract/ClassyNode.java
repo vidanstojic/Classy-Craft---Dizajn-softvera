@@ -1,8 +1,11 @@
 package raf.classycraft.app.model.compositeAbstract;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public abstract class ClassyNode {
 
     private String name;
+    @JsonIgnore
     private ClassyNode parent;
 
     public ClassyNode() {

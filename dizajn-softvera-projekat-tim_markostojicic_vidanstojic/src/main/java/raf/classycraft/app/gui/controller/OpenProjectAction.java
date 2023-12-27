@@ -1,8 +1,13 @@
 package raf.classycraft.app.gui.controller;
 
+import raf.classycraft.app.core.ApplicationFramework;
+import raf.classycraft.app.gui.view.MainFrame;
+import raf.classycraft.app.model.compositeImplement.Project;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 public class OpenProjectAction extends AbstractClassyAction{
     public OpenProjectAction(){
@@ -14,6 +19,17 @@ public class OpenProjectAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        JFileChooser jfc = new JFileChooser();
 
+        if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = jfc.getSelectedFile();
+                Project p = ApplicationFramework.getInstance().getSerializer().loadProject(file);
+                MainFrame.getInstance().getClassyTree().loadProject(p);
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
     }
 }
