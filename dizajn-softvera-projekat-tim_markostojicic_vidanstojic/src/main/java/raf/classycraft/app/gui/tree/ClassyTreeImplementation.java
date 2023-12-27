@@ -96,11 +96,11 @@ public class ClassyTreeImplementation implements ClassyTree{
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
         System.out.println(node.getChildren().get(0).getName());
-        if (!node.getChildren().isEmpty())loadPackage(node);
+        if (!node.getChildren().isEmpty())loadPackage(node, loadedProject);
     }
-   public void loadPackage(Project project){
+   public void loadPackage(Project project, ClassyTreeItem classyTreeItem){
         MyPackage pack =(MyPackage) project.getChildren().get(0);
-        project.addChild(pack);
+        addChild(classyTreeItem);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
