@@ -57,6 +57,7 @@ public class MoveState implements State {
     @Override
     public void stateMouseReleased(MouseEvent e, DiagramView tempTab) {
         int counter = 0;
+        int flag = 0;
         if (!tempTab.getListOfSelectedPainters().isEmpty()){
             for (ElementPainter elementPainter1 : tempTab.getListOfSelectedPainters()) {
                 if (elementPainter1 instanceof InterClassPainter) {
@@ -69,14 +70,33 @@ public class MoveState implements State {
                                 interclass.setPoint(interclass.getSpecialPoint());
                                 interclass.setColor(Color.BLACK);
                                 interclass.setSpecialPoint(interclass.getPoint());
-                                continue;
+                                for (int i = 0; i < pointList.size(); i++) {
+                                    if (interclass.getPoint().equals(pointList.get(i))) {
+                                        flag++;
+                                        pointList.remove(pointList.get(i));
+                                        break;
+                                    }
+                                }
+                            }///problem je sto ovim se ni ne dodje do klase koja se intersektovala
+                            //interclass.setColor(Color.BLACK);
+                            //interclass.setSpecialPoint(interclass.getPoint());
+
+                            /*if (flag == 0) {
+                                MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter++), interclass.getPoint());////ovde baca gresku
+                                tempTab.getCommandManager().addCommand(moveCommand);
                             }
-                            interclass.setColor(Color.BLACK);
-                            interclass.setSpecialPoint(interclass.getPoint());
-                            MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter++), interclass.getPoint());////ovde baca gresku
-                            tempTab.getCommandManager().addCommand(moveCommand);
+                            flag = 0;*/
+                            //if (tempTab.getListOfSelectedPainters().contains(interclass))continue;
+
                         }
                     }
+                    interclass.setColor(Color.BLACK);
+                    interclass.setSpecialPoint(interclass.getPoint());
+                    if (flag == 0) {
+                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter++), interclass.getPoint());////ovde baca gresku
+                        tempTab.getCommandManager().addCommand(moveCommand);
+                    }
+                    flag = 0;
                 }
             }
 
