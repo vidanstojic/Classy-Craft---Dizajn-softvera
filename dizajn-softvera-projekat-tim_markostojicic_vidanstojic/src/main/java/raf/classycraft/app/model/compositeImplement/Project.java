@@ -25,8 +25,11 @@ public class Project extends ClassyNodeComposite implements IPublisher {
         this.addSubscriber(MainFrame.getInstance().getPackageView());
     }
 
-    public Project(String author) {
+    /*public Project(String author) {
         this.author = author;
+    }*/
+    public Project(){
+
     }
 
     @Override

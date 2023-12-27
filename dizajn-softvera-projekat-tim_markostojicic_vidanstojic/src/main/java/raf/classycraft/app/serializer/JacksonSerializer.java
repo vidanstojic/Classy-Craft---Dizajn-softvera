@@ -10,11 +10,12 @@ import java.io.IOException;
 public class JacksonSerializer implements Serializer {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private Project p;
 
     @Override
     public Project loadProject(File file) {
         try {
-            return objectMapper.readValue(file, Project.class);
+            return p = objectMapper.readValue(file, Project.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
