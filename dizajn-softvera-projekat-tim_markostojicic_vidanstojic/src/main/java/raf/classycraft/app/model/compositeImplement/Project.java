@@ -41,11 +41,7 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     public Project(){
 
     }
-    public void openChild(){
-        ClassyTreeImplementation classyTreeImplementation = new ClassyTreeImplementation();
-        ClassyTreeItem classyTreeItem = new ClassyTreeItem(this);
-        classyTreeImplementation.addChild(classyTreeItem);
-    }
+
     @Override
     public void addChild(ClassyNode child) {
         if (child != null &&  child instanceof MyPackage){

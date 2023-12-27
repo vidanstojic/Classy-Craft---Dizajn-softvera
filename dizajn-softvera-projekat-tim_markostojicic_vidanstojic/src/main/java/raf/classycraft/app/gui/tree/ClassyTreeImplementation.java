@@ -15,6 +15,7 @@ import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 public class ClassyTreeImplementation implements ClassyTree{
 
@@ -92,18 +93,39 @@ public class ClassyTreeImplementation implements ClassyTree{
         ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
 
         projectExplorer.addChild(node);
-        //node.openChild();
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
+
+
         System.out.println(node.getChildren().get(0).getName());
-        if (!node.getChildren().isEmpty())loadPackage(node);
+        if (!(node.getChildren().isEmpty()) )loadPackage(node);
     }
    public void loadPackage(Project project){
-        MyPackage pack =(MyPackage) project.getChildren().get(0);
-        project.addChild(pack);
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+       MyPackage pack = (MyPackage) project.getChildren().get(0);
+
+       ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+       ClassyTreeItem projectTreeItem = findTreeItem(rootItem, project);
+
+       if (projectTreeItem != null) {
+
+           ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, pack);
+
+           if (packageTreeItem != null) {
+               treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+           } else {
+               project.addChild(pack);
+               ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(pack);
+               projectTreeItem.add(newPackageTreeItem);
+
+               treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+
+
+               SwingUtilities.updateComponentTreeUI(treeView);
+           }
+       }
     }
+
+
     private ClassyNode createChild(ClassyNodeComposite parent) {
         return FactoryUtils.initNode(parent);
     }
