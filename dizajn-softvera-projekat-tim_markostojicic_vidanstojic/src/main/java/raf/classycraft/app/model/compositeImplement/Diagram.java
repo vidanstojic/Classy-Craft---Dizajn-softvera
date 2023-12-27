@@ -1,5 +1,6 @@
 package raf.classycraft.app.model.compositeImplement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
@@ -13,7 +14,8 @@ import java.util.List;
 
 public class Diagram extends ClassyNodeComposite implements IPublisher {
 
-    List<ISubscriber> subscribers = new ArrayList<>();
+    @JsonIgnore
+    private List<ISubscriber> subscribers = new ArrayList<>();
     public Diagram(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);

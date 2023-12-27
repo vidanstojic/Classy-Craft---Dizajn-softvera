@@ -5,6 +5,8 @@ import raf.classycraft.app.model.simpleFactory.FileLogger;
 import raf.classycraft.app.model.messageGenerator.MessageGeneratorImplementation;
 import raf.classycraft.app.model.simpleFactory.LoggerFactory;
 import raf.classycraft.app.gui.view.MainFrame;
+import raf.classycraft.app.serializer.JacksonSerializer;
+import raf.classycraft.app.serializer.Serializer;
 
 public class ApplicationFramework {
 
@@ -15,6 +17,8 @@ public class ApplicationFramework {
 
     private FileLogger fileLogger;
     private ConsoleLogger consoleLogger;
+
+    private Serializer serializer;
 
     private ApplicationFramework(){
 
@@ -29,7 +33,7 @@ public class ApplicationFramework {
 
         consoleLogger = (ConsoleLogger) loggerFactory.createLogger("consoleLogger");
         fileLogger = (FileLogger) loggerFactory.createLogger("fileLogger");
-
+        serializer = new JacksonSerializer();
 
     }
 
@@ -46,5 +50,13 @@ public class ApplicationFramework {
 
     public ClassyRepository getClassyRepository() {
         return classyRepository;
+    }
+
+    public Serializer getSerializer() {
+        return serializer;
+    }
+
+    public void setSerializer(Serializer serializer) {
+        this.serializer = serializer;
     }
 }
