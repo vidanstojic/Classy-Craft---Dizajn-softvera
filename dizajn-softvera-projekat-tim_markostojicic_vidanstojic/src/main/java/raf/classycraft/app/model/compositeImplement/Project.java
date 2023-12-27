@@ -1,15 +1,25 @@
 package raf.classycraft.app.model.compositeImplement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
+import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
+import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.observer.*;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "Project"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Project.class, name = "Project"),
+})*/
+@JsonTypeName("Project")
 public class Project extends ClassyNodeComposite implements IPublisher {
 
     private String author;
@@ -31,13 +41,17 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     public Project(){
 
     }
-
+    public void openChild(){
+        ClassyTreeImplementation classyTreeImplementation = new ClassyTreeImplementation();
+        ClassyTreeItem classyTreeItem = new ClassyTreeItem(this);
+        classyTreeImplementation.addChild(classyTreeItem);
+    }
     @Override
     public void addChild(ClassyNode child) {
-        if (child != null &&  child instanceof Package){
-            Package packageChild = (Package) child;
-            if (!this.getChildren().contains(packageChild)){
-                this.getChildren().add(packageChild);
+        if (child != null &&  child instanceof MyPackage){
+            MyPackage myPackageChild = (MyPackage) child;
+            if (!this.getChildren().contains(myPackageChild)){
+                this.getChildren().add(myPackageChild);
             }
         }
     }

@@ -1,6 +1,6 @@
 package raf.classycraft.app.model.compositeImplement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
@@ -8,18 +8,29 @@ import raf.classycraft.app.observer.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class Package extends ClassyNodeComposite implements IPublisher {
+/*
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = MyPackage.class, name = "concrete2"),
+})*/
+@JsonTypeName("MyPackage")
+public class MyPackage extends ClassyNodeComposite implements IPublisher {
 
 
     @JsonIgnore
     private List<ISubscriber> subscribers = new ArrayList<>();
-    public Package(String name, ClassyNode parent){
+    public MyPackage(String name, ClassyNode parent){
         super.setName(name);
         super.setParent(parent);
         this.addSubscriber(MainFrame.getInstance().getPackageView());
     }
+    public MyPackage(){
 
+    }
     @Override
     public void addChild(ClassyNode child) {
         if (child != null &&  child instanceof Diagram){
@@ -30,10 +41,10 @@ public class Package extends ClassyNodeComposite implements IPublisher {
                 notifySub(notificationTree);
             }
         }
-        else if (child != null &&  child instanceof Package){
-            Package packageChild = (Package) child;
-            if (!this.getChildren().contains(packageChild)){
-                this.getChildren().add(packageChild);
+        else if (child != null &&  child instanceof MyPackage){
+            MyPackage myPackageChild = (MyPackage) child;
+            if (!this.getChildren().contains(myPackageChild)){
+                this.getChildren().add(myPackageChild);
             }
         }
     }
@@ -46,7 +57,7 @@ public class Package extends ClassyNodeComposite implements IPublisher {
                 NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.DELETED_CHILD);
                 notifySub(notificationTree);
             }
-        }else if (child != null && child instanceof Package){
+        }else if (child != null && child instanceof MyPackage){
             if(getChildren().contains(child)){
                 getChildren().remove(child);
                 NotificationTree notificationTree = new NotificationTree(child, TreeNotificationType.PACKAGE_DELETED);

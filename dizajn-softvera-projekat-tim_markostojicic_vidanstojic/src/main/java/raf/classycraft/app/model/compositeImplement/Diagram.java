@@ -20,7 +20,9 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
         super.setName(name);
         super.setParent(parent);
     }
+    public Diagram(){
 
+    }
 
     @Override
     public int hashCode() {

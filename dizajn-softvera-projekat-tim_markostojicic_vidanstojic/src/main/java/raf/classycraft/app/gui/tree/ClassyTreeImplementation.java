@@ -6,16 +6,15 @@ import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.Connection;
-import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
 
 public class ClassyTreeImplementation implements ClassyTree{
 
@@ -92,13 +91,19 @@ public class ClassyTreeImplementation implements ClassyTree{
         ClassyTreeItem loadedProject = new ClassyTreeItem(node);
         ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
 
-
         projectExplorer.addChild(node);
-
+        //node.openChild();
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+        System.out.println(node.getChildren().get(0).getName());
+        if (!node.getChildren().isEmpty())loadPackage(node);
+    }
+   public void loadPackage(Project project){
+        MyPackage pack =(MyPackage) project.getChildren().get(0);
+        project.addChild(pack);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
-
     private ClassyNode createChild(ClassyNodeComposite parent) {
         return FactoryUtils.initNode(parent);
     }

@@ -1,11 +1,10 @@
 package raf.classycraft.app.model.compositeImplement;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 
 public class ProjectExplorer extends ClassyNodeComposite {
-
-
     public ProjectExplorer() {
         super.setName("ProjectExplorer");
     }

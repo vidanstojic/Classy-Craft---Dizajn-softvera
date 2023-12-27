@@ -2,7 +2,7 @@ package raf.classycraft.app.gui.tree.factory;
 
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
-import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 
@@ -19,8 +19,8 @@ public class FactoryUtils {
             FactoryChild factoryChild = new PackageFactory();
             return factoryChild.order(parent);
         }
-        else if (parent instanceof Package) {
-            Object[] selectionValues = {"Package", "Diagram"};
+        else if (parent instanceof MyPackage) {
+            Object[] selectionValues = {"MyPackage", "Diagram"};
             String initialSelection = "Diagram";
             Object selection = JOptionPane.showInputDialog(null, "Do you want a new subpackage, or would you like a new diagram?",
                     "Add new item", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -31,7 +31,7 @@ public class FactoryUtils {
                 FactoryChild factoryChild = new DiagramFactory();
                 return factoryChild.order(parent);
             }
-            else if (selection.equals("Package")) {
+            else if (selection.equals("MyPackage")) {
                 FactoryChild factoryChild = new PackageFactory();
                 return factoryChild.order(parent);
             }

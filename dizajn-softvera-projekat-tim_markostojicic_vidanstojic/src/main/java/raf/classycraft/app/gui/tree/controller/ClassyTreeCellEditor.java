@@ -5,7 +5,7 @@ import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.Diagram;
-import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
@@ -75,8 +75,8 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
             }
         }
         if(clicked.getClassyNode() instanceof Diagram){
-            Package packageParent = (Package) clicked.getClassyNode().getParent();
-            packageParent.nameChangedDiagram(clicked.getClassyNode(), oldName);
+            MyPackage myPackageParent = (MyPackage) clicked.getClassyNode().getParent();
+            myPackageParent.nameChangedDiagram(clicked.getClassyNode(), oldName);
         }
     }
 

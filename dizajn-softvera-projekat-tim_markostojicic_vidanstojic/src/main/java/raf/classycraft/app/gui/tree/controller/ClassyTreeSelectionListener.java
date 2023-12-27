@@ -3,7 +3,7 @@ package raf.classycraft.app.gui.tree.controller;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.gui.view.PackageView;
-import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 
 import javax.swing.event.TreeSelectionEvent;
@@ -21,7 +21,7 @@ public class ClassyTreeSelectionListener implements TreeSelectionListener {
             MainFrame.getInstance().getPackageView().getAuthor().setText(project.getAuthor());
             MainFrame.getInstance().getPackageView().getNameOfProject().setText(project.getName());
         }
-        if(treeItemSelected.getClassyNode() instanceof Package){
+        if(treeItemSelected.getClassyNode() instanceof MyPackage){
             PackageView.flag = false;
         }
         System.out.println("Selektovan cvor:"+ treeItemSelected.getClassyNode().getName());

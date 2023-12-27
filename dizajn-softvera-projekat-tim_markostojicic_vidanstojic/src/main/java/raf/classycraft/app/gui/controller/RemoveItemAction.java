@@ -3,12 +3,10 @@ package raf.classycraft.app.gui.controller;
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.MainFrame;
-import raf.classycraft.app.model.compositeAbstract.ClassyNode;
-import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
-import raf.classycraft.app.model.messageGenerator.MessageGeneratorImplementation;
 import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
@@ -37,9 +35,9 @@ public class RemoveItemAction extends AbstractClassyAction{
             return;
         }
 
-        if(selected.getClassyNode() instanceof Package){
-            Package selectedPackage = (Package)selected.getClassyNode();
-            selectedPackage.packageDeleted(selectedPackage);
+        if(selected.getClassyNode() instanceof MyPackage){
+            MyPackage selectedMyPackage = (MyPackage)selected.getClassyNode();
+            selectedMyPackage.packageDeleted(selectedMyPackage);
         }
         else if(selected.getClassyNode() instanceof Project){
             Project project = (Project) selected.getClassyNode();

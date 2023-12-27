@@ -26,7 +26,6 @@ public class OpenProjectAction extends AbstractClassyAction{
             try {
                 File file = jfc.getSelectedFile();
                 Project p = ApplicationFramework.getInstance().getSerializer().loadProject(file);
-                p.setParent(ApplicationFramework.getInstance().getClassyRepository().getRoot());
                 MainFrame.getInstance().getClassyTree().loadProject(p, ApplicationFramework.getInstance().getClassyRepository().getRoot());
 
             } catch (Exception exception) {

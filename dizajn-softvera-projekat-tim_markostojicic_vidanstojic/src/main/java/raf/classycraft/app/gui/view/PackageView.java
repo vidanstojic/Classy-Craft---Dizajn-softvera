@@ -2,7 +2,7 @@ package raf.classycraft.app.gui.view;
 
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagram;
-import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationTree;
@@ -106,18 +106,18 @@ public class PackageView extends JPanel implements ISubscriber {
         if(notify instanceof NotificationTree){
 
             NotificationTree notificationTree = (NotificationTree) notify;
-            Package parentP = null;
+            MyPackage parentP = null;
             Project parent = null;
             Diagram child = null;
             if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof Diagram){
                 child = (Diagram) notificationTree.getClassyNode();
             }
-            else if( !(notificationTree.getClassyNode() instanceof Package || notificationTree.getClassyNode() instanceof Project) ){
+            else if( !(notificationTree.getClassyNode() instanceof MyPackage || notificationTree.getClassyNode() instanceof Project) ){
                 return;
             }else if(notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Project){
                 parent = (Project) notificationTree.getClassyNode();
-            }else if (notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof  Package) {
-                parentP = (Package) notificationTree.getClassyNode();
+            }else if (notificationTree.getClassyNode() != null && notificationTree.getClassyNode() instanceof MyPackage) {
+                parentP = (MyPackage) notificationTree.getClassyNode();
             }
             TreeNotificationType typeNotify = notificationTree.getTreeNotificationType();
 
@@ -155,8 +155,8 @@ public class PackageView extends JPanel implements ISubscriber {
             else if(typeNotify == TreeNotificationType.PROJECT_DELETED){
 
                 for(ClassyNode classyNode: parent.getChildren()){
-                    if(classyNode instanceof Package) {
-                        Package p = (Package) classyNode;
+                    if(classyNode instanceof MyPackage) {
+                        MyPackage p = (MyPackage) classyNode;
                         NotificationTree notificationTree1 = new NotificationTree(p, TreeNotificationType.PACKAGE_DELETED);
                         update(notificationTree1);
                     }

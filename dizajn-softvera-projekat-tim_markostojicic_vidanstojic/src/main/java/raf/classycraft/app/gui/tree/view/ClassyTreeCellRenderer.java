@@ -2,7 +2,7 @@ package raf.classycraft.app.gui.tree.view;
 
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.model.compositeImplement.Diagram;
-import raf.classycraft.app.model.compositeImplement.Package;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
@@ -26,7 +26,7 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
         else if (((ClassyTreeItem)value).getClassyNode() instanceof Project) {
             imageURL = getClass().getResource("/images/project.png");
         }
-        else if (((ClassyTreeItem)value).getClassyNode() instanceof Package) {
+        else if (((ClassyTreeItem)value).getClassyNode() instanceof MyPackage) {
             imageURL = getClass().getResource("/images/package.png");
         }
         else if (((ClassyTreeItem)value).getClassyNode() instanceof Diagram) {
