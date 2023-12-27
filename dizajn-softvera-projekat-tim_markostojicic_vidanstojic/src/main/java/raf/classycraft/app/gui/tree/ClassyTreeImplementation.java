@@ -6,6 +6,7 @@ import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.tree.view.ClassyTreeView;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
+import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
@@ -123,7 +124,33 @@ public class ClassyTreeImplementation implements ClassyTree{
                SwingUtilities.updateComponentTreeUI(treeView);
            }
        }
-    }
+       if (!(pack.getChildren().isEmpty()))loadDiagram(pack);
+   }
+   public void loadDiagram(MyPackage myPackage){
+
+       Diagram diagram = (Diagram) myPackage.getChildren().get(0);
+
+       ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+       ClassyTreeItem projectTreeItem = findTreeItem(rootItem, myPackage);
+
+       if (projectTreeItem != null) {
+
+           ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagram);
+
+           if (packageTreeItem != null) {
+               treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+           } else {
+               myPackage.addChild(diagram);
+               ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagram);
+               projectTreeItem.add(newPackageTreeItem);
+
+               treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+
+
+               SwingUtilities.updateComponentTreeUI(treeView);
+           }
+       }
+   }
 
 
     private ClassyNode createChild(ClassyNodeComposite parent) {
