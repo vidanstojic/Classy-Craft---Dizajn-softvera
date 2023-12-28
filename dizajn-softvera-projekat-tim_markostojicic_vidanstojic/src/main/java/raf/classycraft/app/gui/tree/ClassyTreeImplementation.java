@@ -11,6 +11,7 @@ import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.Connection;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
@@ -150,8 +151,32 @@ public class ClassyTreeImplementation implements ClassyTree{
                SwingUtilities.updateComponentTreeUI(treeView);
            }
        }
+       if (!(diagram.getChildren().isEmpty()))loadDiagramElement(diagram);
    }
+    public void loadDiagramElement(Diagram diagram){
+        DiagramElement diagramElement = (DiagramElement) diagram.getChildren().get(0);
 
+        ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+        ClassyTreeItem projectTreeItem = findTreeItem(rootItem, diagram);
+
+        if (projectTreeItem != null) {
+
+            ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagramElement);
+
+            if (packageTreeItem != null) {
+                treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+            } else {
+                diagram.addChild(diagramElement);
+                ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagramElement);
+                projectTreeItem.add(newPackageTreeItem);
+
+                treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+
+
+                SwingUtilities.updateComponentTreeUI(treeView);
+            }
+        }
+    }
 
     private ClassyNode createChild(ClassyNodeComposite parent) {
         return FactoryUtils.initNode(parent);

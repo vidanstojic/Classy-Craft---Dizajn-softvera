@@ -9,6 +9,7 @@ import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -21,6 +22,7 @@ import raf.classycraft.app.model.elementDiagram.DiagramElement;
         @JsonSubTypes.Type(value = ProjectExplorer.class, name = "ProjectExplorer"),
         @JsonSubTypes.Type(value = Diagram.class, name = "Diagram"),
         @JsonSubTypes.Type(value = DiagramElement.class, name = "DiagramElement"),
+        @JsonSubTypes.Type(value = Interclass.class, name = "Class")
 })
 public abstract class ClassyNode {
 

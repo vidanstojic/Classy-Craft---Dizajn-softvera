@@ -19,7 +19,9 @@ public class ClassInterClass extends Interclass {
         this.name = name;
         this.abstractClass = abstractClass;
     }
-
+    public ClassInterClass(){
+        super();
+    }
     @Override
     public String getName() {
         return name;

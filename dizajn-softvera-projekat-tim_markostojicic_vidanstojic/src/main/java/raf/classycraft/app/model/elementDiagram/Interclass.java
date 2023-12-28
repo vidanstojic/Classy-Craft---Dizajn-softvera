@@ -56,7 +56,9 @@ public abstract class Interclass extends DiagramElement implements IPublisher {
         this.point = point;
         this.specialPoint = point;
     }
-
+    public Interclass(){
+        super();
+    }
     public Point getPoint() {
         return point;
     }
