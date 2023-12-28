@@ -95,6 +95,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
 
         projectExplorer.addChild(node);
+        node.setParent(projectExplorer);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
 
@@ -104,7 +105,7 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
    public void loadPackage(Project project){
        MyPackage pack = (MyPackage) project.getChildren().get(0);
-
+       pack.setParent(project);
        ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
        ClassyTreeItem projectTreeItem = findTreeItem(rootItem, project);
 
@@ -131,7 +132,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         for (ClassyNode classyNode : myPackage.getChildren()) {
             if (classyNode instanceof Diagram) {
                 Diagram diagram = (Diagram) classyNode;
-
+                diagram.setParent(myPackage);
                 ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
                 ClassyTreeItem projectTreeItem = findTreeItem(rootItem, myPackage);
 
@@ -155,6 +156,7 @@ public class ClassyTreeImplementation implements ClassyTree{
                 if (!(diagram.getChildren().isEmpty())) loadDiagramElement(diagram);
             } else if (classyNode instanceof MyPackage) {
                 MyPackage myPackage1 = (MyPackage) classyNode;
+                myPackage1.setParent(myPackage);
                 ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
                 ClassyTreeItem projectTreeItem = findTreeItem(rootItem, myPackage);
 
@@ -182,6 +184,7 @@ public class ClassyTreeImplementation implements ClassyTree{
     public void loadDiagramElement(Diagram diagram){
         for (ClassyNode diagramElementChild : diagram.getChildren()) {
             DiagramElement diagramElement = (DiagramElement) diagramElementChild;
+            diagramElement.setParent(diagram);
             ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
             ClassyTreeItem projectTreeItem = findTreeItem(rootItem, diagram);
 

@@ -4,11 +4,14 @@ import raf.classycraft.app.command.CommandManager;
 import raf.classycraft.app.gui.controller.drawingToolbarActions.MyMouseListener;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
+import raf.classycraft.app.gui.view.paint.ClassPainter;
 import raf.classycraft.app.gui.view.paint.ConnectionPainter;
 import raf.classycraft.app.gui.view.paint.ElementPainter;
 import raf.classycraft.app.gui.view.paint.InterClassPainter;
+import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationDiagramView;
 import raf.classycraft.app.observer.TypeDiagramView;
@@ -43,8 +46,17 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.setPreferredSize(new Dimension(MainFrame.getInstance().getWidth() * 2, MainFrame.getInstance().getHeight() * 2));
         affineTransform = new AffineTransform();
         commandManager = new CommandManager();
+        loadPainters(diagram);
     }
-
+    public void loadPainters(Diagram diagram){
+        for (ClassyNode classyNode : diagram.getChildren()){
+            DiagramElement diagramElement1 = (DiagramElement) classyNode;
+            if (diagramElement1 instanceof ClassInterClass){
+                ClassPainter classPainter = new ClassPainter(((ClassInterClass) diagramElement1).getPoint(), (ClassInterClass) diagramElement1);
+                this.getListOfPainters().add(classPainter);
+            }
+        }
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
