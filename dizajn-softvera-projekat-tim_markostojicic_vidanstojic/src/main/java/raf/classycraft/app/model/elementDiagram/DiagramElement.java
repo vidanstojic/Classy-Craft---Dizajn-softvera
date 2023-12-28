@@ -1,9 +1,10 @@
 package raf.classycraft.app.model.elementDiagram;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 
 import java.awt.*;
-
+@JsonTypeName("DiagramElement")
 public abstract class DiagramElement extends ClassyNode {
     // cuva model/recept za crtanje
     private Color color;

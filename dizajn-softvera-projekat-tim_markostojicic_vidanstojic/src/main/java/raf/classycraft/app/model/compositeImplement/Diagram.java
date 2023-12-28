@@ -1,6 +1,7 @@
 package raf.classycraft.app.model.compositeImplement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
@@ -11,7 +12,7 @@ import raf.classycraft.app.observer.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@JsonTypeName("Diagram")
 public class Diagram extends ClassyNodeComposite implements IPublisher {
 
     @JsonIgnore

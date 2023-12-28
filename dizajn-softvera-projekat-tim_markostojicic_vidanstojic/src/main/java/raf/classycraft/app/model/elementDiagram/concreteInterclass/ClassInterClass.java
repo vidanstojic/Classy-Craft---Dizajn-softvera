@@ -1,5 +1,6 @@
 package raf.classycraft.app.model.elementDiagram.concreteInterclass;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
@@ -7,7 +8,7 @@ import raf.classycraft.app.model.elementDiagram.classContent.Method;
 
 import java.awt.*;
 import java.util.List;
-
+@JsonTypeName("Class")
 public class ClassInterClass extends Interclass {
 
     private String name;
