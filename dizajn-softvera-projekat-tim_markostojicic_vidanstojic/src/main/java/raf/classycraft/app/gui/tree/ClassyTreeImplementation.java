@@ -128,52 +128,79 @@ public class ClassyTreeImplementation implements ClassyTree{
        if (!(pack.getChildren().isEmpty()))loadDiagram(pack);
    }
    public void loadDiagram(MyPackage myPackage){
+        for (ClassyNode classyNode : myPackage.getChildren()) {
+            if (classyNode instanceof Diagram) {
+                Diagram diagram = (Diagram) classyNode;
 
-       Diagram diagram = (Diagram) myPackage.getChildren().get(0);
+                ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+                ClassyTreeItem projectTreeItem = findTreeItem(rootItem, myPackage);
 
-       ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
-       ClassyTreeItem projectTreeItem = findTreeItem(rootItem, myPackage);
+                if (projectTreeItem != null) {
 
-       if (projectTreeItem != null) {
+                    ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagram);
 
-           ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagram);
+                    if (packageTreeItem != null) {
+                        treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+                    } else {
+                        myPackage.addChild(diagram);
+                        ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagram);
+                        projectTreeItem.add(newPackageTreeItem);
 
-           if (packageTreeItem != null) {
-               treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
-           } else {
-               myPackage.addChild(diagram);
-               ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagram);
-               projectTreeItem.add(newPackageTreeItem);
-
-               treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+                        treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
 
 
-               SwingUtilities.updateComponentTreeUI(treeView);
-           }
-       }
-       if (!(diagram.getChildren().isEmpty()))loadDiagramElement(diagram);
+                        SwingUtilities.updateComponentTreeUI(treeView);
+                    }
+                }
+                if (!(diagram.getChildren().isEmpty())) loadDiagramElement(diagram);
+            } else if (classyNode instanceof MyPackage) {
+                MyPackage myPackage1 = (MyPackage) classyNode;
+                ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+                ClassyTreeItem projectTreeItem = findTreeItem(rootItem, myPackage);
+
+                if (projectTreeItem != null) {
+
+                    ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, myPackage1);
+
+                    if (packageTreeItem != null) {
+                        treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+                    } else {
+                        myPackage.addChild(myPackage1);
+                        ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(myPackage1);
+                        projectTreeItem.add(newPackageTreeItem);
+
+                        treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+
+
+                        SwingUtilities.updateComponentTreeUI(treeView);
+                    }
+                }
+                if (!(myPackage1.getChildren().isEmpty()))loadDiagram(myPackage1);
+            }
+        }
    }
     public void loadDiagramElement(Diagram diagram){
-        DiagramElement diagramElement = (DiagramElement) diagram.getChildren().get(0);
+        for (ClassyNode diagramElementChild : diagram.getChildren()) {
+            DiagramElement diagramElement = (DiagramElement) diagramElementChild;
+            ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+            ClassyTreeItem projectTreeItem = findTreeItem(rootItem, diagram);
 
-        ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
-        ClassyTreeItem projectTreeItem = findTreeItem(rootItem, diagram);
+            if (projectTreeItem != null) {
 
-        if (projectTreeItem != null) {
+                ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagramElement);
 
-            ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagramElement);
+                if (packageTreeItem != null) {
+                    treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+                } else {
+                    diagram.addChild(diagramElement);
+                    ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagramElement);
+                    projectTreeItem.add(newPackageTreeItem);
 
-            if (packageTreeItem != null) {
-                treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
-            } else {
-                diagram.addChild(diagramElement);
-                ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagramElement);
-                projectTreeItem.add(newPackageTreeItem);
-
-                treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+                    treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
 
 
-                SwingUtilities.updateComponentTreeUI(treeView);
+                    SwingUtilities.updateComponentTreeUI(treeView);
+                }
             }
         }
     }
