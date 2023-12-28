@@ -34,10 +34,12 @@ public class SaveAsAction extends AbstractClassyAction{
             if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
                 projectFile = jfc.getSelectedFile();
                 project.setFilepath(projectFile.getPath());
-            } else {
-                return;
             }
 
+        }
+        else{
+            projectFile = new File(project.getFilepath());
+            project.setFilepath(projectFile.getPath());
         }
 
 

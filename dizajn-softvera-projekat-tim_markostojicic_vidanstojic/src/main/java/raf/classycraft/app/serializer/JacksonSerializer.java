@@ -25,6 +25,7 @@ public class JacksonSerializer implements Serializer {
     @Override
     public void saveProject(Project project) {
         try {
+
             objectMapper.writeValue(new File(String.valueOf(project.getFilepath())), project);
         } catch (IOException e) {
             e.printStackTrace();
