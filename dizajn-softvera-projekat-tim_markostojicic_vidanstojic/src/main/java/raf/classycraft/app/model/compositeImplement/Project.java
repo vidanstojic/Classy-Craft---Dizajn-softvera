@@ -114,4 +114,12 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     public void setChanged(boolean changed) {
         this.changed = changed;
     }
+
+    public List<ISubscriber> getSubscribers() {
+        return subscribers;
+    }
+
+    public void setSubscribers(List<ISubscriber> subscribers) {
+        this.subscribers = subscribers;
+    }
 }

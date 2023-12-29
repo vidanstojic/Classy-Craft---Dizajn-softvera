@@ -4,6 +4,7 @@ import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.factory.FactoryUtils;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.tree.view.ClassyTreeView;
+import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.model.compositeImplement.Diagram;
@@ -96,6 +97,8 @@ public class ClassyTreeImplementation implements ClassyTree{
 
         projectExplorer.addChild(node);
         node.setParent(projectExplorer);
+
+        node.getSubscribers().add(MainFrame.getInstance().getPackageView());
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
 
@@ -116,11 +119,12 @@ public class ClassyTreeImplementation implements ClassyTree{
 
                 if (packageTreeItem != null) {
                     treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+                    pack.getSubscribers().add(MainFrame.getInstance().getPackageView());
                 } else {
                     project.addChild(pack);
                     ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(pack);
                     projectTreeItem.add(newPackageTreeItem);
-
+                    pack.getSubscribers().add(MainFrame.getInstance().getPackageView());
                     treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
 
 
