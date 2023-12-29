@@ -143,6 +143,7 @@ public class MoveState implements State {
                     Point point2 = new Point(interclass.getSpecialPoint());
                     Point point = new Point(point2.x + weight, point2.y + height);
                     interclass.setPoint(point);
+                    tempTab.repaint();
                 }
             }
 
