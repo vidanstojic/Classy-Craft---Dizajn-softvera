@@ -1,11 +1,12 @@
 package raf.classycraft.app.model.elementDiagram.concreteConnections;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.Connection;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
-
+@JsonTypeName("Dependency")
 public class Dependency extends Connection {
 
     public Dependency(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
@@ -15,7 +16,7 @@ public class Dependency extends Connection {
     public Dependency(Color color, int stroke, Line2D line2D) {
         super(color, stroke, line2D);
     }
-
+    public Dependency(){super();}
     @Override
     public Interclass getClassFrom() {
         return super.getClassFrom();

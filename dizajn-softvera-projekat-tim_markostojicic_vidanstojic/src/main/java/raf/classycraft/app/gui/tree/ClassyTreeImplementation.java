@@ -104,29 +104,31 @@ public class ClassyTreeImplementation implements ClassyTree{
         if (!(node.getChildren().isEmpty()) )loadPackage(node);
     }
    public void loadPackage(Project project){
-       MyPackage pack = (MyPackage) project.getChildren().get(0);
-       pack.setParent(project);
-       ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
-       ClassyTreeItem projectTreeItem = findTreeItem(rootItem, project);
+        for (ClassyNode classyNode : project.getChildren()) {
+            MyPackage pack = (MyPackage) classyNode;
+            pack.setParent(project);
+            ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+            ClassyTreeItem projectTreeItem = findTreeItem(rootItem, project);
 
-       if (projectTreeItem != null) {
+            if (projectTreeItem != null) {
 
-           ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, pack);
+                ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, pack);
 
-           if (packageTreeItem != null) {
-               treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
-           } else {
-               project.addChild(pack);
-               ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(pack);
-               projectTreeItem.add(newPackageTreeItem);
+                if (packageTreeItem != null) {
+                    treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+                } else {
+                    project.addChild(pack);
+                    ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(pack);
+                    projectTreeItem.add(newPackageTreeItem);
 
-               treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+                    treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
 
 
-               SwingUtilities.updateComponentTreeUI(treeView);
-           }
-       }
-       if (!(pack.getChildren().isEmpty()))loadDiagram(pack);
+                    SwingUtilities.updateComponentTreeUI(treeView);
+                }
+            }
+            if (!(pack.getChildren().isEmpty())) loadDiagram(pack);
+        }
    }
    public void loadDiagram(MyPackage myPackage){
         for (ClassyNode classyNode : myPackage.getChildren()) {

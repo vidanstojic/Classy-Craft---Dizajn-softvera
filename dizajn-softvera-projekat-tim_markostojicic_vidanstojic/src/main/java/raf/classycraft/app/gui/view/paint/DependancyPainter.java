@@ -15,7 +15,11 @@ public class DependancyPainter extends ConnectionPainter {
     public DependancyPainter(Dependency connection) {
         super(connection);
     }
-
+    public DependancyPainter(Dependency dependency, Line2D line2D){
+        super(dependency);
+        this.line2D = line2D;
+        dependency.setLine2D(line2D);
+    }
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
         Connection connection = super.getConnection();

@@ -44,7 +44,7 @@ public class EnumPainter extends InterClassPainter{
         Point mainPoint = new Point();
         Point heightPoint = new Point();
         heightPoint.y = 35;
-        Stroke stroke = new BasicStroke(diagramElement.getStroke());
+        Stroke stroke = new BasicStroke(enumInterclass.getStroke());
         String nameOfClass = enumInterclass.getName();
         graphics2D.setColor(enumInterclass.getColor());
         graphics2D.setStroke(stroke);

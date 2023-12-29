@@ -17,6 +17,7 @@ public class EnumInterclass extends Interclass {
         super(point,color, stroke, name, visibility);
         this.name = name;
     }
+    public EnumInterclass(){super();}
     @Override
     public String getName() {
         return name;

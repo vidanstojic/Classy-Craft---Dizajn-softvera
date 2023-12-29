@@ -1,16 +1,33 @@
 package raf.classycraft.app.model.elementDiagram;
 
-import raf.classycraft.app.model.elementDiagram.concreteConnections.ConnectionInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.*;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
-
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Aggregation.class, name = "Aggregation"),
+        @JsonSubTypes.Type(value = Composition.class, name = "Composition"),
+        @JsonSubTypes.Type(value = Dependency.class, name = "Dependency"),
+        @JsonSubTypes.Type(value = Generalization.class, name = "Generalization"),
+        @JsonSubTypes.Type(value = ConnectionInfo.class, name = "ConnectionInfo"),
+})
 public abstract class Connection extends DiagramElement {
     private Interclass classFrom;
     private Interclass classTo;
 
     private ConnectionInfo connectionInfo;
-
+    @JsonIgnore
     private Line2D line2D;
     public Connection(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
         super(color, stroke);
@@ -19,6 +36,7 @@ public abstract class Connection extends DiagramElement {
         this.line2D = line2D;
         this.connectionInfo = connectionInfo;
     }
+    public Connection(){}
     public Connection(Color color, int stroke,Line2D line2D){
         super(color, stroke);
         this.line2D = line2D;

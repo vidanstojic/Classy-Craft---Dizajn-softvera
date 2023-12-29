@@ -1,7 +1,8 @@
 package raf.classycraft.app.model.elementDiagram.concreteConnections;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
-
+@JsonTypeName("ConnectionInfo")
 public class ConnectionInfo {
     private String nameOfConnection;
     private String nameofAttribute;
@@ -15,7 +16,7 @@ public class ConnectionInfo {
         this.cardinaliy = cardinaliy;
         this.visibility = visibility;
     }
-
+    public ConnectionInfo(){}
     // konstruktor za dependancy i generalizaciju
 
 

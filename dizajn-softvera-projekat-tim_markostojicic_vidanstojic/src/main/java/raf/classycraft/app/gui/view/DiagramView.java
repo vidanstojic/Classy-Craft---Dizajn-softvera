@@ -4,14 +4,18 @@ import raf.classycraft.app.command.CommandManager;
 import raf.classycraft.app.gui.controller.drawingToolbarActions.MyMouseListener;
 import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
-import raf.classycraft.app.gui.view.paint.ClassPainter;
-import raf.classycraft.app.gui.view.paint.ConnectionPainter;
-import raf.classycraft.app.gui.view.paint.ElementPainter;
-import raf.classycraft.app.gui.view.paint.InterClassPainter;
+import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagram;
+import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.Aggregation;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.Composition;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.Dependency;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalization;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 import raf.classycraft.app.observer.ISubscriber;
 import raf.classycraft.app.observer.NotificationDiagramView;
 import raf.classycraft.app.observer.TypeDiagramView;
@@ -33,6 +37,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private Rectangle rectangle;
     private DiagramElement diagramElement;
     private Line2D line2D;
+    private Line2D createLine2D;
     private AffineTransform affineTransform;
     private ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
     private CommandManager commandManager;
@@ -54,6 +59,24 @@ public class DiagramView extends JPanel implements ISubscriber {
             if (diagramElement1 instanceof ClassInterClass){
                 ClassPainter classPainter = new ClassPainter(((ClassInterClass) diagramElement1).getPoint(), (ClassInterClass) diagramElement1);
                 this.getListOfPainters().add(classPainter);
+            } else if (diagramElement1 instanceof InterfaceInterclass) {
+                InterfacePainter interfacePainter = new InterfacePainter(((InterfaceInterclass) diagramElement1).getPoint(), (InterfaceInterclass) diagramElement1);
+                this.getListOfPainters().add(interfacePainter);
+            } else if (diagramElement1 instanceof EnumInterclass) {
+                EnumPainter enumPainter = new EnumPainter(((EnumInterclass) diagramElement1).getPoint(), (EnumInterclass) diagramElement1);
+                this.getListOfPainters().add(enumPainter);
+            } else if (diagramElement1 instanceof Aggregation) {
+                AggregationPainter aggregationPainter = new AggregationPainter(((Connection) diagramElement1));
+                this.getListOfPainters().add(aggregationPainter);
+            } else if (diagramElement1 instanceof Composition) {
+                CompositionPainter compositionPainter = new CompositionPainter(((Connection) diagramElement1));
+                this.getListOfPainters().add(compositionPainter);
+            } else if (diagramElement1 instanceof Dependency) {
+                DependancyPainter dependancyPainter = new DependancyPainter(((Dependency) diagramElement1), createLine(((Dependency) diagramElement1).getClassFrom().getPoint(),((Dependency) diagramElement1).getClassTo().getPoint()));
+                this.getListOfPainters().add(dependancyPainter);
+            } else if (diagramElement1 instanceof Generalization) {
+                GeneralizationPainter generalizationPainter = new GeneralizationPainter(((Generalization) diagramElement1));
+                this.getListOfPainters().add(generalizationPainter);
             }
         }
     }
@@ -76,7 +99,9 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
         revalidate();
     }
-
+    public Line2D createLine(Point start, Point end){
+        return createLine2D = new Line2D.Double(start.x, start.y, end.x, end.y);
+    }
     public DiagramView(){
 
     }

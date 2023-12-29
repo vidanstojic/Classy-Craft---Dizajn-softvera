@@ -46,8 +46,7 @@ public class ClassPainter extends InterClassPainter{
         Point mainPoint = new Point();
         Point heightPoint = new Point();
         heightPoint.y = 35;
-        //Stroke stroke = new BasicStroke(diagramElement.getStroke());
-        Stroke stroke = new BasicStroke(3);
+        Stroke stroke = new BasicStroke(classInterClass.getStroke());
         String nameOfClass = classInterClass.getName();
         graphics2D.setColor(classInterClass.getColor());
         graphics2D.setStroke(stroke);
