@@ -66,16 +66,16 @@ public class DiagramView extends JPanel implements ISubscriber {
                 EnumPainter enumPainter = new EnumPainter(((EnumInterclass) diagramElement1).getPoint(), (EnumInterclass) diagramElement1);
                 this.getListOfPainters().add(enumPainter);
             } else if (diagramElement1 instanceof Aggregation) {
-                AggregationPainter aggregationPainter = new AggregationPainter(((Connection) diagramElement1));
+                AggregationPainter aggregationPainter = new AggregationPainter(((Connection) diagramElement1), createLine(((Aggregation) diagramElement1).getClassFrom().getPoint(),((Aggregation) diagramElement1).getClassTo().getPoint()));
                 this.getListOfPainters().add(aggregationPainter);
             } else if (diagramElement1 instanceof Composition) {
-                CompositionPainter compositionPainter = new CompositionPainter(((Connection) diagramElement1));
+                CompositionPainter compositionPainter = new CompositionPainter(((Connection) diagramElement1), createLine(((Composition) diagramElement1).getClassFrom().getPoint(),((Composition) diagramElement1).getClassTo().getPoint()));
                 this.getListOfPainters().add(compositionPainter);
             } else if (diagramElement1 instanceof Dependency) {
                 DependancyPainter dependancyPainter = new DependancyPainter(((Dependency) diagramElement1), createLine(((Dependency) diagramElement1).getClassFrom().getPoint(),((Dependency) diagramElement1).getClassTo().getPoint()));
                 this.getListOfPainters().add(dependancyPainter);
             } else if (diagramElement1 instanceof Generalization) {
-                GeneralizationPainter generalizationPainter = new GeneralizationPainter(((Generalization) diagramElement1));
+                GeneralizationPainter generalizationPainter = new GeneralizationPainter(((Generalization) diagramElement1), createLine(((Generalization) diagramElement1).getClassFrom().getPoint(),((Generalization) diagramElement1).getClassTo().getPoint()));
                 this.getListOfPainters().add(generalizationPainter);
             }
         }
