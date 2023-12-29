@@ -21,6 +21,7 @@ public class ActionManager {
     private RedoAction redoAction;
     private DuplicateAction duplicateAction;
     private OpenProjectAction openProjectAction;
+    private ScreenshotAction screenshotAction;
     private MyMouseListener myMouseListener;
     public ActionManager(){
         initialiseActions();
@@ -45,6 +46,7 @@ public class ActionManager {
         undoAction = new UndoAction();
         redoAction = new RedoAction();
         openProjectAction = new OpenProjectAction();
+        screenshotAction = new ScreenshotAction();
     }
 
     public ExitAction getEa() {
@@ -99,5 +101,9 @@ public class ActionManager {
     public SaveAsAction getSaveAsAction(){return saveAsAction;}
     public ZoomInAction getZoomInAction() {
         return zoomInAction;
+    }
+
+    public ScreenshotAction getScreenshotAction() {
+        return screenshotAction;
     }
 }
