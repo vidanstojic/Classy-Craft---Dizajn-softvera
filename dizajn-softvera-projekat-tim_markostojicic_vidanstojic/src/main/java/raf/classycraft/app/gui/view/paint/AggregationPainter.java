@@ -17,6 +17,7 @@ public class AggregationPainter extends ConnectionPainter {
         super(connection);
     }
 
+    public AggregationPainter(Connection connection, Line2D line2D){super(connection); this.line2D = line2D; connection.setLine2D(line2D);}
     @Override
     public void paint(Graphics2D graphics2D, DiagramElement diagramElement) {
         Connection connection = super.getConnection();
