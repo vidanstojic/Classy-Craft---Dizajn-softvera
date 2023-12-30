@@ -8,6 +8,7 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
+import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 
 import java.awt.event.MouseAdapter;
@@ -35,14 +36,20 @@ public class PackageMouseListener extends MouseAdapter {
                             packageView.addTab(child.getName(), new DiagramView((Diagram) child));
                             packageView.setFlag(true);
                         }
+
                         Diagram diagram = (Diagram) child;
                         diagram.getSubscribers().add(MainFrame.getInstance().getCurrentDiagramView());
+                        for(ClassyNode node : diagram.getChildren()){
+                            DiagramElement diagramElement = (DiagramElement) node;
+                            if(diagramElement instanceof Interclass){
+                                Interclass interclass = (Interclass) diagramElement;
+                                interclass.getListOfSubscribers().add(MainFrame.getInstance().getCurrentDiagramView());
+                            }
+                        }
                     }
-                    else if(child instanceof Interclass){
-                        Interclass interclass = (Interclass) child;
-                        interclass.getListOfSubscribers().add(MainFrame.getInstance().getCurrentDiagramView());
-                    }
+
                 }
+
 
             }
 
