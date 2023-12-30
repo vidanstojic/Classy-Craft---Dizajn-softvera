@@ -48,7 +48,12 @@ public class ClassPainter extends InterClassPainter{
         heightPoint.y = 35;
         Stroke stroke = new BasicStroke(classInterClass.getStroke());
         String nameOfClass = classInterClass.getName();
-        graphics2D.setColor(classInterClass.getColor());
+        if(classInterClass.getColor() == null){
+            graphics2D.setColor(Color.BLACK);
+        }
+        else{
+            graphics2D.setColor(classInterClass.getColor());
+        }
         graphics2D.setStroke(stroke);
         mainPoint.y = classInterClass.getPoint().y + 35;
 
