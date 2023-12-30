@@ -13,6 +13,7 @@ import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
+import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
@@ -209,6 +210,18 @@ public class ClassyTreeImplementation implements ClassyTree{
 
 
                     SwingUtilities.updateComponentTreeUI(treeView);
+                }
+            }
+            if (diagramElement instanceof Connection){
+                Connection connection = (Connection) diagramElement;
+                for (ClassyNode classyNode : diagram.getChildren()){
+                    if (classyNode instanceof Interclass){
+                        if (connection.getClassFrom().getPoint().equals(((Interclass) classyNode).getPoint())){
+                            connection.setClassFrom((Interclass) classyNode);
+                        } else if (connection.getClassTo().getPoint().equals(((Interclass) classyNode).getPoint())) {
+                            connection.setClassTo((Interclass) classyNode);
+                        }
+                    }
                 }
             }
         }
