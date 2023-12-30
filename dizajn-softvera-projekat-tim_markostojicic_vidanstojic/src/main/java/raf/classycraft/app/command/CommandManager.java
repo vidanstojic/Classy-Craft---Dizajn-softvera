@@ -22,6 +22,7 @@ public class CommandManager {
         }
         if(currentCommand==commands.size()){
             MainFrame.getInstance().getActionManager().getRedoAction().setEnabled(false);
+            MainFrame.getInstance().getActionManager().getUndoAction().setEnabled(true);
         }
     }
     public void undoCommand(){
@@ -31,6 +32,7 @@ public class CommandManager {
         }
         if(currentCommand==0){
             MainFrame.getInstance().getActionManager().getUndoAction().setEnabled(false);
+            MainFrame.getInstance().getActionManager().getRedoAction().setEnabled(true);
         }
     }
 }

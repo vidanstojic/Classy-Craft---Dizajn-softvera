@@ -23,6 +23,7 @@ public class ScreenshotAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (MainFrame.getInstance().getCurrentDiagramView() == null)return;
         if (!(MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Diagram)) return;
         DiagramView diagramView = MainFrame.getInstance().getCurrentDiagramView();
         BufferedImage bufferedImage = new BufferedImage(diagramView.getWidth(), diagramView.getHeight(), BufferedImage.TYPE_INT_RGB);
