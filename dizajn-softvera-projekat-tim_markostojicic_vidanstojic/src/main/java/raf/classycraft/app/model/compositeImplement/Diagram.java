@@ -128,6 +128,13 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
 
         }
 
+    }
 
+    public List<ISubscriber> getSubscribers() {
+        return subscribers;
+    }
+
+    public void setSubscribers(List<ISubscriber> subscribers) {
+        this.subscribers = subscribers;
     }
 }
