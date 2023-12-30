@@ -103,7 +103,12 @@ public class ClassInterClass extends Interclass {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("public class " + this.getName() + "{ " + "\n");
+        if(this.abstractClass.equals("No")){
+            stringBuilder.append("public class " + this.getName() + "{ " + "\n");
+        }
+        else{
+            stringBuilder.append("public abstract class " + this.getName() + "{ " + "\n");
+        }
         for (Attribute attribute : this.getAssociationAttribute()) {
             if(attribute.isListOrNot() == true){
                 stringBuilder.append(attribute.getVisibility().toString().toLowerCase() + " List<" + attribute.getReturnType() + "> " + attribute.getName() + ";");
