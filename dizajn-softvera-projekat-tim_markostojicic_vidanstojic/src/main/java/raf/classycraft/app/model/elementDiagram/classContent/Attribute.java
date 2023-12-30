@@ -62,4 +62,13 @@ public class Attribute extends ClassContent {
     public void setStaticContentOrNot(String staticContentOrNot) {
         super.setStaticContentOrNot(staticContentOrNot);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        String staticAttribute = this.getStaticContentOrNot().replace("{","").replace("}","");
+        String abstractAttribute = this.getAbstractContentOrNot().replace("{","").replace("}","");
+        stringBuilder.append(this.getVisibility().toString().toLowerCase() +" "+ abstractAttribute+" " + staticAttribute+" "+this.getReturnType()+" "+this.getName()+";");
+        return stringBuilder.toString();
+    }
 }

@@ -62,4 +62,13 @@ public class Method extends ClassContent {
     public void setStaticContentOrNot(String staticContentOrNot) {
         super.setStaticContentOrNot(staticContentOrNot);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        String staticMethod = this.getStaticContentOrNot().replace("{","").replace("}","");
+        String abstractMethod = this.getAbstractContentOrNot().replace("{","").replace("}","");
+        stringBuilder.append(this.getVisibility().toString().toLowerCase()+" " + abstractMethod+" " + staticMethod+" "+this.getReturnType()+" "+this.getName()+"()"+"{}");
+        return stringBuilder.toString();
+    }
 }

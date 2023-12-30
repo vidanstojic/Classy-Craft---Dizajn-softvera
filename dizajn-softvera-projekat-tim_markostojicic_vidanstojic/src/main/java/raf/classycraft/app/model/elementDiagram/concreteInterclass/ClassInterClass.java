@@ -89,7 +89,16 @@ public class ClassInterClass extends Interclass {
         this.abstractClass = abstractClass;
     }
 
-
-
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("public class "+ this.getName()+"{ "+"\n");
+        for(ClassContent classContent : this.getClassContents()){
+            stringBuilder.append(classContent.toString());
+            stringBuilder.append("\n");
+        }
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
 }
 

@@ -152,4 +152,6 @@ public abstract class Interclass extends DiagramElement implements IPublisher {
     public List<ISubscriber> getListOfSubscribers() {
         return listOfSubscribers;
     }
+
+
 }
