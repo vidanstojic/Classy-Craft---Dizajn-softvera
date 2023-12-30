@@ -2,6 +2,7 @@ package raf.classycraft.app.gui.controller;
 
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.view.MainFrame;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 
@@ -21,7 +22,8 @@ public class OpenProjectAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
-        if (!(MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof ProjectExplorer)) return;
+        if ((MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof ProjectExplorer)
+        || MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof MyPackage){
         if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = jfc.getSelectedFile();
@@ -31,6 +33,7 @@ public class OpenProjectAction extends AbstractClassyAction{
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
+        }
         }
     }
 }

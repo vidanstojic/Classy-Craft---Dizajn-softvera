@@ -1,6 +1,8 @@
 package raf.classycraft.app.serializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import raf.classycraft.app.model.compositeAbstract.ClassyNode;
+import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.serializer.Serializer;
 
@@ -23,10 +25,15 @@ public class JacksonSerializer implements Serializer {
     }
 
     @Override
-    public void saveProject(Project project) {
+    public void saveProject(ClassyNode classyNode) {
         try {
-
-            objectMapper.writeValue(new File(String.valueOf(project.getFilepath())), project);
+            if (classyNode instanceof Project) {
+                Project project = (Project) classyNode;
+                objectMapper.writeValue(new File(String.valueOf(project.getFilepath())), project);
+            } else if (classyNode instanceof Diagram) {
+                Diagram diagram = (Diagram) classyNode;
+                objectMapper.writeValue(new File(String.valueOf(diagram.findProject().getFilepath())), diagram);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

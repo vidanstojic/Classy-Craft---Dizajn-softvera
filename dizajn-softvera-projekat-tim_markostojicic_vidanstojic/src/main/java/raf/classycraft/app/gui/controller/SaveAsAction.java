@@ -2,6 +2,7 @@ package raf.classycraft.app.gui.controller;
 
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.view.MainFrame;
+import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.Project;
 
 import javax.swing.*;
@@ -21,30 +22,53 @@ public class SaveAsAction extends AbstractClassyAction{
     public void actionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
 
-        if (!(MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Project)) return;
+        //if (!(MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Project)) return;
+        if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Project) {
+            Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
+            File projectFile = null;
 
-        Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
-        File projectFile = null;
+            if (!project.isChanged()) {
+                return;
+            }
 
-        if (!project.isChanged()) {
-            return;
-        }
+            if (project.getFilepath() == null || project.getFilepath().isEmpty()) {
+                if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+                    projectFile = jfc.getSelectedFile();
+                    project.setFilepath(projectFile.getPath());
+                }
 
-        if (project.getFilepath() == null || project.getFilepath().isEmpty()) {
-            if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
-                projectFile = jfc.getSelectedFile();
+            } else {
+                projectFile = new File(project.getFilepath());
                 project.setFilepath(projectFile.getPath());
             }
 
+
+            ApplicationFramework.getInstance().getSerializer().saveProject(project);
+
+            project.setChanged(false);
+        }else if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Diagram){
+            Diagram diagram = (Diagram) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
+            File projectFile = null;
+
+            /*if (!project.isChanged()) {
+                return;
+            }*/
+
+            if (diagram.findProject().getFilepath() == null || diagram.findProject().getFilepath().isEmpty()) {
+                if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+                    projectFile = jfc.getSelectedFile();
+                    diagram.findProject().setFilepath(projectFile.getPath());
+                }
+
+            } else {
+                projectFile = new File(diagram.findProject().getFilepath());
+                diagram.findProject().setFilepath(projectFile.getPath());
+            }
+
+
+            ApplicationFramework.getInstance().getSerializer().saveProject(diagram);
+
+            //project.setChanged(false);
         }
-        else{
-            projectFile = new File(project.getFilepath());
-            project.setFilepath(projectFile.getPath());
-        }
-
-
-        ApplicationFramework.getInstance().getSerializer().saveProject(project);
-
-        project.setChanged(false);
     }
 }
