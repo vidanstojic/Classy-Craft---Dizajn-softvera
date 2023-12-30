@@ -3,6 +3,7 @@ package raf.classycraft.app.serializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeImplement.Diagram;
+import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.serializer.Serializer;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 public class JacksonSerializer implements Serializer {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private Diagram diagram;
     private Project p;
 
     @Override
@@ -21,6 +23,15 @@ public class JacksonSerializer implements Serializer {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public Diagram loadDiagram(File file) {
+        try {
+            return diagram = objectMapper.readValue(file, Diagram.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

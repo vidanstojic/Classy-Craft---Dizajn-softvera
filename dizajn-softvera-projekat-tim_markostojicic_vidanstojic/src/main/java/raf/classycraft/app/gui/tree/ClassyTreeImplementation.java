@@ -92,20 +92,48 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
 
     @Override
-    public void loadProject(Project node, ProjectExplorer projectExplorer) {
-        ClassyTreeItem loadedProject = new ClassyTreeItem(node);
-        ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
+    public void loadProject(ClassyNode node, ProjectExplorer projectExplorer) {
+        if (node instanceof Project) {
+            Project project = (Project) node;
+            ClassyTreeItem loadedProject = new ClassyTreeItem(project);
+            ((ClassyTreeItem) treeModel.getRoot()).add(loadedProject);
 
-        projectExplorer.addChild(node);
-        node.setParent(projectExplorer);
+            projectExplorer.addChild(project);
+            project.setParent(projectExplorer);
 
-        node.getSubscribers().add(MainFrame.getInstance().getPackageView());
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+            project.getSubscribers().add(MainFrame.getInstance().getPackageView());
+            treeView.expandPath(treeView.getSelectionPath());
+            SwingUtilities.updateComponentTreeUI(treeView);
 
 
-        System.out.println(node.getChildren().get(0).getName());
-        if (!(node.getChildren().isEmpty()) )loadPackage(node);
+            System.out.println(project.getChildren().get(0).getName());
+            if (!(project.getChildren().isEmpty())) loadPackage(project);
+        } else if (node instanceof Diagram) {
+            Diagram diagram = (Diagram) node;
+            MyPackage myPackage = (MyPackage)MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
+            diagram.setParent(myPackage);
+            ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+            ClassyTreeItem projectTreeItem = findTreeItem(rootItem, myPackage);
+
+            if (projectTreeItem != null) {
+
+                ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagram);
+
+                if (packageTreeItem != null) {
+                    treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+                } else {
+                    myPackage.addChild(diagram);
+                    ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagram);
+                    projectTreeItem.add(newPackageTreeItem);
+
+                    treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+
+
+                    SwingUtilities.updateComponentTreeUI(treeView);
+                }
+            }
+            if (!(diagram.getChildren().isEmpty())) loadDiagramElement(diagram);
+        }
     }
    public void loadPackage(Project project){
         for (ClassyNode classyNode : project.getChildren()) {

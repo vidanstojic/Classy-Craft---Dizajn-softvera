@@ -2,6 +2,7 @@ package raf.classycraft.app.gui.controller;
 
 import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.view.MainFrame;
+import raf.classycraft.app.model.compositeImplement.Diagram;
 import raf.classycraft.app.model.compositeImplement.MyPackage;
 import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
@@ -22,18 +23,23 @@ public class OpenProjectAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
-        if ((MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof ProjectExplorer)
-        || MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof MyPackage){
+        if ((MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof ProjectExplorer)){
         if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = jfc.getSelectedFile();
-                Project p = ApplicationFramework.getInstance().getSerializer().loadProject(file);
+                Project p = (Project) ApplicationFramework.getInstance().getSerializer().loadProject(file);
                 MainFrame.getInstance().getClassyTree().loadProject(p, ApplicationFramework.getInstance().getClassyRepository().getRoot());
 
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }
+        } else if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof MyPackage) {
+            if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
+                File file = jfc.getSelectedFile();
+                Diagram diagram = (Diagram) ApplicationFramework.getInstance().getSerializer().loadDiagram(file);
+                MainFrame.getInstance().getClassyTree().loadProject(diagram, ApplicationFramework.getInstance().getClassyRepository().getRoot());
+            }
         }
     }
 }
