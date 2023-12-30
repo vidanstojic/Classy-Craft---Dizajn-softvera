@@ -3,6 +3,8 @@ package raf.classycraft.app.model.elementDiagram.classContent;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 
 public class Attribute extends ClassContent {
+
+    private boolean listOrNot;
     public Attribute(String name, Visibility visibility, String returnType) {
         super(name, visibility, returnType);
     }
@@ -75,5 +77,13 @@ public class Attribute extends ClassContent {
             stringBuilder.append(this.getName()+";");
         }
         return stringBuilder.toString();
+    }
+
+    public boolean isListOrNot() {
+        return listOrNot;
+    }
+
+    public void setListOrNot(boolean listOrNot) {
+        this.listOrNot = listOrNot;
     }
 }

@@ -7,12 +7,15 @@ import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 @JsonTypeName("Class")
 public class ClassInterClass extends Interclass {
 
     private String name;
     private String abstractClass;
+
+    private List<Attribute> associationAttribute = new ArrayList<>();
 
     public ClassInterClass(Point point, Color color, int stroke, String name, String visibility, String abstractClass) {
         super(point,color, stroke, name, visibility);
@@ -89,10 +92,28 @@ public class ClassInterClass extends Interclass {
         this.abstractClass = abstractClass;
     }
 
+    public List<Attribute> getAssociationAttribute() {
+        return associationAttribute;
+    }
+
+    public void setAssociationAttribute(List<Attribute> associationAttribute) {
+        this.associationAttribute = associationAttribute;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("public class "+ this.getName()+"{ "+"\n");
+        stringBuilder.append("public class " + this.getName() + "{ " + "\n");
+        for (Attribute attribute : this.getAssociationAttribute()) {
+            if(attribute.isListOrNot() == true){
+                stringBuilder.append(attribute.getVisibility().toString().toLowerCase() + " List<" + attribute.getReturnType() + "> " + attribute.getName() + ";");
+            }
+            else{
+                stringBuilder.append(attribute.getVisibility().toString().toLowerCase() + " " + attribute.getReturnType() + " " + attribute.getName() + ";");
+            }
+            stringBuilder.append("\n");
+        }
+
         for(ClassContent classContent : this.getClassContents()){
             stringBuilder.append(classContent.toString());
             stringBuilder.append("\n");

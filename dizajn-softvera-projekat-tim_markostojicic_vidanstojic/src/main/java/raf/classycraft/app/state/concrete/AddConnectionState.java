@@ -10,8 +10,10 @@ import raf.classycraft.app.gui.view.paint.*;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.ConnectionMode;
 import raf.classycraft.app.model.elementDiagram.Interclass;
+import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.*;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 import raf.classycraft.app.state.State;
@@ -321,7 +323,18 @@ public class AddConnectionState implements State {
                             if(cardinality == null || cardinality.length() == 0) return;
 
 
+
                             ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
+                            if(connection.getClassFrom() instanceof ClassInterClass){
+                                Attribute attribute = new Attribute(nameOfAttribute, visibilityEnum,connection.getClassTo().getName());
+                                if(cardinality.contains("*")){
+                                    attribute.setListOrNot(true);
+                                }
+                                else{
+                                    attribute.setListOrNot(false);
+                                }
+                                ((ClassInterClass) connection.getClassFrom()).getAssociationAttribute().add(attribute);
+                            }
                             connection.setConnectionInfo(connectionInfo);
                         }
                         else if(connection instanceof Aggregation){
@@ -347,6 +360,16 @@ public class AddConnectionState implements State {
 
 
                             ConnectionInfo connectionInfo = new ConnectionInfo("Aggregation", nameOfAttribute, cardinality, visibilityEnum);
+                            if(connection.getClassFrom() instanceof ClassInterClass){
+                                Attribute attribute = new Attribute(nameOfAttribute, visibilityEnum,connection.getClassTo().getName());
+                                if(cardinality.contains("*")){
+                                    attribute.setListOrNot(true);
+                                }
+                                else{
+                                    attribute.setListOrNot(false);
+                                }
+                                ((ClassInterClass) connection.getClassFrom()).getAssociationAttribute().add(attribute);
+                            }
                             connection.setConnectionInfo(connectionInfo);
                         }
                         else if(connection instanceof Generalization){

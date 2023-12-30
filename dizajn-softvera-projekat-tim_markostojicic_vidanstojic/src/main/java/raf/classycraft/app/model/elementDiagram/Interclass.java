@@ -11,6 +11,7 @@ import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
+import raf.classycraft.app.model.elementDiagram.concreteConnections.ConnectionInfo;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.EnumInterclass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
@@ -47,6 +48,8 @@ public abstract class Interclass extends DiagramElement implements IPublisher {
     private List<Point> connectionDots = new ArrayList<>();
     @JsonIgnore
     private List<ISubscriber> listOfSubscribers = new ArrayList<>();
+
+
 
 
     public Interclass(Point point,Color color, int stroke, String name, String visibility) {
