@@ -68,7 +68,12 @@ public class Attribute extends ClassContent {
         StringBuilder stringBuilder = new StringBuilder();
         String staticAttribute = this.getStaticContentOrNot().replace("{","").replace("}","");
         String abstractAttribute = this.getAbstractContentOrNot().replace("{","").replace("}","");
-        stringBuilder.append(this.getVisibility().toString().toLowerCase() +" "+ abstractAttribute+" " + staticAttribute+" "+this.getReturnType()+" "+this.getName()+";");
+        if(getVisibility() != null && getReturnType() != null){
+            stringBuilder.append(this.getVisibility().toString().toLowerCase() +" "+ abstractAttribute+" " + staticAttribute+" "+this.getReturnType()+" "+this.getName()+";");
+        }
+        else{
+            stringBuilder.append(this.getName()+";");
+        }
         return stringBuilder.toString();
     }
 }

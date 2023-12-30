@@ -95,4 +95,22 @@ public class EnumInterclass extends Interclass {
     public List<ISubscriber> getListOfSubscribers() {
         return super.getListOfSubscribers();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("public enum "+ this.getName()+"{ "+"\n");
+        int size = this.getClassContents().size();
+        for (int i = 0; i < size; i++) {
+            ClassContent classContent = this.getClassContents().get(i);
+            String attributeEnum = classContent.toString().toUpperCase();
+            if (i < size - 1) {
+                attributeEnum = attributeEnum.replace(";", ",") ;
+            }
+            stringBuilder.append(attributeEnum);
+        }
+        stringBuilder.append("\n");
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
 }
