@@ -95,4 +95,16 @@ public class InterfaceInterclass extends Interclass {
     public List<ISubscriber> getListOfSubscribers() {
         return super.getListOfSubscribers();
     }
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("public interface "+ this.getName()+"{ "+"\n");
+        for(ClassContent classContent : this.getClassContents()){
+            stringBuilder.append("@Override"+"\n");
+            stringBuilder.append(classContent.toString().replace("{","").replace("}",";"));
+            stringBuilder.append("\n");
+        }
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
 }
