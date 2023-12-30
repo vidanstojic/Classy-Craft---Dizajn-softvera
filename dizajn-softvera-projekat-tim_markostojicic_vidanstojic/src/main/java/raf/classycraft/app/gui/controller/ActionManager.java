@@ -23,6 +23,8 @@ public class ActionManager {
     private OpenProjectAction openProjectAction;
     private ScreenshotAction screenshotAction;
     private MyMouseListener myMouseListener;
+
+    private ExportCodeAction exportCodeAction;
     public ActionManager(){
         initialiseActions();
     }
@@ -47,6 +49,7 @@ public class ActionManager {
         redoAction = new RedoAction();
         openProjectAction = new OpenProjectAction();
         screenshotAction = new ScreenshotAction();
+        exportCodeAction = new ExportCodeAction();
     }
 
     public ExitAction getEa() {
@@ -106,4 +109,6 @@ public class ActionManager {
     public ScreenshotAction getScreenshotAction() {
         return screenshotAction;
     }
+
+    public ExportCodeAction getExportCodeAction(){return  exportCodeAction;}
 }
