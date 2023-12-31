@@ -44,6 +44,7 @@ public class JacksonSerializer implements Serializer {
             } else if (classyNode instanceof Diagram) {
                 Diagram diagram = (Diagram) classyNode;
                 objectMapper.writeValue(new File(String.valueOf(diagram.findProject().getFilepath())), diagram);
+                objectMapper.writeValue(new File("dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/template/template"), diagram);
             }
         } catch (IOException e) {
             e.printStackTrace();

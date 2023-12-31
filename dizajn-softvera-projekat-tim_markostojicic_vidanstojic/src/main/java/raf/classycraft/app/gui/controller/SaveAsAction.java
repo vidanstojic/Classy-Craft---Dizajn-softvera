@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SaveAsAction extends AbstractClassyAction{
     public SaveAsAction(){
@@ -49,7 +51,6 @@ public class SaveAsAction extends AbstractClassyAction{
         }else if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Diagram){
             Diagram diagram = (Diagram) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
             File projectFile = null;
-
             /*if (!project.isChanged()) {
                 return;
             }*/
@@ -58,6 +59,13 @@ public class SaveAsAction extends AbstractClassyAction{
                 if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
                     projectFile = jfc.getSelectedFile();
                     diagram.findProject().setFilepath(projectFile.getPath());
+                    /*try {
+                        FileWriter fileWriter = new FileWriter("dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/template");
+                        fileWriter.write();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+*/
                 }
 
             } else {

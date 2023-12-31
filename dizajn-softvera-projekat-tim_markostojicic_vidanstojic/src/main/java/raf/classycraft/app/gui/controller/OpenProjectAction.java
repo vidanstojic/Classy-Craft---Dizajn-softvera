@@ -35,11 +35,18 @@ public class OpenProjectAction extends AbstractClassyAction{
             }
         }
         } else if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof MyPackage) {
-            if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
+            if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+                jfc.setCurrentDirectory(new File(System.getProperty("user.home") + File.separator + "Desktop" + "Dizajn" + "dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/template"));
                 File file = jfc.getSelectedFile();
                 Diagram diagram = (Diagram) ApplicationFramework.getInstance().getSerializer().loadDiagram(file);
                 MainFrame.getInstance().getClassyTree().loadProject(diagram, ApplicationFramework.getInstance().getClassyRepository().getRoot());
             }
+        }else if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Diagram) {
+                //jfc.setCurrentDirectory(new File(System.getProperty("user.home") + File.separator + "Desktop" + "Dizajn" + "dizajn-softvera-projekat-tim_markostojicic_vidanstojic/dizajn-softvera-projekat-tim_markostojicic_vidanstojic/src/main/resources/template"));
+                File file = jfc.getSelectedFile();
+                //Diagram diagram = (Diagram) ApplicationFramework.getInstance().getSerializer().loadDiagram(file);//OVDE BACA NULL VRV JER NEMAMO LOAD DIAGRAMELEMENT
+                //MainFrame.getInstance().getClassyTree().loadProject(diagram, ApplicationFramework.getInstance().getClassyRepository().getRoot());
+
         }
     }
 }
