@@ -133,6 +133,30 @@ public class ClassyTreeImplementation implements ClassyTree{
                 }
             }
             if (!(diagram.getChildren().isEmpty())) loadDiagramElement(diagram);
+        } else if (node instanceof DiagramElement) {
+            DiagramElement diagramElement = (DiagramElement) node;
+            Diagram diagram = (Diagram) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
+            diagramElement.setParent(diagram);
+            ClassyTreeItem rootItem = (ClassyTreeItem) treeModel.getRoot();
+            ClassyTreeItem projectTreeItem = findTreeItem(rootItem, diagram);
+
+            if (projectTreeItem != null) {
+
+                ClassyTreeItem packageTreeItem = findTreeItem(projectTreeItem, diagramElement);
+
+                if (packageTreeItem != null) {
+                    treeView.setSelectionPath(new TreePath(packageTreeItem.getPath()));
+                } else {
+                    diagram.addChild(diagramElement);
+                    ClassyTreeItem newPackageTreeItem = new ClassyTreeItem(diagramElement);
+                    projectTreeItem.add(newPackageTreeItem);
+
+                    treeView.expandPath(new TreePath(newPackageTreeItem.getPath()));
+
+
+                    SwingUtilities.updateComponentTreeUI(treeView);
+                }
+            }
         }
     }
    public void loadPackage(Project project){
