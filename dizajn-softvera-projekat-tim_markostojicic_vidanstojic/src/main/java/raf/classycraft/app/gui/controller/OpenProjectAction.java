@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.nio.file.Paths;
 
 public class OpenProjectAction extends AbstractClassyAction{
     public OpenProjectAction(){
@@ -43,6 +44,7 @@ public class OpenProjectAction extends AbstractClassyAction{
                 MainFrame.getInstance().getClassyTree().loadProject(diagram, ApplicationFramework.getInstance().getClassyRepository().getRoot());
             }
         } else if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Diagram) {
+            jfc.setCurrentDirectory(new File(String.valueOf(Paths.get(System.getProperty("user.dir")).toAbsolutePath())));
             if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
                 Diagram diagram = (Diagram) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
                 if (diagram.getChildren().isEmpty()) {
