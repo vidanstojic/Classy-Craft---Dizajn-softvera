@@ -8,9 +8,13 @@ import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.observer.ISubscriber;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 @JsonTypeName("Interface")
 public class InterfaceInterclass extends Interclass {
+    private List<InterfaceInterclass> extendsInterfaceList = new ArrayList<>();
+    private List<Method> overrideMethods = new ArrayList<>();
+
     public InterfaceInterclass(Point point,Color color, int stroke, String name, String visibility) {
         super(point,color, stroke, name, visibility);
     }
@@ -94,10 +98,37 @@ public class InterfaceInterclass extends Interclass {
     public List<ISubscriber> getListOfSubscribers() {
         return super.getListOfSubscribers();
     }
+
+    public List<InterfaceInterclass> getExtendsInterfaceList() {
+        return extendsInterfaceList;
+    }
+
+    public List<Method> getOverrideMethods() {
+        return overrideMethods;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("public interface "+ this.getName()+"{ "+"\n");
+        if(this.extendsInterfaceList.isEmpty() == true){
+            stringBuilder.append("public interface "+ this.getName()+"{ "+"\n");
+        }
+        else{
+            stringBuilder.append("public interface " + this.getName() + " extends ");
+
+            int sizeExtendsInterface= extendsInterfaceList.size();
+            for (int i = 0; i < sizeExtendsInterface; i++) {
+                InterfaceInterclass interfaceInterclass = extendsInterfaceList.get(i);
+                stringBuilder.append(interfaceInterclass.getName());
+
+                if (i != sizeExtendsInterface - 1) {
+                    stringBuilder.append(", ");
+                }
+            }
+            stringBuilder.append("{\n");
+        }
+
+
         for(ClassContent classContent : this.getClassContents()){
             stringBuilder.append(classContent.toString().replace("{","").replace("}",";"));
             stringBuilder.append("\n");

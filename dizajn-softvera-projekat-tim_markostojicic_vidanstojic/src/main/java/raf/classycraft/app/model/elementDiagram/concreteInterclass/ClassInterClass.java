@@ -12,34 +12,22 @@ import java.util.List;
 @JsonTypeName("Class")
 public class ClassInterClass extends Interclass {
 
-    private String name;
     private String abstractClass;
 
     private List<Attribute> associationAttribute = new ArrayList<>();
 
     private List<Method> overrideMethods = new ArrayList<>();
 
-    private Boolean implementsInterface = false;
-    private Boolean extendsClass = false;
+    private List<ClassInterClass> extendsClassList = new ArrayList<>();
 
-    private String nameOfExtendClass;
+    private List<InterfaceInterclass> implementsInterfaceList = new ArrayList<>();
 
     public ClassInterClass(Point point, Color color, int stroke, String name, String visibility, String abstractClass) {
         super(point,color, stroke, name, visibility);
-        this.name = name;
         this.abstractClass = abstractClass;
     }
     public ClassInterClass(){
         super();
-    }
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -115,47 +103,98 @@ public class ClassInterClass extends Interclass {
         this.overrideMethods = overrideMethods;
     }
 
-    public Boolean getImplementsInterface() {
-        return implementsInterface;
+    public List<ClassInterClass> getExtendsClassList() {
+        return extendsClassList;
     }
 
-    public void setImplementsInterface(Boolean implementsInterface) {
-        this.implementsInterface = implementsInterface;
+    public List<InterfaceInterclass> getImplementsInterfaceList() {
+        return implementsInterfaceList;
     }
 
-    public Boolean getExtendsClass() {
-        return extendsClass;
+    @Override
+    public String getName() {
+        return super.getName();
     }
 
-    public void setExtendsClass(Boolean extendsClass) {
-        this.extendsClass = extendsClass;
-    }
-
-    public String getNameOfExtendClass() {
-        return nameOfExtendClass;
-    }
-
-    public void setNameOfExtendClass(String nameOfExtendClass) {
-        this.nameOfExtendClass = nameOfExtendClass;
+    @Override
+    public void setName(String name) {
+        super.setName(name);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        if(this.abstractClass.equals("No")){
-            if(this.extendsClass == false && this.implementsInterface == false){
+
+        if(this.getExtendsClassList().isEmpty() == true && this.getImplementsInterfaceList().isEmpty() == true){
+            if(this.abstractClass.equals("No")){
                 stringBuilder.append("public class " + this.getName() + "{ " + "\n");
             }
-            else if(this.extendsClass == true){
-                stringBuilder.append("public class " + this.getName() + " extends "+this.nameOfExtendClass+"{" + "\n");
-            }
-            else if(this.implementsInterface == true){
-                stringBuilder.append("public class " + this.getName() + " implements "+this.nameOfExtendClass+"{" + "\n");
+            else{
+                stringBuilder.append("public abstract class " + this.getName() + "{ " + "\n");
             }
         }
-        else{
-            stringBuilder.append("public abstract class " + this.getName() + "{ " + "\n");
+        else if(this.getExtendsClassList().isEmpty() == false && this.getImplementsInterfaceList().isEmpty() == false){
+            if(this.abstractClass.equals("No"))  stringBuilder.append("public class " + this.getName() + " extends ");
+            else stringBuilder.append("public abstract class " + this.getName() + " extends ");
+
+
+            int sizeExtendClassList = extendsClassList.size();
+            for (int i = 0; i < sizeExtendClassList; i++) {
+                ClassInterClass classInterClass = extendsClassList.get(i);
+                stringBuilder.append(classInterClass.getName());
+
+
+                if (i != sizeExtendClassList - 1) {
+                    stringBuilder.append(", ");
+                }
+            }
+            stringBuilder.append(" implements ");
+            int sizeImplementsInterface = implementsInterfaceList.size();
+            for (int i = 0; i < sizeImplementsInterface; i++) {
+                InterfaceInterclass interfaceInterclass = implementsInterfaceList.get(i);
+                stringBuilder.append(interfaceInterclass.getName());
+
+
+                if (i != sizeImplementsInterface - 1) {
+                    stringBuilder.append(", ");
+                }
+            }
+            stringBuilder.append("{\n");
         }
+        else if(this.getExtendsClassList().isEmpty() == false && this.getImplementsInterfaceList().isEmpty() == true){
+            if(this.abstractClass.equals("No"))  stringBuilder.append("public class " + this.getName() + " extends ");
+            else stringBuilder.append("public abstract class " + this.getName() + " extends ");
+
+            int sizeExtendClassList = extendsClassList.size();
+            for (int i = 0; i < sizeExtendClassList; i++) {
+                ClassInterClass classInterClass = extendsClassList.get(i);
+                stringBuilder.append(classInterClass.getName());
+
+
+                if (i != sizeExtendClassList - 1) {
+                    stringBuilder.append(", ");
+                }
+            }
+            stringBuilder.append("{\n");
+        }
+        else if(this.getExtendsClassList().isEmpty() == true && this.getImplementsInterfaceList().isEmpty() == false){
+            if(this.abstractClass.equals("No"))  stringBuilder.append("public class " + this.getName() + " implements ");
+            else stringBuilder.append("public abstract class " + this.getName() + " implements ");
+
+            int sizeImplementsInterface = implementsInterfaceList.size();
+            for (int i = 0; i < sizeImplementsInterface; i++) {
+                InterfaceInterclass interfaceInterclass = implementsInterfaceList.get(i);
+                stringBuilder.append(interfaceInterclass.getName());
+
+                if (i != sizeImplementsInterface - 1) {
+                    stringBuilder.append(", ");
+                }
+            }
+            stringBuilder.append("{\n");
+        }
+
+
+
         for (Attribute attribute : this.getAssociationAttribute()) {
             if(attribute.isListOrNot() == true){
                 stringBuilder.append(attribute.getVisibility().toString().toLowerCase() + " List<" + attribute.getReturnType() + "> " + attribute.getName() + ";");
@@ -173,11 +212,11 @@ public class ClassInterClass extends Interclass {
             stringBuilder.append("\n");
         }
 
-        if(this.extendsClass == true || this.implementsInterface == true){
+        if(overrideMethods.isEmpty() == false){
             for(Method method : this.getOverrideMethods()){
-                stringBuilder.append("@Override");
-                stringBuilder.append("\n");
-                stringBuilder.append(method.toString());
+                    stringBuilder.append("@Override");
+                    stringBuilder.append("\n");
+                    stringBuilder.append(method.toString().replaceAll("abstract", ""));
                 stringBuilder.append("\n");
             }
         }
@@ -189,7 +228,6 @@ public class ClassInterClass extends Interclass {
         stringBuilder.append("}");
         return stringBuilder.toString();
     }
-
 
 }
 

@@ -381,8 +381,7 @@ public class AddConnectionState implements State {
                                 ClassInterClass classStart = (ClassInterClass) connection.getClassFrom();
                                 if(connection.getClassTo() instanceof ClassInterClass){
                                     ClassInterClass classEnd = (ClassInterClass) connection.getClassTo();
-                                    classStart.setExtendsClass(true);
-                                    classStart.setNameOfExtendClass(classEnd.getName());
+                                    classStart.getExtendsClassList().add(classEnd);
                                     for(Method method : classEnd.getMethods()){
                                         if(method.getAbstractContentOrNot().length() > 1){
                                             classStart.getOverrideMethods().add(method);
@@ -391,14 +390,19 @@ public class AddConnectionState implements State {
                                 }
                                 else if(connection.getClassTo() instanceof InterfaceInterclass){
                                     InterfaceInterclass interfaceEnd = (InterfaceInterclass) connection.getClassTo();
-                                    classStart.setImplementsInterface(true);
-                                    classStart.setNameOfExtendClass(interfaceEnd.getName());
+                                    classStart.getImplementsInterfaceList().add(interfaceEnd);
                                     classStart.getOverrideMethods().addAll(interfaceEnd.getMethods());
+                                    classStart.getOverrideMethods().addAll(interfaceEnd.getOverrideMethods());
                                 }
 
                             }
                             else if(connection.getClassFrom() instanceof InterfaceInterclass){
-                                // kod u slucaju kada interface extenduje drugi interface
+                                InterfaceInterclass interfaceStart = (InterfaceInterclass) connection.getClassFrom();
+                                if(connection.getClassTo() instanceof InterfaceInterclass){
+                                    InterfaceInterclass interfaceEnd = (InterfaceInterclass) connection.getClassTo();
+                                    interfaceStart.getExtendsInterfaceList().add(interfaceEnd);
+                                    interfaceStart.getOverrideMethods().addAll(interfaceEnd.getMethods());
+                                }
                             }
                         }
                         else if(connection instanceof Dependency){
