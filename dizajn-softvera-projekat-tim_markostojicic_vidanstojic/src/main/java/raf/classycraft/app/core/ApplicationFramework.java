@@ -56,7 +56,4 @@ public class ApplicationFramework {
         return serializer;
     }
 
-    public void setSerializer(Serializer serializer) {
-        this.serializer = serializer;
-    }
 }

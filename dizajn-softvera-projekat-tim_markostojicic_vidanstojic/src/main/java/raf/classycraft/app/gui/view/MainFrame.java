@@ -23,7 +23,6 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
 
-    // buduca polja za glavni view
 
     private MainFrame(){
 
@@ -124,10 +123,6 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public PackageView getPackageView() {
         return packageView;
-    }
-
-    public void setPackageView(PackageView packageView) {
-        this.packageView = packageView;
     }
 
 

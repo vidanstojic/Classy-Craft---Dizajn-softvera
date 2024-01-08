@@ -22,7 +22,6 @@ public class ActionManager {
     private DuplicateAction duplicateAction;
     private OpenProjectAction openProjectAction;
     private ScreenshotAction screenshotAction;
-    private MyMouseListener myMouseListener;
 
     private ExportCodeAction exportCodeAction;
     public ActionManager(){

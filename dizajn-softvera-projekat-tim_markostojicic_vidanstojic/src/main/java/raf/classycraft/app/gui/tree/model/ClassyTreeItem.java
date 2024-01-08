@@ -1,8 +1,5 @@
 package raf.classycraft.app.gui.tree.model;
-
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
-import raf.classycraft.app.model.compositeImplement.Project;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ClassyTreeItem extends DefaultMutableTreeNode {
@@ -25,9 +22,6 @@ public class ClassyTreeItem extends DefaultMutableTreeNode {
         return classyNode;
     }
 
-    public void setClassyNode(ClassyNode classyNode) {
-        this.classyNode = classyNode;
-    }
 
 
 }

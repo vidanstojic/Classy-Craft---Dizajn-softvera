@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 
 public abstract class ElementPainter {
-    // potrebne su metode paint i elementAt
     private Rectangle rectangle;
     private Line2D line2D;
     public abstract void paint(Graphics2D graphics2D, DiagramElement diagramElement);

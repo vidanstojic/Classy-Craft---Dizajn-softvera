@@ -2,10 +2,8 @@ package raf.classycraft.app.gui.view.paint;
 
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.Interclass;
-import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
 import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
-import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 
 import java.awt.*;

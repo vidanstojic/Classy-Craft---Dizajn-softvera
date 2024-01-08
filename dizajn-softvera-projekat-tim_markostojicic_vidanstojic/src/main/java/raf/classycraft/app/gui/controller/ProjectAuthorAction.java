@@ -4,13 +4,11 @@ import raf.classycraft.app.core.ApplicationFramework;
 import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeImplement.Project;
-import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 
 public class ProjectAuthorAction extends AbstractClassyAction {
 

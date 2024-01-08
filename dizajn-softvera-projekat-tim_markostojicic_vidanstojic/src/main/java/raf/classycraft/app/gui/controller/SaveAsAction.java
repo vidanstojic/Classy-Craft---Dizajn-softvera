@@ -24,7 +24,7 @@ public class SaveAsAction extends AbstractClassyAction{
     public void actionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
 
-        //if (!(MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Project)) return;
+
         if (MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode() instanceof Project) {
             Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
             File projectFile = null;

@@ -3,7 +3,6 @@ package raf.classycraft.app.gui.view.paint;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Dependency;
-import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalization;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
