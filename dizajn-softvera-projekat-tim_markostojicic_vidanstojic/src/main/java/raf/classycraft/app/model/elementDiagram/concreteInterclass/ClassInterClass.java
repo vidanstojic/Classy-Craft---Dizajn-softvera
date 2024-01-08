@@ -17,6 +17,13 @@ public class ClassInterClass extends Interclass {
 
     private List<Attribute> associationAttribute = new ArrayList<>();
 
+    private List<Method> overrideMethods = new ArrayList<>();
+
+    private Boolean implementsInterface = false;
+    private Boolean extendsClass = false;
+
+    private String nameOfExtendClass;
+
     public ClassInterClass(Point point, Color color, int stroke, String name, String visibility, String abstractClass) {
         super(point,color, stroke, name, visibility);
         this.name = name;
@@ -100,11 +107,51 @@ public class ClassInterClass extends Interclass {
         this.associationAttribute = associationAttribute;
     }
 
+    public List<Method> getOverrideMethods() {
+        return overrideMethods;
+    }
+
+    public void setOverrideMethods(List<Method> overrideMethods) {
+        this.overrideMethods = overrideMethods;
+    }
+
+    public Boolean getImplementsInterface() {
+        return implementsInterface;
+    }
+
+    public void setImplementsInterface(Boolean implementsInterface) {
+        this.implementsInterface = implementsInterface;
+    }
+
+    public Boolean getExtendsClass() {
+        return extendsClass;
+    }
+
+    public void setExtendsClass(Boolean extendsClass) {
+        this.extendsClass = extendsClass;
+    }
+
+    public String getNameOfExtendClass() {
+        return nameOfExtendClass;
+    }
+
+    public void setNameOfExtendClass(String nameOfExtendClass) {
+        this.nameOfExtendClass = nameOfExtendClass;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         if(this.abstractClass.equals("No")){
-            stringBuilder.append("public class " + this.getName() + "{ " + "\n");
+            if(this.extendsClass == false && this.implementsInterface == false){
+                stringBuilder.append("public class " + this.getName() + "{ " + "\n");
+            }
+            else if(this.extendsClass == true){
+                stringBuilder.append("public class " + this.getName() + " extends "+this.nameOfExtendClass+"{" + "\n");
+            }
+            else if(this.implementsInterface == true){
+                stringBuilder.append("public class " + this.getName() + " implements "+this.nameOfExtendClass+"{" + "\n");
+            }
         }
         else{
             stringBuilder.append("public abstract class " + this.getName() + "{ " + "\n");
@@ -119,12 +166,30 @@ public class ClassInterClass extends Interclass {
             stringBuilder.append("\n");
         }
 
-        for(ClassContent classContent : this.getClassContents()){
-            stringBuilder.append(classContent.toString());
+
+
+        for(Attribute attribute : this.getAttributes()){
+            stringBuilder.append(attribute.toString());
             stringBuilder.append("\n");
         }
+
+        if(this.extendsClass == true || this.implementsInterface == true){
+            for(Method method : this.getOverrideMethods()){
+                stringBuilder.append("@Override");
+                stringBuilder.append("\n");
+                stringBuilder.append(method.toString());
+                stringBuilder.append("\n");
+            }
+        }
+        for(Method method : this.getMethods()){
+            stringBuilder.append(method.toString());
+            stringBuilder.append("\n");
+        }
+
         stringBuilder.append("}");
         return stringBuilder.toString();
     }
+
+
 }
 

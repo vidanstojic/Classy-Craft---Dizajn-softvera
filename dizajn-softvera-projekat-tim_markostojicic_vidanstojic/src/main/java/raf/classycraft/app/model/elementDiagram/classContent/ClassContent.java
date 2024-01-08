@@ -1,5 +1,18 @@
 package raf.classycraft.app.model.elementDiagram.classContent;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Attribute.class, name = "Attribute"),
+        @JsonSubTypes.Type(value = Method.class, name = "Method")
+})
 public abstract class ClassContent {
     private String name;
     private Visibility visibility;

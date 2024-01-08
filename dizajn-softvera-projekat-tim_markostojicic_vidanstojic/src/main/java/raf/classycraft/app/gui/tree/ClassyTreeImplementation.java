@@ -72,16 +72,16 @@ public class ClassyTreeImplementation implements ClassyTree{
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
             return;
         }
-        if(selected != null){
-           ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
-           if(parent == null) {
-     //          ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
-               return;
-           }
-            parent.remove(selected);
-            ((ClassyNodeComposite) parent.getClassyNode()).removeChild(selected.getClassyNode());
-            SwingUtilities.updateComponentTreeUI(treeView);
+
+        ClassyTreeItem parent = (ClassyTreeItem) selected.getParent();
+        if(parent == null) {
+     //     ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventTypes.NODE_MUST_BE_SELECTED, Type.WARNING);
+            return;
         }
+        parent.remove(selected);
+        ((ClassyNodeComposite) parent.getClassyNode()).removeChild(selected.getClassyNode());
+        SwingUtilities.updateComponentTreeUI(treeView);
+
 
 
     }

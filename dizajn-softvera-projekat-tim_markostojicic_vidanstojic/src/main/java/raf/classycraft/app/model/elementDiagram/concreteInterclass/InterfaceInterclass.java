@@ -11,20 +11,19 @@ import java.awt.*;
 import java.util.List;
 @JsonTypeName("Interface")
 public class InterfaceInterclass extends Interclass {
-    public String name;
     public InterfaceInterclass(Point point,Color color, int stroke, String name, String visibility) {
         super(point,color, stroke, name, visibility);
-        this.name = name;
     }
     public InterfaceInterclass(){super();}
+
     @Override
     public String getName() {
-        return name;
+        return super.getName();
     }
 
     @Override
     public void setName(String name) {
-        this.name = name;
+        super.setName(name);
     }
 
     @Override

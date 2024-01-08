@@ -1,7 +1,9 @@
 package raf.classycraft.app.model.elementDiagram.classContent;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 
+@JsonTypeName("Attribute")
 public class Attribute extends ClassContent {
 
     private boolean listOrNot;
@@ -12,6 +14,8 @@ public class Attribute extends ClassContent {
     public Attribute(String name, Visibility visibility, String returnType, String abstractContentOrNot, String staticContentOrNot) {
         super(name, visibility, returnType, abstractContentOrNot, staticContentOrNot);
     }
+
+
 
     public Attribute(String name){super(name);}
     @Override

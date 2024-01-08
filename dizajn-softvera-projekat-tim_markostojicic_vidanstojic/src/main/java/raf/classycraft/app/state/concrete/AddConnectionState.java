@@ -11,9 +11,11 @@ import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.ConnectionMode;
 import raf.classycraft.app.model.elementDiagram.Interclass;
 import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
+import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.elementDiagram.classContent.Visibility;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.*;
 import raf.classycraft.app.model.elementDiagram.concreteInterclass.ClassInterClass;
+import raf.classycraft.app.model.elementDiagram.concreteInterclass.InterfaceInterclass;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 import raf.classycraft.app.state.State;
@@ -375,6 +377,29 @@ public class AddConnectionState implements State {
                         else if(connection instanceof Generalization){
                             ConnectionInfo connectionInfo = new ConnectionInfo("Generalization");
                             connection.setConnectionInfo(connectionInfo);
+                            if(connection.getClassFrom() instanceof ClassInterClass){
+                                ClassInterClass classStart = (ClassInterClass) connection.getClassFrom();
+                                if(connection.getClassTo() instanceof ClassInterClass){
+                                    ClassInterClass classEnd = (ClassInterClass) connection.getClassTo();
+                                    classStart.setExtendsClass(true);
+                                    classStart.setNameOfExtendClass(classEnd.getName());
+                                    for(Method method : classEnd.getMethods()){
+                                        if(method.getAbstractContentOrNot().length() > 1){
+                                            classStart.getOverrideMethods().add(method);
+                                        }
+                                    }
+                                }
+                                else if(connection.getClassTo() instanceof InterfaceInterclass){
+                                    InterfaceInterclass interfaceEnd = (InterfaceInterclass) connection.getClassTo();
+                                    classStart.setImplementsInterface(true);
+                                    classStart.setNameOfExtendClass(interfaceEnd.getName());
+                                    classStart.getOverrideMethods().addAll(interfaceEnd.getMethods());
+                                }
+
+                            }
+                            else if(connection.getClassFrom() instanceof InterfaceInterclass){
+                                // kod u slucaju kada interface extenduje drugi interface
+                            }
                         }
                         else if(connection instanceof Dependency){
                             ConnectionInfo connectionInfo = new ConnectionInfo("Dependancy");

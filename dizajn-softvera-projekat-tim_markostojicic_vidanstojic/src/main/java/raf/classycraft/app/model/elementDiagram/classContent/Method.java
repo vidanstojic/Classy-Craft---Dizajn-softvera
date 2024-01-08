@@ -1,7 +1,9 @@
 package raf.classycraft.app.model.elementDiagram.classContent;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 
+@JsonTypeName("Method")
 public class Method extends ClassContent {
 
 
@@ -65,6 +67,7 @@ public class Method extends ClassContent {
 
     @Override
     public String toString() {
+        // proveriti da li izlazi u ispisu metode da je static/abstract
         StringBuilder stringBuilder = new StringBuilder();
         String staticMethod = this.getStaticContentOrNot().replace("{","").replace("}","");
         String abstractMethod = this.getAbstractContentOrNot().replace("{","").replace("}","");
