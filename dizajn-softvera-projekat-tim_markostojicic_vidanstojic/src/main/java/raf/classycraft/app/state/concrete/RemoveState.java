@@ -43,8 +43,6 @@ public class RemoveState implements State {
                     if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                         elementPaintersToRemove.add(elementPainter);
                         for(ElementPainter connectionElement : tempTab.getListOfPainters()){
-                            // ovde se samo proverava da li se klasa/enum/ interfejs koji brisemo nalazi u nekoj vezi kao interClassTo ili from
-                            // ukoliko se nalazi onda dodajemo tu vezu u listu elemenata za brisanje
                             if(connectionElement instanceof ConnectionPainter && ( ((ConnectionPainter) connectionElement).getConnection().getClassFrom() == (Interclass) ((InterClassPainter) elementPainter).getInterclass() || ((ConnectionPainter) connectionElement).getConnection().getClassTo() == (Interclass) ((InterClassPainter) elementPainter).getInterclass())){
                                 elementPaintersToRemove.add(connectionElement);
                                 elementModelsToRemove.add(((ConnectionPainter) connectionElement).getConnection());
@@ -63,16 +61,6 @@ public class RemoveState implements State {
                 }
             }
         }
-
-
-/*        for(ElementPainter elementPainter : elementPaintersToRemove){
-            tempTab.getListOfPainters().remove(elementPainter);
-        }
-        for(DiagramElement elementToRemove : elementModelsToRemove){
-            ClassyTreeItem itemToRemove = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot() ,elementToRemove);
-            this.classyTreeImplementation.removeChild(itemToRemove);
-        }
-*/
         RemoveCommand removeCommand = new RemoveCommand(tempTab, elementPaintersToRemove, elementModelsToRemove, classyTreeImplementation);
         tempTab.getCommandManager().addCommand(removeCommand);
 

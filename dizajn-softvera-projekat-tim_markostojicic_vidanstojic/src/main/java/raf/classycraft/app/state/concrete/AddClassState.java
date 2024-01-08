@@ -60,8 +60,6 @@ public class AddClassState implements State {
                     return;
                 }
             }
-
-            // dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
             ClassyTreeItem childItem = new ClassyTreeItem(classInterClass);
 
@@ -82,7 +80,6 @@ public class AddClassState implements State {
                     return;
                 }
             }
-            //dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
             ClassyTreeItem childItem = new ClassyTreeItem(interfaceInterclass);
 
@@ -103,8 +100,6 @@ public class AddClassState implements State {
                     return;
                 }
             }
-
-            //dodavanje u tree
             ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
             ClassyTreeItem childItem = new ClassyTreeItem(enumInterclass);
 

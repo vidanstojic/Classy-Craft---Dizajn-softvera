@@ -57,7 +57,6 @@ public class AddConnectionState implements State {
         rectangle.setRect((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()), 5, 5);
         tempTab.setRectangle(rectangle);
         deselect(tempTab);
-        // provera da li je kliknuto na vezu
         for(ElementPainter elementPainter : tempTab.getListOfPainters()){
             if(  elementPainter instanceof ConnectionPainter && elementPainter.getLine2D() != null && rectangle.intersectsLine(elementPainter.getLine2D())){
                 Connection tempConnection = ((ConnectionPainter) elementPainter).getConnection();
@@ -229,9 +228,6 @@ public class AddConnectionState implements State {
                 painter = new CompositionPainter((Composition) connection);
                 tempTab.getListOfPainters().add(painter);
                 tempTab.getDiagram().addChild(connection);
-
-
-
                 tempTab.repaint();
             } else if (selection.equals("Aggregation")) {
                 System.out.println("Dodavanje agregacije");
@@ -323,9 +319,6 @@ public class AddConnectionState implements State {
                                 visibilityEnum = Visibility.DEFAULT;
                             }
                             if(cardinality == null || cardinality.length() == 0) return;
-
-
-
                             ConnectionInfo connectionInfo = new ConnectionInfo("Composition", nameOfAttribute, cardinality, visibilityEnum);
                             if(connection.getClassFrom() instanceof ClassInterClass){
                                 Attribute attribute = new Attribute(nameOfAttribute, visibilityEnum,connection.getClassTo().getName());
@@ -359,8 +352,6 @@ public class AddConnectionState implements State {
                                 visibilityEnum = Visibility.DEFAULT;
                             }
                             if(cardinality == null || cardinality.length() == 0) return;
-
-
                             ConnectionInfo connectionInfo = new ConnectionInfo("Aggregation", nameOfAttribute, cardinality, visibilityEnum);
                             if(connection.getClassFrom() instanceof ClassInterClass){
                                 Attribute attribute = new Attribute(nameOfAttribute, visibilityEnum,connection.getClassTo().getName());
@@ -394,7 +385,6 @@ public class AddConnectionState implements State {
                                     classStart.getOverrideMethods().addAll(interfaceEnd.getMethods());
                                     classStart.getOverrideMethods().addAll(interfaceEnd.getOverrideMethods());
                                 }
-
                             }
                             else if(connection.getClassFrom() instanceof InterfaceInterclass){
                                 InterfaceInterclass interfaceStart = (InterfaceInterclass) connection.getClassFrom();
@@ -409,8 +399,6 @@ public class AddConnectionState implements State {
                             ConnectionInfo connectionInfo = new ConnectionInfo("Dependancy");
                             connection.setConnectionInfo(connectionInfo);
                         }
-
-
                     }
                 }
             }
@@ -420,15 +408,11 @@ public class AddConnectionState implements State {
                 connection.setLine2D(tempTab.getLine2D());
                 tempTab.getDiagram().removeChild(connection);
                 tempTab.getListOfPainters().remove(painter);
-
-
                 tempTab.repaint();
             }
             else{
                 ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(),tempTab.getDiagram());
                 ClassyTreeItem childItem = new ClassyTreeItem(connection);
-
-
                 AddConnectionCommand addConnectionCommand = new AddConnectionCommand(tempTab, connection,painter,parentItem,childItem,classyTreeImplementation);
                 tempTab.getCommandManager().addCommand(addConnectionCommand);
             }

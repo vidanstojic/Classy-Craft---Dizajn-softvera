@@ -11,17 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 @JsonTypeName("Class")
 public class ClassInterClass extends Interclass {
-
     private String abstractClass;
-
     private List<Attribute> associationAttribute = new ArrayList<>();
-
     private List<Method> overrideMethods = new ArrayList<>();
-
     private List<ClassInterClass> extendsClassList = new ArrayList<>();
-
     private List<InterfaceInterclass> implementsInterfaceList = new ArrayList<>();
-
     public ClassInterClass(Point point, Color color, int stroke, String name, String visibility, String abstractClass) {
         super(point,color, stroke, name, visibility);
         this.abstractClass = abstractClass;
@@ -82,27 +76,12 @@ public class ClassInterClass extends Interclass {
     public String getAbstractClass() {
         return abstractClass;
     }
-
-    public void setAbstractClass(String abstractClass) {
-        this.abstractClass = abstractClass;
-    }
-
     public List<Attribute> getAssociationAttribute() {
         return associationAttribute;
     }
-
-    public void setAssociationAttribute(List<Attribute> associationAttribute) {
-        this.associationAttribute = associationAttribute;
-    }
-
     public List<Method> getOverrideMethods() {
         return overrideMethods;
     }
-
-    public void setOverrideMethods(List<Method> overrideMethods) {
-        this.overrideMethods = overrideMethods;
-    }
-
     public List<ClassInterClass> getExtendsClassList() {
         return extendsClassList;
     }
@@ -110,7 +89,6 @@ public class ClassInterClass extends Interclass {
     public List<InterfaceInterclass> getImplementsInterfaceList() {
         return implementsInterfaceList;
     }
-
     @Override
     public String getName() {
         return super.getName();

@@ -8,10 +8,6 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 @JsonTypeName("Aggregation")
 public class Aggregation extends Connection {
-
-    public Aggregation(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
-        super(color, stroke, from, to, line2D, connectionInfo);
-    }
     public Aggregation(){super();}
 
     public Aggregation(Color color, int stroke, Line2D line2D) {

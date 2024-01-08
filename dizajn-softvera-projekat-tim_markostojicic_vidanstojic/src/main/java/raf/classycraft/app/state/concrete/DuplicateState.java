@@ -61,7 +61,6 @@ public class DuplicateState implements State {
 
                 ClassPainter classPainter = new ClassPainter(new Point(tempPoint.x + 20, tempPoint.y + 20), copiedClass);
 
-                //dodavanje u tree
                 ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), tempTab.getDiagram());
                 ClassyTreeItem childItem = new ClassyTreeItem(copiedClass);
 
@@ -81,10 +80,8 @@ public class DuplicateState implements State {
 
                 EnumPainter enumPainter = new EnumPainter(new Point(tempPoint.x + 20, tempPoint.y + 20), copiedEnum);
 
-                //dodavanje u tree
                 ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), tempTab.getDiagram());
                 ClassyTreeItem childItem = new ClassyTreeItem(copiedEnum);
-
 
                 DuplicateCommand duplicateCommand = new DuplicateCommand(tempTab, copiedEnum, enumPainter, parentItem, childItem, classyTreeImplementation);
                 tempTab.getCommandManager().addCommand(duplicateCommand);
@@ -101,10 +98,9 @@ public class DuplicateState implements State {
                 copiedInterface.setClassContents(classContents);
 
                 InterfacePainter interfacePainter = new InterfacePainter(new Point(tempPoint.x + 20, tempPoint.y + 20), copiedInterface);
-                //dodavanje u tree
+
                 ClassyTreeItem parentItem = this.classyTreeImplementation.findTreeItem((ClassyTreeItem) classyTreeImplementation.getTreeModel().getRoot(), tempTab.getDiagram());
                 ClassyTreeItem childItem = new ClassyTreeItem(copiedInterface);
-
 
                 DuplicateCommand duplicateCommand = new DuplicateCommand(tempTab, copiedInterface, interfacePainter, parentItem, childItem, classyTreeImplementation);
                 tempTab.getCommandManager().addCommand(duplicateCommand);

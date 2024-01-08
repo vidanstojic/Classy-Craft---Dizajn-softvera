@@ -8,8 +8,6 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 @JsonTypeName("Generalization")
 public class Generalization extends Connection {
-
-
     public Generalization(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
         super(color, stroke, from, to, line2D, connectionInfo);
     }

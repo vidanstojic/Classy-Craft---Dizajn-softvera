@@ -5,7 +5,6 @@ import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 
 @JsonTypeName("Attribute")
 public class Attribute extends ClassContent {
-
     private boolean listOrNot;
     public Attribute(){}
     public Attribute(String name, Visibility visibility, String returnType) {
@@ -15,9 +14,6 @@ public class Attribute extends ClassContent {
     public Attribute(String name, Visibility visibility, String returnType, String abstractContentOrNot, String staticContentOrNot) {
         super(name, visibility, returnType, abstractContentOrNot, staticContentOrNot);
     }
-
-
-
     public Attribute(String name){super(name);}
     @Override
     public String getName() {

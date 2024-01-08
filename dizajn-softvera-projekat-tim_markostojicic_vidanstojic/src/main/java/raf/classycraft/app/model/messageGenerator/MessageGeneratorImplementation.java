@@ -25,7 +25,6 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         String messageText = "";
 
         if(type == Type.ERROR && eventType == EventTypes.NAME_CANNOT_BE_EMPTY){
-            //[ERROR][12.11.2022. 22:56] ProjectExplorer ne može biti obrisan.
             messageText = "Name can not be empty.";
             message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
@@ -71,8 +70,6 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             messageText = "You have not entered the required information about connection.";
             message = "["+Type.ERROR+"]"+"["+ LocalDateTime.now()+"]"+ messageText;
         }
-
-
         notification = new NotificationMessageGenerator(message, eventType, type, messageText);
         notifySub(notification);
 
@@ -94,17 +91,5 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         for(ISubscriber listener : subscribers){
             listener.update(notification);
         }
-    }
-
-    public List<ISubscriber> getSubscribers() {
-        return subscribers;
-    }
-
-    public void setSubscribers(List<ISubscriber> subscribers) {
-        this.subscribers = subscribers;
-    }
-
-    public NotificationMessageGenerator getNotification() {
-        return notification;
     }
 }

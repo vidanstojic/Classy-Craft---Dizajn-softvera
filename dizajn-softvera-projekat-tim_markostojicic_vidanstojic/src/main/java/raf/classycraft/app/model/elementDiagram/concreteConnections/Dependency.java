@@ -8,11 +8,6 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 @JsonTypeName("Dependency")
 public class Dependency extends Connection {
-
-    public Dependency(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
-        super(color, stroke, from, to, line2D, connectionInfo);
-    }
-
     public Dependency(Color color, int stroke, Line2D line2D) {
         super(color, stroke, line2D);
     }

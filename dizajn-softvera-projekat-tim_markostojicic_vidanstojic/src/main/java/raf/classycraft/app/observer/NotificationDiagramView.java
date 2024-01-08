@@ -17,11 +17,6 @@ public class NotificationDiagramView {
     public TypeDiagramView getTypeDiagramView() {
         return typeDiagramView;
     }
-
-    public void setTypeDiagramView(TypeDiagramView typeDiagramView) {
-        this.typeDiagramView = typeDiagramView;
-    }
-
     public DiagramElement getDiagramElement() {
         return diagramElement;
     }

@@ -8,7 +8,6 @@ import raf.classycraft.app.model.messageGenerator.Type;
 
 public class NotificationMessageGenerator {
     private String message;
-
     private Type type;
     private EventTypes eventTypes;
     private String messageText;
@@ -24,10 +23,6 @@ public class NotificationMessageGenerator {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public Type getType() {
         return type;
     }
@@ -35,20 +30,7 @@ public class NotificationMessageGenerator {
     public void setType(Type type) {
         this.type = type;
     }
-
-    public EventTypes getEventTypes() {
-        return eventTypes;
-    }
-
-    public void setEventTypes(EventTypes eventTypes) {
-        this.eventTypes = eventTypes;
-    }
-
     public String getMessageText() {
         return messageText;
-    }
-
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
     }
 }

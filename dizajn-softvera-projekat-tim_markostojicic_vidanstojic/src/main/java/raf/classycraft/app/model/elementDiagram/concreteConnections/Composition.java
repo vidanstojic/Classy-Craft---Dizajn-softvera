@@ -9,11 +9,6 @@ import java.awt.geom.Line2D;
 @JsonTypeName("Composition")
 public class Composition extends Connection {
 
-
-    public Composition(Color color, int stroke, Interclass from, Interclass to, Line2D line2D, ConnectionInfo connectionInfo) {
-        super(color, stroke, from, to, line2D, connectionInfo);
-    }
-
     public Composition(Color color, int stroke, Line2D line2D) {
         super(color, stroke, line2D);
     }

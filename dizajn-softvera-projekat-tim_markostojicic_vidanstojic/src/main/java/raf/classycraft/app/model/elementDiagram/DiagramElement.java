@@ -7,7 +7,6 @@ import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import java.awt.*;
 @JsonTypeName("DiagramElement")
 public abstract class DiagramElement extends ClassyNode {
-    // cuva model/recept za crtanje
     @JsonIgnore
     private transient Color color;
     private int stroke;

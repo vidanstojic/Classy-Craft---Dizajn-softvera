@@ -11,7 +11,6 @@ import java.awt.*;
 import java.util.List;
 @JsonTypeName("Enum")
 public class EnumInterclass extends Interclass {
-
     private String name;
     public EnumInterclass(Point point,Color color, int stroke, String name, String visibility) {
         super(point,color, stroke, name, visibility);

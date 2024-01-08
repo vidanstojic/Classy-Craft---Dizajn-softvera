@@ -5,7 +5,6 @@ import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 
 @JsonTypeName("Method")
 public class Method extends ClassContent {
-
     public Method(){}
     public Method(String name, Visibility visibility, String returnType) {
         super(name, visibility, returnType);

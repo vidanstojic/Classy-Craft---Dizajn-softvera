@@ -25,7 +25,6 @@ import java.awt.geom.Line2D;
 public abstract class Connection extends DiagramElement {
     private Interclass classFrom;
     private Interclass classTo;
-
     private ConnectionInfo connectionInfo;
     @JsonIgnore
     private Line2D line2D;

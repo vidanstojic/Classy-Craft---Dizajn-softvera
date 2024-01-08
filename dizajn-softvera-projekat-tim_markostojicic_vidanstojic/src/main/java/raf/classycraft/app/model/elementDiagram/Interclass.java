@@ -48,10 +48,6 @@ public abstract class Interclass extends DiagramElement implements IPublisher {
     private List<Point> connectionDots = new ArrayList<>();
     @JsonIgnore
     private List<ISubscriber> listOfSubscribers = new ArrayList<>();
-
-
-
-
     public Interclass(Point point,Color color, int stroke, String name, String visibility) {
         super(color, stroke);
         this.name = name;
@@ -155,6 +151,4 @@ public abstract class Interclass extends DiagramElement implements IPublisher {
     public List<ISubscriber> getListOfSubscribers() {
         return listOfSubscribers;
     }
-
-
 }
