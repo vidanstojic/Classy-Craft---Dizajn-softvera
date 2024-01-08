@@ -1,6 +1,5 @@
 package raf.classycraft.app.model.compositeImplement;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 

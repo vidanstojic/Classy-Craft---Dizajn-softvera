@@ -24,12 +24,6 @@ public class MoveCommand extends AbstractCommand {
         this.newPoint = newPoint;
         this.specialPoint = specialPoint;
     }
-    public MoveCommand(DiagramView diagramView, Interclass interclass, Point oldPoint, Point newPoint){
-        this.diagramView = diagramView;
-        this.interclass = interclass;
-        this.oldPoint = oldPoint;
-        this.newPoint = newPoint;
-    }
     public MoveCommand(DiagramView diagramView, List<Interclass> interclassList, List<Point> pointList, List<Point> oldPointList){
         this.diagramView = diagramView;
         this.interclassList.addAll(interclassList);
@@ -72,15 +66,5 @@ public class MoveCommand extends AbstractCommand {
         }
     }
 
-    public void setOldPoint(Point oldPoint) {
-        this.oldPoint = oldPoint;
-    }
 
-    public Point getOldPoint() {
-        return oldPoint;
-    }
-
-    public void setNewPoint(Point newPoint) {
-        this.newPoint = newPoint;
-    }
 }

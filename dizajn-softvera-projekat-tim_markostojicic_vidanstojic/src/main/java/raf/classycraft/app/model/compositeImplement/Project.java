@@ -1,8 +1,6 @@
 package raf.classycraft.app.model.compositeImplement;
 
 import com.fasterxml.jackson.annotation.*;
-import raf.classycraft.app.gui.tree.ClassyTreeImplementation;
-import raf.classycraft.app.gui.tree.model.ClassyTreeItem;
 import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
@@ -27,9 +25,6 @@ public class Project extends ClassyNodeComposite implements IPublisher {
         this.addSubscriber(MainFrame.getInstance().getPackageView());
     }
 
-    /*public Project(String author) {
-        this.author = author;
-    }*/
     public Project(){
 
     }
@@ -111,7 +106,4 @@ public class Project extends ClassyNodeComposite implements IPublisher {
         return subscribers;
     }
 
-    public void setSubscribers(List<ISubscriber> subscribers) {
-        this.subscribers = subscribers;
-    }
 }

@@ -5,18 +5,8 @@ import raf.classycraft.app.gui.view.MainFrame;
 import raf.classycraft.app.model.compositeAbstract.ClassyNode;
 import raf.classycraft.app.model.compositeAbstract.ClassyNodeComposite;
 import raf.classycraft.app.observer.*;
-
 import java.util.ArrayList;
 import java.util.List;
-/*
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
-)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = MyPackage.class, name = "concrete2"),
-})*/
 @JsonTypeName("MyPackage")
 public class MyPackage extends ClassyNodeComposite implements IPublisher {
 
@@ -113,7 +103,4 @@ public class MyPackage extends ClassyNodeComposite implements IPublisher {
         return subscribers;
     }
 
-    public void setSubscribers(List<ISubscriber> subscribers) {
-        this.subscribers = subscribers;
-    }
 }

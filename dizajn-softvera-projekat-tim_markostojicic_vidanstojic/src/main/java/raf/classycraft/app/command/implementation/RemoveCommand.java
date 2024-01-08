@@ -58,7 +58,6 @@ public class RemoveCommand extends AbstractCommand {
             classyTreeImplementation.addDiagramElement(parentForDiagramElement, new ClassyTreeItem(elementToRemove));
         }
 
-//        diagramView.getDiagram().getChildren().addAll(startingModels);
-    //    diagramView.repaint();
+
     }
 }

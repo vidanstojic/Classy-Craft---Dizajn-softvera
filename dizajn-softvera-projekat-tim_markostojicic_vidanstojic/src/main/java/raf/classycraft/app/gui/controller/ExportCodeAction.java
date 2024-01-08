@@ -48,7 +48,6 @@ public class ExportCodeAction extends AbstractClassyAction {
                 System.out.println("Folder već postoji na: " + projectFile.getAbsolutePath());
             }
 
-            // Prolazak kroz svu decu projekta
             for (ClassyNode child : project.getChildren()) {
                 createSubFolder(projectFile, child);
             }
@@ -67,9 +66,6 @@ public class ExportCodeAction extends AbstractClassyAction {
                     System.out.println("Podfolder uspešno kreiran na: " + subFolder.getAbsolutePath());
                     if(child instanceof MyPackage){
                         createSubFolder(subFolder, classyNode);
-                        // zovem ovu metodu dokle god imam dete koje je instance od packaga, a kad naidjem
-                        // na dete koje je dijagram onda takodje pravim subPackage ali cu i prolaziti kroz listu dece
-                        // od tog dijagrama i za sve njih praviti txt/java fajl
                     }
                     else if(child instanceof Diagram){
                         Diagram diagram = (Diagram) child;
@@ -106,7 +102,6 @@ public class ExportCodeAction extends AbstractClassyAction {
         try (FileWriter fileWriter = new FileWriter(txtFile);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
 
-            // Ovde možete dodati sadržaj koji želite upisati u txt fajl
             bufferedWriter.write(interclass.toString());
 
             System.out.println("Sadržaj uspešno upisan u txt fajl.");

@@ -151,10 +151,6 @@ public class DiagramView extends JPanel implements ISubscriber {
         return listOfPainters;
     }
 
-    public void setListOfPainters(List<ElementPainter> listOfPainters) {
-        this.listOfPainters = listOfPainters;
-    }
-
     public Diagram getDiagram() {
         return diagram;
     }
@@ -177,10 +173,6 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public List<ElementPainter> getListOfSelectedPainters() {
         return listOfSelectedPainters;
-    }
-
-    public void setListOfSelectedPainters(List<ElementPainter> listOfSelectedPainters) {
-        this.listOfSelectedPainters = listOfSelectedPainters;
     }
 
     public CommandManager getCommandManager() {
