@@ -39,13 +39,13 @@ public class ExportCodeAction extends AbstractClassyAction {
             if (!projectFile.exists()) {
                 boolean success = projectFile.mkdirs();
                 if (success) {
-                    System.out.println("Folder uspešno kreiran na: " + projectFile.getAbsolutePath());
+                    System.out.println("Folder successfully created at: " + projectFile.getAbsolutePath());
                 } else {
-                    System.err.println("Greška pri kreiranju foldera.");
+                        System.err.println("Error creating folder.");
                     return;
                 }
             } else {
-                System.out.println("Folder već postoji na: " + projectFile.getAbsolutePath());
+                System.out.println("Folder already exists at: " + projectFile.getAbsolutePath());
             }
 
             for (ClassyNode child : project.getChildren()) {
@@ -63,7 +63,7 @@ public class ExportCodeAction extends AbstractClassyAction {
             if (!subFolder.exists()) {
                 boolean success = subFolder.mkdirs();
                 if (success) {
-                    System.out.println("Podfolder uspešno kreiran na: " + subFolder.getAbsolutePath());
+                    System.out.println("Subfolder successfully created at:" + subFolder.getAbsolutePath());
                     if(child instanceof MyPackage){
                         createSubFolder(subFolder, classyNode);
                     }
@@ -74,7 +74,7 @@ public class ExportCodeAction extends AbstractClassyAction {
                         }
                     }
                 } else {
-                    System.err.println("Greška pri kreiranju podfoldera.");
+                    System.err.println("Error creating subfolder.");
                 }
             }
 
@@ -88,10 +88,10 @@ public class ExportCodeAction extends AbstractClassyAction {
 
         try {
             if (txtFile.createNewFile()) {
-                System.out.println("Txt fajl uspešno kreiran na: " + txtFile.getAbsolutePath());
+                System.out.println("Txt file successfully created at: " + txtFile.getAbsolutePath());
                 writeContentToFile(txtFile, interclass);
             } else {
-                System.err.println("Greška pri kreiranju txt fajla.");
+                System.err.println("Error creating txt file.");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -104,7 +104,7 @@ public class ExportCodeAction extends AbstractClassyAction {
 
             bufferedWriter.write(interclass.toString());
 
-            System.out.println("Sadržaj uspešno upisan u txt fajl.");
+            System.out.println("Content successfully written to txt file.");
         } catch (IOException e) {
             e.printStackTrace();
         }

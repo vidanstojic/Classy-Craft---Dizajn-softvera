@@ -165,7 +165,6 @@ public class AddConnectionState implements State {
             if (selection == null) {
                 return;
             } else if (selection.equals("Generalisation")) {
-                System.out.println("Dodavanje generalizacije");
                 Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
@@ -189,7 +188,6 @@ public class AddConnectionState implements State {
                 tempTab.repaint();
 
             } else if (selection.equals("Dependency")) {
-                System.out.println("Dodavanje dependency");
                 Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
@@ -210,7 +208,6 @@ public class AddConnectionState implements State {
                 tempTab.getDiagram().addChild(connection);
                 tempTab.repaint();
             } else if (selection.equals("Composition")) {
-                System.out.println("Dodavanje kompozicije");
                Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {
@@ -230,7 +227,6 @@ public class AddConnectionState implements State {
                 tempTab.getDiagram().addChild(connection);
                 tempTab.repaint();
             } else if (selection.equals("Aggregation")) {
-                System.out.println("Dodavanje agregacije");
                 Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX() ), (int) (e.getY() / tempTab.getAffineTransform().getScaleY()));
                 boolean flagForAdd = false;
                 for (ElementPainter elementPainter : tempTab.getListOfPainters()) {

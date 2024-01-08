@@ -39,7 +39,7 @@ public class FileLogger implements Logger {
             fileWriter.close();
 
         } catch (IOException e) {
-            System.out.println("Podaci se nisu pravilno upisali u fajl");
+            System.out.println("Error creating txt file.");
             throw new RuntimeException(e);
         }
 

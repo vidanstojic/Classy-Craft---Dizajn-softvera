@@ -33,7 +33,7 @@ public class ScreenshotAction extends AbstractClassyAction{
         try {
             ImageIO.write(bufferedImage, "png", new File("src/main/resources/screenshots/" + diagramView.getDiagram().getName() + ".png"));
         } catch (IOException ex) {
-            System.out.println("lose ucitavanje");
+            System.out.println("Error creating txt file.");
             throw new RuntimeException(ex);
         }
     }

@@ -24,7 +24,7 @@ public class ClassyTreeSelectionListener implements TreeSelectionListener {
         if(treeItemSelected.getClassyNode() instanceof MyPackage){
             PackageView.flag = false;
         }
-        System.out.println("Selektovan cvor:"+ treeItemSelected.getClassyNode().getName());
+        System.out.println("Selected node:"+ treeItemSelected.getClassyNode().getName());
         System.out.println("getPath: "+e.getPath());
     }
 }
