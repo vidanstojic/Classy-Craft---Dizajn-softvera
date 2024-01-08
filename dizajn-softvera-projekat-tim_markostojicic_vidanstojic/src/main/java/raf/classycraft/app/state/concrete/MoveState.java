@@ -21,6 +21,8 @@ public class MoveState implements State {
     private Point newPoint;
     private Point startPointInInterClass;
     private List<Point> pointList = new ArrayList<>();
+    private List<Interclass> commandList = new ArrayList<>();
+    private List<Point> commandPointList = new ArrayList<>();
     @Override
     public void stateMousePressed(MouseEvent e, DiagramView tempTab) {
         Point point = new Point((int) (e.getX() / tempTab.getAffineTransform().getScaleX()), (int) (e.getY() / tempTab.getAffineTransform().getScaleX()));
@@ -47,6 +49,7 @@ public class MoveState implements State {
                     interclass = ((InterClassPainter) elementPainter).getInterclass();
                     oldPoint = new Point(interclass.getPoint());
                     interclass.setColor(Color.BLUE);
+                    commandList.add(interclass);
                     pointList.add(oldPoint);
                     tempTab.repaint();
                 }
@@ -77,7 +80,8 @@ public class MoveState implements State {
                                         break;
                                     }
                                 }
-                            }///problem je sto ovim se ni ne dodje do klase koja se intersektovala
+                            }
+                            ///problem je sto ovim se ni ne dodje do klase koja se intersektovala
                             //interclass.setColor(Color.BLACK);
                             //interclass.setSpecialPoint(interclass.getPoint());
 
@@ -90,16 +94,20 @@ public class MoveState implements State {
 
                         }
                     }
+                    commandPointList.add(interclass.getPoint());
                     interclass.setColor(Color.BLACK);
-                    interclass.setSpecialPoint(interclass.getPoint());
-                    if (flag == 0) {
-                        MoveCommand moveCommand = new MoveCommand(tempTab, interclass, pointList.get(counter++), interclass.getPoint());////ovde baca gresku
+                   // interclass.setSpecialPoint(interclass.getPoint());
+                    /*if (flag == 0) {
+                        MoveCommand moveCommand = new MoveCommand(tempTab, (List<Interclass>) commandList, (List<Point>) commandPointList);////ovde baca gresku
                         tempTab.getCommandManager().addCommand(moveCommand);
-                    }
+                    }*/
                     flag = 0;
                 }
             }
-
+            MoveCommand moveCommand = new MoveCommand(tempTab, commandList, commandPointList, pointList);////ovde baca gresku
+            tempTab.getCommandManager().addCommand(moveCommand);
+            commandPointList.clear();
+            commandList.clear();
             tempTab.removeListOfSelectedPainters(tempTab.getListOfSelectedPainters());
             interclass = null;
         }
