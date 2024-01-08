@@ -114,16 +114,19 @@ public class Diagram extends ClassyNodeComposite implements IPublisher {
 
             if(child instanceof Interclass){
                 Interclass interclass = (Interclass) child;
-                ClassyNode childToRemove = null;
+                List<ClassyNode> nodesToRemove = new ArrayList<>();
                 for(ClassyNode children :this.getChildren()){
                     if(children instanceof Connection){
                         Connection tempConnection = (Connection) children;
                         if(tempConnection.getClassFrom().equals(interclass) || tempConnection.getClassTo().equals(interclass)){
-                            childToRemove = children;
+                            nodesToRemove.add(children);
                         }
                     }
                 }
-                removeChild(childToRemove);
+
+                for(ClassyNode classyNode : nodesToRemove){
+                    removeChild(classyNode);
+                }
             }
 
         }
