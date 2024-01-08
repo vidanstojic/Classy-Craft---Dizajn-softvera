@@ -10,6 +10,7 @@ import raf.classycraft.app.model.compositeImplement.Project;
 import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.Interclass;
+import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Aggregation;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Composition;
 import raf.classycraft.app.model.elementDiagram.concreteConnections.Dependency;
@@ -30,7 +31,8 @@ import raf.classycraft.app.model.elementDiagram.concreteConnections.Generalizati
         @JsonSubTypes.Type(value = Aggregation.class, name = "Aggregation"),
         @JsonSubTypes.Type(value = Composition.class, name = "Composition"),
         @JsonSubTypes.Type(value = Dependency.class, name = "Dependency"),
-        @JsonSubTypes.Type(value = Generalization.class, name = "Generalization")
+        @JsonSubTypes.Type(value = Generalization.class, name = "Generalization"),
+        @JsonSubTypes.Type(value = ClassContent.class, name = "Content")
 })
 public abstract class ClassyNode {
 

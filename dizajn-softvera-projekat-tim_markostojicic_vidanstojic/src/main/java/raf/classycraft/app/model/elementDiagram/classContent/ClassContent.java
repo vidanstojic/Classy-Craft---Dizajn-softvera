@@ -2,6 +2,7 @@ package raf.classycraft.app.model.elementDiagram.classContent;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 
 @JsonTypeInfo(
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = Attribute.class, name = "Attribute"),
         @JsonSubTypes.Type(value = Method.class, name = "Method")
 })
+@JsonTypeName("Content")
 public abstract class ClassContent {
     private String name;
     private Visibility visibility;
@@ -21,6 +23,9 @@ public abstract class ClassContent {
     private String abstractContentOrNot = "";
     private String staticContentOrNot = "";
 
+    public ClassContent(){
+
+    }
     public ClassContent(String name, Visibility visibility, String returnType) {
         this.name = name;
         this.visibility = visibility;

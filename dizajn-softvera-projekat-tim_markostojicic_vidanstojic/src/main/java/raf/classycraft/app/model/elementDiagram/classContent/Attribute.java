@@ -7,6 +7,7 @@ import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
 public class Attribute extends ClassContent {
 
     private boolean listOrNot;
+    public Attribute(){}
     public Attribute(String name, Visibility visibility, String returnType) {
         super(name, visibility, returnType);
     }
