@@ -31,7 +31,7 @@ public class ScreenshotAction extends AbstractClassyAction{
         diagramView.printAll(g2d);
         g2d.dispose();
         try {
-            ImageIO.write(bufferedImage, "png", new File("src/main/resources/screenshots" + diagramView.getDiagram().getName() + ".png"));
+            ImageIO.write(bufferedImage, "png", new File("src/main/resources/screenshots/" + diagramView.getDiagram().getName() + ".png"));
         } catch (IOException ex) {
             System.out.println("lose ucitavanje");
             throw new RuntimeException(ex);

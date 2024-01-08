@@ -10,16 +10,7 @@ import raf.classycraft.app.observer.*;
 
 import java.util.ArrayList;
 import java.util.List;
-/*
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "Project"
-)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Project.class, name = "Project"),
-        @JsonSubTypes.Type(value = Diagram.class, name = "Diagram"),
-})*/
+
 @JsonTypeName("Project")
 public class Project extends ClassyNodeComposite implements IPublisher {
 

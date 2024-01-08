@@ -32,9 +32,9 @@ public class MoveCommand extends AbstractCommand {
     }
     public MoveCommand(DiagramView diagramView, List<Interclass> interclassList, List<Point> pointList, List<Point> oldPointList){
         this.diagramView = diagramView;
-        this.interclassList = interclassList;
-        this.interclassPoint = pointList;
-        this.oldPointList = oldPointList;
+        this.interclassList.addAll(interclassList);
+        this.interclassPoint.addAll(pointList);
+        this.oldPointList.addAll(oldPointList);
     }
     @Override
     public void doCommand() {
