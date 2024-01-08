@@ -14,12 +14,17 @@ import raf.classycraft.app.model.compositeImplement.ProjectExplorer;
 import raf.classycraft.app.model.elementDiagram.Connection;
 import raf.classycraft.app.model.elementDiagram.DiagramElement;
 import raf.classycraft.app.model.elementDiagram.Interclass;
+import raf.classycraft.app.model.elementDiagram.classContent.Attribute;
+import raf.classycraft.app.model.elementDiagram.classContent.ClassContent;
+import raf.classycraft.app.model.elementDiagram.classContent.Method;
 import raf.classycraft.app.model.messageGenerator.EventTypes;
 import raf.classycraft.app.model.messageGenerator.Type;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClassyTreeImplementation implements ClassyTree{
 
@@ -276,7 +281,24 @@ public class ClassyTreeImplementation implements ClassyTree{
                     }
                 }
             }
+            if (diagramElement instanceof Interclass) {
+                Interclass interclass = (Interclass) diagramElement;
+                List<ClassContent> classContentList = new ArrayList<>();
+                for (ClassContent classContent : interclass.getClassContents()) {
+                    classContentList.add(classContent);
+                }
+                interclass.getClassContents().removeAll(interclass.getClassContents());
+                interclass.getMethods().removeAll(interclass.getMethods());
+                interclass.getAttributes().removeAll(interclass.getAttributes());
+                for (ClassContent classContent : classContentList){
+                    if (classContent instanceof Attribute)
+                        interclass.getAttributes().add((Attribute) classContent);
+                    else if (classContent instanceof Method)
+                        interclass.getMethods().add((Method) classContent);
+                    interclass.getClassContents().add(classContent);
 
+                }
+            }
         }
     }
 
